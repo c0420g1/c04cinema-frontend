@@ -10,6 +10,7 @@ import { InformationComponent } from './customer/information/information.compone
 import {HistoryPointComponent} from './customer/history-point/history-point.component';
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.comp
     PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UserModule { }

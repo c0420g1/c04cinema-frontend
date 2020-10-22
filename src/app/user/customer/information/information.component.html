@@ -1,5 +1,8 @@
-<form>
+<form [formGroup]="accountForm">
     <h3>Login Information</h3>
+    <div *ngIf="checkUppass">
+        <p style="color: #0f8edd">PassWord update success !</p>
+    </div>
     <div class="form-group row">
         <label  class="col-sm-3 col-form-label">Member Card :</label>
         <div class="col-sm-9">
@@ -11,45 +14,56 @@
         <label class="col-sm-3 col-form-label">User :</label>
         <div class="col-sm-9">
             <input type="text" readonly class="form-control"
-                   value="nvtlong">
+                   formControlName="username">
         </div>
     </div>
+</form>
+
     <div class="form-group row">
         <label for="inputPassword" class="col-sm-3 col-form-label">
             Old password <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" required [(ngModel)]="passOld">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword1" class="col-sm-3 col-form-label">New Password <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="password" class="form-control" id="inputPassword1" placeholder="Password" required>
+            <input type="password" class="form-control" id="inputPassword1" placeholder="Password" required [(ngModel)]="passNew">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword2" class="col-sm-3 col-form-label">Retype New Password <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="password" class="form-control" id="inputPassword2" placeholder="Password" required>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="Password" required [(ngModel)]="passReNew">
         </div>
     </div>
-    <button type='submit' class="btn btn-md btn--warning btn--wider">Change Password</button>
-</form>
+    <div *ngIf="checkPass">
+        <p style="color: red">UserName or PassWord not true</p>
+    </div>
+    <div *ngIf="checkPassNew">
+        <p style="color: red">New Password and Retype New Password must be the same</p>
+    </div>
+    <button type='submit' class="btn btn-md btn--warning btn--wider" (click)="editPass()">Change Password</button>
+
 <hr>
-<form>
+<form [formGroup]="customerForm">
     <h3>User information</h3>
+    <div *ngIf="checkUpInfor">
+        <p style="color: #00A0D1">Update Information success !</p>
+    </div>
     <div class="form-group row">
         <label for="inputUsername" class="col-sm-3 col-form-label">
             Full Name <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required>
+            <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required formControlName="name">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputBirthday" class="col-sm-3 col-form-label">
             Birth Day <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="date" class="form-control" id="inputBirthday" required>
+            <input type="text" class="form-control" id="inputBirthday" required formControlName="birthday">
         </div>
     </div>
     <div class="form-group row">
@@ -57,13 +71,11 @@
             Gender <span style="color: red">(*)</span> :</label>
         <div class="col-sm-8">
             <div class="form-group row">
-                <div class="col-sm-3">
-                    <input type="radio" id="male" name="gender" value="male" style="margin-right: 10px">
-                    <label for="male">Male</label><br>
-                </div>
-                <div class="col-sm-4">
-                    <input type="radio" id="female" name="gender" value="female" style="margin-right: 10px">
-                    <label for="female">Female</label><br>
+                <div>
+                    <input type="radio"  formControlName="gender" value="Male" style="margin-right: 10px"  >
+                    <label >Male</label><br>
+                    <input type="radio"  formControlName="gender" value="Female" style="margin-right: 10px" >
+                    <label >Female</label><br>
                 </div>
             </div>
         </div>
@@ -71,26 +83,26 @@
     <div class="form-group row">
         <label for="staticEmail" class="col-sm-3 col-form-label">Email :</label>
         <div class="col-sm-9">
-            <input type="text"  class="form-control" id="staticEmail">
+            <input type="text"  class="form-control" id="staticEmail" formControlName="email">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputCmnd" class="col-sm-3 col-form-label">Credit Card <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text"  class="form-control" id="inputCmnd" required>
+            <input type="text"  class="form-control" id="inputCmnd" required formControlName="cardid">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPhone" class="col-sm-3 col-form-label">Phone <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text"  class="form-control" id="inputPhone" required>
+            <input type="text"  class="form-control" id="inputPhone" required formControlName="phone">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputAdd" class="col-sm-3 col-form-label">Address <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text"  class="form-control" id="inputAdd" required>
+            <input type="text"  class="form-control" id="inputAdd" required formControlName="address">
         </div>
     </div>
-    <button type='submit' class="btn btn-md btn--warning btn--wider">Update</button>
+    <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid" (click)="editCustomer()">Update</button>
 </form>
