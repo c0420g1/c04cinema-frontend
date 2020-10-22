@@ -1,0 +1,222 @@
+
+<div class="wrapper">
+  <div class="banner-top">
+    <img alt='top banner' src="assets/images/download/banner2.jpg">
+  </div>
+  <header class=" header-wrapper--home">
+    <div class="container">
+      <a href='index.html' class="logo">
+        <img alt='logo' src="assets/images/download/logo.png">
+      </a>
+
+      <nav id="navigation-box">
+        <a href="#" id="navigation-toggle">
+                        <span class="menu-icon">
+                            <span class="icon-toggle" role="button" aria-label="Toggle Navigation">
+                              <span class="lines"></span>
+                            </span>
+                        </span>
+        </a>
+
+        <ul id="navigation">
+          <li>
+            <span class="sub-nav-toggle plus"></span>
+            <a routerLink="">Home</a>
+
+          </li>
+          <li>
+            <span class="sub-nav-toggle plus"></span>
+            <a routerLink="movie">Movies</a>
+
+          </li>
+          <li>
+            <span class="sub-nav-toggle plus"></span>
+            <a routerLink="promotion">Promotion</a>
+
+          </li>
+          <li>
+            <span class="sub-nav-toggle plus"></span>
+            <a href="cinema">Cinema</a>
+
+          </li>
+          <li>
+            <span class="sub-nav-toggle plus"></span>
+            <a href="news">News</a>
+
+          </li>
+          <li>
+
+          </li>
+        </ul>
+      </nav>
+
+      <div class="control-panel">
+        <a href="#" id="register" class="btn btn-md btn--warning btn--book btn-control--home register-window">Register</a>
+        <a href="#" id="login" class="btn btn-md btn--warning btn--book btn-control--home login-window">Login</a>
+      </div>
+
+    </div>
+  </header>
+<!--  end-heaader-->
+
+  <router-outlet></router-outlet>
+
+<!--  end-body-->
+  <div class="clearfix"></div>
+
+  <footer class="footer-wrapper">
+    <section class="container">
+      <div class="col-xs-4 col-md-2 footer-nav">
+        <ul class="nav-link">
+          <li><a href="#" class="nav-link__item">Cities</a></li>
+          <li><a href="movie-list-left.html" class="nav-link__item">Movies</a></li>
+          <li><a href="trailer.html" class="nav-link__item">Trailers</a></li>
+          <li><a href="rates-left.html" class="nav-link__item">Rates</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-4 col-md-2 footer-nav">
+        <ul class="nav-link">
+          <li><a href="coming-soon.html" class="nav-link__item">Coming soon</a></li>
+          <li><a href="cinema-list.html" class="nav-link__item">Cinemas</a></li>
+          <li><a href="offers.html" class="nav-link__item">Best offers</a></li>
+          <li><a href="news-left.html" class="nav-link__item">News</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-4 col-md-2 footer-nav">
+        <ul class="nav-link">
+          <li><a href="#" class="nav-link__item">Terms of use</a></li>
+          <li><a href="gallery-four.html" class="nav-link__item">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link__item">Contacts</a></li>
+          <li><a href="page-elements.html" class="nav-link__item">Support</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="footer-info">
+          <p class="heading-special--small">C04.Movie<br><span class="title-edition">in the social media</span></p>
+
+          <div class="social">
+            <a href='#' class="social__variant fa fa-facebook"></a>
+            <a href='#' class="social__variant fa fa-twitter"></a>
+            <a href='#' class="social__variant fa fa-vk"></a>
+            <a href='#' class="social__variant fa fa-instagram"></a>
+            <a href='#' class="social__variant fa fa-tumblr"></a>
+            <a href='#' class="social__variant fa fa-pinterest"></a>
+          </div>
+
+          <div class="clearfix"></div>
+          <p class="copy">&copy; C04.Movie, 2020. All rights reserved.</p>
+        </div>
+      </div>
+    </section>
+  </footer>
+</div>
+
+<!-- open/close -->
+<div id="login1" class="overlay overlay-hugeinc">
+
+  <section class="container">
+
+    <div class="col-sm-4 col-sm-offset-4">
+
+      <form id="login-form" class="login" method='get' novalidate='' style="padding-top: 0">
+        <div class="header-form">
+          <button type="button" class="overlay-close">Close</button>
+          <p class="login__title">sign in <br><span class="login-edition">welcome to C04.Movie</span></p>
+        </div>
+
+        <div class="social social--colored">
+          <a href='#' class="social__variant fa fa-facebook"></a>
+          <a href='#' class="social__variant fa fa-twitter"></a>
+          <a href='#' class="social__variant fa fa-google"></a>
+        </div>
+        <div class="field-wrap">
+          <div class="inputWithIcon">
+          <input type='text' placeholder='Account' name='account' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-user m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <input type='password' placeholder='Password' name='user-password' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-key m-r-10"></i>
+          </div>
+          <input type='checkbox' id='#informed' class='login__check styled'>
+          <label for='#informed' class='login__check-info'>remember me</label>
+        </div>
+
+        <div class="login__control">
+          <button type='submit' class="btn btn-md btn--warning btn--wider">sign in</button>
+          <a href="#" class="login__tracker form__tracker">Forgot password?</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!--    register-->
+
+<div id="register1" class="overlayregister overlay-hugeinc ">
+  <section class="container">
+    <div class="col-sm-4 col-sm-offset-4" style="margin-left: 30%">
+      <form id="register-form" class="login" method='get' novalidate='' style="padding-top: 0; width: 127%">
+        <div class="header-form" >
+          <button type="button" class="overlay-close">Close</button>
+          <p class="login__title">Register <br><span class="login-edition">welcome to C04.Movie</span></p>
+        </div>
+        <div class="field-wrap">
+          <div class="inputWithIcon">
+          <label>Account</label>
+          <input type='text'  name='account' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-user m-r-10"></i>
+          </div >
+          <div class="inputWithIcon">
+          <label>Password</label>
+          <input type='password'  name='user-password' class="login__input">
+          <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-key m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <label>Full Name</label>
+          <input type='text' name='name' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-pencil m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <label>Birthday</label>
+          <input type='date'  name='birthday' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-birthday-cake m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <label>Gender</label><br>
+          <input type='radio' name='gender' checked style="margin-left: 30px"><label style="font-size: 14px; margin-left: 5px">Male</label>
+          <input type='radio' name='gender' style="margin-left: 30px"> <label style="font-size: 14px; margin-left: 5px">Femail</label>
+          </div>
+          <br>
+          <div class="inputWithIcon">
+          <label>ID Card</label>
+          <input type='text'  name='idCard' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-id-card m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <label>Email</label>
+          <input type='text'  name='email' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-envelope m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <label>Address</label>
+          <input type='text'  name='address' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-address-book-o m-r-10"></i>
+          </div>
+          <div class="inputWithIcon">
+          <label>Phone number</label>
+          <input type='text'  name='phone' class="login__input">
+            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-phone m-r-10"></i>
+          </div>
+        </div>
+
+        <div class="login__control">
+          <button type='submit' class="btn btn-md btn--warning btn--wider" style="margin-top: 15px">Register</button>
+        </div>
+      </form>
+    </div>
+
+  </section>
+</div>
+
+
