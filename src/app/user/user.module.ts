@@ -10,14 +10,19 @@ import { InformationComponent } from './customer/information/information.compone
 import {HistoryPointComponent} from './customer/history-point/history-point.component';
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
   declarations: [UserLayoutComponent, HomeComponent, MovieComponent,
     PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent],
-  imports: [
-    CommonModule,
-    UserRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule
+    ]
 })
 export class UserModule { }

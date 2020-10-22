@@ -156,62 +156,64 @@
 <div id="register1" class="overlayregister overlay-hugeinc ">
   <section class="container">
     <div class="col-sm-4 col-sm-offset-4" style="margin-left: 30%">
-      <form id="register-form" class="login" method='get' novalidate='' style="padding-top: 0; width: 127%">
+      <form class="login"  style="padding-top: 0; width: 127%" [formGroup]="formCustomer">
         <div class="header-form" >
           <button type="button" class="overlay-close">Close</button>
           <p class="login__title">Register <br><span class="login-edition">welcome to C04.Movie</span></p>
         </div>
         <div class="field-wrap">
+          <form [formGroup]="formAccount">
           <div class="inputWithIcon">
           <label>Account</label>
-          <input type='text'  name='account' class="login__input">
+          <input type='text'  class="login__input" formControlName="username">
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-user m-r-10"></i>
           </div >
           <div class="inputWithIcon">
           <label>Password</label>
-          <input type='password'  name='user-password' class="login__input">
+          <input type='password'  class="login__input" formControlName="password">
           <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-key m-r-10"></i>
           </div>
+          </form>
           <div class="inputWithIcon">
           <label>Full Name</label>
-          <input type='text' name='name' class="login__input">
+          <input type='text'  class="login__input" formControlName="name">
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-pencil m-r-10"></i>
           </div>
           <div class="inputWithIcon">
           <label>Birthday</label>
-          <input type='date'  name='birthday' class="login__input">
+          <input type='date'  class="login__input" formControlName="birthday">
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-birthday-cake m-r-10"></i>
           </div>
           <div class="inputWithIcon">
           <label>Gender</label><br>
-          <input type='radio' name='gender' checked style="margin-left: 30px"><label style="font-size: 14px; margin-left: 5px">Male</label>
-          <input type='radio' name='gender' style="margin-left: 30px"> <label style="font-size: 14px; margin-left: 5px">Femail</label>
+          <input type='radio'  formControlName="gender" value="Male"  style="margin-left: 30px"><label style="font-size: 14px; margin-left: 5px">Male</label>
+          <input type='radio'  formControlName="gender" value="Femail" style="margin-left: 30px"> <label style="font-size: 14px; margin-left: 5px">Femail</label>
           </div>
           <br>
           <div class="inputWithIcon">
           <label>ID Card</label>
-          <input type='text'  name='idCard' class="login__input">
+          <input type='text'   class="login__input" formControlName="cardid">
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-id-card m-r-10"></i>
           </div>
           <div class="inputWithIcon">
           <label>Email</label>
-          <input type='text'  name='email' class="login__input">
+          <input type='text'   class="login__input" formControlName="email">
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-envelope m-r-10"></i>
           </div>
           <div class="inputWithIcon">
           <label>Address</label>
-          <input type='text'  name='address' class="login__input">
+          <input type='text'   class="login__input" formControlName="address">
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-address-book-o m-r-10"></i>
           </div>
           <div class="inputWithIcon">
           <label>Phone number</label>
-          <input type='text'  name='phone' class="login__input">
+          <input type='text'  class="login__input" formControlName="phone" >
             <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-phone m-r-10"></i>
           </div>
         </div>
 
         <div class="login__control">
-          <button type='submit' class="btn btn-md btn--warning btn--wider" style="margin-top: 15px">Register</button>
+          <button id="submit" type='submit' class="btn btn-md btn--warning btn--wider" style="margin-top: 15px" (click)="getForm()">Register</button>
         </div>
       </form>
     </div>
