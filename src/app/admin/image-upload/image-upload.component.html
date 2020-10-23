@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <img [src]="imgSrc" alt="" (click)="fileUploader.click()" style="width: 300px">
+            <br><br>
+            <!--            <label>Upload </label><br>-->
+
+            <input required type="file" class="form-control-file" #fileUploader accept="image/*" (change)="showPreview($event)">
+            <br>
+            <input required class="form-control" type="text" placeholder="Input Your Caption"  (change)="changeCaption($event.target.value)">
+            <br>
+            <br>
+            <div>
+                <label for="">Select Category</label>
+                <select (change)="changeCategory($event.target.value)">
+                    <option value="Animal" selected>Animal</option>
+                    <option value="Vehicle">Vehicle</option>
+                    <option value="Bird">Bird</option>
+                </select>
+            </div>
+            <br>
+            <div id="contain">
+
+                <!--                <textarea class="form-control rounded-0" rows="3"></textarea>-->
+
+                <button class="btn btn-primary" (click)="addNewImage()">Upload your File</button>
+                <button (click)="getLink()" class="btn btn-success ml-2" [disabled]="confirm" >Show Link</button>
+            </div>
+            <!--            <button id="test" (click)="test()">test</button>-->
+
+        </div>
+    </div>
+</div>
+<div class="my-container">
+    <ng-template #customLoadingTemplate>
+        <div class="custom-class">
+            <h3>
+                Loading...
+            </h3>
+        </div>
+    </ng-template>
+
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+</div>
+
