@@ -9,6 +9,7 @@ import {InformationComponent} from './customer/information/information.component
 import {HistoryPointComponent} from './customer/history-point/history-point.component';
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
+import { BookingComponent } from './booking/booking.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'promotion',
         component: PromotionComponent
+      },
+      {
+        path: 'booking',
+        component: BookingComponent
       },
       {
         path: 'customer',
