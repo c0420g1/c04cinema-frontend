@@ -41,4 +41,6 @@ export class MovieService {
   editMovieService(movie: Movie, id: number): Observable<Movie> {
     return this.http.patch<Movie>(this.API_URL_MOVIE + '/' +  id, movie);
   }
+
+
 }
