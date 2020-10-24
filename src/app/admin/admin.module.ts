@@ -13,9 +13,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxLoadingModule} from 'ngx-loading';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { BookingTicketComponent } from './booking-ticket/booking-ticket.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent],
+  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
