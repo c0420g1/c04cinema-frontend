@@ -42,21 +42,27 @@
 #cssAddForm input{
     font-size: 15px;
 }
+#cssAddForm textarea{
+    font-size: 15px;
+}
 #cssAddForm{
     font-size: 15px;
 }
 #cssEditForm {
     font-size: 15px;
 }
+#cssEditForm textarea{
+    font-size: 15px;
+}
 #cssEditForm input{
     font-size: 15px;
 }
-#cssDeleteFormForm {
+#cssDeleteForm {
     font-size: 15px;
 }
-#cssAddShowFormForm {
+#cssAddShowForm {
     font-size: 15px;
 }
-#cssAddShowFormForm input{
+#cssAddShowForm input{
     font-size: 15px;
 }

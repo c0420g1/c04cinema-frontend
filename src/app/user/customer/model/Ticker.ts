@@ -1,4 +1,7 @@
 export class Ticker {
-    id: number;
-
+   movieName:string;
+   dayPut:string;
+   totalMoney: number;
+   status: number;
+   canCel: number;
 }
