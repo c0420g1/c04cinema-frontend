@@ -1,4 +1,4 @@
-export class Customer {
+export class CustomerDTO {
     id: number;
     name: string;
     birthday: string;
@@ -8,4 +8,8 @@ export class Customer {
     address: string;
     phone: string;
     accountId: number;
+    customerTypeId: number;
+    currentBonusPoint: number;
+    isactive: number;
+    code: string;
 }

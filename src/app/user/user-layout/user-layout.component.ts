@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {RegisterService} from './register.service';
-import {Customer} from './model/customer';
+import {CustomerDTO} from './model/customerDTO';
+import {Account} from './model/account';
 declare var $: any;
+import * as bcrypt from 'bcryptjs';
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
   styleUrls: ['./user-layout.component.css']
 })
 export class UserLayoutComponent implements OnInit {
-  accounts: Account[] = [];
-  customer: Customer;
+  account: Account;
+  accountFindById: Account;
+  customerDTO: CustomerDTO;
   formAccount: FormGroup;
   formCustomer: FormGroup;
+  pass: string;
+  check = true;
 
   constructor(private fb: FormBuilder, private registerService: RegisterService) { }
 
@@ -35,9 +40,9 @@ export class UserLayoutComponent implements OnInit {
         $('.overlayregister').removeClass('close');
       }, 500);
     });
-    $('#submit').click(function(e) {
+    $('.signin').click(function(e) {
       e.preventDefault;
-      $('.overlay').removeClass('open').addClass('close');
+      $('.overlay').removeClass('close').addClass('open');
       $('.overlayregister').removeClass('open').addClass('close');
 
       setTimeout(function(){
@@ -45,7 +50,8 @@ export class UserLayoutComponent implements OnInit {
         $('.overlayregister').removeClass('close');
       }, 500);
     });
-    this.registerService.getAllAccount().subscribe(data => this.accounts = data);
+    this.registerService.getAccountIdFirst().subscribe(data => {this.accountFindById = data; });
+
     this.formAccount = this.fb.group({
       username: [''],
       password: ['']
@@ -57,17 +63,24 @@ export class UserLayoutComponent implements OnInit {
       cardid: [''],
       email: [''],
       address: [''],
-      phone: ['']
+      phone: [''],
+      customerTypeId: ['1'],
+      currentBonusPoint: ['0'],
+      isactive: ['1'],
+      code: ['']
     });
 
   }
   getForm(){
-    this.customer = this.formCustomer.value;
-    console.log(this.formAccount.value);
-    console.log(this.formCustomer.value);
-    console.log(this.accounts[this.accounts.length - 1].id);
+    this.account = this.formAccount.value;
+    this.pass = bcrypt.hashSync(this.account.password, 10);
+    this.account.password = this.pass;
+    this.registerService.addAccount(this.formAccount.value).subscribe();
+    this.customerDTO = this.formCustomer.value;
     // tslint:disable-next-line:radix
-    this.customer.accountId = parseInt(this.accounts[this.accounts.length - 1].id);
-    console.log(this.customer);
+    this.customerDTO.accountId = this.accountFindById.id + 1;
+    console.log(this.customerDTO);
+    this.registerService.addCustomer(this.customerDTO).subscribe();
+    this.check = false;
   }
 }
