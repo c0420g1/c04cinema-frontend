@@ -3,7 +3,7 @@ export class Customer {
     name: string;
     address: string;
     customer_type_id: number;
-    current_bonus_point: number;
+    currentBonusPoint: number;
     accountId: number;
     email: string;
     birthday: string;
