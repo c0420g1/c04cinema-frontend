@@ -27,7 +27,20 @@ export class GalleryComponent implements OnInit {
   }
 
   deleteImage(image) {
-    console.log(image);
-    this.service.deleteImageDetails(image);
+
+    this.service.deleteImageDetails(image.key);
   }
+
+    copyImage(image) {
+        const selBox = document.createElement('textarea');
+        selBox.rows = 3;
+        selBox.style.opacity='0';
+        selBox.value = image.imageUrl;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
+        alert("Copied to Clipboard");
+    }
 }
