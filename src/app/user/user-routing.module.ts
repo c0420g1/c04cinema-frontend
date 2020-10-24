@@ -34,19 +34,19 @@ const routes: Routes = [
         children: [
           {
             path: 'information',
-            component: InformationComponent,
+            component: InformationComponent
           },
           {
             path: 'history-point',
-            component: HistoryPointComponent,
+            component: HistoryPointComponent
           },
           {
             path: 'ticker-put',
-            component: TickerPutComponent,
+            component: TickerPutComponent
           },
           {
             path: 'ticker-cancel',
-            component: TickerCancelComponent,
+            component: TickerCancelComponent
           }
         ]
       }

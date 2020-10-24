@@ -8,25 +8,19 @@
         <td>Status</td>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td>Harry Potter Bảo Bối Tử Thần</td>
-        <td>21/01/2017 8:08</td>
-        <td>120000</td>
-        <td>Waiting For Tickets</td>
-    </tr>
-    <tr>
-        <td>Harry Potter Bảo Bối Tử Thần</td>
-        <td>21/01/2017 8:08</td>
-        <td>120000</td>
-        <td>Got Tickets</td>
+    <tbody *ngFor="let ticker of tickerPut">
+    <tr *ngIf="ticker.canCel == 0">
+        <td>{{ticker.movieName}}</td>
+        <td>{{ticker.dayPut}}</td>
+        <td>{{ticker.totalMoney}}</td>
+        <td *ngIf="ticker.status == 1">received</td>
+        <td *ngIf="ticker.status == 0">not received</td>
     </tr>
     </tbody>
+<!--    <div style="text-align: left" *ngIf="tickerPutPage.length > 5">-->
+<!--        <div *ngFor="let i of numPage">-->
+<!--            <button (click)="movedPage(i)">{{i}}</button>-->
+<!--        </div>-->
+<!--    </div>-->
 </table>
-<div style="text-align: left">
-    <a href="#">Next</a>
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <a href="#">3...</a>
-    <a href="#">Previous</a>
-</div>
+
