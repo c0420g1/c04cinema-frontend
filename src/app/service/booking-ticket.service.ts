@@ -4,7 +4,6 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BookingTicketDTO} from '../model/bookingTicketDTO';
 import {ConfirmTicket} from '../model/confirmTicket';
-import {Customer} from '../user/customer/model/Customer';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +19,8 @@ export class BookingTicketService {
     return this.http.get<BookingTicketDTO[]>(this.API_URL_TICKET + '/' + pageNum +'?search=' + search);
   }
 
-  getListTicket(): Observable<BookingTicketDTO[]>{
-    return this.http.get<BookingTicketDTO[]>(this.API_URL_TICKET);
+  getListTicket(search: string): Observable<BookingTicketDTO[]>{
+    return this.http.get<BookingTicketDTO[]>(this.API_URL_TICKET + '?search=' +search);
   }
 
   findTicketById(id: number): Observable<BookingTicket>{
