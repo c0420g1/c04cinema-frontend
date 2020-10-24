@@ -11,11 +11,12 @@ import {HistoryPointComponent} from './customer/history-point/history-point.comp
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BookingComponent } from './booking/booking.component';
 
 
 @NgModule({
   declarations: [UserLayoutComponent, HomeComponent, MovieComponent,
-    PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent],
+    PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent, BookingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
