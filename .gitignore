@@ -123,3 +123,4 @@ yarn-error.log
 /.sonarlint
 /.scannerwork
 /php-config/*
+__ngcc_entry_points__.json
