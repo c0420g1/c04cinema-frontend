@@ -42,6 +42,7 @@ export class InformationComponent implements OnInit {
             gender: ['', Validators.required],
             cardid: ['', Validators.required],
             accountId: ['', Validators.required],
+            code: ['', Validators.required],
         });
         this.accountForm = this.fb.group({
             id: [''],
