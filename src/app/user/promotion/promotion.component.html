@@ -1,2 +1,31 @@
-<p style="margin-top: 100px">promotion works!</p>
+<div id="1" class="item new col-md-4" *ngFor="let item of datas" style="margin-top: 150px">
+    <img src="{{item.picture}}">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            (click)="getId(item)">
+        Detail
+    </button>
+</div>?
 
+<div *ngIf="promotion" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true" style="margin-top: 100px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="{{promotion.picture}}">
+                <p>{{promotion.name}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="buyPromotion()" >Save changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
