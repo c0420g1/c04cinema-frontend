@@ -14,7 +14,10 @@
             <img class="img-fluid" style="width: 200px;height: 200px" [src]="image.imageUrl" alt="">
             <p>{{image.caption}}</p>
             <p>name: {{image.name}}</p>
-            <button class="btn btn-primary" href="#" (click)="deleteImage(image.$key=image.caption)">Delete Image</button>
+            <button class="btn btn-danger" href="#" (click)="deleteImage(image)">Delete Image</button>
+            <a class="link" (click)="copyImage(image)">
+                <img src="assets/images/banners/60990.png" style="width: 25px;margin-left: 66px" alt="">
+            </a>
         </div>
     </div>
 </div>
