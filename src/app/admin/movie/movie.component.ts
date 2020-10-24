@@ -17,11 +17,13 @@ export class MovieComponent implements OnInit {
   movieGenreAssociates: MovieGenreAssociate[] = [];
   idMovieGenreTypesTrue: number[] = [];
   idMovieGenreTypes = [false,false,false,false,false,false,false,false,false,false,false,false];
+  editIdMovieGenreTypes = [false,false,false,false,false,false,false,false,false,false,false,false];
   addFormMovie: FormGroup;
   addFormMovieGenreAssociate: FormGroup;
   editFormMovie: FormGroup;
   lastMovie: Movie;
   check: number;
+  arrEditMovieGenreTypeId: number[] = [];
 
   constructor(private movieService: MovieService, private fb: FormBuilder) { }
 
@@ -71,7 +73,7 @@ export class MovieComponent implements OnInit {
 
   checkBoxes(event) {
         this.check = event.target.value;
-        console.log(this.idMovieGenreTypes[0]);
+        // console.log(this.idMovieGenreTypes[0]);
         console.log(this.check);
         let realCheck = this.check -1;
         for(let i=0;i<12;i++){
@@ -103,6 +105,7 @@ export class MovieComponent implements OnInit {
                   movieGenreTypeId: [this.idMovieGenreTypesTrue[i]]
               }
           )
+          console.log(this.lastMovie.id, this.idMovieGenreTypesTrue[i]);
           this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe();
       }
       this.message = "Added successfully";
@@ -110,9 +113,30 @@ export class MovieComponent implements OnInit {
 
     getMovie(movie: Movie) {
         this.editFormMovie.patchValue(movie);
-        
-        // this.productEdit = this.editFormMovie.value;
-        // console.log(this.productEdit);
+        // this.movieService.getAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id)
+        this.movieService.getAllMovieGenreAssociateByMovieId(115).subscribe(
+            (data) => {
+                for(let item of data){
+                    this.arrEditMovieGenreTypeId.push(item.movieGenreTypeId);
+                    // console.log(this.arrEditMovieGenreTypeId);
+                }
+                console.log("ket qua");
+                console.log(this.arrEditMovieGenreTypeId);
+                console.log("ket qua2");
+                console.log(this.arrEditMovieGenreTypeId[2]);
+                console.log(typeof this.arrEditMovieGenreTypeId);
+                for (let i=0; i<this.editIdMovieGenreTypes.length; i++){
+                    for (let j=0; j<this.arrEditMovieGenreTypeId.length; j++){
+                        if (this.arrEditMovieGenreTypeId[j] == i+1){
+                            this.editIdMovieGenreTypes[i] = true;
+                        }
+                    }
+                }
+                console.log("ket qua3");
+                console.log(this.editIdMovieGenreTypes);
+
+            });
+
 
     }
     editMovie() {
