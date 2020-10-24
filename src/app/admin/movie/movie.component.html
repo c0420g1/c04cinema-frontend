@@ -1,1 +1,394 @@
-<p>movie works!</p>
+
+<div class="content" style="height: 71vh">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-10" style="margin-top: 28px; margin-left: 8%">
+
+                <div class="table-title">
+
+                    <div class="row">
+                        <div class="search" style="width: 18%">
+                            <input style="border-radius: 17px;margin-left: 15px; font-size: 15px" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                        </div>
+
+                        <div class="col-sm-3">
+                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-9" style="max-width: 75%">
+                            <div style="margin-left: 380px;">
+                                <p style="font-size: 31px; font-weight: bold">Movie Management</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <h3 class="text text-success" *ngIf="message">{{message}}</h3>
+                    <table id="movie">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Movie</th>
+                            <th>Start Date</th>
+                            <th>Entertainment</th>
+                            <th>Duration (m)</th>
+                            <th >Version</th>
+                            <th width="20%">
+                                <div style="display: flex">
+                                    <div  style="margin-left: 20px">Edit</div>
+                                    <div style="margin-left: 15px">Delete</div>
+                                    <div  style="margin-left: 11px">Add Show</div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let movie of movies;let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{movie.name}}</td>
+                            <td>{{movie.startDate}}</td>
+                            <td>{{movie.entertainment}}</td>
+                            <td>{{movie.duration}}</td>
+                            <td *ngIf="movie.is2d == true, else block " >2D</td>
+                            <ng-template #block>
+                                <td>3D</td>
+                            </ng-template>
+                            <td>
+                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovie(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
+                                <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons">&#xe148;</i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page" style="margin-left: 450px">
+                    <button  class="btn badge-dark" >First</button>
+                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>
+                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>
+                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>
+
+                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>
+                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>
+                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--ADD NEW MOVIE-->
+<div id="cssAddForm">
+    <div id="addNewMovie" class="modal fade" >
+        <div class="modal-dialog">
+            <div class="modal-content" >
+
+                <form [formGroup]="addFormMovie">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Movie</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                        <div class="modal-body">
+                            <div>
+                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">
+                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>
+                            </div>
+                        <div class="form-group">
+                            <label>Name <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Start Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="endDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Actor <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="actor" >
+                        </div>
+                        <div class="form-group">
+                            <label>Director <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="director">
+                        </div>
+                        <div class="form-group">
+                            <label>Entertainment <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="entertainment">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (minute) <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="duration">
+                        </div>
+                        <div class="form-group" >
+                            <label>Version <span style="color: red">(*)</span></label><br>
+                            <input type="radio" id="2d" formControlName="is2d" value="1">
+                            <label for="2d" style="margin-left: 5px">2D</label>
+                            <input type="radio" id="3d" formControlName="is2d" value="0" style="margin-left: 55px;" >
+                            <label for="3d" style="margin-left: 5px">3D</label><br>
+                        </div>
+                        <div class="form-group" >
+                            <label >Subtitle <span style="color: red">(*)</span></label><br>
+                            <input type="radio"  formControlName="isSub" value="1">
+                            <label style="margin-left: 5px" >Subtitle</label>
+                            <input type="radio"  formControlName="isSub" value="0" style="margin-left: 55px;" >
+                            <label style="margin-left: 5px">Not Subtitle</label><br>
+                        </div>
+                        <div class="form-group">
+                            <label>Trailer Url <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="trailerUrl">
+                        </div>
+                        <div class="form-group">
+                            <label>Movie Genre Type <span style="color: red">(*)</span></label><br>
+                            <div style="margin-left: 5px">
+                                    <div class="form-check">
+                                        <div class="row">
+                                            <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
+                                                <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxes($event)">
+                                                <label style="margin-left: 5px;">
+                                                    {{mgType.name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="movieRatedAgeId" >
+                                    <option value="1">G (General Audiences)</option>
+                                    <option value="2">PG (Parental Guidance Suggested)</option>
+                                    <option value="3">PG-13 (Parents Strongly Cautioned)</option>
+                                    <option value="4">R (Restricted)</option>
+                                    <option value="5">CR (Children)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Star Rating<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="starRating" >
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="5">5 Stars</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" class="form-control" formControlName="description"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" [disabled]="addFormMovie.invalid" (click)="addNewMovie()" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--END ADD NEW FILM-->
+
+<!--EDIT FILM-->
+<div id="cssEditForm">
+    <div id="editMovie" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form [formGroup]="editFormMovie">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Movie</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">
+                            <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>
+                        </div>
+                        <input type="hidden" formControlName="id">
+                        <div class="form-group">
+                            <label>Name <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="name" >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Start Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="endDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Actor <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="actor">
+                        </div>
+                        <div class="form-group">
+                            <label>Director <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="director">
+                        </div>
+                        <div class="form-group">
+                            <label>Entertainment <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="entertainment">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (minute) <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="duration">
+                        </div>
+                        <div class="form-group" >
+                            <label>Version <span style="color: red">(*)</span></label><br>
+                            <input type="radio"  formControlName="is2d" value="1">
+                            <label style="margin-left: 5px">2D</label>
+                            <input type="radio"  formControlName="is2d" value="0" style="margin-left: 55px;" >
+                            <label style="margin-left: 5px" >3D</label><br>
+                        </div>
+                        <div class="form-group" >
+                            <label >Subtitle <span style="color: red">(*)</span></label><br>
+                            <input type="radio"  formControlName="isSub" value="1">
+                            <label style="margin-left: 5px">Subtitle</label>
+                            <input type="radio"  formControlName="isSub" value="0" style="margin-left: 55px;" >
+                            <label style="margin-left: 5px">Not Subtitle</label><br>
+                        </div>
+                        <div class="form-group">
+                            <label>Trailer <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="trailerUrl" >
+                        </div>
+                        <div class="form-group">
+                            <label>Movie Genre Type <span style="color: red">(*)</span></label><br>
+                            <div style="margin-left: 5px">
+                                <div class="form-check">
+                                    <div class="row">
+                                        <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
+                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxes($event)" >
+                                            <label style="margin-left: 5px;">
+                                                {{mgType.name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="movieRatedAgeId" >
+                                    <option value="1">G (General Audiences)</option>
+                                    <option value="2">PG (Parental Guidance Suggested)</option>
+                                    <option value="3">PG-13 (Parents Strongly Cautioned)</option>
+                                    <option value="4">R (Restricted)</option>
+                                    <option value="5">CR (Children)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Star Rating<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="starRating" >
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="5">5 Stars</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" class="form-control" formControlName="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-warning" data-dismiss="modal" value="Update" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END EDIT MOVIE-->
+
+<!--DELETE MOVIE-->
+<div id="cssDeleteForm">
+    <div id="deleteMovie" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form  method="post" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Movie</h4>
+                        <a ><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this movie?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a ><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"></a>
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--END DELETE MOVIE-->
+
+
+<!--ADD SHOW-->
+<div id="cssAddShowForm">
+    <div id="addShow" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+                <form >
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Show</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Movie Name</label>
+                            <input type="text" class="id" readonly >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hall Name<span style="color: red">(*)</span></label>
+                            <select name="idHall" id="">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Show Time<span style="color: red">(*)</span></label>
+                            <input type="datetime-local" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label>Price of Show<span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" >
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--END ADD SHOW-->

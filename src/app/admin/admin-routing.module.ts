@@ -4,6 +4,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
 import {MovieComponent} from './movie/movie.component';
 import {TicketComponent} from './ticket/ticket.component';
+import {ImageUploadComponent} from './image-upload/image-upload.component';
+import {GalleryComponent} from './gallery/gallery.component';
+import {BookingTicketComponent} from './booking-ticket/booking-ticket.component';
+import {BannerComponent} from './banner/banner.component';
 
 
 const routes: Routes = [
@@ -22,7 +26,24 @@ const routes: Routes = [
       {
         path: 'ticket',
         component: TicketComponent
+      },
+      {
+        path: 'image',
+        component: ImageUploadComponent
+      },
+      {
+        path: 'gallery',
+        component: GalleryComponent
+      },
+      {
+        path: 'booking-ticket',
+        component: BookingTicketComponent
+      },
+      {
+        path: 'banner',
+        component: BannerComponent
       }
+
     ]
   }
 ];
