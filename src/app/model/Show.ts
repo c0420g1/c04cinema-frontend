@@ -5,5 +5,5 @@ export class Show {
     movieId: number;
     price: number;
     description: string;
-    isearly: boolean;
+    isearly: boolean
 }
