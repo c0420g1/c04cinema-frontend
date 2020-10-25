@@ -6,10 +6,10 @@
         <div class="col-sm-8">
             <input type="date" class="form-control" formControlName="contractStarDate" (change)="compareTwoDates()"
                    [(ngModel)]="star">
-            <div class="error1"
+            <div class="alert alert-danger"
                  *ngIf="pointForm.get('contractStarDate').touched && pointForm.get('contractStarDate').invalid">Invalid
-                <p class="error1" *ngIf="pointForm.get('contractStarDate').hasError('required')"> must Required</p>
-                <p class="error1" *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format
+                <p  *ngIf="pointForm.get('contractStarDate').hasError('required')"> must Required</p>
+                <p  *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format
                     (yyyy-mm-dd)</p>
             </div>
         </div>
@@ -20,11 +20,11 @@
             <input type="date" class="form-control" formControlName="contractEndDate"
                    (change)="compareTwoDates()"
                    [(ngModel)]="end">
-            <div class="error1"
+            <div class="alert alert-danger"
                  *ngIf="pointForm.get('contractEndDate').touched && pointForm.get('contractEndDate').invalid">
                 Invalid
-                <p class="error1" *ngIf="pointForm.get('contractEndDate').hasError('required')"> must Required</p>
-                <p class="error1" *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format (yyyy-mm-dd)</p>
+                <p  *ngIf="pointForm.get('contractEndDate').hasError('required')"> must Required</p>
+                <p  *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format (yyyy-mm-dd)</p>
             </div>
         </div>
         <p class="error1" *ngIf="error">day end > day star</p>
@@ -42,11 +42,10 @@
     <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="pointForm.invalid || error"
             (click)="searchPoint()">View Point
     </button>
-
 </form>
-
-
-<hr>
+<span *ngIf="message" class="error1">
+          {{message}}
+          </span>
 <table class="table">
     <thead>
     <tr>
@@ -63,10 +62,32 @@
     </tr>
     </tbody>
 </table>
-<div style="text-align: left">
-    <a href="#">Next</a>
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <a href="#">3...</a>
-    <a href="#">Previous</a>
+<div class="row" style="margin-top: 10px" *ngIf="!message">
+    <div class="col-lg-4">
+        <div style="font-size: 15px">
+            Show {{entityNumber}} entities of {{totalEntities}} entities
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div style="float: right; margin-right: 50px">
+            <ul class="list-inline">
+                <li>
+                    <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                </li>
+
+                <li>
+                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                </li>
+
+                <li>
+                    <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<=totalPage">Next</button>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
 </div>
