@@ -1,8 +1,17 @@
 
-<div class="col-lg-3">
-    <h3 style="text-align: center; font-size: 20px; color: orange; margin-top: 20px">BANNER MANAGEMENT</h3>
+
+<div class="row" style="text-align: center; font-size: 20px; margin-top: 20px">
+    <div class="col-lg-3" >
+        <h3 style="color: orange">BANNER MANAGEMENT</h3>
+    </div>
+    <div class="form-inline my-2 my-lg-0 float-lg-left" style="text-align: left">
+        <a href="#addBanner"  title="Add" data-toggle="modal" style="color: orange;">ADD NEW BANNER</a>
+    </div>
+
 </div>
-<a href="#addBanner"  title="Add" data-toggle="modal"><i  style="color: blue;" class="material-icons">&#xe148;</i></a>
+
+
+
 <table class="table table-striped table-hover" style="font-size: 12px">
     <thead>
     <tr>
@@ -20,7 +29,7 @@
         <td>{{banner.url}}</td>
         <td>{{banner.description}}</td>
         <td>
-            <a href="#editBanner" class="edit" title="Edit" data-toggle="modal" (click)="getBanner(banner)">
+            <a href="#editBanner"  data-toggle="modal" (click)="getBanner(banner)">
                 <i style="color: #ffd564" class="material-icons">&#xE254;</i>
             </a>
         </td>
@@ -67,39 +76,37 @@
 
 <!--END ADD NEW FILM-->
 
-<!--EDIT FILM-->
-<!--<div id="cssEditForm">-->
-<!--    <div id="editBanner" class="modal fade">-->
-<!--        <div class="modal-dialog">-->
-<!--            <div class="modal-content" style="margin-top: 427px;">-->
-<!--                <form [formGroup]="editFormBanner">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h4 class="modal-title">Edit Movie</h4>-->
-<!--                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <div>-->
-<!--                            <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">-->
-<!--                            <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>-->
-<!--                        </div>-->
-<!--                        <input type="hidden" formControlName="id">-->
-<!--                        <div class="form-group">-->
-<!--                            <label>Name <span style="color: red">(*)</span></label>-->
-<!--                            <input type="text" class="form-control" formControlName="name" >-->
-<!--                        </div>-->
+<div id="editBanner" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-<!--                        <div class="form-group">-->
-<!--                            <label>Trailer <span style="color: red">(*)</span></label>-->
-<!--                            <input type="text" class="form-control" formControlName="trailerUrl" >-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
-<!--                        <input type="submit" class="btn btn-warning" data-dismiss="modal" value="Update" >-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Banner</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editFormBanner" (ngSubmit)="EditBanner()">
+                    <div class="form-group">
+                        <label>Title <span style="color: red">(*)</span></label>
+                        <input type="text" class="form-control" formControlName="title">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Url <span style="color: red">(*)</span></label>
+                        <input type="text" class="form-control" formControlName="url">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea type="text" class="form-control" formControlName="description"></textarea>
+                    </div>
+                    </form>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <button class="btn btn-success" (click)="EditBanner()">Update</button>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
 <!--END EDIT MOVIE-->
