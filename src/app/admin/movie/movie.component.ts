@@ -4,7 +4,7 @@ import {MovieGenreType} from '../../model/MovieGenreType';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {MovieService} from './movie.service';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
-import {Hall} from '../../model/hall';
+import {Hall} from '../../model/Hall';
 
 @Component({
   selector: 'app-movie',

@@ -1,3 +1,20 @@
 .container{
     margin-top: 50px;
 }
+.img-poster{
+    width: 80%;border: 2px solid black; height: 280px;
+}
+.p-name-movie{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.p-date-start{
+    margin-top: -15px
+}
+.div-button-detail{
+    margin-top: -10px
+}
+.not-found{
+    margin-top: 100px
+}
