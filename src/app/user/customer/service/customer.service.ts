@@ -9,13 +9,14 @@ import {Customer} from '../model/Customer';
 export class CustomerService {
 
   private readonly API_URL = 'http://localhost:8080/customer';
+  private readonly API_URL1 = 'http://localhost:8080/editCustomer';
   constructor(private http: HttpClient) {}
 
   getCustomerById(id: string): Observable<Customer>{
     return this.http.get<Customer>(`${this.API_URL}?${id}`);
   }
 
-  updateCustomer(customer: Customer, i: number): Observable<Customer> {
-    return this.http.patch<Customer>(`${this.API_URL}/${customer.id}`, customer);
+  updateCustomer(customer: Customer, i: number): Observable<Error[]> {
+    return this.http.patch<Error[]>(`${this.API_URL1}/${customer.id}`, customer);
   }
 }

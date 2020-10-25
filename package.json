@@ -20,14 +20,16 @@
     "@angular/platform-browser": "~9.1.12",
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "firebase": ">= 5.5.7 <8",
     "jquery": "^3.5.1",
     "ngx-loading": "^8.0.0",
     "rxjs": "~6.5.4",
     "safe-pipe": "^1.0.3",
     "save": "^2.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2",
-    "firebase": ">= 5.5.7 <8"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
