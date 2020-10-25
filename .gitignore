@@ -125,3 +125,5 @@ yarn-error.log
 /php-config/*
 __ngcc_entry_points__.json
 node_modules/__ngcc_entry_points__.json
+debug.log
+*.log
