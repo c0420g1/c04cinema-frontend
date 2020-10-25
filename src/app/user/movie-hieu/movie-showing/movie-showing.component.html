@@ -7,6 +7,10 @@
             <input type="date" class="form-control btn-block ml-2 input-search-date"
                    (change)="searchFilmByDate($event.target.value)">
         </div>
+        <div class="col-5">
+            <input type="text" class="input-search-name" placeholder="Enter name film"  [(ngModel)]="nameSearch"
+                   (ngModelChange)="searchByName()">
+        </div>
     </div>
     <div class="div-title-movie-show">
         <h2 class="page-heading">Movies showing</h2>
@@ -23,9 +27,9 @@
             <p class="p-startDate"><strong>Date: </strong>{{filmShowing.startDate}}</p>
             <div class="row">
                 <div class="col-12 item-button-getTicket" style="">
-                    <button class="btn btn-outline-secondary" [routerLink]="['/movie-detail',filmShowing.id]">Detail
-                    </button>
-                    <button class="ml-2 btn btn-warning">Book Ticket</button>
+                    <a href="#" class="btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">Detail</a>
+                    <a href="#" class="btn btn-md btn--shine" style="margin-left: 3px" *ngIf="checkDate===true">Book a
+                        ticket</a>
                 </div>
             </div>
         </div>

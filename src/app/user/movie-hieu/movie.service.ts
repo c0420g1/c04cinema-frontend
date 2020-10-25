@@ -9,6 +9,7 @@ import {Movie} from '../../model/Movie';
 export class MovieService {
   private readonly API_URL = 'http://localhost:8080/movie?filter=';
   private readonly API_URL2 = 'http://localhost:8080/movie/date/';
+  private readonly API_URL3 = 'http://localhost:8080/movie-new';
 
   constructor(private http: HttpClient) {
   }
@@ -28,5 +29,11 @@ export class MovieService {
   }
   getMovieById(id: string): Observable<Movie> {
     return this.http.get<Movie>(this.API_URL + this.endCodeDate('id','eq', id));
+  }
+  getFilmByName(name:string): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_URL + this.endCodeDate('name','like', name))
+  }
+  getMoviesNew(): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_URL3);
   }
 }
