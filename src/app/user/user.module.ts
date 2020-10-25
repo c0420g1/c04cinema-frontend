@@ -11,17 +11,28 @@ import {HistoryPointComponent} from './customer/history-point/history-point.comp
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MovieShowingComponent } from './movie-hieu/movie-showing/movie-showing.component';
+import { MovieComingComponent } from './movie-hieu/movie-coming/movie-coming.component';
+import { MovieDetailComponent } from './movie-hieu/movie-detail/movie-detail.component';
+import {HttpClientModule} from '@angular/common/http';
+import {SafePipeModule} from 'safe-pipe';
 import { BookingComponent } from './booking/booking.component';
 
 
+// @ts-ignore
 @NgModule({
   declarations: [UserLayoutComponent, HomeComponent, MovieComponent,
-    PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent, BookingComponent],
+    PromotionComponent, CustomerComponent, InformationComponent,
+    HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
+    MovieShowingComponent, MovieComingComponent,
+    MovieDetailComponent,BookingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+      HttpClientModule,
+      SafePipeModule
   ]
 })
 export class UserModule { }

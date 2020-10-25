@@ -1,0 +1,17 @@
+export class Show {
+    id: number;
+    startTime: string;
+<<<<<<< HEAD
+    hallID: number;
+    movieId: number;
+    price: number;
+    description: string;
+    isEarly: number;
+=======
+    hallId: number;
+    movieId: number;
+    price: number;
+    description: string;
+    isearly: boolean
+>>>>>>> develop
+}
