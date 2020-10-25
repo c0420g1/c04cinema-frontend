@@ -1,55 +1,93 @@
-<form>
-    <h3>History Point</h3>
+<h3>History Point</h3>
+
+<form [formGroup]="pointForm">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Date Star :</label>
+        <label class="col-sm-2 col-form-label">Star Date <span style="color: red">(*)</span> :</label>
         <div class="col-sm-8">
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" formControlName="contractStarDate" (change)="compareTwoDates()"
+                   [(ngModel)]="star">
+            <div class="alert alert-danger"
+                 *ngIf="pointForm.get('contractStarDate').touched && pointForm.get('contractStarDate').invalid">Invalid
+                <p  *ngIf="pointForm.get('contractStarDate').hasError('required')"> must Required</p>
+                <p  *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format
+                    (yyyy-mm-dd)</p>
+            </div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Date End :</label>
+        <label class="col-sm-2 col-form-label">End Date <span style="color: red">(*)</span> : </label>
         <div class="col-sm-8">
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" formControlName="contractEndDate"
+                   (change)="compareTwoDates()"
+                   [(ngModel)]="end">
+            <div class="alert alert-danger"
+                 *ngIf="pointForm.get('contractEndDate').touched && pointForm.get('contractEndDate').invalid">
+                Invalid
+                <p  *ngIf="pointForm.get('contractEndDate').hasError('required')"> must Required</p>
+                <p  *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format (yyyy-mm-dd)</p>
+            </div>
         </div>
+        <p class="error1" *ngIf="error">day end > day star</p>
     </div>
     <div class="form-group row">
         <div class="col-sm-7">
-            <input type="radio" id="History Plus Point" name="Point" value="History Plus Point">
+            <input type="radio" id="History Plus Point" name="gender"  formControlName="gender" (change)="changeGender($event)" value="true">
             <label for="History Plus Point">History Plus Point</label>
         </div>
         <div class="col-sm-7">
-            <input type="radio" id="History Use Points" name="Point" value="History Use Points">
+            <input type="radio" id="History Use Points" name="gender" formControlName="gender" (change)="changeGender($event)" value="false">
             <label for="History Use Points">History Use Points</label>
         </div>
     </div>
-    <button type='submit' class="btn btn-md btn--warning btn--wider">View Point</button>
+    <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="pointForm.invalid || error"
+            (click)="searchPoint()">View Point
+    </button>
 </form>
-<hr>
+<span *ngIf="message" class="error1">
+          {{message}}
+          </span>
 <table class="table">
     <thead>
     <tr>
         <td>Day Create</td>
-        <td>Movie's Name</td>
+        <td>Source</td>
         <td>Point</td>
     </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let point of pointS">
     <tr>
-        <td>21/01/2017 8:08</td>
-        <td>Harry Potter Bảo Bối Tử Thần</td>
-        <td>120000</td>
-    </tr>
-    <tr>
-        <td>21/01/2017 8:08</td>
-        <td>Harry Potter Bảo Bối Tử Thần</td>
-        <td>120000</td>
+        <td>{{point.dayPut}}</td>
+        <td>{{point.movieName}}</td>
+        <td>{{point.point}}</td>
     </tr>
     </tbody>
 </table>
-<div style="text-align: left">
-    <a href="#">Next</a>
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <a href="#">3...</a>
-    <a href="#">Previous</a>
+<div class="row" style="margin-top: 10px" *ngIf="!message">
+    <div class="col-lg-4">
+        <div style="font-size: 15px">
+            Show {{entityNumber}} entities of {{totalEntities}} entities
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div style="float: right; margin-right: 50px">
+            <ul class="list-inline">
+                <li>
+                    <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                </li>
+
+                <li>
+                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                </li>
+
+                <li>
+                    <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<=totalPage">Next</button>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
 </div>

@@ -13,13 +13,13 @@
             <p>Cumulative Points : {{point}}</p>
             <button type='submit' class="btn btn-md btn--warning btn--wider">Log Out</button>
             <hr>
-            <div class="m-1"><a routerLink="information"> Account Information</a></div>
+            <div class="m-1"><a [routerLink]="['information',customer.id]"> Account Information</a></div>
             <hr>
-            <div class="m-3"><a routerLink="history-point"> History </a></div>
+            <div class="m-3"><a [routerLink]="['history-point',customer.id]"> History </a></div>
             <hr>
-            <div class="m-4"><a routerLink="ticker-put"> Tickets Booked </a></div>
+            <div class="m-4"><a [routerLink]="['ticker-put',customer.id]"> Tickets Booked </a></div>
             <hr>
-            <div class="m-4"><a routerLink="ticker-cancel"> Tickets Cancel </a></div>
+            <div class="m-4"><a [routerLink]="['ticker-cancel',customer.id]"> Tickets Cancel </a></div>
         </div>
         <div class="col-lg-8" style="text-align: left">
             <router-outlet></router-outlet>

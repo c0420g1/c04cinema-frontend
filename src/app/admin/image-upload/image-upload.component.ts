@@ -17,6 +17,7 @@ export class ImageUploadComponent implements OnInit {
   imgSrc = 'assets/images/banners/300.png';
   loading = false;
   editImage: Image = {
+    key: null,
     name: '',
     imageUrl: '',
     category: '',
@@ -60,7 +61,7 @@ export class ImageUploadComponent implements OnInit {
     this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            this.editImage.imageUrl = url;
+            this.editImage.imageUrl = url
             // add image to database
             this.service.insertImageDetails(this.editImage);
             this.confirm = this.service.imageConfirm;
@@ -106,6 +107,7 @@ export class ImageUploadComponent implements OnInit {
     selBox.focus();
     selBox.select();
     document.execCommand('copy');
+
   }
 
 
