@@ -1,0 +1,77 @@
+<div class="content" style="height: 71vh">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-10" style="margin-top: 28px; margin-left: 8%">
+
+                <div class="table-title">
+
+                    <div class="row">
+                        <div class="search" style="width: 18%">
+                            <input style="border-radius: 17px;margin-left: 15px; font-size: 15px" class="form-control" type="text" name="search" placeholder="Search for hall..." >
+                        </div>
+
+                        <div class="col-sm-3">
+                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewHall" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Hall</a>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-9" style="max-width: 75%">
+                            <div style="margin-left: 380px;">
+                                <p style="font-size: 31px; font-weight: bold">Hall Management</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <table id="movie">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Hall Name</th>
+                            <th>Seat Quantity</th>
+                            <th>Hall Type</th>
+                            <th width="20%">
+                                <div style="display: flex">
+                                    <div  style="margin-left: 40px">Seat Detail</div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let hall of halls;let i = index">
+                            <ng-container *ngIf="hall.theatreId == theaterId">
+                            <td>{{i + 1}}</td>
+                            <td>{{hall.name}}</td>
+                            <td>{{hall.seatQuantity}}</td>
+                            <ng-container *ngFor="let type of hallType">
+                                <ng-container *ngIf="type.id == hall.hallTypeId">
+                                    <td>{{ type.name }}</td>
+                                </ng-container>
+                            </ng-container>
+                            <td>
+                                <a  class="edit" title="Edit" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                            </td>
+                            </ng-container>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page" style="margin-left: 450px">
+                    <button  class="btn badge-dark" >First</button>
+                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>
+                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>
+                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>
+
+                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>
+                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>
+                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

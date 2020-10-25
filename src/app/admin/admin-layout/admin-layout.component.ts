@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor(private roter: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.roter.navigateByUrl('/admin/dashboard');
+    this.router.navigateByUrl('/admin/dashboard');
   }
 
 }
