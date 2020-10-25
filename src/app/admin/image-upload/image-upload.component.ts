@@ -59,7 +59,7 @@ export class ImageUploadComponent implements OnInit {
     this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            this.editImage.imageUrl = url;
+            this.editImage.imageUrl = url
             // add image to database
             this.service.insertImageDetails(this.editImage);
             this.confirm = this.service.imageConfirm;
