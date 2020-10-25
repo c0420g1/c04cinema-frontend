@@ -2899,7 +2899,7 @@ input[type="button"].btn-block {
 }
 .alert-danger {
   background-color: #f2dede;
-  border-color: #ebccd1;
+  border-color: #ff0000 !important;
   color: #a94442;
 }
 .alert-danger hr {

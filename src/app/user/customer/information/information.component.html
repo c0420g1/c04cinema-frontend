@@ -57,6 +57,10 @@
             Full Name <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
             <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required formControlName="name">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('name').touched && customerForm.get('name').invalid">
+                <p *ngIf="customerForm.get('name').hasError('required')"> required </p>
+                <p *ngIf="customerForm.get('name').hasError('pattern')"> error format </p>
+            </div>
         </div>
     </div>
     <div class="form-group row">
@@ -64,6 +68,11 @@
             Birth Day <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
             <input type="date" class="form-control" id="inputBirthday" required formControlName="birthday">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('birthday').touched && customerForm.get('birthday').invalid">
+                <p *ngIf="customerForm.get('birthday').hasError('required')"> required </p>
+                <p *ngIf="customerForm.get('birthday').hasError('pattern')"> error format </p>
+                <p *ngIf="customerForm.get('birthday').hasError('checkDate')"> error format </p>
+            </div>
         </div>
     </div>
     <div class="form-group row">
@@ -77,6 +86,10 @@
                     <input type="radio"  formControlName="gender" value="Female" style="margin-right: 10px" >
                     <label >Female</label><br>
                 </div>
+                <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('gender').touched && customerForm.get('gender').invalid">
+                    <p *ngIf="customerForm.get('gender').hasError('required')"> required </p>
+                    <p *ngIf="customerForm.get('gender').hasError('pattern')"> error format </p>
+                </div>
             </div>
         </div>
     </div>
@@ -84,25 +97,48 @@
         <label for="staticEmail" class="col-sm-3 col-form-label">Email :</label>
         <div class="col-sm-9">
             <input type="text"  class="form-control" id="staticEmail" formControlName="email">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('email').touched && customerForm.get('email').invalid">
+                <p *ngIf="customerForm.get('email').hasError('required')"> required </p>
+                <p *ngIf="customerForm.get('email').hasError('pattern')"> error format </p>
+            </div>
         </div>
     </div>
     <div class="form-group row">
-        <label for="inputCmnd" class="col-sm-3 col-form-label">Credit Card <span style="color: red">(*)</span> :</label>
+        <label class="col-sm-3 col-form-label">Credit Card <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text"  class="form-control" id="inputCmnd" required formControlName="cardid">
+            <input type="text"  class="form-control" required formControlName="cardid">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('cardid').touched && customerForm.get('cardid').invalid">
+                <p *ngIf="customerForm.get('cardid').hasError('required')"> required </p>
+                <p *ngIf="customerForm.get('cardid').hasError('pattern')"> error format </p>
+            </div>
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPhone" class="col-sm-3 col-form-label">Phone <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
             <input type="text"  class="form-control" id="inputPhone" required formControlName="phone">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('phone').touched && customerForm.get('phone').invalid">
+                <p *ngIf="customerForm.get('phone').hasError('required')"> required </p>
+                <p *ngIf="customerForm.get('phone').hasError('pattern')"> error format </p>
+            </div>
         </div>
     </div>
     <div class="form-group row">
         <label for="inputAdd" class="col-sm-3 col-form-label">Address <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
             <input type="text"  class="form-control" id="inputAdd" required formControlName="address">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('address').touched && customerForm.get('address').invalid">
+                <p *ngIf="customerForm.get('address').hasError('required')"> required </p>
+                <p *ngIf="customerForm.get('address').hasError('maxlength')"> max length 200 </p>
+            </div>
         </div>
+    </div>
+    <div *ngIf="errors.length > 0 ">
+        <ul class="alert alert-danger">
+            <li *ngFor="let error of errors">
+                {{error.message}}
+            </li>
+        </ul>
     </div>
     <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid" (click)="editCustomer()">Update</button>
 </form>
