@@ -45,6 +45,9 @@
 #cssAddForm textarea{
     font-size: 15px;
 }
+#cssAddForm select option{
+    font-size: 15px;
+}
 #cssAddForm{
     font-size: 15px;
 }
