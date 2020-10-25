@@ -9,6 +9,10 @@ import {InformationComponent} from './customer/information/information.component
 import {HistoryPointComponent} from './customer/history-point/history-point.component';
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
+import {MovieShowingComponent} from './movie-hieu/movie-showing/movie-showing.component';
+import {MovieComingComponent} from './movie-hieu/movie-coming/movie-coming.component';
+import {MovieDetailComponent} from './movie-hieu/movie-detail/movie-detail.component';
+import { BookingComponent } from './booking/booking.component';
 
 
 const routes: Routes = [
@@ -27,6 +31,10 @@ const routes: Routes = [
       {
         path: 'promotion',
         component: PromotionComponent
+      },
+      {
+        path: 'booking',
+        component: BookingComponent
       },
       {
         path: 'customer',
@@ -49,6 +57,18 @@ const routes: Routes = [
             component: TickerCancelComponent
           }
         ]
+      },
+      {
+        path: 'movie-showing',
+        component: MovieShowingComponent
+      },
+      {
+        path: 'movie-coming',
+        component: MovieComingComponent
+      },
+      {
+        path: 'movie-detail/:id',
+        component: MovieDetailComponent
       }
     ]
   }

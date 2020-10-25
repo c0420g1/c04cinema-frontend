@@ -11,4 +11,5 @@ export class Customer {
     isactive: boolean;
     gender: string;
     cardid: string;
+    code:string;
 }

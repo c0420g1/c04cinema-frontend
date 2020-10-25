@@ -7,6 +7,7 @@ import {TicketComponent} from './ticket/ticket.component';
 import {ImageUploadComponent} from './image-upload/image-upload.component';
 import {GalleryComponent} from './gallery/gallery.component';
 import {BookingTicketComponent} from './booking-ticket/booking-ticket.component';
+import {BannerComponent} from './banner/banner.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'booking-ticket',
         component: BookingTicketComponent
+      },
+      {
+        path: 'banner',
+        component: BannerComponent
       }
 
     ]

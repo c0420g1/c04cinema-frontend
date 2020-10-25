@@ -15,8 +15,11 @@ export class BookingTicketComponent implements OnInit {
   ticketList: BookingTicketDTO[] = [];
   message: string;
   currentPage = 1;
+  totalEntities: number;
   totalPage: number;
   ticketNew: BookingTicketDTO = new BookingTicketDTO();
+  entityNumber: number;
+  jumpPage: number;
   total = 0;
   id = 0;
   private confirmTicket: ConfirmTicket;
@@ -25,7 +28,11 @@ export class BookingTicketComponent implements OnInit {
               private route: Router) { }
 
   ngOnInit(): void {
-    this.bookingTicketService.getListTicket().subscribe((data) => this.totalPage = data.length);
+
+    this.bookingTicketService.getListTicket(this.variableFind).subscribe((data) => {
+      this.totalEntities = data.length;
+      this.totalPage = this.totalEntities/10;
+    });
 
     this.bookingTicketService.getAllTicket(this.currentPage, this.variableFind).subscribe((data) => {
       if (data.length === 0){
@@ -33,11 +40,16 @@ export class BookingTicketComponent implements OnInit {
       } else {
         this.message = '';
       }
+      console.log(this.currentPage);
+      console.log(this.totalPage);
+      this.entityNumber = data.length;
+      // this.totalPage = this.totalEntities/10;
       this.ticketList = data;
     });
 
   }
   search(): void {
+    this.currentPage =1;
     this.ngOnInit();
   }
 
@@ -57,16 +69,22 @@ export class BookingTicketComponent implements OnInit {
   prePage(): void {
     if (this.currentPage >= 2 ){
       this.currentPage--;
+      this.jumpPage = this.currentPage;
     }
     this.ngOnInit();
   }
 
   nexPage(): void {
-    if (this.currentPage < this.totalPage / 5) {
+    if (this.currentPage < this.totalEntities / 10) {
       this.currentPage++;
+      this.jumpPage = this.currentPage;
     }
     console.log(this.currentPage)
     this.ngOnInit();
   }
 
+  goToPage() {
+    this.currentPage = this.jumpPage;
+    this.ngOnInit();
+  }
 }
