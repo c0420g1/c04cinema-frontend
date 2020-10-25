@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
+  @Output()
+  getLinkFather: EventEmitter<string> = new EventEmitter<string>();
   imageList: any[];
   imgSrc = 'assets/images/banners/300.png';
   loading = false;
@@ -96,6 +98,7 @@ export class ImageUploadComponent implements OnInit {
         a = image.imageUrl;
       }
     }
+    this.getLinkFather.emit(a);
     const selBox = document.createElement('textarea');
     selBox.rows = 3;
     selBox.setAttribute("class","form-control rounded-0 mt-2");
