@@ -16,6 +16,7 @@ import { MovieComingComponent } from './movie-hieu/movie-coming/movie-coming.com
 import { MovieDetailComponent } from './movie-hieu/movie-detail/movie-detail.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SafePipeModule} from 'safe-pipe';
+import { BookingComponent } from './booking/booking.component';
 
 
 // @ts-ignore
@@ -24,8 +25,7 @@ import {SafePipeModule} from 'safe-pipe';
     PromotionComponent, CustomerComponent, InformationComponent,
     HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
     MovieShowingComponent, MovieComingComponent,
-    MovieDetailComponent,
-  ],
+    MovieDetailComponent,BookingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

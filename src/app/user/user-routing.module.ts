@@ -12,6 +12,7 @@ import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.comp
 import {MovieShowingComponent} from './movie-hieu/movie-showing/movie-showing.component';
 import {MovieComingComponent} from './movie-hieu/movie-coming/movie-coming.component';
 import {MovieDetailComponent} from './movie-hieu/movie-detail/movie-detail.component';
+import { BookingComponent } from './booking/booking.component';
 
 
 const routes: Routes = [
@@ -32,24 +33,28 @@ const routes: Routes = [
         component: PromotionComponent
       },
       {
+        path: 'booking',
+        component: BookingComponent
+      },
+      {
         path: 'customer',
         component: CustomerComponent,
         children: [
           {
             path: 'information',
-            component: InformationComponent,
+            component: InformationComponent
           },
           {
             path: 'history-point',
-            component: HistoryPointComponent,
+            component: HistoryPointComponent
           },
           {
             path: 'ticker-put',
-            component: TickerPutComponent,
+            component: TickerPutComponent
           },
           {
             path: 'ticker-cancel',
-            component: TickerCancelComponent,
+            component: TickerCancelComponent
           }
         ]
       },
