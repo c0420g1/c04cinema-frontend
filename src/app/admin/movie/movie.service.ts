@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
+import {Hall} from '../../model/hall';
+import {Show} from '../../model/show';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,10 @@ export class MovieService {
   private readonly API_URL_MOVIE_GENRE_ASSOCIATE = 'http://localhost:8080/movie_genre_associate';
   private readonly API_URL_LAST_MOVIE = 'http://localhost:8080/lastMovie';
   private readonly API_URL_ALL_MOVIE_GENRE_ASSOCIATE_BY_MOVIE_ID = 'http://localhost:8080/getAllMovieGenreAssociate';
+  private readonly API_URL_ALL_HALL = 'http://localhost:8080/hall';
+  private readonly API_URL_DELETE_ALL_MOVIE_GENRE_ASSOCIATE_BY_MOVIE_ID = 'http://localhost:8080/movieGenreAssociate';
+  private readonly API_URL_SHOW = 'http://localhost:8080/show';
+
   constructor(private http: HttpClient) { }
   getAllMovie(): Observable<Movie[]>{
     return this.http.get<Movie[]>(this.API_URL_MOVIE);
@@ -33,12 +39,22 @@ export class MovieService {
   addMovieGenreAssociate(movieGenreAssociate: MovieGenreAssociate): Observable<MovieGenreAssociate>{
     return this.http.post<MovieGenreAssociate>(this.API_URL_MOVIE_GENRE_ASSOCIATE, movieGenreAssociate);
   }
+  addShow(show: Show): Observable<Show>{
+    return this.http.post<Show>(this.API_URL_SHOW, show);
+  }
   getLastMovie(): Observable<Movie>{
     return this.http.get<Movie>(this.API_URL_LAST_MOVIE);
   }
 
+  deleteAllMovieGenreAssociateByMovieId(movieId: number): Observable<MovieGenreAssociate>{
+    return this.http.delete<MovieGenreAssociate>(this.API_URL_DELETE_ALL_MOVIE_GENRE_ASSOCIATE_BY_MOVIE_ID + '/' + movieId);
+  }
 
   editMovieService(movie: Movie, id: number): Observable<Movie> {
     return this.http.patch<Movie>(this.API_URL_MOVIE + '/' +  id, movie);
+  }
+
+  getAllHall(): Observable<Hall[]>{
+    return this.http.get<Hall[]>(this.API_URL_ALL_HALL);
   }
 }

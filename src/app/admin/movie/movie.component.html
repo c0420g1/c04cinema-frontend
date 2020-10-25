@@ -60,7 +60,7 @@
                             <td>
                                 <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovie(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
                                 <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
-                                <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons">&#xe148;</i></a>
+                                <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -94,8 +94,14 @@
                     </div>
                         <div class="modal-body">
                             <div>
-                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">
-                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>
+                                <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
+<!--                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">-->
+<!--                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>-->
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Url Poster<span style="color: red">(*)</span></label>
+                                <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" readonly>
                             </div>
                         <div class="form-group">
                             <label>Name <span style="color: red">(*)</span></label>
@@ -186,13 +192,13 @@
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea type="text" class="form-control" formControlName="description"></textarea>
+                            <textarea  rows="4" cols="50" type="text" class="form-control" formControlName="description"></textarea>
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" [disabled]="addFormMovie.invalid" (click)="addNewMovie()" >
+                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" [disabled]="addFormMovie.invalid || !movieGenreTypes" (click)="addNewMovie()" >
                     </div>
                 </form>
             </div>
@@ -214,7 +220,9 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">
+<!--                            <img  alt="" style="width: 200px; height: auto">-->
+                            <input type="text" formControlName="posterUrl" alt="" style="width: 200px; height: auto">
+<!--                            <div [style.]="" style="width: 300px; height: 600px"></div>-->
                             <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>
                         </div>
                         <input type="hidden" formControlName="id">
@@ -271,7 +279,7 @@
                                 <div class="form-check">
                                     <div class="row">
                                         <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
-                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxes($event)" >
+                                            <input class="form-check-input" [checked]="checkedEdit(mgType.id)"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesEdit($event)" >
                                             <label style="margin-left: 5px;">
                                                 {{mgType.name}}
                                             </label>
@@ -279,8 +287,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                         <div class="form-group">
                             <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
                             <div>
@@ -307,12 +315,12 @@
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea type="text" class="form-control" formControlName="description"></textarea>
+                            <textarea   rows="4" cols="50" type="text" class="form-control" formControlName="description"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-warning" data-dismiss="modal" value="Update" >
+                        <input type="submit" class="btn btn-warning" data-dismiss="modal" value="Update" (click)="editMovie()" >
                     </div>
                 </form>
             </div>
@@ -360,30 +368,38 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Movie Name</label>
-                            <input type="text" class="id" readonly >
+                            <label>Movie Name: </label>
+                            <p  >{{movieName}}</p>
                         </div>
 
                         <div class="form-group">
                             <label>Hall Name<span style="color: red">(*)</span></label>
-                            <select name="idHall" id="">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
+                            <select  name="idHall" id="hallId">
+                                <option  style="margin-left: 10px" *ngFor="let hall of halls" value="{{hall.id}}">{{hall.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Show Time<span style="color: red">(*)</span></label>
-                            <input type="datetime-local" class="form-control" >
+                            <label>Show StartTime<span style="color: red">(*)</span></label>
+                            <input type="datetime-local" class="form-control"  (change)="addShowTimes($event)">
                         </div>
-                        <div class="form-group">
-                            <label>Price of Show<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control" >
+                        <div class="form-group" style="display: flex" *ngFor="let time of showStartTimes; let i = index;">
+                            <div >
+                                <label>Selected Time</label>
+                                <input  type="text" class="form-control" value="{{time}}" readonly>
+                            </div>
+                            <div style="margin-left: 10px">
+                                <label >Show Price($)<span style="color: red">(*)</span></label>
+                                <input type="text" class="form-control" id="{{i}}" >
+                            </div>
+                            <div style="padding-top: 28px; margin-left: 5px;">
+                                <button type="button" aria-hidden="true" style="padding: 5px; color: red;"  (click)="deleteShowTimeAndShowPrice(i)">&times;</button>
+                            </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" >
+                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" (click)="addShow(showStartTimes.length)">
                     </div>
                 </form>
 
