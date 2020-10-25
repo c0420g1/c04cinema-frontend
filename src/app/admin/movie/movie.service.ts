@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
+// @ts-ignore
 import {Hall} from '../../model/hall';
 import {Show} from '../../model/show';
 
