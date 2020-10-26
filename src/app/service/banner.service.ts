@@ -16,4 +16,7 @@ export class BannerService {
   addNewBanner(banner: Banner): Observable<void>{
     return this.http.post<void>(this.API_URL_BANNER, banner);
   }
+  updateBanner(id: number, banner: Banner): Observable<void>{
+    return this.http.patch<void>(this.API_URL_BANNER + '/' + id, banner);
+  }
 }
