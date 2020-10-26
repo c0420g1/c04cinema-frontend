@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MovieService} from './movie.service';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
 import {Hall} from '../../model/Hall';
@@ -46,39 +46,39 @@ export class MovieComponent implements OnInit {
     this.movieService.getAllHall().subscribe((data) => {this.halls = data; });
     this.addFormMovie = this.fb.group(
         {
-          name: [''],
-          director: [''],
-          actor: [''],
-          isSub: [''],
-          is2d: [''],
-          posterUrl: [''],
-          startDate: [''],
-          endDate: [''],
-          duration: [''],
-          trailerUrl: [''],
-          starRating: [''],
-          movieRatedAgeId: [''],
-          description: [''],
-          entertainment: [''],
+          name: ['',[Validators.required,Validators.maxLength(100)]],
+          director: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
+          actor: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
+          isSub: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
+          is2d: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
+          posterUrl: ['', [Validators.required,Validators.maxLength(300)]],
+          startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
+          endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
+          duration: ['',[Validators.required,Validators.min(60),Validators.max(235)]],
+          trailerUrl: ['',[Validators.required,Validators.maxLength(250),Validators.pattern('^(https://www.youtube.com)[0-9a-zA-Z./?=&_-]+$')]],
+          starRating:['',[Validators.required,Validators.min(1),Validators.max(5)]],
+          movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5)]],
+          description: ['',Validators.maxLength(1000)],
+          entertainment: ['',[Validators.required,Validators.maxLength(45)]],
         }
     );
       this.editFormMovie = this.fb.group(
           {
               id: [''],
-              name: [''],
-              director: [''],
-              actor: [''],
-              isSub: [''],
-              is2d: [''],
-              posterUrl: [''],
-              startDate: [''],
-              endDate: [''],
-              duration: [''],
-              trailerUrl: [''],
-              starRating: [''],
-              movieRatedAgeId: [''],
-              description: [''],
-              entertainment: [''],
+              name: ['',[Validators.required,Validators.maxLength(100)]],
+              director: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
+              actor: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
+              isSub: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
+              is2d: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
+              posterUrl: ['', [Validators.required,Validators.maxLength(300)]],
+              startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
+              endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
+              duration: ['',[Validators.required,Validators.min(60),Validators.max(235)]],
+              trailerUrl: ['',[Validators.required,Validators.maxLength(250),Validators.pattern('^(https://www.youtube.com)[0-9a-zA-Z./?=&_-]+$')]],
+              starRating:['',[Validators.required,Validators.min(1),Validators.max(5)]],
+              movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5)]],
+              description: ['',Validators.maxLength(1000)],
+              entertainment: ['',[Validators.required,Validators.maxLength(45)]],
           }
       );
   }
@@ -198,7 +198,16 @@ export class MovieComponent implements OnInit {
     addShowTimes(event) {
         console.log(event.target.value);
         this.showStartTime = event.target.value;
-        this.showStartTimes.push(this.showStartTime);
+        if(this.showStartTimes.length == 0){
+            this.showStartTimes.push(this.showStartTime);
+        }
+        for (let i=0; i<this.showStartTimes.length;i++){
+            if (this.showStartTime != this.showStartTimes[i]){
+                this.showStartTimes.push(this.showStartTime);
+            }
+        }
+        // console.log(this.showStartTimes);
+
     }
 
 
@@ -212,14 +221,15 @@ export class MovieComponent implements OnInit {
         for(let i=0; i<length; i++){
             this.showPrice = parseInt((document.getElementById(i.toString()) as HTMLInputElement).value);
             this.showPrices.push(this.showPrice);
-            // console.log(this.showPrices);
+            console.log(this.showPrices);
+            console.log(this.showStartTimes);
             for (let i=0; i<this.showStartTimes.length; i++){
                 this.addFormShow = this.fb.group({
                     startTime: [this.showStartTimes[i]],
                     hallId: [parseInt((document.getElementById('hallId') as HTMLInputElement).value)],
                     movieId: [this.showMovie.id],
                     price: [this.showPrices[i]],
-                    description: ['every'],
+                    description: ['temporary'],
                     isearly: [0]
                 })
                 console.log(this.addFormShow.value);
@@ -240,4 +250,18 @@ export class MovieComponent implements OnInit {
     getMark(event) {
         this.url = event;
     }
+
+}
+function dateValidator(formControl: FormControl) {
+    let date1: string[];
+    date1 = formControl.value.split('-');
+    const o_date = new Intl.DateTimeFormat;
+    const f_date = (m_ca, m_it) => Object({...m_ca, [m_it.type]: m_it.value});
+    const m_date = o_date.formatToParts().reduce(f_date, {});
+    const dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2])) ;
+    const dateNumberNow = (parseInt(m_date.year)  * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day)) ;
+    if (dateNumber < dateNumberNow) {
+        return {checkDate: true};
+    }
+    return null;
 }
