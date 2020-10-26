@@ -8,7 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {UserModule} from './user/user.module';
 import {AdminModule} from './admin/admin.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -18,14 +18,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     UserModule,
     AdminModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

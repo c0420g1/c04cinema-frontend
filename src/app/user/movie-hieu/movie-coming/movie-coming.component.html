@@ -1,0 +1,26 @@
+<div class="container">
+    <h2 class="page-heading">Movies coming soon</h2>
+    <div class="row mt-4">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12  mt-4" *ngFor="let filmShowing of movies">
+            <a [routerLink]="['/movie-detail',filmShowing.id]">
+                <img [src]="filmShowing.posterUrl" class="img-poster">
+            </a>
+            <p class="p-name-movie">
+                <strong maxlength="20"
+                        [routerLink]="['/movie-detail',filmShowing.id]" ng>{{filmShowing.name.toUpperCase()}}</strong>
+            </p>
+            <p><strong>Status: </strong>{{filmShowing.actor}}</p>
+            <p class="p-date-start"><strong>Date start: </strong>{{filmShowing.startDate}}</p>
+            <div class="row">
+                <div class="col-12 div-button-detail" >
+                    <button class="btn btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">
+                        Detail
+                    </button>
+                </div>
+            </div>
+        </div>
+        <ng-template *ngIf="movies.length==0">
+            <h1 class="not-found"> Not found movies !</h1>
+        </ng-template>
+    </div>
+</div>

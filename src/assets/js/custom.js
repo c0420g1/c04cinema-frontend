@@ -1059,16 +1059,16 @@ function init_MovieList () {
 
 	//5. Toggle function for additional content
 				//toggle timetable show
-                $('.movie__show-btn').click(function (ev) {
-                    ev.preventDefault();
-
-                    $(this).parents('.movie--preview').find('.time-select').slideToggle(500);
-                });
-
-                $('.time-select__item').click(function (){
-                    $('.time-select__item').removeClass('active');
-                    $(this).addClass('active');
-                });
+                // $('.movie__show-btn').click(function (ev) {
+                //     ev.preventDefault();
+                //
+                //     $(this).parents('.movie--preview').find('.time-select').slideToggle(500);
+                // });
+                //
+                // $('.time-select__item').click(function (){
+                //     $('.time-select__item').removeClass('active');
+                //     $(this).addClass('active');
+                // });
 }
 
 function init_MoviePage () {
