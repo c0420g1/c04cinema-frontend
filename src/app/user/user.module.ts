@@ -17,6 +17,7 @@ import {MovieDetailComponent} from './movie-hieu/movie-detail/movie-detail.compo
 import {HttpClientModule} from '@angular/common/http';
 import {SafePipeModule} from 'safe-pipe';
 import {BookingComponent} from './booking/booking.component';
+import {NgxLoadingModule} from 'ngx-loading';
 
 
 // @ts-ignore
@@ -33,6 +34,7 @@ import {BookingComponent} from './booking/booking.component';
         FormsModule,
         HttpClientModule,
         SafePipeModule,
+        NgxLoadingModule,
 
     ]
 })

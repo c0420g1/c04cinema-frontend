@@ -6,7 +6,7 @@ import {DatePipe} from '@angular/common';
 import {Show} from 'src/app/model/Show';
 import {ShowService} from '../show.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {SafeSubscriber} from 'rxjs/internal/Subscriber';
+import {of} from 'rxjs';
 
 declare var $: any;
 
@@ -39,6 +39,10 @@ export class MovieDetailComponent implements OnInit {
     shows: Show [] = [];
     videoUrl: SafeResourceUrl = '';
     dangerousVideoUrl = '';
+    checkHideButton = false;
+    checkTableTimeShow = false;
+    show: Show;
+    showHaveTableTime: Show[] =[];
 
     constructor(private moviesService: MovieService,
                 private activatedRoute: ActivatedRoute,
@@ -50,13 +54,26 @@ export class MovieDetailComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        const dateCur = new Date();
+        const resultDate = this.pipe.transform(dateCur, 'yyyy-MM-dd');
+        let date2 = Date.parse(resultDate);
         this.activatedRoute.paramMap.subscribe(
             (param: ParamMap) => {
                 this.id = param.get('id');
                 this.moviesService.getMovieById(this.id).subscribe(
                     (data) => {
-                        this.movie = data[0];
-                        this.updateVideoUrl(this.youtube_parser(this.movie.trailerUrl));
+                        try {
+                            this.checkHideButton = false;
+                            this.movie = data[0];
+                            this.updateVideoUrl(this.youtube_parser(this.movie.trailerUrl));
+                            let date1 = Date.parse(this.movie.startDate);
+                            if (date2 > date1) {
+                                this.checkHideButton = true;
+                            }
+                        } catch (e) {
+                            return 'Not found data result !';
+                        }
 
                     }
                 );
@@ -71,12 +88,13 @@ export class MovieDetailComponent implements OnInit {
             $('.time-select__item').removeClass('active');
             $(this).addClass('active');
         });
+
         $('.score').raty({
             width: 130,
             score: 0,
             path: 'assets/images/rate/',
             starOff: 'star-off.svg',
-            starOn: 'star-on.svg'
+            starOn: 'star-on.svg',
         });
 
 
@@ -85,7 +103,6 @@ export class MovieDetailComponent implements OnInit {
                 this.shows = data;
             }
         );
-
 
     }
 
@@ -98,11 +115,11 @@ export class MovieDetailComponent implements OnInit {
     youtube_parser(url) {
         let videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
         console.log('url' + url);
-        if(videoid != null) {
+        if (videoid != null) {
             console.log(videoid[1]);
             return videoid[1];
         } else {
-            console.log("The youtube url is not valid.");
+            console.log('The youtube url is not valid.');
         }
     }
 

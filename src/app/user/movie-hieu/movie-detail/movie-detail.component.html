@@ -19,7 +19,7 @@
             <p class="movie__option"><strong>Age restriction: </strong><a href="#">{{movie.movieRatedAgeId}}</a></p>
 
             <div class="movie__btns">
-                <a href="#" class="btn btn-md btn--warning">book a ticket <span class="hidden-sm">for this movie</span></a>
+                <a href="#" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book a ticket <span class="hidden-sm">for this movie</span></a>
                 <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal"
                    class="watchlist" >Watch trailer</a>
             </div>
@@ -33,6 +33,7 @@
 
 
                 <a href="#" class="movie__show-btn">Showtime</a>
+
             </div>
         </div>
 
@@ -40,11 +41,16 @@
 
         <!-- Time table (choose film start time)-->
         <div class="time-select">
-                <ul class="time-select__group group--first" *ngFor="let show of shows">
-                    <li class="time-select__item"  *ngIf="movie.id === show.id">
-                        <span>{{show.startTime | date: 'HH:mm'}}</span>
-                    </li>
-                </ul>
+            <div class="col-12" *ngFor="let show of shows">
+               <div class="time-select__item" *ngIf="show.movieId === movie.id">
+                   <span>{{show.startTime | date: 'HH:mm'}}</span>
+               </div>
+            </div>
+<!--                <ul class="time-select__group group&#45;&#45;first" *ngFor="let show of shows">-->
+<!--                    <li class="time-select__item" *ngIf="show.movieId === movie.id">-->
+<!--                        <span>{{show.startTime | date: 'HH:mm'}}</span>-->
+<!--                    </li>-->
+<!--                </ul>-->
         </div>
         <!-- end time table-->
     </div>

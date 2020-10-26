@@ -212,18 +212,16 @@
 
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-8 col-md-9">
-
-
+            <div class="col-sm-8 col-md-9" >
                 <div class="movie movie--test movie--test--dark movie--test--left" *ngFor="let movie of movieShowing"
-                >
+                     style="">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link" [routerLink]="['/movie-detail',movie.id]">
-                            <img alt='' [src]="movie.posterUrl" style="width: 250px; height: 280px;">
+                        <a  class="movie-beta__link" [routerLink]="['/movie-detail',movie.id]">
+                            <img alt='' [src]="movie.posterUrl" style="width: 170px; height: 250px;">
                         </a>
                     </div>
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">Gravity (2020) </a>
+                        <a class="movie__title">{{movie.name}}</a>
 
                         <p class="movie__time">91 min</p>
 
@@ -236,8 +234,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <aside class="col-sm-4 col-md-3">
