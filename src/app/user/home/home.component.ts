@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit {
         this.moviesService.getMoviesNew().subscribe(
             (data) => {
                 this.movieShowing = data;
-                console.log(data);
             }
         );
 
