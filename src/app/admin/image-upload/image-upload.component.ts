@@ -100,6 +100,7 @@ export class ImageUploadComponent implements OnInit {
     }
     this.getLinkFather.emit(a);
     const selBox = document.createElement('textarea');
+    selBox.style.opacity="0";
     selBox.rows = 3;
     selBox.setAttribute("class","form-control rounded-0 mt-2");
     selBox.value = a;
@@ -107,7 +108,7 @@ export class ImageUploadComponent implements OnInit {
     selBox.focus();
     selBox.select();
     document.execCommand('copy');
-
+    contain.removeChild(selBox);
   }
 
 
