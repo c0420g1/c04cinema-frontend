@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap, Params} from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import {ActivatedRoute, ParamMap, Params, RouterOutlet} from '@angular/router';
 import {Hall} from '../../model/Hall';
 import {TheaterService} from '../theater/theater.service';
 import {HallType} from '../../model/hallType';
@@ -24,5 +22,4 @@ export class HallListComponent implements OnInit {
     this.theaterService.getAllHall().subscribe((data) => {this.halls = data; });
     this.theaterService.getAllHallType().subscribe((data) => {this.hallType = data; });
   }
-
 }

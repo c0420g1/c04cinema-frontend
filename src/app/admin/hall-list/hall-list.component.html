@@ -5,21 +5,11 @@
 
                 <div class="table-title">
 
-                    <div class="row">
-                        <div class="search" style="width: 18%">
-                            <input style="border-radius: 17px;margin-left: 15px; font-size: 15px" class="form-control" type="text" name="search" placeholder="Search for hall..." >
-                        </div>
-
-                        <div class="col-sm-3">
-                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewHall" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Hall</a>
-                        </div>
-                    </div>
-
                     <br>
                     <div class="row">
                         <div class="col-sm-9" style="max-width: 75%">
                             <div style="margin-left: 380px;">
-                                <p style="font-size: 31px; font-weight: bold">Hall Management</p>
+                                <p style="font-size: 14px; font-weight: bold">Hall Management</p>
                             </div>
                         </div>
                     </div>
@@ -53,7 +43,7 @@
                                 </ng-container>
                             </ng-container>
                             <td>
-                                <a  class="edit" title="Edit" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a [routerLink]="['seat', hall.id]" class="edit" title="Edit" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
                             </td>
                             </ng-container>
                         </tr>
@@ -74,4 +64,5 @@
             </div>
         </div>
     </div>
+    <router-outlet></router-outlet>
 </div>

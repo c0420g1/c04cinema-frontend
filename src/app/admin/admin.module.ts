@@ -17,9 +17,10 @@ import { BookingTicketComponent } from './booking-ticket/booking-ticket.componen
 import { BannerComponent } from './banner/banner.component';
 import { TheaterComponent } from './theater/theater.component';
 import {HallListComponent} from './hall-list/hall-list.component';
+import { SeatComponent } from './seat/seat.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, TheaterComponent,HallListComponent],
+  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, TheaterComponent,HallListComponent, SeatComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

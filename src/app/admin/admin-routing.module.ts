@@ -10,6 +10,7 @@ import {BookingTicketComponent} from './booking-ticket/booking-ticket.component'
 import {BannerComponent} from './banner/banner.component';
 import { TheaterComponent } from './theater/theater.component';
 import {HallListComponent} from './hall-list/hall-list.component';
+import {SeatComponent} from './seat/seat.component';
 
 
 const routes: Routes = [
@@ -51,7 +52,13 @@ const routes: Routes = [
         children:[
           {
             path: 'hall/:id',
-            component: HallListComponent
+            component: HallListComponent,
+            children:[
+              {
+                path: 'seat/:id',
+                component: SeatComponent,
+              }
+            ]
           }
         ]
       }
