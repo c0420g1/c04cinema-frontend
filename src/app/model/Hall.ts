@@ -1,7 +1,7 @@
 export class Hall {
     id: number;
     name: string;
-    seatQuantity: string;
-    hallTypeId: string;
-    theatreId: string;
+    setQuantity: number;
+    hallTypeId: number;
+    theatreId: number;
 }

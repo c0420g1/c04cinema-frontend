@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
@@ -11,10 +11,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
+  @Output()
+  getLinkFather: EventEmitter<string> = new EventEmitter<string>();
   imageList: any[];
   imgSrc = 'assets/images/banners/300.png';
   loading = false;
   editImage: Image = {
+    key: null,
     name: '',
     imageUrl: '',
     category: '',
@@ -58,7 +61,7 @@ export class ImageUploadComponent implements OnInit {
     this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            this.editImage.imageUrl = url;
+            this.editImage.imageUrl = url
             // add image to database
             this.service.insertImageDetails(this.editImage);
             this.confirm = this.service.imageConfirm;
@@ -95,7 +98,9 @@ export class ImageUploadComponent implements OnInit {
         a = image.imageUrl;
       }
     }
+    this.getLinkFather.emit(a);
     const selBox = document.createElement('textarea');
+    selBox.style.opacity="0";
     selBox.rows = 3;
     selBox.setAttribute("class","form-control rounded-0 mt-2");
     selBox.value = a;
@@ -103,6 +108,7 @@ export class ImageUploadComponent implements OnInit {
     selBox.focus();
     selBox.select();
     document.execCommand('copy');
+    contain.removeChild(selBox);
   }
 
 

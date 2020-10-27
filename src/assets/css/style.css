@@ -1087,6 +1087,7 @@ table {
   background: url("../images/components/arrow.svg") repeat scroll center center rgba(76, 65, 69, 0.8);
   display: block;
   height: 50px;
+  border-radius: 25px;
 }
 .top-scroll a:hover {
   background: url("../images/components/arrow.svg") repeat scroll center center rgba(254, 80, 90, 0.8);
@@ -2899,7 +2900,7 @@ input[type="button"].btn-block {
 }
 .alert-danger {
   background-color: #f2dede;
-  border-color: #ebccd1;
+  border-color: #ff0000 !important;
   color: #a94442;
 }
 .alert-danger hr {
