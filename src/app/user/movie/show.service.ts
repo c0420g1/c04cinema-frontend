@@ -7,8 +7,11 @@ import { Show } from 'src/app/model/Show';
   providedIn: 'root'
 })
 export class ShowService {
-  private readonly API_URL = 'http://localhost:8080/show';
+  private readonly API_URL = 'http://localhost:8080/shows';
   constructor(private http: HttpClient) { }
+
+
+
   getAllShow(): Observable<Show[]>{
     return this.http.get<Show[]>(this.API_URL);
   }
