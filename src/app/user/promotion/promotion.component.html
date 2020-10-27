@@ -1,31 +1,52 @@
 <div id="1" class="item new col-md-4" *ngFor="let item of datas" style="margin-top: 150px">
-    <img src="{{item.picture}}">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-            (click)="getId(item)">
-        Detail
-    </button>
-</div>?
+    <div class="d-flex justify-content-center align-items-center flex-lg-column">
+        <img src="{{item.picture}}">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                (click)="getId(item)">
+            Detail
+        </button>
+    </div>
+
+</div>
 
 <div *ngIf="promotion" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true" style="margin-top: 100px">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="margin-top: 140px">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title " id="exampleModalLabel"style="margin-top: 10px">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <img src="{{promotion.picture}}">
-                <p>{{promotion.name}}</p>
+            <div class="modal-body ">
+                <div class="row align-items-center " style="width: 50%">
+                    <img src="{{promotion.picture}}" style="margin-left: 45px">
+                </div>
+                <div class="row m-0 " style="width: 50%; padding-top: 10px; margin: 0">
+                    <label>Name:</label>
+                    <p>{{promotion.name}}</p>
+                    <label>Discount: </label>
+                    <p>{{promotion.discount}}</p>
+                    <label>Description:</label>
+                    <p>{{promotion.description}}</p>
+                    <label>Start Day:</label>
+                    <p>{{promotion.startDate}}</p>
+                    <label>End Day: </label>
+                    <p>{{promotion.endDate}}</p>
+                    <label>Price:</label>
+                    <p>{{promotion.price}}</p>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="buyPromotion()" >Save changes</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="buyPromotion()">Buy</button>
             </div>
         </div>
 
     </div>
 </div>
+
+

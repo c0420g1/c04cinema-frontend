@@ -4,13 +4,13 @@ export class Promotion {
     name: string;
     discount: string;
     description: string;
-    startDay: string;
-    endDay: string;
+    startDate: string;
+    endDate: string;
     showId: string;
     moveId: string;
     theatreId: string;
     customerId: string;
     staffId: string;
-    price: string;
-    picture: string
+    price: number;
+    picture: string;
 }
