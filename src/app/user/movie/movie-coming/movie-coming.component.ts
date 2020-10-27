@@ -9,11 +9,13 @@ import { Movie } from 'src/app/model/Movie';
 })
 export class MovieComingComponent implements OnInit {
   movies: Movie[] = [];
+  public loading = false;
 
   constructor(private moviesService: MovieService) {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     const dateCur = new Date().getTime();
     console.log(dateCur);
     this.moviesService.getAll().subscribe(
@@ -24,10 +26,14 @@ export class MovieComingComponent implements OnInit {
               this.movies.push(data[i]);
             }
           }
+          this.loading = false;
         }
     );
 
   }
 
 
+  showAlert() {
+     alert("Loading !")
+  }
 }

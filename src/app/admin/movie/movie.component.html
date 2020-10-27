@@ -2,20 +2,19 @@
 <div class="content" style="height: 71vh">
     <div class="container-fluid">
         <div class="row" >
-            <div class="col-10" style="margin-top: 28px; margin-left: 8%">
+            <div class="col-10" style="margin-top: 5px; margin-left: 8%">
 
                 <div class="table-title">
-
                     <div class="row">
-                        <div class="search" style="width: 18%">
-                            <input style="border-radius: 17px;margin-left: 15px; font-size: 15px" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                        <div style="width: 18%; display: flex" >
+                            <input [(ngModel)]="variableFind"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">Search<i class="fa fa-search"></i></button>
+<!--                            <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>-->
                         </div>
-
                         <div class="col-sm-3">
                             <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
                         </div>
                     </div>
-                    <br>
                     <div class="row">
                         <div class="col-sm-9" style="max-width: 75%">
                             <div style="margin-left: 380px;">
@@ -32,10 +31,10 @@
                         <tr>
                             <th>#</th>
                             <th>Movie</th>
-                            <th>Start Date</th>
+                            <th style="width: 9%;">Start Date</th>
                             <th>Entertainment</th>
-                            <th>Duration (m)</th>
-                            <th >Version</th>
+                            <th>Duration(m)</th>
+                            <th width="6%">Version</th>
                             <th width="20%">
                                 <div style="display: flex">
                                     <div  style="margin-left: 20px">Edit</div>
@@ -67,16 +66,45 @@
                     </table>
                 </div>
 
-                <div class="page" style="margin-left: 450px">
-                    <button  class="btn badge-dark" >First</button>
-                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>
-                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>
-                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>
+                <div class="row" style="margin-top: 10px; margin-bottom: 20px" *ngIf="!message">
+                    <div class="col-lg-3">
+                        <div style="font-size: 15px">
+                            Show {{entityNumber}} entities of {{totalEntities}} entities
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div style="float: right; margin-right: 50px">
+                            <ul class="list-inline">
+                                <li>
+                                    <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                </li>
 
-                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>
-                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>
-                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>
+                                <li>
+                                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                </li>
+
+                                <li>
+                                    <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
                 </div>
+<!--                <div class="page" style="margin-left: 450px">-->
+<!--                    <button  class="btn badge-dark" >First</button>-->
+<!--                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>-->
+<!--                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>-->
+<!--                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>-->
+
+<!--                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>-->
+<!--                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>-->
+<!--                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

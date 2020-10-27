@@ -5,6 +5,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {MovieService} from './movie.service';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
 import {Hall} from '../../model/Hall';
+import {BookingTicketDTO} from '../../model/bookingTicketDTO';
 
 @Component({
   selector: 'app-movie',
@@ -12,7 +13,7 @@ import {Hall} from '../../model/Hall';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
-    url: string;
+  url: string;
   message: string;
   movies: Movie[] = [];
   movieGenreTypes: MovieGenreType[] = [];
@@ -29,6 +30,8 @@ export class MovieComponent implements OnInit {
   lastMovie: Movie;
   check: number;
   checkEdit: number;
+
+    // variables used for the add show function
   showStartTimes: string[] = [];
   showStartTime: string;
   showPrices: number[] = [];
@@ -36,10 +39,36 @@ export class MovieComponent implements OnInit {
   showMovie: Movie;
   movieName = '';
 
+    // variables used for paging functions
+    variableFind = '';
+    currentPage = 1;
+    totalEntities: number;
+    totalPage: number;
+    // ticketNew: BookingTicketDTO = new BookingTicketDTO();
+    entityNumber: number;
+    jumpPage: number;
+
   constructor(private movieService: MovieService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.movieService.getAllMovie().subscribe((data) => {this.movies = data; });
+      this.movieService.getListMovie(this.variableFind).subscribe((data) => {
+          this.totalEntities = data.length;
+          this.totalPage = this.totalEntities/10;
+      });
+
+    this.movieService.getAllMovie(this.currentPage, this.variableFind).subscribe((data) => {
+        if (data.length === 0){
+            this.message = 'Could not find any movies';
+        } else {
+            this.message = '';
+        }
+        console.log(this.currentPage);
+        console.log(this.totalPage);
+        this.entityNumber = data.length;
+        // this.totalPage = this.totalEntities/10;
+        this.movies = data;
+    });
+
     this.movieService.getAllMovieGenreType().subscribe((data) => {this.movieGenreTypes = data; });
     this.movieService.getAllMovieGenreAssociate().subscribe((data) => {this.movieGenreAssociates = data; });
     this.movieService.getLastMovie().subscribe((data) => {this.lastMovie = data; });
@@ -249,6 +278,32 @@ export class MovieComponent implements OnInit {
 
     getMark(event) {
         this.url = event;
+    }
+
+    prePage(): void {
+        if (this.currentPage >= 2 ){
+            this.currentPage--;
+            this.jumpPage = this.currentPage;
+        }
+        this.ngOnInit();
+    }
+
+    nexPage(): void {
+        if (this.currentPage < this.totalEntities / 10) {
+            this.currentPage++;
+            this.jumpPage = this.currentPage;
+        }
+        console.log(this.currentPage)
+        this.ngOnInit();
+    }
+
+    goToPage() {
+        this.currentPage = this.jumpPage;
+        this.ngOnInit();
+    }
+    search(): void {
+        this.currentPage =1;
+        this.ngOnInit();
     }
 
 }

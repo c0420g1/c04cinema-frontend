@@ -4,14 +4,16 @@ import {Observable} from 'rxjs';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
-import { Hall } from 'src/app/model/Hall';
-import { Show } from 'src/app/model/Show';
+// @ts-ignore
+import {Hall} from '../../model/hall';
+import {Show} from '../../model/show';
+import {BookingTicketDTO} from '../../model/bookingTicketDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private readonly API_URL_MOVIE = 'http://localhost:8080/movie';
+  private readonly API_URL_MOVIE = 'http://localhost:8080/movies';
   private readonly API_URL_MOVIE_GENRE_TYPE = 'http://localhost:8080/movie_genre_type';
   private readonly API_URL_MOVIE_GENRE_ASSOCIATE = 'http://localhost:8080/movie_genre_associate';
   private readonly API_URL_LAST_MOVIE = 'http://localhost:8080/lastMovie';
@@ -21,8 +23,11 @@ export class MovieService {
   private readonly API_URL_SHOW = 'http://localhost:8080/show';
 
   constructor(private http: HttpClient) { }
-  getAllMovie(): Observable<Movie[]>{
-    return this.http.get<Movie[]>(this.API_URL_MOVIE);
+  getListMovie(search: string): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_URL_MOVIE + '?search=' +search);
+  }
+  getAllMovie(pageNum: number, search: string): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_URL_MOVIE + '/' + pageNum +'?search=' + search);
   }
   getAllMovieGenreType(): Observable<MovieGenreType[]>{
     return this.http.get<MovieGenreType[]>(this.API_URL_MOVIE_GENRE_TYPE);
