@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MovieService} from '../movie-hieu/movie.service';
+import {MovieService} from '../movie/movie.service';
 import {Movie} from 'src/app/model/Movie';
 import {DatePipe} from '@angular/common';
 
@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit {
         this.moviesService.getMoviesNew().subscribe(
             (data) => {
                 this.movieShowing = data;
-                console.log(data);
             }
         );
 
