@@ -32,7 +32,7 @@
                 <th>Customer Name</th>
                 <th>Customer ID</th>
                 <th>Customer Phone</th>
-                <th>Moive Name</th>
+                <th>Movie Name</th>
                 <th>Time</th>
             </tr>
             </thead>
@@ -44,7 +44,7 @@
                 <td>{{ticket.cardIdCustomer}}</td>
                 <td>{{ticket.phoneCustomer}}</td>
                 <td>{{ticket.movieName}}</td>
-                <td>{{ticket.bookingDate | date:'dd/MM/yyyy HH:mm'}} </td>
+                <td>{{ticket.startTime | date:'dd/MM/yyyy HH:mm'}} </td>
                 <td>
                     <button   class="btn btn-warning" *ngIf="ticket.status">Đã nhận <i class="fa fa-check "></i></button>
                     <button *ngIf="!ticket.status" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEdit" (click)="getInfo(ticket)" >
@@ -114,7 +114,23 @@
                                 Ngày chiếu:
                             </label>
                             <label style="margin-left: 5px">
-                                {{ticketNew.bookingDate}}
+                                {{ticketNew.startTime | date: 'dd/MM/yyyy'}}
+                            </label>
+                        </label>
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Giờ chiếu:
+                            </label>
+                            <label style="margin-left: 5px">
+                                {{ticketNew.startTime | date:'HH:mm'}}
+                            </label>
+                        </label>
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Ghế:
+                            </label>
+                            <label style="margin-left: 5px">
+                                {{ticketNew.seat}}
                             </label>
                         </label>
                         <label class="row">
@@ -122,7 +138,7 @@
                                 Tổng cộng:
                             </label>
                             <label style="margin-left: 5px">
-                                {{total}}
+                                {{ticketNew.priceTicket}}
                             </label>
                         </label>
 

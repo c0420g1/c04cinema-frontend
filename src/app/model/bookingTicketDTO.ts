@@ -6,7 +6,10 @@ export class BookingTicketDTO {
     nameCustomer: string;
     cardIdCustomer: string;
     phoneCustomer: string;
-    movieName: string
+    movieName: string;
     status: boolean;
     posterUrl: string;
+    startTime: Date;
+    priceTicket: number;
+    seat: string;
 }
