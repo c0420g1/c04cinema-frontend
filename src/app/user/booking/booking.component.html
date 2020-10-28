@@ -1,4 +1,4 @@
-
+    <div id="step0">
     <section class="container" style="padding-top:50px">
         <div class="order-container">
             <div class="order">
@@ -11,118 +11,257 @@
             </div>
         </div>
         <div class="order-step-area">
-            <div class="order-step first--step">1. Where &amp; When</div>
+            <div class="order-step first--step order-step--disable ">1. Where &amp; When</div>
+                    <div class="order-step second--step order-step--disable">2. Choose a sit</div>
+                    <div class="order-step third--step">3. Check out</div>
         </div>
 
     </section>
-
+    </div>
+    <div id="step1">
     <section class="container">
         <div class="col-sm-12">
             <h2 class="page-heading">City &amp; Date</h2>
-<select>
+        <select class="select__sort" (change)="changeLocation(4)">
           <option *ngFor="let location of listLocation" [ngValue]="location.id">{{location.name}}</option>
         </select>
-          <input type="date">
+        <input type="date" class="form-control btn-block ml-2 input-search-date" value="{{dateShow}}"
+                   (change)="searchByDate($event.target.value)">
 
 
             <h2 class="page-heading">Pick time</h2>
 
             <div class="time-select time-select--wide">
-                <!-- <div class="time-select__group group--first">
+            
+                <div class="time-select__group" *ngFor="let e of listTheatreTime">
                     <div class="col-sm-3">
-                        <p class="time-select__place">Cineworld</p>
+                        <p class="time-select__place">{{e.theatreName}}</p>
                     </div>
                     <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='09:40'>09:40</li>
-                        <li class="time-select__item" data-time='13:45'>13:45</li>
-                        <li class="time-select__item" data-time='15:45'>15:45</li>
-                        <li class="time-select__item" data-time='19:50'>19:50</li>
-                        <li class="time-select__item" data-time='21:50'>21:50</li>
-                    </ul>
-                </div> -->
-
-                <div class="time-select__group">
-                    <div class="col-sm-3">
-                        <p class="time-select__place">Empire</p>
-                    </div>
-                    <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='10:45'>10:45</li>
-                        <li class="time-select__item" data-time='16:00'>16:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:15'>21:15</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
+                        <li class="time-select__item" *ngFor="let t of e.showDTO" (click)="bookshow(t.id, t.price)" id="{{t.id}}">{{t.time.split('T')[1]}}</li>
                     </ul>
                 </div>
-<!-- 
-                <div class="time-select__group">
-                    <div class="col-sm-3">
-                        <p class="time-select__place">Curzon</p>
-                    </div>
-                    <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='09:00'>09:00</li>
-                        <li class="time-select__item" data-time='11:00'>11:00</li>
-                        <li class="time-select__item" data-time='13:00'>13:00</li>
-                        <li class="time-select__item" data-time='15:00'>15:00</li>
-                        <li class="time-select__item" data-time='17:00'>17:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:00'>21:00</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
-                        <li class="time-select__item" data-time='01:00'>01:00</li>
-                    </ul>
-                </div>
-
-                <div class="time-select__group">
-                    <div class="col-sm-3">
-                        <p class="time-select__place">Odeon</p>
-                    </div>
-                    <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='10:45'>10:45</li>
-                        <li class="time-select__item" data-time='16:00'>16:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:15'>21:15</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
-                    </ul>
-                </div> -->
-
-                <!-- <div class="time-select__group group--last">
-                    <div class="col-sm-3">
-                        <p class="time-select__place">Picturehouse</p>
-                    </div>
-                    <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='17:45'>17:45</li>
-                        <li class="time-select__item" data-time='21:30'>21:30</li>
-                        <li class="time-select__item" data-time='02:20'>02:20</li>
-                    </ul>
-                </div> -->
+        
             </div>
         </div>
 
     </section>
 
     <div class="clearfix"></div>
+    <div class="booking-pagination">
+        <a href="#" class="booking-pagination__prev hide--arrow">
+            <span class="arrow__text arrow--prev"></span>
+            <span class="arrow__info"></span>
+        </a>
+        <a (click)="fstep1()" class="booking-pagination__next">
+            <span class="arrow__text arrow--next">next step</span>
+            <span class="arrow__info">choose a sit</span>
+        </a>
+    </div>
+    </div>
 
-    <form id='film-and-time' class="booking-form" method='get' action='bookStep2.html'>
-        <input type='text' name='choosen-movie' class="choosen-movie">
+    <div id="step2" style="display: none;">
+        <section class="container">
+            <div class="col-sm-12">
+                <div class="choose-sits">
+                    <div class="choose-sits__info choose-sits__info--first">
+                        <ul>
+                            <li class="sits-price marker--none"><strong>Price</strong></li>
+                            <li *ngFor="let e of listSeatType" [ngClass]="{ sits_price_cheap : e.color=='yellow', sits_price_middle: e.color=='blue', sits_price_expensive: e.color=='green'}" class="sits-price">{{pricefn(e.price) | currency}}</li>
+                        </ul>
+                    </div>
+        
+                    <div class="choose-sits__info">
+                        <ul>
+                            <li class="sits-state sits_state_not">Not available</li>
+                            <li class="sits-state sits-state--your">Your choice</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+                    <div class="sits-area hidden-xs">
+                        <div class="sits-anchor">screen</div>
+                         <br>   
+                        <div class="sits" style="width: 700px;padding-left: 150px;">
+                                <div class="sits__row">
+                                    <span *ngFor="let i of listSeat" [ngClass]="{ sits_price_cheap : i.color=='yellow', sits_price_middle: i.color=='blue', sits_price_expensive: i.color=='green', sits_state_not : !i.available  }" class="sits__place"  id="{{i.id}}" (click)="chooseSit(i.id, i.price)">{{i.name}}</span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                </div>
+            </div>
+        </section>
+        
 
-        <input type='text' name='choosen-city' class="choosen-city">
-        <input type='text' name='choosen-date' class="choosen-date">
+        <div class="clearfix"></div>
+        <div class="booking-pagination booking-pagination--margin">
+            <a  class="booking-pagination__prev">
+                <span class="arrow__text arrow--prev">prev step</span>
+                <span class="arrow__info">where&amp;when</span>
+            </a>
+            <a (click)="fstep2()" class="booking-pagination__next">
+                <span class="arrow__text arrow--next">next step</span>
+                <span class="arrow__info">checkout</span>
+            </a>
+    </div>
+    </div>
 
-        <input type='text' name='choosen-cinema' class="choosen-cinema">
-        <input type='text' name='choosen-time' class="choosen-time">
+    <div id="payment" style="display: none;">
+        <section class="container">
+            <div class="col-sm-12">
+                <h2 class="page-heading">price</h2>
+                <ul class="book-result">
+                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
+                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
+                </ul>
+                <h2 class="page-heading">Choose payment method</h2>
+                <div class="abc">
+                    <div id="paypal-button-container"></div>
+                  
+                    
+                    <script>
+                        // Render the PayPal button into #paypal-button-container
+                 
+                    </script>
+            
+                    </div>
 
+
+
+
+
+
+
+
+
+
+                <h2 class="page-heading">Contact information</h2>
+        
+                <form id='contact-info' method='post' novalidate="" class="form contact-info">
+                    <div class="contact-info__field contact-info__field-mail">
+                        <input type='email' name='user-mail' placeholder='Your email' class="form__mail">
+                    </div>
+                    <div class="contact-info__field contact-info__field-tel">
+                        <input type='tel' name='user-tel' placeholder='Phone number' class="form__mail">
+                    </div>
+                </form>
+            </div>
+            <div class="order">
+                <a href="book-final.html" class="btn btn-md btn--warning btn--wide">purchase</a>
+            </div>
+        </section>
+
+            <div class="clearfix"></div>
 
         <div class="booking-pagination">
-            <a href="#" class="booking-pagination__prev hide--arrow">
-                <span class="arrow__text arrow--prev"></span>
-                <span class="arrow__info"></span>
-            </a>
-            <a href="bookStep2.html" class="booking-pagination__next">
-                <span class="arrow__text arrow--next">next step</span>
-                <span class="arrow__info">choose a sit</span>
-            </a>
+                <a href="bookStep2.html" class="booking-pagination__prev">
+                    <p class="arrow__text arrow--prev">prev step</p>
+                    <span class="arrow__info">choose a sit</span>
+                </a>
+                <a class="booking-pagination__next hide--arrow">
+                    <p class="arrow__text arrow--next">next step</p>
+                    <span class="arrow__info"></span>
+                </a>
         </div>
+    </div>
 
-    </form>
-    
-    <div class="clearfix"></div>
+
+    <div id="step3" style="display: none;">
+        <section class="container">
+            <div class="col-sm-12">
+                <h2 class="page-heading">price</h2>
+                <ul class="book-result">
+                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
+                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
+                </ul>
+
+                <h2 class="page-heading">Contact information</h2>
+        
+                <form id='contact-info' method='post' novalidate="" class="form contact-info">
+                    <div class="contact-info__field contact-info__field-mail">
+                        <input type='email' name='user-mail' placeholder='Your email' class="form__mail">
+                    </div>
+                    <div class="contact-info__field contact-info__field-tel">
+                        <input type='tel' name='user-tel' placeholder='Phone number' class="form__mail">
+                    </div>
+                </form>
+                
+                <p class="reservation-message">Fill your contact information to recieve your reservation code. Reserved tickets are removed 20 minutes befor the session is due to start</p>
+            </div>
+            <div class="order">
+                <a (click)="fstep3()" class="btn btn-md btn--warning btn--wide">reserve</a> </div>
+        </section>
+
+            <div class="clearfix"></div>
+
+        <div class="booking-pagination">
+                <a href="bookStep2.html" class="booking-pagination__prev">
+                    <p class="arrow__text arrow--prev">prev step</p>
+                    <span class="arrow__info">choose a sit</span>
+                </a>
+                <a class="booking-pagination__next hide--arrow">
+                    <p class="arrow__text arrow--next">next step</p>
+                    <span class="arrow__info"></span>
+                </a>
+        </div>
+     </div>
+
+
+     
+     
+     <div id="reserve" style="display: none;">
+        <section class="container" style="padding-top:50px">
+            <div class="order-container">
+                <div class="order">
+                    <img class="order__images" alt='' src="assets/images/tickets.png">
+                    <p class="order__title">Thank you <br><span class="order__descript">you have successfully reserved seat</span></p>
+                </div>
+
+            </div>
+        </section>
+     </div>
+     
+     <div id="final" style="display: none;">
+        <section class="container" style="padding-top:50px">
+            <div class="order-container">
+                <div class="order">
+                    <img class="order__images" alt='' src="assets/images/tickets.png">
+                    <p class="order__title">Thank you <br><span class="order__descript">you have successfully purchased tickets</span></p>
+                </div>
+
+                <div class="ticket">
+                    <div class="ticket-position">
+                        <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
+                        <div class="ticket__inner">
+
+                            <div class="ticket-secondary">
+                                <span class="ticket__item">Ticket number <strong class="ticket__number">a126bym4</strong></span>
+                                <span class="ticket__item ticket__date">25/10/2020</span>
+                                <span class="ticket__item ticket__time">17:45</span>
+                                <span class="ticket__item">Cinema: <span class="ticket__cinema">Cineworld</span></span>
+                                <span class="ticket__item">Hall: <span class="ticket__hall">Visconti</span></span>
+                                <span class="ticket__item ticket__price">price: <strong class="ticket__cost">$60</strong></span>
+                            </div>
+
+                            <div class="ticket-primery">
+                                <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">The Fifth Estate (2020)</strong></span>
+                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">11F, 12F, 13F</span></span>
+                            </div>
+
+
+                        </div>
+                        <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
+                    </div>
+                </div>
+
+                <div class="ticket-control">
+                    <a href="#" class="watchlist list--download">Download</a>
+                    <a href="#" class="watchlist list--print">Print</a>
+                </div>
+
+            </div>
+        </section></div>
+
 

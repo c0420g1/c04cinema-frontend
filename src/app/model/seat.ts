@@ -3,5 +3,5 @@ export class Seat {
     name: string;
     theatreId: number;
     hallId: number;
-    seatTypeId: number
+    seatTypeId: number;
 }
