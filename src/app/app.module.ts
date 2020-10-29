@@ -9,7 +9,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {UserModule} from './user/user.module';
 import {AdminModule} from './admin/admin.module';
 import {DatePipe} from '@angular/common';
-
 import {NgxPaginationModule} from 'ngx-pagination';
 
 
