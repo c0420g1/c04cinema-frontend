@@ -4,10 +4,8 @@ import {Observable} from 'rxjs';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
-// @ts-ignore
-import {Hall} from '../../model/hall';
-import {Show} from '../../model/show';
-import {BookingTicketDTO} from '../../model/bookingTicketDTO';
+import { Hall } from 'src/app/model/Hall';
+import { Show } from 'src/app/model/Show';
 
 @Injectable({
   providedIn: 'root'
