@@ -19,8 +19,7 @@
             <p class="movie__option"><strong>Age restriction: </strong><a >{{movie.movieRatedAgeId}}</a></p>
 
             <div class="movie__btns">
-                <a href="#" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book a ticket <span
-                        class="hidden-sm">for this movie</span></a>
+                <a [routerLink]="['/booking',movie.id]" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book a ticket <span class="hidden-sm">for this movie</span></a>
                 <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal"
                    class="watchlist">Watch trailer</a>
             </div>

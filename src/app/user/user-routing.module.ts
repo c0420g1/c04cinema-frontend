@@ -28,7 +28,7 @@ const routes: Routes = [
         component: PromotionComponent
       },
       {
-        path: 'booking',
+        path: 'booking/:id',
         component: BookingComponent
       },
       {
