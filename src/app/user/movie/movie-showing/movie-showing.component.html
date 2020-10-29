@@ -28,8 +28,8 @@
             <p class="p-startDate"><strong>Date: </strong>{{filmShowing.startDate}}</p>
             <div class="row">
                 <div class="col-12 item-button-getTicket" style="">
-                    <a href="#" class="btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">Detail</a>
-                    <a href="#" class="btn btn-md btn--shine" style="margin-left: 3px" *ngIf="checkDate===true">Book a
+                    <a class="btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">Detail</a>
+                    <a [routerLink]="['/booking',filmShowing.id]" class="btn btn-md btn--shine" style="margin-left: 3px" *ngIf="checkDate===true">Book a
                         ticket</a>
                 </div>
             </div>
