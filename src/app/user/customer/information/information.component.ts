@@ -22,14 +22,16 @@ export class InformationComponent implements OnInit, OnDestroy {
     rescus: string;
     resacc: string;
     error1s: Error1[];
+    error2s: Error1 = new Error1();
     passOld: string;
     passNew: string;
     passReNew: string;
-    checkPass: boolean;
     checkPassNew: boolean;
-    checkUppass: boolean;
-    checkUpInfor: boolean;
+    checkUpInfor = false;
     sub: Subscription;
+    errorPassNew : string;
+    errorPassReNew : string;
+    regexPass =  new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$');
 
 
 
@@ -43,7 +45,7 @@ export class InformationComponent implements OnInit, OnDestroy {
         this.customerForm = this.fb.group({
             id: [''],
             code: ['', Validators.required],
-            name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')]],
+            name: ['', [Validators.required, Validators.pattern('([A-Z])\\w+')]],
             birthday: ['', [Validators.required, dateValidator, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
             gender: ['', [Validators.required, Validators.pattern('Male|Female')]],
             email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,}(@)[a-zA-Z]{3,}\.[a-zA-Z]{3}$/)]],
@@ -52,9 +54,7 @@ export class InformationComponent implements OnInit, OnDestroy {
             address: ['', [Validators.required, Validators.maxLength(200)]],
         });
         this.accountForm = this.fb.group({
-            id: [''],
             username: ['', Validators.required],
-            password: ['', Validators.required]
         });
 
 
@@ -84,6 +84,7 @@ export class InformationComponent implements OnInit, OnDestroy {
                 }
             );
         });
+
     }
 
 
@@ -118,33 +119,39 @@ export class InformationComponent implements OnInit, OnDestroy {
         }
     };
 
-    PassOldCheck: string;
-    PassNewCheck: string;
-    RePassNewCheck: string;
-
+    checkRegexPass(){
+        if(!this.regexPass.test(this.passNew) || !this.regexPass.test(this.passReNew)){
+            this.errorPassNew = 'New Pass length pass word > 8 and < 20 or pass format Abcd123';
+            this.errorPassReNew = 'Re New Pass length pass word > 8 and < 20 or pass format Abcd123';
+            this.checkUpInfor = false;
+        } else
+        {
+            this.editPass()
+        }
+    }
     // Huỳnh Văn Thịnh.
     // chỉnh sửa password
     editPass() {
-        if (this.PassNewCheck != this.RePassNewCheck) {
+        if (this.passNew != this.passReNew) {
             this.checkPassNew = true;
-            this.checkUppass = false;
-        }
-        if (this.PassOldCheck == this.account.password) {
-            this.account.password = this.PassNewCheck;
-            this.accountService.updatePassword(this.account).subscribe(
+            this.error2s = null;
+        } else {
+            this.accountService.updatePassword(this.passOld, this.passNew, this.account.id).subscribe(
                 next => {
-                    this.ngOnInit();
-                    this.checkUppass = true;
-                    this.checkPass = false;
+                    this.error2s = next[0];
                     this.checkPassNew = false;
+                    this.errorPassReNew = null;
+                    this.errorPassNew = null;
+                    this.passOld = '';
+                    this.passNew = '';
+                    this.passReNew = '';
+                    this.ngOnInit();
                 },
                 error => console.log(error)
             );
-        } else {
-            this.checkPass = true;
-            this.checkUppass = false;
         }
     };
+
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
