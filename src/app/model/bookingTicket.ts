@@ -13,7 +13,6 @@ export class BookingTicket {
     status: boolean;
     price: number;
     iscancel: boolean;
-
 }
 
 
