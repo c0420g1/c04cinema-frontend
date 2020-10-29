@@ -6,6 +6,7 @@ import {Account} from '../model/Account';
 import {AccountService} from '../service/account.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import { Error1 } from '../model/error1';
 
 @Component({
     selector: 'app-information',
@@ -20,7 +21,7 @@ export class InformationComponent implements OnInit, OnDestroy {
     customer: Customer;
     rescus: string;
     resacc: string;
-    errors: Error[];
+    error1s: Error1[];
     passOld: string;
     passNew: string;
     passReNew: string;
@@ -47,7 +48,7 @@ export class InformationComponent implements OnInit, OnDestroy {
             gender: ['', [Validators.required, Validators.pattern('Male|Female')]],
             email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,}(@)[a-zA-Z]{3,}\.[a-zA-Z]{3}$/)]],
             cardid: ['', [Validators.required, Validators.pattern('[\\d]{3,}(-)[\\d]{2,}(-)[\\d]{4,}')]],
-            phone: ['',],
+            phone: ['',[Validators.required, Validators.pattern('^[\\d\\s]+$')]],
             address: ['', [Validators.required, Validators.maxLength(200)]],
         });
         this.accountForm = this.fb.group({
@@ -96,6 +97,9 @@ export class InformationComponent implements OnInit, OnDestroy {
         this.resacc = encodeURI(uri);
     }
 
+
+    // Huỳnh Văn Thịnh.
+    // Chỉnh sửa thông tin customer
     editCustomer() {
         if (this.customerForm.valid) {
             const {value} = this.customerForm;
@@ -105,7 +109,7 @@ export class InformationComponent implements OnInit, OnDestroy {
             };
             this.customerService.updateCustomer(data, this.customer.id).subscribe(
                 next => {
-                    this.errors = next;
+                    this.error1s = next;
                     this.checkUpInfor = true;
                     this.ngOnInit();
                 },
@@ -118,6 +122,8 @@ export class InformationComponent implements OnInit, OnDestroy {
     PassNewCheck: string;
     RePassNewCheck: string;
 
+    // Huỳnh Văn Thịnh.
+    // chỉnh sửa password
     editPass() {
         if (this.PassNewCheck != this.RePassNewCheck) {
             this.checkPassNew = true;

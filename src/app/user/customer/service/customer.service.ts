@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Customer} from '../model/Customer';
+import { Error1 } from '../model/error1';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CustomerService {
     return this.http.get<Customer>(`${this.API_URL}?${id}`);
   }
 
-  updateCustomer(customer: Customer, i: number): Observable<Error[]> {
-    return this.http.patch<Error[]>(`${this.API_URL1}/${customer.id}`, customer);
+  updateCustomer(customer: Customer, i: number): Observable<Error1[]> {
+    return this.http.patch<Error1[]>(`${this.API_URL1}/${customer.id}`, customer);
   }
 }

@@ -47,6 +47,8 @@ export class HistoryPointComponent implements OnInit {
     Plus: string;
 
 
+    // Huỳnh Văn Thịnh.
+    // so sánh ngày bắt đầu vs ngày kết thúc
     compareTwoDates() {
         let dateEnd: string[];
         let dateStar: string[];
@@ -61,6 +63,8 @@ export class HistoryPointComponent implements OnInit {
         }
     }
 
+    // Huỳnh Văn Thịnh.
+    // tra cứu điểm
     searchPoint() {
         if (this.Plus == 'true') {
             this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
@@ -71,13 +75,14 @@ export class HistoryPointComponent implements OnInit {
                     .subscribe(next => {
                         (this.pointListS = next
                             , this.totalEntities = this.pointListS.length
-                            , this.totalPage = this.totalEntities / 10),
-                            error => (this.pointListS = []);
-                        if (next.length === 0) {
+                            , this.totalPage = this.totalEntities / 10);
+                        if (this.pointListS.length === 0) {
                             this.message = 'not Data!';
                         } else {
                             this.message = '';
-                        }
+                        };
+                            error => (this.pointListS = []);
+
                     });
             });
         }
