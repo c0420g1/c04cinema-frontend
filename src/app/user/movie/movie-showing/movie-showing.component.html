@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-3">
+            <p class="title-search"><strong>Tìm kiếm lịch chiếu</strong></p>
+        </div>
+        <div class="col-4">
+            <input type="date" class="form-control btn-block ml-2 input-search-date"
+                   (change)="searchFilmByDate($event.target.value)">
+        </div>
+        <div class="col-5">
+            <input type="text" class="input-search-name" placeholder="Enter name film"  [(ngModel)]="nameSearch"
+                   (ngModelChange)="searchByName()">
+        </div>
+    </div>
+    <div class="div-title-movie-show">
+        <h2 class="page-heading" *ngIf="checkDate===true">Movies showing</h2>
+        <h2 class="page-heading" *ngIf="checkDate===false">Movies showed</h2>
+    </div>
+    <div class="row mt-5">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12  mt-3" *ngFor="let filmShowing of movies">
+            <a [routerLink]="['/movie-detail',filmShowing.id]">
+                <img [src]="filmShowing.posterUrl" class="poster-img">
+            </a>
+            <p class="p-name-film">
+                <strong [routerLink]="['/movie-detail', filmShowing.id]">{{filmShowing.name.toUpperCase()}}</strong>
+            </p>
+            <p><strong>Actor: </strong>{{filmShowing.actor}}</p>
+            <p class="p-startDate"><strong>Date: </strong>{{filmShowing.startDate}}</p>
+            <div class="row">
+                <div class="col-12 item-button-getTicket" style="">
+                    <a href="#" class="btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">Detail</a>
+                    <a href="#" class="btn btn-md btn--shine" style="margin-left: 3px" *ngIf="checkDate===true">Book a
+                        ticket</a>
+                </div>
+            </div>
+        </div>
+        <ng-template [ngIf]="movies.length === 0">
+            <h4 class="h4-not-found"> Not found movies !</h4>
+        </ng-template>
+    </div>
+</div>
+
+<div class="my-container">
+    <ng-template #customLoadingTemplate>
+        <div class="custom-class">
+            <h3>
+                Loading...
+            </h3>
+            <button (click)="showAlert()">
+                Click me!
+            </button>
+        </div>
+    </ng-template>
+
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
