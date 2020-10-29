@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Booking } from '../model/Booking';
 import { BookingTicketDTO } from '../model/bookingTicketDTO';
 import { BookingTimeDTO } from '../model/BookingTimeDTO';
 import { Location } from '../model/location';
@@ -15,6 +16,7 @@ export class BookingService {
   private readonly API_URL_BOOKING_TIME = 'http://localhost:8080/bookingTime/';
   private readonly API_URL_SEATHALL = 'http://localhost:8080/seatShow';
   private readonly API_URL_SEATTYPE = 'http://localhost:8080/seat_type';
+  private readonly API_URL_BOOKING = 'http://localhost:8080/booking_ticket';
   constructor(private http: HttpClient) { }
 
   getAllLocation(): Observable<Location[]>{
@@ -31,5 +33,9 @@ export class BookingService {
 
   getSeatType(): Observable<SeatType[]>{
     return this.http.get<SeatType[]>(this.API_URL_SEATTYPE);
+  }
+
+  booking(booking: Booking): Observable<string[]>{
+    return this.http.post<string[]>(this.API_URL_BOOKING, booking);
   }
 }

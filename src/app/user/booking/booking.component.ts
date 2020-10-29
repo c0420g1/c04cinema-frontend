@@ -7,6 +7,7 @@ import { BookingTimeDTO } from 'src/app/model/BookingTimeDTO';
 import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
 import { DatePipe } from '@angular/common';
+import { Booking } from 'src/app/model/Booking';
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -21,7 +22,7 @@ export class BookingComponent implements OnInit {
   listSeat: any = [];
   priceShow: number=0;
   listSeatType: any= [];
-  listRes: BookingTicket[] = [];
+  listRes: Booking[] = [];
   ticketQuantity=0;
   totalPrice=0;
   showId=0;
@@ -68,7 +69,7 @@ export class BookingComponent implements OnInit {
     }
     else{
       $('#' + seatId).addClass('sits-state--your');
-      let bt = new BookingTicket();
+      let bt = new Booking();
       bt.showId= this.showId;
       bt.ticketTypeId=1;
       bt.accountId= 2;
@@ -94,17 +95,42 @@ export class BookingComponent implements OnInit {
   fstep2() {
     $("#step1").hide();
     $("#step2").hide();
+    $("#step3").hide();
     $("#payment").show();
+    this.ticketQuantity= this.listRes.length;
+  }
+
+  fstep22() {
+    $("#step1").hide();
+    $("#step2").hide();
+    $("#payment").hide();
+    $("#step3").show();
     this.ticketQuantity= this.listRes.length;
   }
 
   fstep3(){
     this.hiddenAll();
+    this.listRes.forEach(e=> {
+      e.contactEmail="hcronin0@mtv.com";
+      e.contactPhone= "5859577512";
+      e.paymentId= 2;
+      e.promotionId= 16;
+      this.bookService.booking(e).subscribe();
+      });
     $("#reserve").show();
   }
 
   fstep4(){
     this.hiddenAll();
+    this.listRes.forEach(e=> {
+    e.contactEmail="hcronin0@mtv.com";
+    e.contactPhone= "5859577512";
+    e.paymentId= 2;
+    e.promotionId= 16;
+    e.status= 0;
+    this.bookService.booking(e).subscribe();
+    });
+    
     $("#final").show();
   }
   hiddenAll(){
