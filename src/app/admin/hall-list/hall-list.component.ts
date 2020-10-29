@@ -15,7 +15,7 @@ export class HallListComponent implements OnInit {
   titleSearch ='';
   pageHall = 1;
   count = 0;
-  pageSizeHall = 5;
+  pageSizeHall = 4;
   pageSizes = [3, 6, 9];
   theaterId: number;
 
@@ -37,7 +37,6 @@ export class HallListComponent implements OnInit {
     this.showListHall();
     this.addFormHall = this.fbAddHall.group({
       name: ['', Validators.required],
-      seatQuantity: ['', [Validators.required, Validators.pattern(/^\d{2,3}$/)]],
       hallTypeId: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
       theatreId: [this.theaterId],
     })
@@ -46,7 +45,6 @@ export class HallListComponent implements OnInit {
     this.editFormHall = this.fbEditHall.group({
       id: [''],
       name: ['', Validators.required],
-      seatQuantity: ['', [Validators.required, Validators.pattern(/^\d{2,3}$/)]],
       hallTypeId: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
       theatreId: [''],
     })

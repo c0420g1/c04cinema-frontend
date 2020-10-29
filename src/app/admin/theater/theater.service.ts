@@ -18,6 +18,7 @@ export class TheaterService {
   private readonly API_URL_HALLS_SEARCH = 'http://localhost:8080/hall/search';
   private readonly API_URL_HALL_TYPE = 'http://localhost:8080/hall_type';
   private readonly API_URL_LOCATIONS = 'http://localhost:8080/location';
+  private readonly API_URL_SEATS_LIST = 'http://localhost:8080/seat/list';
   private readonly API_URL_SEATS = 'http://localhost:8080/seat';
   private readonly API_URL_SEAT_TYPE = 'http://localhost:8080/seat_type';
 
@@ -62,8 +63,8 @@ export class TheaterService {
     return this.http.get<SeatType[]>(this.API_URL_SEAT_TYPE);
   }
 
-  getAllSeat(hall): Observable<Seat[]>{
-    return this.http.get<Seat[]>(this.API_URL_SEATS, {params: hall});
+  getAllSeat(hallId): Observable<Seat[]>{
+    return this.http.get<Seat[]>(this.API_URL_SEATS_LIST + '/?hallId=' + hallId);
   }
 
   addSeat(seat: Partial<Seat>): Observable<Seat>{

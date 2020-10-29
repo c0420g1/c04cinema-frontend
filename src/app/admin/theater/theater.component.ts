@@ -13,7 +13,7 @@ export class TheaterComponent implements OnInit {
   title = '';
   page = 1;
   count = 0;
-  pageSize = 5;
+  pageSize = 4;
   pageSizes = [3, 6, 9];
   // ----------
   theaters: Theatre[] = [];

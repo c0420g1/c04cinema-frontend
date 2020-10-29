@@ -27,7 +27,6 @@
                         <tr>
                             <th>#</th>
                             <th>Hall Name</th>
-                            <th>Seat Quantity</th>
                             <th>Hall Type</th>
                             <th width="20%">Seat Detail</th>
                             <th width="20%">Edit Hall Detail</th>
@@ -43,7 +42,6 @@
                         ">
                             <td>{{hall.id}}</td>
                             <td>{{hall.name}}</td>
-                            <td>{{hall.seatQuantity}}</td>
                             <ng-container *ngFor="let type of hallType">
                                 <ng-container *ngIf="type.id == hall.hallTypeId">
                                     <td>{{ type.name }}</td>
@@ -100,18 +98,6 @@
 
 
                             <div class="form-group">
-                                <label for="seatNumber">Seat Quantity: </label>
-                                <input type="number"
-                                       formControlName="seatQuantity"
-                                       class="form-control" id="seatNumber" placeholder="Enter Seat Number" >
-                            </div>
-                            <div class="alert alert-danger" role="alert"
-                                 *ngIf="addFormHall.get('seatQuantity').invalid && addFormHall.get('seatQuantity').touched">
-                                <p *ngIf="addFormHall.get('seatQuantity').hasError('required')">Seat Number is Required</p>
-                                <p *ngIf="addFormHall.get('seatQuantity').hasError('pattern')">Seat Number has to be number</p>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="hallType">Hall Type: </label>
                                 <select formControlName="hallTypeId" id="hallType">
                                     <option  style="margin-left: 10px" *ngFor="let type of hallType" value="{{type.id}}">{{type.name}}</option>
@@ -163,18 +149,6 @@
                                 <p *ngIf="editFormHall.get('name').hasError('required')">Name is Required</p>
                             </div>
 
-
-                            <div class="form-group">
-                                <label for="seatNumberEdit">Seat Quantity: </label>
-                                <input type="number"
-                                       formControlName="seatQuantity"
-                                       class="form-control" id="seatNumberEdit" placeholder="Enter Seat Number" >
-                            </div>
-                            <div class="alert alert-danger" role="alert"
-                                     *ngIf="editFormHall.get('seatQuantity').invalid && editFormHall.get('seatQuantity').touched">
-                                    <p *ngIf="editFormHall.get('seatQuantity').hasError('required')">Seat Number is Required</p>
-                                    <p *ngIf="editFormHall.get('seatQuantity').hasError('pattern')">Seat Number has to be number</p>
-                            </div>
 
                             <div class="form-group">
                                 <label for="hallTypeEdit">Hall Type: </label>
