@@ -12,9 +12,7 @@
     </div>
 </div>
 
-
-
-
+<!-- LIST SEARCH & PAGINATION-->
 
 <div class="container" style="left: auto">
     <div class="row">
@@ -46,16 +44,18 @@
                 <td>{{ticket.movieName}}</td>
                 <td>{{ticket.bookingDate | date:'dd/MM/yyyy HH:mm'}} </td>
                 <td>
-                    <button   class="btn btn-warning" *ngIf="ticket.status">Đã nhận <i class="fa fa-check "></i></button>
-                    <button *ngIf="!ticket.status" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEdit" (click)="getInfo(ticket)" >
-                        Nhận vé <i class="fa fa-ticket"></i>
+                    <button   class="btn btn-warning" *ngIf="ticket.status && !ticket.isCancel">Received <i class="fa fa-check "></i></button>
+                    <button *ngIf="!ticket.status && !ticket.isCancel" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEdit" (click)="getInfo(ticket)" >
+                        Get Ticket <i class="fa fa-ticket"></i>
                     </button>
+                    <button   class="btn btn--danger" *ngIf="ticket.isCancel">Canceled <i class="fa fa-check "></i></button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 
+<!--    SHOW CURRENT PAGE & JUMP PAGE-->
     <div class="row" style="margin-top: 10px" *ngIf="!message">
         <div class="col-lg-3">
             <div style="font-size: 15px">
@@ -68,30 +68,24 @@
                     <li>
                         <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
                     </li>
-
                     <li>
-                        <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                        <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
                                [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
                     </li>
-
                     <li>
                         <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
                         <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
                     </li>
                 </ul>
-
-
             </div>
         </div>
-
     </div>
-
 </div>
 
 
 
 <div class="modal fade" id="formEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"  >
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 660px" role="document">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 660px; font-size: 12px" role="document">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
                 <h5 class="modal-title" id="exampleModalLabel1">Xác nhận</h5>
@@ -111,10 +105,46 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
+                                Screen:
+                            </label>
+                            <label style="margin-left: 5px">
+                                {{ticketNew.hallName}}
+                            </label>
+                        </label>
+
+                        <label class="row">
+                            <label style="font-weight: bold">
                                 Ngày chiếu:
                             </label>
                             <label style="margin-left: 5px">
-                                {{ticketNew.bookingDate}}
+                                {{ticketNew.bookingDate | date:'dd/MM/yyyy'}}
+                            </label>
+                        </label>
+
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Giờ chiếu:
+                            </label>
+                            <label style="margin-left: 5px">
+                                {{ticketNew.bookingDate | date: 'HH:mm'}}
+                            </label>
+                        </label>
+
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Ghế:
+                            </label>
+                            <label style="margin-left: 5px" *ngFor="let seat of seatList" >
+                                {{seat.seat}}
+                            </label>
+                        </label>
+
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Số vé:
+                            </label>
+                            <label style="margin-left: 5px">
+                                {{quantity}}
                             </label>
                         </label>
                         <label class="row">
@@ -139,6 +169,31 @@
                                 {{ticketNew.codeCustomer}}
                             </label>
                         </label>
+
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Điểm thành viên:
+                            </label>
+                            <label style="margin-left: 5px">
+                                {{ticketNew.pointCustomer}}
+                            </label>
+                        </label>
+
+                        <label class="row">
+                            <label style="font-weight: bold">
+                                Đổi vé:
+                            </label>
+                                <label>
+                                    <input style="margin-left: 5px;" type="radio" name="numberTicket" value= "0" [(ngModel)]="numberTicket"
+                                           (ngModelChange)="checkPoint()"> 0</label>
+
+                            <label style="margin-left: 5px" class="radio-inline" *ngFor="let seat1 of seatList, let i = index;">
+
+                                        <input type="radio" name="numberTicket" value= "{{i+1}}" [(ngModel)]="numberTicket"
+                                               (ngModelChange)="checkPoint()"> {{i+1}}
+                            </label>
+                        </label>
+                        <label *ngIf="!check" style="color: red">Không đủ điểm</label>
 
                         <label class="row">
                             <label style="font-weight: bold">
@@ -169,7 +224,8 @@
                     </div>
                 </div>
                 <div class="col-md-12 text-center">
-                    <button class="btn btn-success" style="margin-bottom: 10px; margin-top: 10px" (click)="confirm(ticketNew.idBookingTicket)">Xác nhận</button>
+                    <button class="btn btn-success" style="margin-bottom: 10px; margin-top: 10px"
+                            (click)="confirm(ticketNew.idBookingTicket)" [disabled]="!check">Xác nhận</button>
                 </div>
             </div>
 
