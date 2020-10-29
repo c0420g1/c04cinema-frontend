@@ -37,18 +37,18 @@ export class HallListComponent implements OnInit {
     this.showListHall();
     this.addFormHall = this.fbAddHall.group({
       name: ['', Validators.required],
-      seatQuantity: ['', [Validators.required, Validators.pattern(/^\d$/)]],
-      hallTypeId: ['', [Validators.required, Validators.pattern(/^\d$/)]],
+      seatQuantity: ['', [Validators.required, Validators.pattern(/^\d{2,3}$/)]],
+      hallTypeId: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
       theatreId: [this.theaterId],
     })
     ;
 
     this.editFormHall = this.fbEditHall.group({
       id: [''],
-      name: ['', [Validators.required, Validators.pattern(/^(A|B|C|D|E|F|G|H)([0-9]{1,2})$/)]],
-      seatQuantity: ['', Validators.required],
-      hallTypeId: ['', [Validators.required, Validators.pattern(/^\d$/)]],
-      theatreId: [this.theaterId],
+      name: ['', Validators.required],
+      seatQuantity: ['', [Validators.required, Validators.pattern(/^\d{2,3}$/)]],
+      hallTypeId: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
+      theatreId: [''],
     })
     ;
 
@@ -65,7 +65,6 @@ export class HallListComponent implements OnInit {
   }
 
   private showListHall() {
-    console.log(this.theaterId)
     if ('' == this.titleSearch){
       this.theaterService
         .getAllHall(this.pageHall,this.theaterId,this.pageSizeHall)
@@ -89,6 +88,7 @@ export class HallListComponent implements OnInit {
             this.addFormHall.reset();
           }, error => console.log(error));
     }
+    this.showListHall();
   }
 
   editHall(hall: Hall){
@@ -110,6 +110,7 @@ export class HallListComponent implements OnInit {
           error => console.log(error)
       );
     };
+    this.showListHall();
   };
 
   formDeleteHall(hall: Hall){

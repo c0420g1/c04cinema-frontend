@@ -8,7 +8,7 @@
                             <input [(ngModel)]="titleSearch"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
                             <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">Search<i class="fa fa-search"></i></button>
                         </div>
-                        <div class="col-sm-3">
+                        <div style="width: 30%; display: flex">
                             <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addHall" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Hall</a>
                         </div>
                     </div>
@@ -141,11 +141,10 @@
         <div id="editHall" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content" >
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Hall</h4>
+                    </div>
                     <form [formGroup]="editFormHall">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Edit Hall</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="idEdit">Id</label>
@@ -188,6 +187,13 @@
                                     *ngIf="editFormHall.get('hallTypeId').invalid && editFormHall.get('hallTypeId').touched">
                                     <p *ngIf="editFormHall.get('hallTypeId').hasError('required')">Seat Number is Required</p>
                                     <p *ngIf="editFormHall.get('hallTypeId').hasError('pattern')">Seat Number has to be number</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="theaterIdEdit">Id</label>
+                                <input type="text"
+                                       formControlName="theatreId"
+                                       class="form-control" id="theaterIdEdit" readonly>
                             </div>
 
                         </div>
