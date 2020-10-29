@@ -99,13 +99,23 @@ export class BookingComponent implements OnInit {
   }
 
   fstep3(){
+    this.hiddenAll();
+    $("#reserve").show();
+  }
+
+  fstep4(){
+    this.hiddenAll();
+    $("#final").show();
+  }
+  hiddenAll(){
     $("#step0").hide();
     $("#step1").hide();
     $("#step2").hide();
     $("#step3").hide();
-    $("#reserve").show();
-
+    $("#payment").hide();
+    $("#reserve").hide();
   }
-  ngOnInit(): void {  }
-
+  ngOnInit(): void {
+    $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
+    }
 }

@@ -25,10 +25,7 @@
         <select class="select__sort" (change)="changeLocation(4)">
           <option *ngFor="let location of listLocation" [ngValue]="location.id">{{location.name}}</option>
         </select>
-        <input type="date" class="form-control btn-block ml-2 input-search-date" value="{{dateShow}}"
-                   (change)="searchByDate($event.target.value)">
-
-
+        <input type="date" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
             <h2 class="page-heading">Pick time</h2>
 
             <div class="time-select time-select--wide">
@@ -116,25 +113,11 @@
                     <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
                     <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
                 </ul>
+                <h2 class="page-heading">Input your promotion code</h2>
+                <input name="promotionCode">
+                <input type="button" value="Use">
                 <h2 class="page-heading">Choose payment method</h2>
-                <div class="abc">
-                    <div id="paypal-button-container"></div>
-                  
-                    
-                    <script>
-                        // Render the PayPal button into #paypal-button-container
-                 
-                    </script>
-            
-                    </div>
-
-
-
-
-
-
-
-
+                <div id="paypal-button-container"></div>
 
 
                 <h2 class="page-heading">Contact information</h2>
@@ -149,7 +132,7 @@
                 </form>
             </div>
             <div class="order">
-                <a href="book-final.html" class="btn btn-md btn--warning btn--wide">purchase</a>
+                <a (click)="fstep4()" class="btn btn-md btn--warning btn--wide">purchase</a>
             </div>
         </section>
 
@@ -166,7 +149,6 @@
                 </a>
         </div>
     </div>
-
 
     <div id="step3" style="display: none;">
         <section class="container">
