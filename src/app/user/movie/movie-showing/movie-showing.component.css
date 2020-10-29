@@ -19,7 +19,8 @@
     color: black; font-size: 24px; margin-top: 7px
 }
 .input-search-date{
-    font-size: 17px
+    font-size: 17px;
+    width: 300px;
 }
 .div-title-movie-show{
     margin-top: -20px

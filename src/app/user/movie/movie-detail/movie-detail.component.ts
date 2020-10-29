@@ -6,7 +6,7 @@ import {DatePipe} from '@angular/common';
 import {Show} from 'src/app/model/Show';
 import {ShowService} from '../show.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {of} from 'rxjs';
+import DateTimeFormat = Intl.DateTimeFormat;
 
 declare var $: any;
 
@@ -40,9 +40,11 @@ export class MovieDetailComponent implements OnInit {
     videoUrl: SafeResourceUrl = '';
     dangerousVideoUrl = '';
     checkHideButton = false;
-    checkTableTimeShow = false;
     show: Show;
-    showHaveTableTime: Show[] =[];
+    checkTableTime = false;
+    showTableTime: Show[] = [];
+
+
 
     constructor(private moviesService: MovieService,
                 private activatedRoute: ActivatedRoute,
@@ -75,7 +77,7 @@ export class MovieDetailComponent implements OnInit {
                             return 'Not found data result !';
                         }
 
-                    }
+                    }, error => console.log('Error !')
                 );
             }
         );
@@ -101,8 +103,16 @@ export class MovieDetailComponent implements OnInit {
         this.showService.getAllShow().subscribe(
             (data) => {
                 this.shows = data;
-            }
+                for (let i = 0; i < this.shows.length; i++){
+                    if (this.movie.id === this.shows[i].movieId){
+                        this.showTableTime.push(this.shows[i])
+                    }
+                }
+
+            }, error => console.log('Error !')
         );
+
+
 
     }
 
@@ -123,5 +133,10 @@ export class MovieDetailComponent implements OnInit {
         }
     }
 
+
+
+    solve(): any{
+
+    }
 
 }
