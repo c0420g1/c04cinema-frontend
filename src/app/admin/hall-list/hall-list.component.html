@@ -2,10 +2,16 @@
     <div class="container-fluid">
         <div class="row" >
             <div class="col-10" style="margin-top: 28px; margin-left: 8%">
-
                 <div class="table-title">
-
-                    <br>
+                    <div class="row">
+                        <div style="width: 18%; display: flex" >
+                            <input [(ngModel)]="titleSearch"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">Search<i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="col-sm-3">
+                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addHall" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Hall</a>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-9" style="max-width: 75%">
                             <div style="margin-left: 380px;">
@@ -23,18 +29,19 @@
                             <th>Hall Name</th>
                             <th>Seat Quantity</th>
                             <th>Hall Type</th>
-                            <th width="20%">
-                                <div style="display: flex">
-                                    <div  style="margin-left: 40px">Seat Detail</div>
-                                </div>
-                            </th>
+                            <th width="20%">Edit Hall Detail</th>
+                            <th width="20%">Seat Detail</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        <tr *ngFor="let hall of halls;let i = index">
-                            <ng-container *ngIf="hall.theatreId == theaterId">
-                            <td>{{i + 1}}</td>
+                        <tr *ngFor="let hall of halls |
+                        paginate : {itemsPerPage: pageSizeHall,
+                                         currentPage: pageHall,
+                                         totalItems: count
+                                        };
+                        ">
+                            <td>{{hall.id}}</td>
                             <td>{{hall.name}}</td>
                             <td>{{hall.seatQuantity}}</td>
                             <ng-container *ngFor="let type of hallType">
@@ -43,26 +50,155 @@
                                 </ng-container>
                             </ng-container>
                             <td>
-                                <a [routerLink]="['seat', hall.id]" class="edit" title="Edit" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a [routerLink]="['seat', hall.id]" class="detail" title="Detail" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
                             </td>
-                            </ng-container>
+                            <td>
+                                <button class="btn btn-primary" (click)="editHall(hall)" data-toggle="modal" data-target="#editHall">Edit</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="page" style="margin-left: 450px">
-                    <button  class="btn badge-dark" >First</button>
-                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>
-                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>
-                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>
-
-                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>
-                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>
-                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>
+                <div class="page" style="margin-left: 450px" >
+                    <pagination-controls
+                            previousLabel="Prev"
+                            nextLabel="Next"
+                            responsive="true"
+                            (pageChange)="handlePageChange($event)"
+                    ></pagination-controls>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!--ADD HALL-->
+
+    <div class="modal fade" id="addHall" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" (click)="resetForm()">&times;</span>
+                    </button>
+                </div>
+                <form [formGroup]="addFormHall">
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nameHall">Hall Name: </label>
+                                <input type="text"
+                                       formControlName="name"
+                                       class="form-control" id="nameHall" placeholder="Enter Name Hall" >
+                            </div>
+                            <div class="alert alert-danger" role="alert"
+                                 *ngIf="addFormHall.get('name').invalid && addFormHall.get('name').touched">
+                                <p *ngIf="addFormHall.get('name').hasError('required')">Name is Required</p>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="seatNumber">Seat Quantity: </label>
+                                <input type="number"
+                                       formControlName="seatQuantity"
+                                       class="form-control" id="seatNumber" placeholder="Enter Seat Number" >
+                            </div>
+                            <div class="alert alert-danger" role="alert"
+                                 *ngIf="addFormHall.get('seatQuantity').invalid && addFormHall.get('seatQuantity').touched">
+                                <p *ngIf="addFormHall.get('seatQuantity').hasError('required')">Seat Number is Required</p>
+                                <p *ngIf="addFormHall.get('seatQuantity').hasError('pattern')">Seat Number has to be number</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hallType">Hall Type: </label>
+                                <select formControlName="hallTypeId" id="hallType">
+                                    <option  style="margin-left: 10px" *ngFor="let type of hallType" value="{{type.id}}">{{type.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="alert alert-danger" role="alert"
+                                 *ngIf="addFormHall.get('hallTypeId').invalid && addFormHall.get('hallTypeId').touched">
+                                <p *ngIf="addFormHall.get('hallTypeId').hasError('required')">Seat Number is Required</p>
+                                <p *ngIf="addFormHall.get('hallTypeId').hasError('pattern')">Seat Number has to be number</p>
+                            </div>
+                    </div>
+
+                    <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" [disabled]="addFormHall.invalid" (click)="addHall()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--END ADD HALL-->
+
+    <!--EDIT HALL-->
+        <div id="editHall" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content" >
+                    <form [formGroup]="editFormHall">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Hall</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="idEdit">Id</label>
+                                <input type="text"
+                                       formControlName="id"
+                                       class="form-control" id="idEdit" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nameHallEdit">Hall Name: </label>
+                                <input type="text"
+                                       formControlName="name"
+                                       class="form-control" id="nameHallEdit" placeholder="Enter Name Hall" >
+                            </div>
+                            <div class="alert alert-danger" role="alert"
+                                 *ngIf="editFormHall.get('name').invalid && editFormHall.get('name').touched">
+                                <p *ngIf="editFormHall.get('name').hasError('required')">Name is Required</p>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="seatNumberEdit">Seat Quantity: </label>
+                                <input type="number"
+                                       formControlName="seatQuantity"
+                                       class="form-control" id="seatNumberEdit" placeholder="Enter Seat Number" >
+                            </div>
+                            <div class="alert alert-danger" role="alert"
+                                     *ngIf="editFormHall.get('seatQuantity').invalid && editFormHall.get('seatQuantity').touched">
+                                    <p *ngIf="editFormHall.get('seatQuantity').hasError('required')">Seat Number is Required</p>
+                                    <p *ngIf="editFormHall.get('seatQuantity').hasError('pattern')">Seat Number has to be number</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hallTypeEdit">Hall Type: </label>
+                                <select formControlName="hallTypeId" id="hallTypeEdit">
+                                    <option  style="margin-left: 10px" *ngFor="let type of hallType" value="{{type.id}}">{{type.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="alert alert-danger" role="alert"
+                                    *ngIf="editFormHall.get('hallTypeId').invalid && editFormHall.get('hallTypeId').touched">
+                                    <p *ngIf="editFormHall.get('hallTypeId').hasError('required')">Seat Number is Required</p>
+                                    <p *ngIf="editFormHall.get('hallTypeId').hasError('pattern')">Seat Number has to be number</p>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" [disabled]="editFormHall.invalid" (click)="editHallConfirm()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!--END EDIT HALL-->
+
     <router-outlet></router-outlet>
 </div>

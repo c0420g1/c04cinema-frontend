@@ -18,43 +18,33 @@
         <table id="movie">
 
             <tr>A<ng-container *ngFor="let seat of seats">
-                <ng-container *ngIf="seat.hallId == hallId">
                     <ng-container *ngIf="seat.name <= 10">
                         <td>{{seat.name}}</td>
                     </ng-container>
-                </ng-container>
             </ng-container></tr>
 
             <tr>B<ng-container *ngFor="let seat of seats">
-                <ng-container *ngIf="hallId == seat.hallId">
                     <ng-container *ngIf="seat.name <= 20 && seat.name > 10">
                         <td>{{seat.name}}</td>
                     </ng-container>
-                </ng-container>
             </ng-container></tr>
 
             <tr>C<ng-container *ngFor="let seat of seats">
-                <ng-container *ngIf="hallId == seat.hallId">
                     <ng-container *ngIf="seat.name <= 30 && seat.name > 20">
                         <td>{{seat.name}}</td>
                     </ng-container>
-                </ng-container>
             </ng-container></tr>
 
             <tr>D<ng-container *ngFor="let seat of seats">
-                <ng-container *ngIf="hallId == seat.hallId">
                     <ng-container *ngIf="seat.name <= 40 && seat.name > 30">
                         <td>{{seat.name}}</td>
                     </ng-container>
-                </ng-container>
             </ng-container></tr>
 
             <tr>E<ng-container *ngFor="let seat of seats">
-                <ng-container *ngIf="hallId == seat.hallId">
                     <ng-container *ngIf="seat.name <= 50 && seat.name > 40">
                         <td>{{seat.name}}</td>
                     </ng-container>
-                </ng-container>
             </ng-container></tr>
 
         </table>
