@@ -1,0 +1,56 @@
+<div class="content" style="height: 71vh">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-10" style="margin-top: 28px; margin-left: 8%">
+
+                <div class="table-title">
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-9" style="max-width: 75%">
+                            <div style="margin-left: 380px;">
+                                <p style="font-size: 14px; font-weight: bold">Seat Management</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+        <table id="movie">
+
+            <tr>A<ng-container *ngFor="let seat of seats">
+                    <ng-container *ngIf="seat.name <= 10">
+                        <td>{{seat.name}}</td>
+                    </ng-container>
+            </ng-container></tr>
+
+            <tr>B<ng-container *ngFor="let seat of seats">
+                    <ng-container *ngIf="seat.name <= 20 && seat.name > 10">
+                        <td>{{seat.name}}</td>
+                    </ng-container>
+            </ng-container></tr>
+
+            <tr>C<ng-container *ngFor="let seat of seats">
+                    <ng-container *ngIf="seat.name <= 30 && seat.name > 20">
+                        <td>{{seat.name}}</td>
+                    </ng-container>
+            </ng-container></tr>
+
+            <tr>D<ng-container *ngFor="let seat of seats">
+                    <ng-container *ngIf="seat.name <= 40 && seat.name > 30">
+                        <td>{{seat.name}}</td>
+                    </ng-container>
+            </ng-container></tr>
+
+            <tr>E<ng-container *ngFor="let seat of seats">
+                    <ng-container *ngIf="seat.name <= 50 && seat.name > 40">
+                        <td>{{seat.name}}</td>
+                    </ng-container>
+            </ng-container></tr>
+
+        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

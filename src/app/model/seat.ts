@@ -1,7 +1,7 @@
 export class Seat {
     id: number;
-    name: string;
+    name: number;
     theatreId: number;
     hallId: number;
-    seatTypeId: number
+    seatTypeId: number;
 }

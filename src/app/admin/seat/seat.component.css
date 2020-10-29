@@ -1,0 +1,68 @@
+#movie {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+#movie thead{
+    text-align: center;
+}
+#movie td, #movie th {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#movie tr:nth-child(even){background-color: #f2f2f2;}
+#movie tbody tr td:nth-child(2){
+    text-align: left;
+}
+#movie tbody tr td:nth-child(7) {
+    /*font-size: 22px;*/
+    margin-left: 9px;
+}
+#movie tbody tr td:nth-child(7) a i{
+    font-size: 22px;
+    margin-left: 31px;
+}
+
+#movie td:hover {background-color: #ddd;}
+
+#movie th {
+    font-weight: bold;
+    font-size: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #2a3035;
+    color: white;
+}
+#movie td{
+    font-size: 15px;
+}
+#cssAddForm input{
+    font-size: 15px;
+}
+#cssAddForm textarea{
+    font-size: 15px;
+}
+#cssAddForm{
+    font-size: 15px;
+}
+#cssEditForm {
+    font-size: 15px;
+}
+#cssEditForm textarea{
+    font-size: 15px;
+}
+#cssEditForm input{
+    font-size: 15px;
+}
+#cssDeleteForm {
+    font-size: 15px;
+}
+#cssAddShowForm {
+    font-size: 15px;
+}
+#cssAddShowForm input{
+    font-size: 15px;
+}

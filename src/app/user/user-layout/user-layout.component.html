@@ -53,9 +53,28 @@
         </ul>
       </nav>
 
+<!--      <div class="control-panel">-->
+<!--        <a href="#" id="register" class="btn btn-md btn&#45;&#45;warning btn&#45;&#45;book btn-control&#45;&#45;home register-window">Register</a>-->
+<!--        <a href="#" id="login" class="btn btn-md btn&#45;&#45;warning btn&#45;&#45;book btn-control&#45;&#45;home login-window">Login</a>-->
+<!--      </div>-->
       <div class="control-panel">
-        <a href="#" id="register" class="btn btn-md btn--warning btn--book btn-control--home register-window">Register</a>
-        <a href="#" id="login" class="btn btn-md btn--warning btn--book btn-control--home login-window">Login</a>
+        <div class="auth auth--home">
+          <div class="auth__show">
+                  <span class="auth__image">
+                    <img alt="" src="../../../assets/images/customer/11333831.jpg">
+                  </span>
+          </div>
+          <a href="#" class="btn btn--sign btn--singin">
+            Quoc
+          </a>
+          <ul class="auth__function">
+            <li><a href="#" class="auth__function-item">Watchlist</a></li>
+            <li><a href="#" class="auth__function-item">Booked tickets</a></li>
+            <li><a href="#" class="auth__function-item">Discussion</a></li>
+            <li><a class="auth__function-item" [routerLink]="'customer'">Settings</a></li>
+            <li><a class="auth__function-item" [routerLink]="''">Logout</a></li>
+          </ul>
+        </div>
       </div>
 
     </div>
