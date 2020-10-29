@@ -7,9 +7,12 @@ import {Movie} from '../../model/Movie';
   providedIn: 'root'
 })
 export class MovieService {
-  private readonly API_URL = 'http://localhost:8080/movie?filter=';
-  private readonly API_URL2 = 'http://localhost:8080/movie/date/';
-  private readonly API_URL3 = 'http://localhost:8080/movie-new';
+  private readonly API_URL_FILTER = 'http://localhost:8080/movie?filter=';
+  private readonly API_GET_BY_DATE = 'http://localhost:8080/movie/date/';
+  private readonly API_MOV_COMING = 'http://localhost:8080/movie-new';
+  private readonly API_MOV_BY_NAME = 'http://localhost:8080/movie/';
+  private readonly API_MOV_COM = 'http://localhost:8080/movie-coming/';
+  private readonly TOTAL_MOV_COM = 'http://localhost:8080/totalPageComing/';
 
   constructor(private http: HttpClient) {
   }
@@ -19,21 +22,25 @@ export class MovieService {
     return encodeURI(filter);
   }
 
-  getAll(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.API_URL);
-  }
   getMovieByDate(date: string): Observable<Movie[]> {
-    // return this.http.get<Movie[]>(this.API_URL + this.endCodeDate('startDate', 'ge', date) + this.endCodeDate('startDate', 'le', date));
-    return this.http.get<Movie[]>(this.API_URL2 + date);
+    return this.http.get<Movie[]>(this.API_GET_BY_DATE + date);
 
   }
   getMovieById(id: string): Observable<Movie> {
-    return this.http.get<Movie>(this.API_URL + this.endCodeDate('id','eq', id));
-  }
-  getFilmByName(name:string): Observable<Movie[]>{
-    return this.http.get<Movie[]>(this.API_URL + this.endCodeDate('name','like', name))
+    return this.http.get<Movie>(this.API_URL_FILTER + this.endCodeDate('id','eq', id));
   }
   getMoviesNew(): Observable<Movie[]>{
-    return this.http.get<Movie[]>(this.API_URL3);
+    return this.http.get<Movie[]>(this.API_MOV_COMING);
   }
+  getMovieByName(name: string): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_MOV_BY_NAME + name);
+  }
+  getMovieComing(pageNum: number, date: string): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_MOV_COM + pageNum + '?date=' + date);
+  }
+
+  getTotalPage(date: string): Observable<number>{
+    return this.http.get<number>(this.TOTAL_MOV_COM + date);
+  }
+
 }
