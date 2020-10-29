@@ -1,3 +1,18 @@
+#inputSearch{
+    /*style="border-radius: 10px;margin-left: 15px; font-size: 14px; height: 35px; width: 150px;"*/
+    border-radius: 10px;
+    margin-left: 15px;
+    font-size: 14px;
+    height: 35px;
+    width: 150px;
+}
+#buttonSearch{
+    /*style="border-radius: 10px;margin-left: 5px; font-size: 14px;height: 35px;"*/
+    border-radius: 10px;
+    margin-left: 5px;
+    font-size: 14px;
+    height: 35px;
+}
 #movie {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -37,32 +52,35 @@
     color: white;
 }
 #movie td{
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssAddForm input{
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssAddForm textarea{
-    font-size: 15px;
+    font-size: 14px;
+}
+#cssAddForm select option{
+    font-size: 14px;
 }
 #cssAddForm{
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssEditForm {
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssEditForm textarea{
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssEditForm input{
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssDeleteForm {
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssAddShowForm {
-    font-size: 15px;
+    font-size: 14px;
 }
 #cssAddShowForm input{
-    font-size: 15px;
+    font-size: 14px;
 }
