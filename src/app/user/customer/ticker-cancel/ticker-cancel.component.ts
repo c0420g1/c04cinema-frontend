@@ -17,7 +17,7 @@ export class TickerCancelComponent implements OnInit {
   totalEntities: number;
   currentPage = 1;
   totalPage: number;
-  jumpPage: any;
+  jumpPage: number;
   sub: Subscription;
   constructor(private tickerService: TickerService,  private activatedRoute: ActivatedRoute) {
   }

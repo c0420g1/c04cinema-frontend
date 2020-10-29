@@ -57,9 +57,10 @@
             Full Name <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
             <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required formControlName="name">
-            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('name').touched && customerForm.get('name').invalid">
-                <p *ngIf="customerForm.get('name').hasError('required')"> required </p>
-                <p *ngIf="customerForm.get('name').hasError('pattern')"> error format </p>
+            <div class="alert alert-danger"
+                 *ngIf="customerForm.get('name').touched && customerForm.get('name').invalid">
+                <p *ngIf="customerForm.get('name').hasError('required')"> must Required</p>
+                <p *ngIf="customerForm.get('name').hasError('pattern')"> must format </p>
             </div>
         </div>
     </div>
@@ -94,20 +95,21 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">Email :</label>
-        <div class="col-sm-9">
-            <input type="text"  class="form-control" id="staticEmail" formControlName="email">
-            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('email').touched && customerForm.get('email').invalid">
-                <p *ngIf="customerForm.get('email').hasError('required')"> required </p>
-                <p *ngIf="customerForm.get('email').hasError('pattern')"> error format </p>
-            </div>
+    <label for="staticEmail" class="col-sm-3 col-form-label">Email :</label>
+    <div class="col-sm-9">
+        <input type="text"  class="form-control" id="staticEmail" formControlName="email">
+        <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('email').touched && customerForm.get('email').invalid">
+            <p *ngIf="customerForm.get('email').hasError('required')"> required </p>
+            <p *ngIf="customerForm.get('email').hasError('pattern')"> error format </p>
         </div>
     </div>
+</div>
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Credit Card <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text"  class="form-control" required formControlName="cardid">
-            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('cardid').touched && customerForm.get('cardid').invalid">
+            <input type="text" class="form-control" required formControlName="cardid">
+            <div class="alert alert-danger" role="alert"
+                 *ngIf="customerForm.get('cardid').touched && customerForm.get('cardid').invalid">
                 <p *ngIf="customerForm.get('cardid').hasError('required')"> required </p>
                 <p *ngIf="customerForm.get('cardid').hasError('pattern')"> error format </p>
             </div>
@@ -133,12 +135,12 @@
             </div>
         </div>
     </div>
-    <div *ngIf="errors.length > 0 ">
-        <ul class="alert alert-danger">
-            <li *ngFor="let error of errors">
-                {{error.message}}
-            </li>
-        </ul>
-    </div>
     <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid" (click)="editCustomer()">Update</button>
 </form>
+
+    <ul>
+        <li *ngFor="let e of error1s">
+            {{e.message}}
+        </li>
+    </ul>
+
