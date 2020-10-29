@@ -3,25 +3,25 @@
     <div class="movie movie--preview release">
         <div class="col-sm-5 col-md-3">
             <div class="movie__images">
-                <img alt='' [src]="movie.posterUrl"  class="img-poster">
+                <img alt='' [src]="movie.posterUrl" class="img-poster">
             </div>
         </div>
         <div class="col-sm-7 col-md-9">
-            <a href='#' class="movie__title link--huge">{{movie.name}}</a>
+            <a  style="color: blue" class="movie__title link--huge">{{movie.name}}</a>
 
             <p class="movie__time">{{movie.duration}} min</p>
 
-            <p class="movie__option"><strong>Director: </strong><a href="#">{{movie.director}}</a></p>
-            <p class="movie__option"><strong>Actor: </strong><a href="#">{{movie.actor}}</a></p>
+            <p class="movie__option"><strong>Director: </strong><a >{{movie.director}}</a></p>
+            <p class="movie__option"><strong>Actor: </strong><a >{{movie.actor}}</a></p>
             <p class="movie__option"><strong>Start date : </strong>{{movie.startDate}}</p>
-            <p class="movie__option"><strong>Entertainment : </strong><a href="#">{{movie.entertainment}}</a></p>
-            <p class="movie__option"><strong>Actors: </strong><a href="#">{{movie.actor}}</a></p>
-            <p class="movie__option"><strong>Age restriction: </strong><a href="#">{{movie.movieRatedAgeId}}</a></p>
+            <p class="movie__option"><strong>Entertainment : </strong><a >{{movie.entertainment}}</a></p>
+            <p class="movie__option"><strong>Actors: </strong><a >{{movie.actor}}</a></p>
+            <p class="movie__option"><strong>Age restriction: </strong><a >{{movie.movieRatedAgeId}}</a></p>
 
             <div class="movie__btns">
                 <a [routerLink]="['/booking',movie.id]" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book a ticket <span class="hidden-sm">for this movie</span></a>
                 <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal"
-                   class="watchlist" >Watch trailer</a>
+                   class="watchlist">Watch trailer</a>
             </div>
 
             <div class="preview-footer">
@@ -32,7 +32,7 @@
                 </div>
 
 
-                <a href="#" class="movie__show-btn">Showtime</a>
+                <a href="#" class="movie__show-btn" (click)="solve()">Showtime</a>
 
             </div>
         </div>
@@ -40,31 +40,29 @@
         <div class="clearfix"></div>
 
         <!-- Time table (choose film start time)-->
-        <div class="time-select">
-            <div class="col-12" *ngFor="let show of shows">
-               <div class="time-select__item" *ngIf="show.movieId === movie.id">
-                   <span>{{show.startTime | date: 'HH:mm'}}</span>
-               </div>
-            </div>
-<!--                <ul class="time-select__group group&#45;&#45;first" *ngFor="let show of shows">-->
-<!--                    <li class="time-select__item" *ngIf="show.movieId === movie.id">-->
-<!--                        <span>{{show.startTime | date: 'HH:mm'}}</span>-->
-<!--                    </li>-->
-<!--                </ul>-->
-        </div>
         <!-- end time table-->
+        <div class="col-sm-12">
+            <div class="time-select">
+                <h3 class="">Time showing :</h3>
+                <div class="time-select__item"*ngFor="let show of showTableTime">
+                    <span>{{show.startTime | date: 'HH:mm'}}</span>
+                </div>
+                <div *ngIf="showTableTime.length===0">
+                    <p>Not found !</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Modal iframe youtube -->
 <div>
     <div class="modal fade" id="exampleModal" style="position: absolute; margin: 130px 60px 0px -20px;">
-        <div class="modal-dialog"  >
+        <div class="modal-dialog">
             <iframe width="700" height="450" style="border: 3px solid lavenderblush" [src]="videoUrl"></iframe>
         </div>
     </div>
 </div>
-
 
 
 <!-- end movie preview item -->

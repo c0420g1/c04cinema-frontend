@@ -5857,6 +5857,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   font-size: 13px;
   margin-bottom: 3px;
 }
+.movie__option a{
+  color: blue!important;
+}
 .movie .comment-link {
   position: relative;
   display: inline-block;
@@ -9095,6 +9098,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 .movie--preview .movie__option {
   line-height: 25px;
+}
+.movie__option a{
+  color: blue;
 }
 .movie--preview .time-select {
   display: none;

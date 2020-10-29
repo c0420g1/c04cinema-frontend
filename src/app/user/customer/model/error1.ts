@@ -1,4 +1,4 @@
 export class Error1 {
-    filename:string;
+    fileName: string = 'test';
     message:string;
 }
