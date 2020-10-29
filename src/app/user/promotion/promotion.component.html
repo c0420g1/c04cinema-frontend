@@ -1,4 +1,4 @@
-<div id="1" class="item new col-md-4" *ngFor="let item of datas" style="margin-top: 150px">
+<div id="1" class="item new col-md-4" *ngFor="let item of datas|paginate: { itemsPerPage: 6, currentPage: p }" style="margin-top: 150px">
     <div class="d-flex justify-content-center align-items-center flex-lg-column">
         <img src="{{item.picture}}">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
@@ -8,6 +8,10 @@
     </div>
 
 </div>
+<div class="justify-content-center" style="font-size: large; ">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
 
 <div *ngIf="promotion" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel"

@@ -15,9 +15,10 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { BookingTicketComponent } from './booking-ticket/booking-ticket.component';
 import { BannerComponent } from './banner/banner.component';
+import { PromotionAdminComponent } from './promotion-admin/promotion-admin.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent],
+  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, PromotionAdminComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
