@@ -1,5 +1,9 @@
     "use strict";
 
+
+    function testq(){
+        alert("quoc");
+    }
     //General function for all pages
 
     //Modernizr touch detect
