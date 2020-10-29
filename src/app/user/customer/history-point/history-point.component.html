@@ -8,8 +8,8 @@
                    [(ngModel)]="star">
             <div class="alert alert-danger"
                  *ngIf="pointForm.get('contractStarDate').touched && pointForm.get('contractStarDate').invalid">Invalid
-                <p  *ngIf="pointForm.get('contractStarDate').hasError('required')"> must Required</p>
-                <p  *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format
+                <p *ngIf="pointForm.get('contractStarDate').hasError('required')"> must Required</p>
+                <p *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format
                     (yyyy-mm-dd)</p>
             </div>
         </div>
@@ -20,22 +20,24 @@
             <input type="date" class="form-control" formControlName="contractEndDate"
                    (change)="compareTwoDates()"
                    [(ngModel)]="end">
+            <p class="alert alert-danger" *ngIf="error">day end > day star</p>
             <div class="alert alert-danger"
                  *ngIf="pointForm.get('contractEndDate').touched && pointForm.get('contractEndDate').invalid">
                 Invalid
-                <p  *ngIf="pointForm.get('contractEndDate').hasError('required')"> must Required</p>
-                <p  *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format (yyyy-mm-dd)</p>
+                <p *ngIf="pointForm.get('contractEndDate').hasError('required')"> must Required</p>
+                <p *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format (yyyy-mm-dd)</p>
             </div>
         </div>
-        <p class="error1" *ngIf="error">day end > day star</p>
     </div>
     <div class="form-group row">
         <div class="col-sm-7">
-            <input type="radio" id="History Plus Point" name="gender"  formControlName="gender" (change)="changeGender($event)" value="true">
+            <input type="radio" id="History Plus Point" name="gender" formControlName="gender"
+                   (change)="changeGender($event)" value="true">
             <label for="History Plus Point">History Plus Point</label>
         </div>
         <div class="col-sm-7">
-            <input type="radio" id="History Use Points" name="gender" formControlName="gender" (change)="changeGender($event)" value="false">
+            <input type="radio" id="History Use Points" name="gender" formControlName="gender"
+                   (change)="changeGender($event)" value="false">
             <label for="History Use Points">History Use Points</label>
         </div>
     </div>
@@ -43,9 +45,9 @@
             (click)="searchPoint()">View Point
     </button>
 </form>
-<span *ngIf="message" class="error1">
-          {{message}}
-          </span>
+<div *ngIf="message" class="error1">
+    {{message}}
+</div>
 <table class="table">
     <thead>
     <tr>
@@ -76,8 +78,9 @@
                 </li>
 
                 <li>
-                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
-                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page"
+                           style="width: 100px;"
+                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()">
                 </li>
 
                 <li>
@@ -85,8 +88,6 @@
                     <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<=totalPage">Next</button>
                 </li>
             </ul>
-
-
         </div>
     </div>
 

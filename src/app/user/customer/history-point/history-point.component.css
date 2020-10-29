@@ -20,4 +20,9 @@ label{
 input{
     font-size: 12px;
 }
+.error1{
+    font-size: 14px;
+    font-weight: bolder;
+    color: red;
+}
 
