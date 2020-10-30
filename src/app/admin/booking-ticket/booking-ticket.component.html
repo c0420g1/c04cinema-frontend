@@ -88,7 +88,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 660px; font-size: 12px" role="document">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title" id="exampleModalLabel1">Xác nhận</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Confirm</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -114,7 +114,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Ngày chiếu:
+                                Day:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.bookingDate | date:'dd/MM/yyyy'}}
@@ -123,7 +123,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Giờ chiếu:
+                                Time:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.bookingDate | date: 'HH:mm'}}
@@ -132,7 +132,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Ghế:
+                                Seat:
                             </label>
                             <label style="margin-left: 5px" *ngFor="let seat of seatList" >
                                 {{seat.seat}}
@@ -141,7 +141,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Số vé:
+                                Ticket's Quantity:
                             </label>
                             <label style="margin-left: 5px">
                                 {{quantity}}
@@ -149,7 +149,7 @@
                         </label>
                         <label class="row">
                             <label style="font-weight: bold">
-                                Tổng cộng:
+                                Total:
                             </label>
                             <label style="margin-left: 5px">
                                 {{total}}
@@ -158,12 +158,12 @@
 
 
                         <label class="row">
-                            <h3>Thông tin thành viên</h3>
+                            <h3>Member's Information</h3>
                         </label>
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Mã thành viên:
+                                Member Code:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.codeCustomer}}
@@ -172,7 +172,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Điểm thành viên:
+                                Member's Point:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.pointCustomer}}
@@ -181,7 +181,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Đổi vé:
+                                Change Ticket:
                             </label>
                                 <label>
                                     <input style="margin-left: 5px;" type="radio" name="numberTicket" value= "0" [(ngModel)]="numberTicket"
@@ -193,11 +193,11 @@
                                                (ngModelChange)="checkPoint()"> {{i+1}}
                             </label>
                         </label>
-                        <label *ngIf="!check" style="color: red">Không đủ điểm</label>
+                        <label *ngIf="!check" style="color: red; font-size: 12px">Not Enough Point</label>
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                CMND:
+                                Member Identity:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.cardIdCustomer}}
@@ -206,7 +206,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Họ tên:
+                                Full Name:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.nameCustomer}}
@@ -215,7 +215,7 @@
 
                         <label class="row">
                             <label style="font-weight: bold">
-                                Số điện thoại:
+                                Phone Number:
                             </label>
                             <label style="margin-left: 5px">
                                 {{ticketNew.phoneCustomer}}
@@ -225,7 +225,7 @@
                 </div>
                 <div class="col-md-12 text-center">
                     <button class="btn btn-success" style="margin-bottom: 10px; margin-top: 10px"
-                            (click)="confirm(ticketNew.idBookingTicket)" [disabled]="!check">Xác nhận</button>
+                            (click)="confirm(ticketNew.idBookingTicket)" [disabled]="!check">Confirm</button>
                 </div>
             </div>
 
