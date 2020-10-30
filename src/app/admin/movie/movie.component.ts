@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
+import {Component, OnInit} from '@angular/core';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
 import {Hall} from '../../model/Hall';
 import {MovieService} from './movie.service';
-
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
-  selector: 'app-movie',
-  templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css']
+    selector: 'app-movie',
+    templateUrl: './movie.component.html',
+    styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
   url: string;
@@ -33,12 +31,12 @@ export class MovieComponent implements OnInit {
   posterUrlShowImgEdit: string;
 
     // variables used for the add show function
-  showStartTimes: string[] = [];
-  showStartTime: string;
-  showPrices: number[] = [];
-  showPrice: number;
-  showMovie: Movie;
-  movieName = '';
+    showStartTimes: string[] = [];
+    showStartTime: string;
+    showPrices: number[] = [];
+    showPrice: number;
+    showMovie: Movie;
+    movieName = '';
 
   // variables used for paging functions
   variableFind = '';
@@ -48,13 +46,14 @@ export class MovieComponent implements OnInit {
   entityNumber: number;
   jumpPage: number;
 
-  constructor(private movieService: MovieService, private fb: FormBuilder) { }
+    constructor(private movieService: MovieService, private fb: FormBuilder) {
+    }
 
-  ngOnInit(): void {
-      this.movieService.getListMovie(this.variableFind).subscribe((data) => {
-          this.totalEntities = data.length;
-          this.totalPage = this.totalEntities/10;
-      });
+    ngOnInit(): void {
+        this.movieService.getListMovie(this.variableFind).subscribe((data) => {
+            this.totalEntities = data.length;
+            this.totalPage = this.totalEntities / 10;
+        });
 
     this.movieService.getAllMovie(this.currentPage, this.variableFind).subscribe((data) => {
         if (data.length === 0){
@@ -168,7 +167,7 @@ export class MovieComponent implements OnInit {
         this.posterUrlShowImgEdit = movie.posterUrl;
         this.movieService.getAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id).subscribe(
             (data) => {
-                for(let item of data){
+                for (let item of data) {
                     this.idEditMovieGenreTypesTrue.push(item.movieGenreTypeId);
                     // console.log(this.arrEditMovieGenreTypeId);
                 }
@@ -180,13 +179,12 @@ export class MovieComponent implements OnInit {
                         }
                     }
                 }
-                // error => console.log(error)
             });
     }
     // check boxes movie genre type at screen edit function
     errorIdMovieGenreTypeEdit: boolean;
     checkBoxesEdit(event) {
-      console.log(event.target.value);
+        console.log(event.target.value);
         this.checkEdit = event.target.value;
         if (this.checkEdit > 5 || this.checkEdit <1){
             this.errorIdMovieGenreTypeEdit = true;
@@ -206,8 +204,10 @@ export class MovieComponent implements OnInit {
     }
     // edit movie
     editMovie() {
-        this.movieService.editMovieService(this.editFormMovie.value, this.editFormMovie.value.id).subscribe(data => {this.ngOnInit()});
-        this.message = "Edited Successfully";
+        this.movieService.editMovieService(this.editFormMovie.value, this.editFormMovie.value.id).subscribe(data => {
+            this.ngOnInit();
+        });
+        this.message = 'Edited Successfully';
         this.idEditMovieGenreTypesTrue.splice(0, this.idEditMovieGenreTypesTrue.length);
         for(let i=0; i<this.idEditMovieGenreTypes.length; i++){
             if(this.idEditMovieGenreTypes[i]==true){
@@ -216,7 +216,7 @@ export class MovieComponent implements OnInit {
         }
 
         this.movieService.deleteAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id).subscribe();
-        for(let i=0; i < this.idEditMovieGenreTypesTrue.length; i++){
+        for (let i = 0; i < this.idEditMovieGenreTypesTrue.length; i++) {
             this.addFormMovieGenreAssociate = this.fb.group(
                 {
                     movieId: [this.editFormMovie.value.id],
@@ -229,22 +229,22 @@ export class MovieComponent implements OnInit {
 
     // to show the movie genre type to the edit screen,
     checkedEdit(id) {
-      for(let i=0; i<this.idEditMovieGenreTypes.length; i++){
-          if(id==this.idEditMovieGenreTypesTrue[i]){
-              return true;
-          }
-      }
+        for (let i = 0; i < this.idEditMovieGenreTypes.length; i++) {
+            if (id == this.idEditMovieGenreTypesTrue[i]) {
+                return true;
+            }
+        }
     }
 
     // add show times
     addShowTimes(event) {
         console.log(event.target.value);
         this.showStartTime = event.target.value;
-        if(this.showStartTimes.length == 0){
+        if (this.showStartTimes.length == 0) {
             this.showStartTimes.push(this.showStartTime);
         }
-        for (let i=0; i<this.showStartTimes.length;i++){
-            if (this.showStartTime != this.showStartTimes[i]){
+        for (let i = 0; i < this.showStartTimes.length; i++) {
+            if (this.showStartTime != this.showStartTimes[i]) {
                 this.showStartTimes.push(this.showStartTime);
             }
         }
@@ -257,7 +257,7 @@ export class MovieComponent implements OnInit {
 
     // add show at button add, in add show screen
     addShow(length: number) {
-        for(let i=0; i<length; i++){
+        for (let i = 0; i < length; i++) {
             this.showPrice = parseInt((document.getElementById(i.toString()) as HTMLInputElement).value);
             this.showPrices.push(this.showPrice);
             for (let i=0; i<this.showStartTimes.length; i++){
@@ -285,7 +285,7 @@ export class MovieComponent implements OnInit {
     }
 
     prePage(): void {
-        if (this.currentPage >= 2 ){
+        if (this.currentPage >= 2) {
             this.currentPage--;
             this.jumpPage = this.currentPage;
         }
@@ -297,7 +297,7 @@ export class MovieComponent implements OnInit {
             this.currentPage++;
             this.jumpPage = this.currentPage;
         }
-        console.log(this.currentPage)
+        console.log(this.currentPage);
         this.ngOnInit();
     }
 
@@ -305,8 +305,9 @@ export class MovieComponent implements OnInit {
         this.currentPage = this.jumpPage;
         this.ngOnInit();
     }
+
     search(): void {
-        this.currentPage =1;
+        this.currentPage = 1;
         this.ngOnInit();
     }
 
@@ -339,8 +340,8 @@ function dateValidator(formControl: FormControl) {
     const o_date = new Intl.DateTimeFormat;
     const f_date = (m_ca, m_it) => Object({...m_ca, [m_it.type]: m_it.value});
     const m_date = o_date.formatToParts().reduce(f_date, {});
-    const dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2])) ;
-    const dateNumberNow = (parseInt(m_date.year)  * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day)) ;
+    const dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2]));
+    const dateNumberNow = (parseInt(m_date.year) * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day));
     if (dateNumber < dateNumberNow) {
         return {checkDate: true};
     }

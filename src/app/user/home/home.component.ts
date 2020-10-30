@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MovieService} from '../movie-hieu/movie.service';
+import {MovieService} from '../movie/movie.service';
 import {Movie} from 'src/app/model/Movie';
 import {DatePipe} from '@angular/common';
+import {BannerService} from '../../service/banner.service';
+import { Banner } from 'src/app/model/Banner';
 
 declare var $: any;
 
@@ -12,11 +14,14 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
     movieShowing: Movie[] = [];
+    bannerList: Banner[] = [];
 
-    constructor(private  moviesService: MovieService, private pipe: DatePipe) {
+    constructor(private  moviesService: MovieService, private pipe: DatePipe,
+                private bannerService: BannerService) {
     }
 
     ngOnInit(): void {
+        this.bannerService.getAllBanner().subscribe((data) => this.bannerList = data);
 
         $('.banner').show().revolution({
             delay: 9000,
@@ -46,7 +51,6 @@ export class HomeComponent implements OnInit {
         this.moviesService.getMoviesNew().subscribe(
             (data) => {
                 this.movieShowing = data;
-                console.log(data);
             }
         );
 

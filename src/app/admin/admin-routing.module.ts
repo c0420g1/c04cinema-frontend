@@ -8,6 +8,9 @@ import {ImageUploadComponent} from './image-upload/image-upload.component';
 import {GalleryComponent} from './gallery/gallery.component';
 import {BookingTicketComponent} from './booking-ticket/booking-ticket.component';
 import {BannerComponent} from './banner/banner.component';
+import { TheaterComponent } from './theater/theater.component';
+import {HallListComponent} from './hall-list/hall-list.component';
+import {SeatComponent} from './seat/seat.component';
 
 
 const routes: Routes = [
@@ -42,8 +45,23 @@ const routes: Routes = [
       {
         path: 'banner',
         component: BannerComponent
+      },
+      {
+        path: 'theater',
+        component: TheaterComponent,
+        children:[
+          {
+            path: 'hall/:id',
+            component: HallListComponent,
+            children:[
+              {
+                path: 'seat/:id',
+                component: SeatComponent,
+              }
+            ]
+          }
+        ]
       }
-
     ]
   }
 ];

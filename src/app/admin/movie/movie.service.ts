@@ -23,6 +23,9 @@ export class MovieService {
   private readonly API_URL_DELETE_ALL_MOVIE_GENRE_ASSOCIATE_BY_MOVIE_ID = 'http://localhost:8080/movieGenreAssociate';
   private readonly API_URL_SHOW = 'http://localhost:8080/show';
 
+  //creator Hieu to search by name of movie
+  private readonly API_SEARCH_NAME = 'http://localhost:8080/movie/';
+
   constructor(private http: HttpClient) { }
   //get Movie List and Search that disable pageable
   getListMovie(search: string): Observable<Movie[]>{
@@ -71,5 +74,13 @@ export class MovieService {
   // get All Hall
   getAllHall(): Observable<Hall[]>{
     return this.http.get<Hall[]>(this.API_URL_ALL_HALL);
+  }
+
+
+
+
+  //creator Hieu to search by name of movie
+  searhcByName(name: string): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.API_SEARCH_NAME + name)
   }
 }

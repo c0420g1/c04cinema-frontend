@@ -1087,6 +1087,7 @@ table {
   background: url("../images/components/arrow.svg") repeat scroll center center rgba(76, 65, 69, 0.8);
   display: block;
   height: 50px;
+  border-radius: 25px;
 }
 .top-scroll a:hover {
   background: url("../images/components/arrow.svg") repeat scroll center center rgba(254, 80, 90, 0.8);
@@ -5856,6 +5857,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   font-size: 13px;
   margin-bottom: 3px;
 }
+.movie__option a{
+  color: blue!important;
+}
 .movie .comment-link {
   position: relative;
   display: inline-block;
@@ -6857,13 +6861,13 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   background-color: #4c4145;
   width: 101%;
 }
-.order-step-area .order-step--disable {
+.order-step-area .order_step_disable {
   color: #dbdee1;
 }
-.order-step-area .order-step--disable:before {
+.order-step-area .order_step_disable:before {
   border-color: transparent transparent #dbdee1 transparent;
 }
-.order-step-area .order-step--disable:after {
+.order-step-area .order_step_disable:after {
   background-color: #dbdee1;
 }
 .choose-film .film-images {
@@ -7098,11 +7102,11 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .sits .sits__row .sits__place:hover:before {
   background-color: #4c4145;
 }
-.sits .sits__row .sits-state--not:hover {
+.sits .sits__row .sits_state_not:hover {
   text-indent: -9999px;
   cursor: auto;
 }
-.sits .sits__row .sits-state--not:hover:before {
+.sits .sits__row .sits_state_not:hover:before {
   background-color: #dbdee1;
 }
 .sits .sits__row .sits-state--your {
@@ -9095,6 +9099,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .movie--preview .movie__option {
   line-height: 25px;
 }
+.movie__option a{
+  color: blue;
+}
 .movie--preview .time-select {
   display: none;
   margin-top: 42px;
@@ -9400,16 +9407,16 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .choose-sits__info--first {
   border-right: 1px solid #4c4145;
 }
-.sits-price--cheap:before {
+.sits_price_cheap:before {
   background-color: #fff0c7;
 }
-.sits-price--middle:before {
+.sits_price_middle:before {
   background-color: #ffc8cb;
 }
-.sits-price--expensive:before {
+.sits_price_expensive:before {
   background-color: #cdb4bd;
 }
-.sits-state--not:before {
+.sits_state_not:before {
   background-color: #dbdee1;
 }
 .sits-state--your:before {
