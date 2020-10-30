@@ -28,7 +28,11 @@ export class MovieComponent implements OnInit {
   lastMovie: Movie;
   check: number;
   checkEdit: number;
+<<<<<<< Updated upstream
   posterUrlShowImgEdit: string;
+=======
+  posterUrlShowImage: string;
+>>>>>>> Stashed changes
 
     // variables used for the add show function
     showStartTimes: string[] = [];
@@ -161,17 +165,25 @@ export class MovieComponent implements OnInit {
       }
       this.message = "Added successfully";
   }
-    // get info of the movie that you want to edit
-    getMovie(movie: Movie) {
+
+
+    getMovieEdit(movie: Movie) {
+        this.posterUrlShowImage= movie.posterUrl;
         this.editFormMovie.patchValue(movie);
-        this.posterUrlShowImgEdit = movie.posterUrl;
+        console.log(movie);
+>>>>>>> Stashed changes
         this.movieService.getAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id).subscribe(
             (data) => {
                 for (let item of data) {
                     this.idEditMovieGenreTypesTrue.push(item.movieGenreTypeId);
                     // console.log(this.arrEditMovieGenreTypeId);
                 }
+<<<<<<< Updated upstream
 
+=======
+                // console.log("idEditMovieGenreTypesTrue");
+                // console.log(this.idEditMovieGenreTypesTrue);
+>>>>>>> Stashed changes
                 for (let i=0; i<this.idEditMovieGenreTypes.length; i++){
                     for (let j=0; j<this.idEditMovieGenreTypesTrue.length; j++){
                         if (this.idEditMovieGenreTypesTrue[j] == i+1){

@@ -13,8 +13,12 @@ import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
   providedIn: 'root'
 })
 export class MovieService {
+<<<<<<< Updated upstream
   private readonly API_URL_MOVIE = 'http://localhost:8080/movies';
   private readonly API_URL_MOVIE_2 = 'http://localhost:8080/movie';
+=======
+  private readonly API_URL_MOVIE = 'http://localhost:8080/movie';
+>>>>>>> Stashed changes
   private readonly API_URL_MOVIE_GENRE_TYPE = 'http://localhost:8080/movie_genre_type';
   private readonly API_URL_MOVIE_GENRE_ASSOCIATE = 'http://localhost:8080/movie_genre_associate';
   private readonly API_URL_LAST_MOVIE = 'http://localhost:8080/lastMovie';

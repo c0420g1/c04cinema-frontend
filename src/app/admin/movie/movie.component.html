@@ -57,7 +57,7 @@
                                 <td>3D</td>
                             </ng-template>
                             <td>
-                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovie(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovieEdit(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
                                 <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
                                 <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
                             </td>
@@ -110,7 +110,13 @@
                     </div>
                     <div class="modal-body">
                         <div>
+<<<<<<< Updated upstream
                             <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
+=======
+<!--                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>-->
+                            <!--                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">-->
+                            <!--                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>-->
+>>>>>>> Stashed changes
                         </div>
                         <br>
                         <div class="form-group">
@@ -316,6 +322,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
+<<<<<<< Updated upstream
                             <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
                         </div>
                         <br>
@@ -323,6 +330,14 @@
                         <div>
                             <img  [src]="posterUrlShowImgEdit" style="width: 200px; height: auto">
                             <input type="text" formControlName="posterUrl" [value]="url" alt="" style="width: 200px; height: auto" >
+=======
+<!--                            <input type="hidden" formControlName="posterUrl" alt="" style="width: 200px; height: auto">-->
+                             <img [src]="posterUrlShowImage" class="posterUrlShowImage">
+<!--                            <div [style.]="" style="width: 300px; height: 600px"></div>-->
+                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
+                            <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" readonly>
+<!--                            <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>-->
+>>>>>>> Stashed changes
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('posterUrl').invalid && editFormMovie.get('posterUrl').touched">
@@ -407,7 +422,11 @@
                         </div>
                         <div class="form-group" >
                             <label>Version <span style="color: red">(*)</span></label><br>
+<<<<<<< Updated upstream
                             <input type="radio"  formControlName="is2d" [value] ="1">
+=======
+                            <input type="radio"  formControlName="is2d"  value="1">
+>>>>>>> Stashed changes
                             <label style="margin-left: 5px">2D</label>
                             <input type="radio"  formControlName="is2d" [value]="0" style="margin-left: 55px;" >
                             <label style="margin-left: 5px" >3D</label><br>
