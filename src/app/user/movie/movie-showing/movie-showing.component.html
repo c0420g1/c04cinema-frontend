@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="row mt-2">
+    <div class="row mt-2 ml-2">
         <div class="col-3">
-            <p class="title-search"><strong>Tìm kiếm lịch chiếu</strong></p>
+            <p class="title-search"><strong>Search </strong></p>
         </div>
         <div class="col-4">
             <input type="date" class="form-control btn-block ml-2 input-search-date"
@@ -28,8 +28,8 @@
             <p class="p-startDate"><strong>Date: </strong>{{filmShowing.startDate}}</p>
             <div class="row">
                 <div class="col-12 item-button-getTicket" style="">
-                    <a href="#" class="btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">Detail</a>
-                    <a href="#" class="btn btn-md btn--shine" style="margin-left: 3px" *ngIf="checkDate===true">Book a
+                    <a class="btn btn-md btn-outline-inverse" [routerLink]="['/movie-detail',filmShowing.id]">Detail</a>
+                    <a [routerLink]="['/booking',filmShowing.id]" class="btn btn-md btn--shine" style="margin-left: 3px" *ngIf="checkDate===true">Book a
                         ticket</a>
                 </div>
             </div>
@@ -43,12 +43,7 @@
 <div class="my-container">
     <ng-template #customLoadingTemplate>
         <div class="custom-class">
-            <h3>
-                Loading...
-            </h3>
-            <button (click)="showAlert()">
-                Click me!
-            </button>
+
         </div>
     </ng-template>
 

@@ -5857,6 +5857,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   font-size: 13px;
   margin-bottom: 3px;
 }
+.movie__option a{
+  color: blue!important;
+}
 .movie .comment-link {
   position: relative;
   display: inline-block;
@@ -6858,13 +6861,13 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   background-color: #4c4145;
   width: 101%;
 }
-.order-step-area .order-step--disable {
+.order-step-area .order_step_disable {
   color: #dbdee1;
 }
-.order-step-area .order-step--disable:before {
+.order-step-area .order_step_disable:before {
   border-color: transparent transparent #dbdee1 transparent;
 }
-.order-step-area .order-step--disable:after {
+.order-step-area .order_step_disable:after {
   background-color: #dbdee1;
 }
 .choose-film .film-images {
@@ -9095,6 +9098,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 .movie--preview .movie__option {
   line-height: 25px;
+}
+.movie__option a{
+  color: blue;
 }
 .movie--preview .time-select {
   display: none;
