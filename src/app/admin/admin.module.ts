@@ -16,9 +16,13 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { BookingTicketComponent } from './booking-ticket/booking-ticket.component';
 import { BannerComponent } from './banner/banner.component';
 import { PromotionAdminComponent } from './promotion-admin/promotion-admin.component';
+import {HallListComponent} from './hall-list/hall-list.component';
+import {TheaterComponent} from './theater/theater.component';
+import {SeatComponent} from './seat/seat.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, PromotionAdminComponent],
+  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, PromotionAdminComponent, TheaterComponent,HallListComponent,SeatComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -27,7 +31,8 @@ import { PromotionAdminComponent } from './promotion-admin/promotion-admin.compo
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+      NgxPaginationModule
   ]
 })
 export class AdminModule { }
