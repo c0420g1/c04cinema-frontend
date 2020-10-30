@@ -12,8 +12,7 @@ export class MovieShowingComponent implements OnInit {
     movies: Movie[] = [];
     checkDate = true;
     nameSearch = '';
-    checkHeader = true;
-    public loading = false;
+    loading = false;
 
     constructor(private moviesService: MovieService, private pipe: DatePipe) {
     }
@@ -31,12 +30,12 @@ export class MovieShowingComponent implements OnInit {
                 }catch (e) {
                     return 'Not found result !'
                 }
-            }
+            },error => console.log("Error !")
         );
         this.checkDate = true;
     }
 
-    searchFilmByDate(date) {
+    searchFilmByDate(date): void {
         this.loading = true;
         let date1=Date.parse(date);
         const dateCur = new Date();
@@ -56,13 +55,13 @@ export class MovieShowingComponent implements OnInit {
                     return 'Not found result !'
                 }
 
-            }
+            },error => console.log("Error !")
         );
     }
     searchByName(): any{
         this.loading = true;
         //chua fix search theo ten viet thuong
-        this.moviesService.getFilmByName(this.nameSearch).subscribe(
+        this.moviesService.getMovieByName(this.nameSearch).subscribe(
             (data) => {
                 try {
                     this.movies = data;
@@ -70,11 +69,9 @@ export class MovieShowingComponent implements OnInit {
                 }catch (e) {
                     return 'Not found result !'
                 }
-            }
+            },error => console.log("Error !")
         )
     }
 
-    showAlert() {
-        alert("hello")
-    }
+
 }

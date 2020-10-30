@@ -220,7 +220,7 @@
                             <img alt='' [src]="movie.posterUrl" style="width: 170px; height: 250px;">
                         </a>
                     </div>
-                    <div class="movie__info">
+                    <div class="movie__info" [routerLink]="['/movie-detail',movie.id]">
                         <a class="movie__title">{{movie.name}}</a>
 
                         <p class="movie__time">91 min</p>
