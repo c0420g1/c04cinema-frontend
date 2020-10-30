@@ -1,0 +1,71 @@
+<div class="content" style="height: 71vh">
+
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-10" style="margin-top: 28px; margin-left: 8%">
+
+                <div class="table-title">
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-9" style="max-width: 75%">
+                            <div style="margin-left: 380px;">
+                                <p style="font-size: 14px; font-weight: bold">Theater Management</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <table id="movie">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Theater Name</th>
+                            <th>Location</th>
+                            <th width="20%">
+                                <div style="display: flex">
+                                    <div  style="margin-left: 40px">List Halls</div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr *ngFor="let theater of theaters |
+                        paginate : {itemsPerPage: pageSize,
+                                         currentPage: page,
+                                         totalItems: count
+                                        };
+                        ">
+                            <td>{{theater.id}}</td>
+                            <td>{{theater.name}}</td>
+                            <ng-container *ngFor="let location of locations;let l = index">
+                                <ng-container *ngIf="location.id == theater.locationId">
+                                    <td>{{ location.name }}</td>
+                                </ng-container>
+                            </ng-container>
+                            <td>
+                                <a [routerLink]="['hall', theater.id]" class="edit" title="Edit" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="page" style="margin-left: 450px" >
+                    <pagination-controls
+                            previousLabel="Prev"
+                            nextLabel="Next"
+                            responsive="true"
+                            (pageChange)="handlePageChange($event)"
+                    ></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <router-outlet></router-outlet>
+</div>
+
