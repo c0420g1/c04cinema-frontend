@@ -4,11 +4,9 @@
         <div class="col-6">
             <img [src]="imgSrc" alt="" (click)="fileUploader.click()" style="width: 300px">
             <br><br>
-            <!--            <label>Upload </label><br>-->
-
             <input required type="file" class="form-control-file" #fileUploader accept="image/*" (change)="showPreview($event)">
             <br>
-            <input required class="form-control" type="text" placeholder="Input Your Caption"  (change)="changeCaption($event.target.value)">
+            <input style="font-size: 14px" required class="form-control" type="text" placeholder="Input Image's Name"  (change)="changeCaption($event.target.value)">
             <br>
             <br>
             <div>
@@ -20,15 +18,10 @@
                 </select>
             </div>
             <br>
-            <div id="contain">
-
-                <!--                <textarea class="form-control rounded-0" rows="3"></textarea>-->
-
-                <button class="btn btn-primary" (click)="addNewImage()">Upload your File</button>
-                <button (click)="getLink()" class="btn btn-success ml-2" [disabled]="confirm" >Show Link</button>
+            <div id="contain" style="">
+                <button class="btn btn-primary" (click)="addNewImage()">Upload to FireBase</button>
+                <button (click)="getLink()" class="btn btn-success " [disabled]="confirm" >Set to PosterUrl</button>
             </div>
-            <!--            <button id="test" (click)="test()">test</button>-->
-
         </div>
     </div>
 </div>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MovieService} from './movie.service';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
 import {Hall} from '../../model/Hall';
-import {BookingTicketDTO} from '../../model/bookingTicketDTO';
+import {MovieService} from './movie.service';
 
 @Component({
   selector: 'app-movie',
@@ -30,6 +30,7 @@ export class MovieComponent implements OnInit {
   lastMovie: Movie;
   check: number;
   checkEdit: number;
+  posterUrlShowImgEdit: string;
 
     // variables used for the add show function
   showStartTimes: string[] = [];
@@ -39,14 +40,13 @@ export class MovieComponent implements OnInit {
   showMovie: Movie;
   movieName = '';
 
-    // variables used for paging functions
-    variableFind = '';
-    currentPage = 1;
-    totalEntities: number;
-    totalPage: number;
-    // ticketNew: BookingTicketDTO = new BookingTicketDTO();
-    entityNumber: number;
-    jumpPage: number;
+  // variables used for paging functions
+  variableFind = '';
+  currentPage = 1;
+  totalEntities: number;
+  totalPage: number;
+  entityNumber: number;
+  jumpPage: number;
 
   constructor(private movieService: MovieService, private fb: FormBuilder) { }
 
@@ -62,10 +62,8 @@ export class MovieComponent implements OnInit {
         } else {
             this.message = '';
         }
-        console.log(this.currentPage);
-        console.log(this.totalPage);
         this.entityNumber = data.length;
-        // this.totalPage = this.totalEntities/10;
+        this.totalPage = this.totalEntities/10;
         this.movies = data;
     });
 
@@ -78,15 +76,16 @@ export class MovieComponent implements OnInit {
           name: ['',[Validators.required,Validators.maxLength(100)]],
           director: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
           actor: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
-          isSub: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
-          is2d: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
-          posterUrl: ['', [Validators.required,Validators.maxLength(300)]],
-          startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
+          isSub: ['',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
+          is2d: ['',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
+          posterUrl: ['',[Validators.required]],
+          startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'), dateValidator]],
           endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
-          duration: ['',[Validators.required,Validators.min(60),Validators.max(235)]],
-          trailerUrl: ['',[Validators.required,Validators.maxLength(250),Validators.pattern('^(https://www.youtube.com)[0-9a-zA-Z./?=&_-]+$')]],
-          starRating:['',[Validators.required,Validators.min(1),Validators.max(5)]],
-          movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5)]],
+          duration: ['',[Validators.required,Validators.min(60),Validators.max(235),Validators.pattern(/^[0-9]+$/)]],
+          trailerUrl: ['',[Validators.required,Validators.maxLength(250),
+                          Validators.pattern('^(https://www.youtube.com)[0-9a-zA-Z./?=&_-]+$')]],
+          starRating:['',[Validators.required,Validators.min(1),Validators.max(5),Validators.pattern(/^[0-9]+$/)]],
+          movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5),Validators.pattern(/^[0-9]+$/)]],
           description: ['',Validators.maxLength(1000)],
           entertainment: ['',[Validators.required,Validators.maxLength(45)]],
         }
@@ -100,10 +99,11 @@ export class MovieComponent implements OnInit {
               isSub: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
               is2d: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
               posterUrl: ['', [Validators.required,Validators.maxLength(300)]],
-              startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
-              endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
-              duration: ['',[Validators.required,Validators.min(60),Validators.max(235)]],
-              trailerUrl: ['',[Validators.required,Validators.maxLength(250),Validators.pattern('^(https://www.youtube.com)[0-9a-zA-Z./?=&_-]+$')]],
+              startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'), dateValidator]],
+              endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),]],
+              duration: ['',[Validators.required,Validators.min(60),Validators.max(235),Validators.pattern(/^[0-9]+$/)]],
+              trailerUrl: ['',[Validators.required,Validators.maxLength(250),
+                              Validators.pattern('^(https://www.youtube.com)[0-9a-zA-Z./?=&_-]+$')]],
               starRating:['',[Validators.required,Validators.min(1),Validators.max(5)]],
               movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5)]],
               description: ['',Validators.maxLength(1000)],
@@ -112,10 +112,15 @@ export class MovieComponent implements OnInit {
       );
   }
 
-  checkBoxes(event) {
+  // to check boxes of movie genre type, and validate idMovieGenreType, in add new movie function
+    errorIdMovieGenreType = false;
+  checkBoxesAdd(event) {
         this.check = event.target.value;
-        // console.log(this.idMovieGenreTypes[0]);
-        console.log(this.check);
+        if (this.check < 1 || this.check > 5){
+            this.errorIdMovieGenreType = true;
+        }else {
+            this.errorIdMovieGenreType = false;
+        }
         let realCheck = this.check -1;
         for(let i=0;i<12;i++){
             if(realCheck == i){
@@ -127,7 +132,14 @@ export class MovieComponent implements OnInit {
             }
         }
   }
+  // add new movie & movie genre type
 
+//     this.moviesService.getTotalPage(this.dateCurrent).subscribe(
+// (data) => {
+//     this.totalPage = parseInt(String(data / 4));
+// },
+// error => console.log(error)
+// );
   addNewMovie() {
       this.movieService.addMovie(this.addFormMovie.value).subscribe();
 
@@ -138,7 +150,7 @@ export class MovieComponent implements OnInit {
               this.idMovieGenreTypesTrue.push(i+1);
           }
       }
-      console.log(this.idMovieGenreTypesTrue);
+
       for(let i=0; i < this.idMovieGenreTypesTrue.length; i++){
           this.addFormMovieGenreAssociate = this.fb.group(
               {
@@ -146,22 +158,21 @@ export class MovieComponent implements OnInit {
                   movieGenreTypeId: [this.idMovieGenreTypesTrue[i]]
               }
           )
-          console.log(this.lastMovie.id, this.idMovieGenreTypesTrue[i]);
           this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe();
       }
       this.message = "Added successfully";
   }
-
+    // get info of the movie that you want to edit
     getMovie(movie: Movie) {
         this.editFormMovie.patchValue(movie);
+        this.posterUrlShowImgEdit = movie.posterUrl;
         this.movieService.getAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id).subscribe(
             (data) => {
                 for(let item of data){
                     this.idEditMovieGenreTypesTrue.push(item.movieGenreTypeId);
                     // console.log(this.arrEditMovieGenreTypeId);
                 }
-                console.log("idEditMovieGenreTypesTrue");
-                console.log(this.idEditMovieGenreTypesTrue);
+
                 for (let i=0; i<this.idEditMovieGenreTypes.length; i++){
                     for (let j=0; j<this.idEditMovieGenreTypesTrue.length; j++){
                         if (this.idEditMovieGenreTypesTrue[j] == i+1){
@@ -169,14 +180,19 @@ export class MovieComponent implements OnInit {
                         }
                     }
                 }
-                console.log("idEditMovieGenreTypes");
-                console.log(this.idEditMovieGenreTypes);
+                // error => console.log(error)
             });
     }
-
+    // check boxes movie genre type at screen edit function
+    errorIdMovieGenreTypeEdit: boolean;
     checkBoxesEdit(event) {
       console.log(event.target.value);
         this.checkEdit = event.target.value;
+        if (this.checkEdit > 5 || this.checkEdit <1){
+            this.errorIdMovieGenreTypeEdit = true;
+        }else {
+            this.errorIdMovieGenreTypeEdit = false;
+        }
         let realCheckEdit = this.checkEdit -1;
         for(let i=0;i<12;i++){
             if(realCheckEdit == i){
@@ -188,19 +204,17 @@ export class MovieComponent implements OnInit {
             }
         }
     }
-
+    // edit movie
     editMovie() {
         this.movieService.editMovieService(this.editFormMovie.value, this.editFormMovie.value.id).subscribe(data => {this.ngOnInit()});
         this.message = "Edited Successfully";
         this.idEditMovieGenreTypesTrue.splice(0, this.idEditMovieGenreTypesTrue.length);
-        // console.log(this.idEditMovieGenreTypesTrue);
-        // console.log(this.idEditMovieGenreTypes);
         for(let i=0; i<this.idEditMovieGenreTypes.length; i++){
             if(this.idEditMovieGenreTypes[i]==true){
                 this.idEditMovieGenreTypesTrue.push(i+1);
             }
         }
-        // console.log(this.idEditMovieGenreTypesTrue);
+
         this.movieService.deleteAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id).subscribe();
         for(let i=0; i < this.idEditMovieGenreTypesTrue.length; i++){
             this.addFormMovieGenreAssociate = this.fb.group(
@@ -209,12 +223,11 @@ export class MovieComponent implements OnInit {
                     movieGenreTypeId: [this.idEditMovieGenreTypesTrue[i]]
                 }
             )
-            console.log(this.editFormMovie.value.id,this.idEditMovieGenreTypesTrue[i]);
             this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe();
         }
     }
 
-
+    // to show the movie genre type to the edit screen,
     checkedEdit(id) {
       for(let i=0; i<this.idEditMovieGenreTypes.length; i++){
           if(id==this.idEditMovieGenreTypesTrue[i]){
@@ -223,7 +236,7 @@ export class MovieComponent implements OnInit {
       }
     }
 
-
+    // add show times
     addShowTimes(event) {
         console.log(event.target.value);
         this.showStartTime = event.target.value;
@@ -235,23 +248,18 @@ export class MovieComponent implements OnInit {
                 this.showStartTimes.push(this.showStartTime);
             }
         }
-        // console.log(this.showStartTimes);
-
     }
 
-
+    // delete showtime and show input tag: price, at add show screen
     deleteShowTimeAndShowPrice(i: number) {
         this.showStartTimes.splice(i,1);
-        console.log(this.showStartTimes);
     }
 
-
+    // add show at button add, in add show screen
     addShow(length: number) {
         for(let i=0; i<length; i++){
             this.showPrice = parseInt((document.getElementById(i.toString()) as HTMLInputElement).value);
             this.showPrices.push(this.showPrice);
-            console.log(this.showPrices);
-            console.log(this.showStartTimes);
             for (let i=0; i<this.showStartTimes.length; i++){
                 this.addFormShow = this.fb.group({
                     startTime: [this.showStartTimes[i]],
@@ -261,14 +269,10 @@ export class MovieComponent implements OnInit {
                     description: ['temporary'],
                     isearly: [0]
                 })
-                console.log(this.addFormShow.value);
                 this.movieService.addShow(this.addFormShow.value).subscribe();
             }
         }
-
-
     }
-
 
     getShowMovie(movie: Movie) {
         this.showMovie = movie;
@@ -306,7 +310,29 @@ export class MovieComponent implements OnInit {
         this.ngOnInit();
     }
 
+    end: string;
+    start: string;
+    error = false;
+    Plus: string;
+
+    // validate start date < end date
+    compareTwoDates() {
+        let endDate: string[];
+        let startDate: string[];
+        endDate = this.end.split('-');
+        startDate = this.start.split('-');
+        let dateNumberEnd = (parseInt(endDate[0]) * 12 * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
+        let dateNumberStar = (parseInt(startDate[0]) * 12 * 365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
+        if (dateNumberEnd <= dateNumberStar) {
+            this.error = true;
+        } else {
+            this.error = false;
+        }
+    }
+
 }
+
+// function to validate date > current date
 function dateValidator(formControl: FormControl) {
     let date1: string[];
     date1 = formControl.value.split('-');
@@ -320,3 +346,5 @@ function dateValidator(formControl: FormControl) {
     }
     return null;
 }
+
+

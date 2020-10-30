@@ -58,8 +58,8 @@
         <div class="col-sm-9">
             <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required formControlName="name">
             <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('name').touched && customerForm.get('name').invalid">
-                <p *ngIf="customerForm.get('name').hasError('required')"> required </p>
-                <p *ngIf="customerForm.get('name').hasError('pattern')"> error format </p>
+                <div *ngIf="customerForm.get('name').hasError('required')"> required </div>
+                <div *ngIf="customerForm.get('name').hasError('pattern')"> error format </div>
             </div>
         </div>
     </div>
@@ -133,12 +133,12 @@
             </div>
         </div>
     </div>
-    <div *ngIf="errors.length > 0 ">
-        <ul class="alert alert-danger">
+
+        <ul>
             <li *ngFor="let error of errors">
                 {{error.message}}
             </li>
         </ul>
-    </div>
+
     <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid" (click)="editCustomer()">Update</button>
 </form>
