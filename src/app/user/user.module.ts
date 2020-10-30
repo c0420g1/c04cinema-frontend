@@ -19,6 +19,9 @@ import {SafePipeModule} from 'safe-pipe';
 import {BookingComponent} from './booking/booking.component';
 import {NgxLoadingModule} from 'ngx-loading';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ContactComponent } from './contact/contact.component';
+import { NewsComponent } from './news/news.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 // @ts-ignore
@@ -27,7 +30,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
         PromotionComponent, CustomerComponent, InformationComponent,
         HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
         MovieShowingComponent, MovieComingComponent,
-        MovieDetailComponent, BookingComponent],
+        MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent],
     imports: [
         CommonModule,
         UserRoutingModule,
