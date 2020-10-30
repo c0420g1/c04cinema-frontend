@@ -1,6 +1,8 @@
 export class SeatType {
     id: number;
     name: string;
-    price: number;
     promoPointId: number
+    price: number;
+    color: string;
+    description: string;
 }
