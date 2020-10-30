@@ -12,4 +12,7 @@ export class BookingTicketDTO {
     startTime: Date;
     priceTicket: number;
     seat: string;
+    pointCustomer: number;
+    isCancel: boolean;
+    hallName: string;
 }

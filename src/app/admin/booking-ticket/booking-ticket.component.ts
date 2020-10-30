@@ -20,8 +20,12 @@ export class BookingTicketComponent implements OnInit {
   ticketNew: BookingTicketDTO = new BookingTicketDTO();
   entityNumber: number;
   jumpPage: number;
+  numberTicket: number = 0;
   total = 0;
   id = 0;
+  quantity = 0;
+  check: boolean = true;
+  seatList: BookingTicketDTO[] = [];
   private confirmTicket: ConfirmTicket;
   ticketUpdate = new BookingTicket();
   constructor(private bookingTicketService: BookingTicketService,
@@ -40,10 +44,7 @@ export class BookingTicketComponent implements OnInit {
       } else {
         this.message = '';
       }
-      console.log(this.currentPage);
-      console.log(this.totalPage);
       this.entityNumber = data.length;
-      // this.totalPage = this.totalEntities/10;
       this.ticketList = data;
     });
 
@@ -54,16 +55,29 @@ export class BookingTicketComponent implements OnInit {
   }
 
   getInfo(ticket: BookingTicketDTO): void {
+    this.bookingTicketService.findTicketById(ticket.idBookingTicket).subscribe((data) => {
+      this.ticketUpdate = data;
+
+      this.bookingTicketService.getQuantity(data[0].showId,data[0].accountId)
+          .subscribe((dataSeat) => {
+            this.seatList = dataSeat;
+            this.quantity = this.seatList.length;
+            console.log(this.quantity);
+            this.total = this.quantity * data[0].price;
+          });
+    });
     this.ticketNew = ticket;
-    console.log(this.ticketNew)
-    this.bookingTicketService.findTicketById(this.ticketNew.idBookingTicket).subscribe((data) => this.ticketUpdate = data);
-    console.log(this.ticketUpdate);
   }
 
   confirm(id: number): void {
     this.confirmTicket = new ConfirmTicket(id, 1);
-    console.log(this.confirmTicket);
-    this.bookingTicketService.confirmTicket(this.confirmTicket).subscribe(() => this.ngOnInit());
+    if (this.numberTicket == null){
+      this.bookingTicketService.confirmTicket(this.confirmTicket,0).subscribe(() => this.ngOnInit());
+    } else {
+      this.bookingTicketService.confirmTicket(this.confirmTicket,this.numberTicket*500).subscribe(() => this.ngOnInit());
+    }
+
+    this.check = false;
     document.getElementById('formEdit').click();
   }
   prePage(): void {
@@ -86,5 +100,14 @@ export class BookingTicketComponent implements OnInit {
   goToPage() {
     this.currentPage = this.jumpPage;
     this.ngOnInit();
+  }
+
+  checkPoint() {
+    if (this.ticketNew.pointCustomer >= this.numberTicket*500){
+      this.total = (this.quantity - this.numberTicket) * this.ticketNew.priceTicket;
+      this.check = true;
+    } else{
+      this.check = false;
+    }
   }
 }
