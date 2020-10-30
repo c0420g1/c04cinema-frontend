@@ -12,11 +12,13 @@ import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [UserLayoutComponent, HomeComponent, MovieComponent,
-    PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent],
+      // tslint:disable-next-line:max-line-length
+    PromotionComponent, CustomerComponent, InformationComponent, HistoryPointComponent, TickerPutComponent, TickerCancelComponent, LoginComponent],
     imports: [
         CommonModule,
         UserRoutingModule,

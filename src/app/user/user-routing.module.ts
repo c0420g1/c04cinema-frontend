@@ -9,6 +9,7 @@ import {InformationComponent} from './customer/information/information.component
 import {HistoryPointComponent} from './customer/history-point/history-point.component';
 import {TickerPutComponent} from './customer/ticker-put/ticker-put.component';
 import {TickerCancelComponent} from './customer/ticker-cancel/ticker-cancel.component';
+import {LoginComponent} from './login/login.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
+        children: [{
+          path: 'login',
+          component: LoginComponent
+        }]
       },
       {
         path: 'movie',
