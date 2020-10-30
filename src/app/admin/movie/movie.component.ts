@@ -28,19 +28,16 @@ export class MovieComponent implements OnInit {
   lastMovie: Movie;
   check: number;
   checkEdit: number;
-<<<<<<< Updated upstream
-  posterUrlShowImgEdit: string;
-=======
   posterUrlShowImage: string;
->>>>>>> Stashed changes
 
-    // variables used for the add show function
-    showStartTimes: string[] = [];
-    showStartTime: string;
-    showPrices: number[] = [];
-    showPrice: number;
-    showMovie: Movie;
-    movieName = '';
+  // variables used for the add show function
+  showStartTimes: string[] = [];
+  showStartTime: string;
+  showPrices: number[] = [];
+  showPrice: number;
+  showMovie: Movie;
+  movieName = '';
+
 
   // variables used for paging functions
   variableFind = '';
@@ -136,13 +133,6 @@ export class MovieComponent implements OnInit {
         }
   }
   // add new movie & movie genre type
-
-//     this.moviesService.getTotalPage(this.dateCurrent).subscribe(
-// (data) => {
-//     this.totalPage = parseInt(String(data / 4));
-// },
-// error => console.log(error)
-// );
   addNewMovie() {
       this.movieService.addMovie(this.addFormMovie.value).subscribe();
 
@@ -171,19 +161,12 @@ export class MovieComponent implements OnInit {
         this.posterUrlShowImage= movie.posterUrl;
         this.editFormMovie.patchValue(movie);
         console.log(movie);
->>>>>>> Stashed changes
         this.movieService.getAllMovieGenreAssociateByMovieId(this.editFormMovie.value.id).subscribe(
             (data) => {
                 for (let item of data) {
                     this.idEditMovieGenreTypesTrue.push(item.movieGenreTypeId);
-                    // console.log(this.arrEditMovieGenreTypeId);
                 }
-<<<<<<< Updated upstream
 
-=======
-                // console.log("idEditMovieGenreTypesTrue");
-                // console.log(this.idEditMovieGenreTypesTrue);
->>>>>>> Stashed changes
                 for (let i=0; i<this.idEditMovieGenreTypes.length; i++){
                     for (let j=0; j<this.idEditMovieGenreTypesTrue.length; j++){
                         if (this.idEditMovieGenreTypesTrue[j] == i+1){
@@ -292,9 +275,6 @@ export class MovieComponent implements OnInit {
         console.log(this.showMovie);
     }
 
-    getMark(event) {
-        this.url = event;
-    }
 
     prePage(): void {
         if (this.currentPage >= 2) {

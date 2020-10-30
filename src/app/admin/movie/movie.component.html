@@ -110,13 +110,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-<<<<<<< Updated upstream
-                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
-=======
-<!--                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>-->
-                            <!--                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">-->
-                            <!--                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>-->
->>>>>>> Stashed changes
+                            <app-image-upload></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
@@ -157,7 +151,7 @@
                             <p *ngIf="addFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="addFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
-                        <p class="error1" *ngIf="error" style="color: red">Start Date > End Date</p>
+                        <p class="error1" *ngIf="error" style="color: red">Start Date < End Date</p>
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" formControlName="actor" >
@@ -322,22 +316,15 @@
                     </div>
                     <div class="modal-body">
                         <div>
-<<<<<<< Updated upstream
-                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
+                            <app-image-upload ></app-image-upload>
                         </div>
                         <br>
-
                         <div>
-                            <img  [src]="posterUrlShowImgEdit" style="width: 200px; height: auto">
+                            <img  [src]="posterUrlShowImage" style="width: 200px; height: auto">
+                        </div>
+                        <div>
+                            <label>Poster Url <span style="color: red">(*)</span></label>
                             <input type="text" formControlName="posterUrl" [value]="url" alt="" style="width: 200px; height: auto" >
-=======
-<!--                            <input type="hidden" formControlName="posterUrl" alt="" style="width: 200px; height: auto">-->
-                             <img [src]="posterUrlShowImage" class="posterUrlShowImage">
-<!--                            <div [style.]="" style="width: 300px; height: 600px"></div>-->
-                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
-                            <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" readonly>
-<!--                            <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>-->
->>>>>>> Stashed changes
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('posterUrl').invalid && editFormMovie.get('posterUrl').touched">
@@ -422,11 +409,7 @@
                         </div>
                         <div class="form-group" >
                             <label>Version <span style="color: red">(*)</span></label><br>
-<<<<<<< Updated upstream
                             <input type="radio"  formControlName="is2d" [value] ="1">
-=======
-                            <input type="radio"  formControlName="is2d"  value="1">
->>>>>>> Stashed changes
                             <label style="margin-left: 5px">2D</label>
                             <input type="radio"  formControlName="is2d" [value]="0" style="margin-left: 55px;" >
                             <label style="margin-left: 5px" >3D</label><br>
