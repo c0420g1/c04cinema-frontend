@@ -5,15 +5,15 @@
                 <img class="order__images" alt='' src="assets/images/tickets.png">
                 <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
                 <div class="order__control">
-                    <a (click)="fstep2()" class="order__control-btn active">Purchase</a>
-                    <a (click)="fstep22()" class="order__control-btn active">Reserve</a>
+                    <a (click)="fstep2()" [ngClass]="{active: !isActive }" class="order__control-btn">Purchase</a>
+                    <a (click)="fstep22()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
                 </div>
             </div>
         </div>
         <div class="order-step-area">
-            <div class="order-step first--step order-step--disable ">1. Where &amp; When</div>
-                    <div class="order-step second--step order-step--disable">2. Choose a sit</div>
-                    <div class="order-step third--step">3. Check out</div>
+            <div [ngClass]="{order_step_disable: step!='s1'}" class="order-step first--step">1. Where &amp; When</div>
+                    <div [ngClass]="{order_step_disable: step!='s2'}" class="order-step second--step">2. Choose a sit</div>
+                    <div [ngClass]="{order_step_disable: step!='s3'}" class="order-step third--step">3. Check out</div>
         </div>
 
     </section>
@@ -35,7 +35,7 @@
                         <p class="time-select__place">{{e.theatreName}}</p>
                     </div>
                     <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" *ngFor="let t of e.showDTO" (click)="bookshow(t.id, t.price)" id="{{t.id}}">{{t.time.split('T')[1]}}</li>
+                        <li class="time-select__item" *ngFor="let t of e.showDTO" (click)="bookshow(t.id, t.price, t.time, e.hallName, e.theatreName)" id="{{t.id}}">{{t.time.split('T')[1]}}</li>
                     </ul>
                 </div>
         
@@ -81,7 +81,7 @@
                          <br>   
                         <div class="sits" style="width: 700px;padding-left: 150px;">
                                 <div class="sits__row">
-                                    <span *ngFor="let i of listSeat" [ngClass]="{ sits_price_cheap : i.color=='yellow', sits_price_middle: i.color=='blue', sits_price_expensive: i.color=='green', sits_state_not : !i.available  }" class="sits__place"  id="{{i.id}}" (click)="chooseSit(i.id, i.price)">{{i.name}}</span>
+                                    <span *ngFor="let i of listSeat" [ngClass]="{ sits_price_cheap : i.color=='yellow', sits_price_middle: i.color=='blue', sits_price_expensive: i.color=='green', sits_state_not : !i.available  }" class="sits__place"  id="{{i.id}}" (click)="chooseSit(i.id, i.price, i.bonus_seat_point)">{{i.name}}</span>
                                 </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
 
         <div class="clearfix"></div>
         <div class="booking-pagination booking-pagination--margin">
-            <a  class="booking-pagination__prev">
+            <a  (click)="pstep2()" class="booking-pagination__prev">
                 <span class="arrow__text arrow--prev">prev step</span>
                 <span class="arrow__info">where&amp;when</span>
             </a>
@@ -112,10 +112,11 @@
                 <ul class="book-result">
                     <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
                     <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">You get new bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
                 </ul>
                 <h2 class="page-heading">Input your promotion code</h2>
-                <input name="promotionCode">
-                <input type="button" value="Use">
+                <input name="promotionCode" (keyup)="getProCode($event.target.value)" />
+                <input type="button" value="Use" (click)="useProCode()">
                 <h2 class="page-heading">Choose payment method</h2>
                 <div id="paypal-button-container"></div>
 
@@ -139,14 +140,11 @@
             <div class="clearfix"></div>
 
         <div class="booking-pagination">
-                <a href="bookStep2.html" class="booking-pagination__prev">
+                <a (click)="pPurchase()" class="booking-pagination__prev">
                     <p class="arrow__text arrow--prev">prev step</p>
                     <span class="arrow__info">choose a sit</span>
                 </a>
-                <a class="booking-pagination__next hide--arrow">
-                    <p class="arrow__text arrow--next">next step</p>
-                    <span class="arrow__info"></span>
-                </a>
+                
         </div>
     </div>
 
@@ -179,20 +177,15 @@
             <div class="clearfix"></div>
 
         <div class="booking-pagination">
-                <a href="bookStep2.html" class="booking-pagination__prev">
+                <a (click)='pReserve()' class="booking-pagination__prev">
                     <p class="arrow__text arrow--prev">prev step</p>
                     <span class="arrow__info">choose a sit</span>
-                </a>
-                <a class="booking-pagination__next hide--arrow">
-                    <p class="arrow__text arrow--next">next step</p>
-                    <span class="arrow__info"></span>
                 </a>
         </div>
      </div>
 
 
-     
-     
+    
      <div id="reserve" style="display: none;">
         <section class="container" style="padding-top:50px">
             <div class="order-container">
@@ -213,23 +206,22 @@
                     <p class="order__title">Thank you <br><span class="order__descript">you have successfully purchased tickets</span></p>
                 </div>
 
-                <div class="ticket">
+                <div *ngFor="let l of listRes" class="ticket">
                     <div class="ticket-position">
                         <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
                         <div class="ticket__inner">
 
                             <div class="ticket-secondary">
                                 <span class="ticket__item">Ticket number <strong class="ticket__number">a126bym4</strong></span>
-                                <span class="ticket__item ticket__date">25/10/2020</span>
-                                <span class="ticket__item ticket__time">17:45</span>
-                                <span class="ticket__item">Cinema: <span class="ticket__cinema">Cineworld</span></span>
-                                <span class="ticket__item">Hall: <span class="ticket__hall">Visconti</span></span>
-                                <span class="ticket__item ticket__price">price: <strong class="ticket__cost">$60</strong></span>
+                                <span class="ticket__item ticket__date">{{showTime.split('T')[0]}}</span>
+                                <span class="ticket__item ticket__time">{{showTime.split('T')[1]}}</span>
+                                <span class="ticket__item">Theatre: <span class="ticket__cinema">{{theatreName}}</span></span>
+                                <span class="ticket__item">Hall: <span class="ticket__hall">{{hallName}}</span></span>
                             </div>
 
                             <div class="ticket-primery">
                                 <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">The Fifth Estate (2020)</strong></span>
-                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">11F, 12F, 13F</span></span>
+                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">{{getSeatName()}}</span></span>
                             </div>
 
 
@@ -237,6 +229,7 @@
                         <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
                     </div>
                 </div>
+                
 
                 <div class="ticket-control">
                     <a href="#" class="watchlist list--download">Download</a>
