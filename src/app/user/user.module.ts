@@ -18,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SafePipeModule} from 'safe-pipe';
 import {BookingComponent} from './booking/booking.component';
 import {NgxLoadingModule} from 'ngx-loading';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 // @ts-ignore
@@ -35,6 +36,7 @@ import {NgxLoadingModule} from 'ngx-loading';
         HttpClientModule,
         SafePipeModule,
         NgxLoadingModule,
+        NgxPaginationModule,
 
     ]
 })

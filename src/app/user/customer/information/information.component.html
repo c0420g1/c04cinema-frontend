@@ -66,12 +66,10 @@
         <label for="inputUsername" class="col-sm-3 col-form-label">
             Full Name <span style="color: red">(*)</span> :</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required
-                   formControlName="name">
-            <div class="alert alert-danger"
-                 *ngIf="customerForm.get('name').touched && customerForm.get('name').invalid">
-                <p *ngIf="customerForm.get('name').hasError('required')"> must Required</p>
-                <p *ngIf="customerForm.get('name').hasError('pattern')"> must format </p>
+            <input type="text" class="form-control" id="inputUsername" placeholder="Full Name" required formControlName="name">
+            <div class="alert alert-danger" role="alert" *ngIf="customerForm.get('name').touched && customerForm.get('name').invalid">
+                <div *ngIf="customerForm.get('name').hasError('required')"> required </div>
+                <div *ngIf="customerForm.get('name').hasError('pattern')"> error format </div>
             </div>
         </div>
     </div>
@@ -151,14 +149,14 @@
             </div>
         </div>
     </div>
-    <ul>
-        <li *ngFor="let e of error1s">
-            {{e.message}}
-        </li>
-    </ul>
-    <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid"
-            (click)="editCustomer()">Update
-    </button>
+
+        <ul>
+            <li *ngFor="let error of error1s">
+                {{error.message}}
+            </li>
+        </ul>
+
+    <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid" (click)="editCustomer()">Update</button>
 </form>
 
 

@@ -1,7 +1,7 @@
 <h3>Tickets Booked</h3>
-<span *ngIf="message" class="alert alert-danger">
-          {{message}}
-          </span>
+<div *ngIf="message" class="alert alert-danger">
+    {{message}}
+</div>
 <table class="table">
     <thead>
     <tr>
@@ -33,20 +33,16 @@
                 <li>
                     <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
                 </li>
-
                 <li>
-                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
-                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page"
+                           style="width: 100px;"
+                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()">
                 </li>
-
                 <li>
                     <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
                     <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<=totalPage">Next</button>
                 </li>
             </ul>
-
-
         </div>
     </div>
-
 </div>
