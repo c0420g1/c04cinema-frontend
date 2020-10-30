@@ -1,0 +1,9 @@
+.container {
+    margin-top: 60px;
+}
+
+.img-poster {
+    width: 223px;
+    height: auto;
+    border: 2px solid black;
+}

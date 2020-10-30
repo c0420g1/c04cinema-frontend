@@ -1,0 +1,30 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4" style="text-align: center">
+            <img src="../../../assets/images/customer/11333831.jpg" height="auto" width="200"/>
+            <p style="font-size: 20px; font-weight: bold">{{customer.name}}</p>
+            <p>Cumulative Points : {{point}}</p>
+            <button type='submit' class="btn btn-md btn--warning btn--wider"><a href="../../../index.html">Log Out</a></button>
+            <hr>
+            <div class="m-1"><a [routerLink]="['information',customer.id]"> Account Information</a></div>
+            <hr>
+            <div class="m-3"><a [routerLink]="['history-point',customer.id]"> History </a></div>
+            <hr>
+            <div class="m-4"><a [routerLink]="['ticker-put',customer.id]"> Tickets Booked </a></div>
+            <hr>
+            <div class="m-4"><a [routerLink]="['ticker-cancel',customer.id]"> Tickets Cancel </a></div>
+        </div>
+        <div class="col-lg-8" style="text-align: left">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+

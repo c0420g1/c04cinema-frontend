@@ -1,0 +1,101 @@
+<div class="container">
+    <!-- Movie preview item -->
+    <div class="movie movie--preview release">
+        <div class="col-sm-5 col-md-3">
+            <div class="movie__images">
+                <img alt='' [src]="movie.posterUrl" class="img-poster">
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-9">
+            <a  style="color: blue" class="movie__title link--huge">{{movie.name}}</a>
+
+            <p class="movie__time">{{movie.duration}} min</p>
+
+            <p class="movie__option"><strong>Director: </strong><a >{{movie.director}}</a></p>
+            <p class="movie__option"><strong>Actor: </strong><a >{{movie.actor}}</a></p>
+            <p class="movie__option"><strong>Start date : </strong>{{movie.startDate}}</p>
+            <p class="movie__option"><strong>Entertainment : </strong><a >{{movie.entertainment}}</a></p>
+            <p class="movie__option"><strong>Actors: </strong><a >{{movie.actor}}</a></p>
+            <p class="movie__option"><strong>Age restriction: </strong><a >{{movie.movieRatedAgeId}}</a></p>
+
+            <div class="movie__btns">
+                <a [routerLink]="['/booking',movie.id]" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book a ticket <span class="hidden-sm">for this movie</span></a>
+                <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal"
+                   class="watchlist">Watch trailer</a>
+            </div>
+
+            <div class="preview-footer">
+                <div class="movie__rate">
+                    <div class="score"></div>
+                    <span class="movie__rate-number">170 votes</span>
+                    <span class="movie__rating">{{movie.starRating}}</span>
+                </div>
+
+
+                <a href="#" class="movie__show-btn" (click)="solve()">Showtime</a>
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- Time table (choose film start time)-->
+        <!-- end time table-->
+        <div class="col-sm-12">
+            <div class="time-select">
+                <h3 class="">Time showing :</h3>
+                <div class="time-select__item"*ngFor="let show of showTableTime">
+                    <span>{{show.startTime | date: 'HH:mm'}}</span>
+                </div>
+                <div *ngIf="showTableTime.length===0">
+                    <p>Not found !</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal iframe youtube -->
+<div>
+    <div class="modal fade" id="exampleModal" style="position: absolute; margin: 130px 60px 0px -20px;">
+        <div class="modal-dialog">
+            <iframe width="700" height="450" style="border: 3px solid lavenderblush" [src]="videoUrl"></iframe>
+        </div>
+    </div>
+</div>
+
+
+<!-- end movie preview item -->
+<!-- JavaScript-->
+<!-- jQuery 3.1.1-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/external/jquery-3.1.1.min.js"><\/script>')</script>
+<!-- Migrate -->
+<script src="assets/js/external/jquery-migrate-1.2.1.min.js"></script>
+<!-- jQuery UI -->
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!-- Bootstrap 3-->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<!-- Mobile menu -->
+<script src="assets/js/jquery.mobile.menu.js"></script>
+<!-- Select -->
+<script src="assets/js/external/jquery.selectbox-0.2.min.js"></script>
+
+<!-- Stars rate -->
+<script src="assets/js/external/jquery.raty.js"></script>
+
+<!-- Form element -->
+<script src="assets/js/external/form-element.js"></script>
+<!-- Form validation -->
+<script src="assets/js/form.js"></script>
+
+<!-- Custom -->
+<script src="assets/js/custom.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        init_MovieList();
+    });
+</script>
+

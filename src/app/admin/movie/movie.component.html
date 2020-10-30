@@ -1,0 +1,594 @@
+
+<div class="content" style="height: 71vh">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-10" style="margin-top: 5px; margin-left: 8%">
+
+                <div class="table-title">
+                    <div class="row">
+                        <div style="width: 18%; display: flex" >
+<!--                            hieu edit at ngModelChange-->
+                            <input [(ngModel)]="variableFind" (ngModelChange)="searchByName(variableFind)"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">Search<i class="fa fa-search"></i></button>
+<!--                            <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>-->
+                        </div>
+                        <div class="col-sm-3">
+                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9" style="max-width: 75%">
+                            <div style="margin-left: 380px;">
+                                <p style="font-size: 31px; font-weight: bold">Movie Management</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <h3 class="text text-success" *ngIf="message">{{message}}</h3>
+                    <table id="movie">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Movie</th>
+                            <th style="width: 9%;">Start Date</th>
+                            <th>Entertainment</th>
+                            <th>Duration(m)</th>
+                            <th width="6%">Version</th>
+                            <th width="20%">
+                                <div style="display: flex">
+                                    <div  style="margin-left: 20px">Edit</div>
+                                    <div style="margin-left: 15px">Delete</div>
+                                    <div  style="margin-left: 11px">Add Show</div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let movie of movies;let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{movie.name}}</td>
+                            <td>{{movie.startDate}}</td>
+                            <td>{{movie.entertainment}}</td>
+                            <td>{{movie.duration}}</td>
+                            <td *ngIf="movie.is2d == true, else block " >2D</td>
+                            <ng-template #block>
+                                <td>3D</td>
+                            </ng-template>
+                            <td>
+                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovie(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
+                                <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row" style="margin-top: 10px; margin-bottom: 20px" *ngIf="!message">
+                    <div class="col-lg-3">
+                        <div style="font-size: 15px">
+                            Show {{entityNumber}} entities of {{totalEntities}} entities
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div style="float: right; margin-right: 50px">
+                            <ul class="list-inline">
+                                <li>
+                                    <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                </li>
+
+                                <li>
+                                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                </li>
+
+                                <li>
+                                    <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+                </div>
+<!--                <div class="page" style="margin-left: 450px">-->
+<!--                    <button  class="btn badge-dark" >First</button>-->
+<!--                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>-->
+<!--                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>-->
+<!--                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>-->
+
+<!--                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>-->
+<!--                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>-->
+<!--                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--ADD NEW MOVIE-->
+<div id="cssAddForm">
+    <div id="addNewMovie" class="modal fade" >
+        <div class="modal-dialog">
+            <div class="modal-content" >
+
+                <form [formGroup]="addFormMovie">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Movie</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
+                            <!--                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">-->
+                            <!--                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>-->
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Url Poster<span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" readonly>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('posterUrl').invalid && addFormMovie.get('posterUrl').touched">
+                            <p *ngIf="addFormMovie.get('posterUrl').hasError('required')">Url Poster is required</p>
+                            <p *ngIf="addFormMovie.get('posterUrl').hasError('maxLength')">Url Poster must be less than 300 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Name <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('name').invalid && addFormMovie.get('name').touched">
+                            <p *ngIf="addFormMovie.get('name').hasError('required')">Name is required</p>
+                            <p *ngIf="addFormMovie.get('name').hasError('maxLength')">Name must be less than 100 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="startDate">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('startDate').invalid && addFormMovie.get('startDate').touched">
+                            <p *ngIf="addFormMovie.get('startDate').hasError('required')">Start Date is required</p>
+                            <p *ngIf="addFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
+                            <p *ngIf="addFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="endDate">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('endDate').invalid && addFormMovie.get('endDate').touched">
+                            <p *ngIf="addFormMovie.get('endDate').hasError('required')">End Date is required</p>
+                            <p *ngIf="addFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Actor <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="actor" >
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('actor').invalid && addFormMovie.get('actor').touched">
+                            <p *ngIf="addFormMovie.get('actor').hasError('required')">Actor is required</p>
+                            <p *ngIf="addFormMovie.get('actor').hasError('pattern')">Actor must be not special sign</p>
+                            <p *ngIf="addFormMovie.get('actor').hasError('maxLength')">Actor must be less than 45 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Director <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="director">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('director').invalid && addFormMovie.get('director').touched">
+                            <p *ngIf="addFormMovie.get('director').hasError('required')">Director is required</p>
+                            <p *ngIf="addFormMovie.get('director').hasError('pattern')">Director must be not special sign</p>
+                            <p *ngIf="addFormMovie.get('director').hasError('maxLength')">Director must be less than 45 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Entertainment <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="entertainment">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('entertainment').invalid && addFormMovie.get('entertainment').touched">
+                            <p *ngIf="addFormMovie.get('entertainment').hasError('required')">Entertainment is required</p>
+                            <p *ngIf="addFormMovie.get('entertainment').hasError('maxLength')">Entertainment must be less than 45 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (minute) <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="duration">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('duration').invalid && addFormMovie.get('duration').touched">
+                            <p *ngIf="addFormMovie.get('duration').hasError('required')">Duration (minute) is required</p>
+                            <p *ngIf="addFormMovie.get('duration').hasError('min')">Duration (minute) must be number more than 60</p>
+                            <p *ngIf="addFormMovie.get('duration').hasError('max')">Duration (minute) must be number less than 235</p>
+                        </div>
+                        <div class="form-group" >
+                            <label>Version <span style="color: red">(*)</span></label><br>
+                            <input type="radio" id="2d" formControlName="is2d" value="1">
+                            <label for="2d" style="margin-left: 5px">2D</label>
+                            <input type="radio" id="3d" formControlName="is2d" value="0" style="margin-left: 55px;" >
+                            <label for="3d" style="margin-left: 5px">3D</label><br>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('is2d').invalid && addFormMovie.get('is2d').touched">
+                            <p *ngIf="addFormMovie.get('is2d').hasError('required')">Version is required</p>
+                            <p *ngIf="addFormMovie.get('is2d').hasError('min')">Version must be number 0 or 1</p>
+                            <p *ngIf="addFormMovie.get('is2d').hasError('max')">Version must be number 0 or 1</p>
+                        </div>
+                        <div class="form-group" >
+                            <label >Subtitle <span style="color: red">(*)</span></label><br>
+                            <input type="radio"  formControlName="isSub" value="1">
+                            <label style="margin-left: 5px" >Subtitle</label>
+                            <input type="radio"  formControlName="isSub" value="0" style="margin-left: 55px;" >
+                            <label style="margin-left: 5px">Not Subtitle</label><br>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('isSub').invalid && addFormMovie.get('isSub').touched">
+                            <p *ngIf="addFormMovie.get('isSub').hasError('required')">Subtitle is required</p>
+                            <p *ngIf="addFormMovie.get('isSub').hasError('min')">Subtitle must be number 0 or 1</p>
+                            <p *ngIf="addFormMovie.get('isSub').hasError('max')">Subtitle must be number 0 or 1</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Trailer Url <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="trailerUrl">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('trailerUrl').invalid && addFormMovie.get('trailerUrl').touched">
+                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('required')">Trailer Url is required</p>
+                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must be less than 250 characters</p>
+                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Movie Genre Type <span style="color: red">(*)</span></label><br>
+                            <div style="margin-left: 5px">
+                                <div class="form-check">
+                                    <div class="row">
+                                        <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
+                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxes($event)">
+                                            <label style="margin-left: 5px;">
+                                                {{mgType.name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="movieRatedAgeId" >
+                                    <option value="1">G (General Audiences)</option>
+                                    <option value="2">PG (Parental Guidance Suggested)</option>
+                                    <option value="3">PG-13 (Parents Strongly Cautioned)</option>
+                                    <option value="4">R (Restricted)</option>
+                                    <option value="5">CR (Children)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('movieRatedAgeId').invalid && addFormMovie.get('movieRatedAgeId').touched">
+                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('required')">Movie Rated Age is required</p>
+                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number more than 0</p>
+                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number less than 6</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Star Rating<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="starRating" >
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="5">5 Stars</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('starRating').invalid && addFormMovie.get('starRating').touched">
+                            <p *ngIf="addFormMovie.get('starRating').hasError('required')">Star Rating is required</p>
+                            <p *ngIf="addFormMovie.get('starRating').hasError('min')">Star Rating must be number more than 0</p>
+                            <p *ngIf="addFormMovie.get('starRating').hasError('max')">Star Rating must be number less than 6</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea  rows="4" cols="50" type="text" class="form-control" formControlName="description"></textarea>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="addFormMovie.get('description').invalid && addFormMovie.get('description').touched">
+                            <p *ngIf="addFormMovie.get('description').hasError('maxLength')">Description is less than 1000 characters</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" [disabled]="addFormMovie.invalid " (click)="addNewMovie()" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--END ADD NEW FILM-->
+
+<!--EDIT FILM-->
+<div id="cssEditForm">
+    <div id="editMovie" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form [formGroup]="editFormMovie" >
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Movie</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+<!--                            <img  alt="" style="width: 200px; height: auto">-->
+                            <input type="text" formControlName="posterUrl" alt="" style="width: 200px; height: auto">
+<!--                            <div [style.]="" style="width: 300px; height: 600px"></div>-->
+                            <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('posterUrl').invalid && editFormMovie.get('posterUrl').touched">
+                            <p *ngIf="editFormMovie.get('posterUrl').hasError('required')">Url Poster is required</p>
+                            <p *ngIf="editFormMovie.get('posterUrl').hasError('maxLength')">Url Poster must be less than 300 characters</p>
+                        </div>
+                        <input type="hidden" formControlName="id">
+                        <div class="form-group">
+                            <label>Name <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="name" >
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('name').invalid && editFormMovie.get('name').touched">
+                            <p *ngIf="editFormMovie.get('name').hasError('required')">Name is required</p>
+                            <p *ngIf="editFormMovie.get('name').hasError('maxLength')">Name must be less than 100 characters</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Start Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="startDate">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('startDate').invalid && editFormMovie.get('startDate').touched">
+                            <p *ngIf="editFormMovie.get('startDate').hasError('required')">Start Date is required</p>
+                            <p *ngIf="editFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
+                            <p *ngIf="editFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date <span style="color: red">(*)</span></label>
+                            <input type="date" class="form-control" formControlName="endDate">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('endDate').invalid && editFormMovie.get('endDate').touched">
+                            <p *ngIf="editFormMovie.get('endDate').hasError('required')">End Date is required</p>
+                            <p *ngIf="editFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Actor <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="actor">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('actor').invalid && editFormMovie.get('actor').touched">
+                            <p *ngIf="editFormMovie.get('actor').hasError('required')">Actor is required</p>
+                            <p *ngIf="editFormMovie.get('actor').hasError('pattern')">Actor must be not special sign</p>
+                            <p *ngIf="editFormMovie.get('actor').hasError('maxLength')">Actor must be less than 45 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Director <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="director">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('director').invalid && editFormMovie.get('director').touched">
+                            <p *ngIf="editFormMovie.get('director').hasError('required')">Director is required</p>
+                            <p *ngIf="editFormMovie.get('director').hasError('pattern')">Director must be not special sign</p>
+                            <p *ngIf="editFormMovie.get('director').hasError('maxLength')">Director must be less than 45 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Entertainment <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="entertainment">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('entertainment').invalid && editFormMovie.get('entertainment').touched">
+                            <p *ngIf="editFormMovie.get('entertainment').hasError('required')">Entertainment is required</p>
+                            <p *ngIf="editFormMovie.get('entertainment').hasError('maxLength')">Entertainment must be less than 45 characters</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (minute) <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="duration">
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('duration').invalid && editFormMovie.get('duration').touched">
+                            <p *ngIf="editFormMovie.get('duration').hasError('required')">Duration (minute) is required</p>
+                            <p *ngIf="editFormMovie.get('duration').hasError('min')">Duration (minute) must be number more than 60</p>
+                            <p *ngIf="editFormMovie.get('duration').hasError('max')">Duration (minute) must be number less than 235</p>
+                        </div>
+                        <div class="form-group" >
+                            <label>Version <span style="color: red">(*)</span></label><br>
+                            <input type="radio"  formControlName="is2d" value="1">
+                            <label style="margin-left: 5px">2D</label>
+                            <input type="radio"  formControlName="is2d" value="0" style="margin-left: 55px;" >
+                            <label style="margin-left: 5px" >3D</label><br>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('is2d').invalid && editFormMovie.get('is2d').touched">
+                            <p *ngIf="editFormMovie.get('is2d').hasError('required')">Version is required</p>
+                            <p *ngIf="editFormMovie.get('is2d').hasError('min')">Version must be number 0 or 1</p>
+                            <p *ngIf="editFormMovie.get('is2d').hasError('max')">Version must be number 0 or 1</p>
+                        </div>
+                        <div class="form-group" >
+                            <label >Subtitle <span style="color: red">(*)</span></label><br>
+                            <input type="radio"  formControlName="isSub" value="1">
+                            <label style="margin-left: 5px">Subtitle</label>
+                            <input type="radio"  formControlName="isSub" value="0" style="margin-left: 55px;" >
+                            <label style="margin-left: 5px">Not Subtitle</label><br>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('isSub').invalid && editFormMovie.get('isSub').touched">
+                            <p *ngIf="editFormMovie.get('isSub').hasError('required')">Subtitle is required</p>
+                            <p *ngIf="editFormMovie.get('isSub').hasError('min')">Subtitle must be number 0 or 1</p>
+                            <p *ngIf="editFormMovie.get('isSub').hasError('max')">Subtitle must be number 0 or 1</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Trailer <span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" formControlName="trailerUrl" >
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('trailerUrl').invalid && editFormMovie.get('trailerUrl').touched">
+                            <p *ngIf="editFormMovie.get('trailerUrl').hasError('required')">Trailer Url is required</p>
+                            <p *ngIf="editFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must be less than 250 characters</p>
+                            <p *ngIf="editFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Movie Genre Type <span style="color: red">(*)</span></label><br>
+                            <div style="margin-left: 5px">
+                                <div class="form-check">
+                                    <div class="row">
+                                        <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
+                                            <input class="form-check-input" [checked]="checkedEdit(mgType.id)"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesEdit($event)" >
+                                            <label style="margin-left: 5px;">
+                                                {{mgType.name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="movieRatedAgeId" >
+                                    <option value="1">G (General Audiences)</option>
+                                    <option value="2">PG (Parental Guidance Suggested)</option>
+                                    <option value="3">PG-13 (Parents Strongly Cautioned)</option>
+                                    <option value="4">R (Restricted)</option>
+                                    <option value="5">CR (Children)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('movieRatedAgeId').invalid && editFormMovie.get('movieRatedAgeId').touched">
+                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('required')">Movie Rated Age is required</p>
+                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number more than 0</p>
+                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number less than 6</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Star Rating<span style="color: red">(*)</span></label><br>
+                            <div>
+                                <select formControlName="starRating" >
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="5">5 Stars</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('starRating').invalid && editFormMovie.get('starRating').touched">
+                            <p *ngIf="editFormMovie.get('starRating').hasError('required')">Star Rating is required</p>
+                            <p *ngIf="editFormMovie.get('starRating').hasError('min')">Star Rating must be number more than 0</p>
+                            <p *ngIf="editFormMovie.get('starRating').hasError('max')">Star Rating must be number less than 6</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea   rows="4" cols="50" type="text" class="form-control" formControlName="description"></textarea>
+                        </div>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="editFormMovie.get('description').invalid && editFormMovie.get('description').touched">
+                            <p *ngIf="editFormMovie.get('description').hasError('maxLength')">Description is less than 1000 characters</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-warning" data-dismiss="modal" value="Update" [disabled]="editFormMovie.invalid " (click)="editMovie()" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END EDIT MOVIE-->
+
+<!--DELETE MOVIE-->
+<div id="cssDeleteForm">
+    <div id="deleteMovie" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form  method="post" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Movie</h4>
+                        <a ><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this movie?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a ><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"></a>
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--END DELETE MOVIE-->
+
+
+<!--ADD SHOW-->
+<div id="cssAddShowForm">
+    <div id="addShow" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+                <form >
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Show</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Movie Name: </label>
+                            <p  >{{movieName}}</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hall Name<span style="color: red">(*)</span></label>
+                            <select  name="idHall" id="hallId">
+                                <option  style="margin-left: 10px" *ngFor="let hall of halls" value="{{hall.id}}">{{hall.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Show StartTime<span style="color: red">(*)</span></label>
+                            <input type="datetime-local" class="form-control"  (change)="addShowTimes($event)">
+                        </div>
+                        <div class="form-group" style="display: flex" *ngFor="let time of showStartTimes; let i = index;">
+                            <div >
+                                <label>Selected Time</label>
+                                <input  type="text" class="form-control" value="{{time}}" readonly>
+                            </div>
+                            <div style="margin-left: 10px">
+                                <label >Show Price($)<span style="color: red">(*)</span></label>
+                                <input type="text" class="form-control" id="{{i}}" >
+                            </div>
+                            <div style="padding-top: 28px; margin-left: 5px;">
+                                <button type="button" aria-hidden="true" style="padding: 5px; color: red;"  (click)="deleteShowTimeAndShowPrice(i)">&times;</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" (click)="addShow(showStartTimes.length)">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--END ADD SHOW-->

@@ -1,0 +1,51 @@
+<h3>Tickets Cancel</h3>
+<span *ngIf="message" class="alert alert-danger">
+          {{message}}
+          </span>
+<table class="table">
+    <thead>
+    <tr>
+        <td>Movie's Name</td>
+        <td>Day Put</td>
+        <td>Total Money</td>
+        <td>Status</td>
+    </tr>
+    </thead>
+    <tbody *ngFor="let ticker of tickerPut">
+    <tr>
+        <td>{{ticker.movieName}}</td>
+        <td>{{ticker.dayPut}}</td>
+        <td>{{ticker.totalMoney}}</td>
+        <td>Cancel</td>
+    </tr>
+    </tbody>
+</table>
+<div class="row" style="margin-top: 10px" *ngIf="!message">
+    <div class="col-lg-4">
+        <div style="font-size: 15px">
+            Show {{entityNumber}} entities of {{totalEntities}} entities
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div style="float: right; margin-right: 50px">
+            <ul class="list-inline">
+                <li>
+                    <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                </li>
+
+                <li>
+                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                           [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                </li>
+
+                <li>
+                    <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<=totalPage">Next</button>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+</div>
