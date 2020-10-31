@@ -323,6 +323,10 @@ export class MovieComponent implements OnInit {
         }
     }
 
+    // hai edit
+    getLink(value) {
+        this.url = value;
+    }
 }
 
 // function to validate date > current date
