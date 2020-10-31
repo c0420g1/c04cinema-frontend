@@ -10,6 +10,7 @@ import {UserModule} from './user/user.module';
 import {AdminModule} from './admin/admin.module';
 import {DatePipe} from '@angular/common';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {httpInterceptorProviders} from './user/user-layout/auth-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
         UserModule,
         AdminModule
     ],
-    providers: [DatePipe],
+    providers: [DatePipe,httpInterceptorProviders],
     bootstrap: [AppComponent]
 })
 export class AppModule {
