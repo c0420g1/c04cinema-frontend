@@ -5,50 +5,50 @@
 }
 #inputSearch{
     /*style="border-radius: 10px;margin-left: 15px; font-size: 14px; height: 35px; width: 150px;"*/
-    border-radius: 10px;
-    margin-left: 15px;
+    border-radius: 3px;
+    margin-left: -102px;
     font-size: 14px;
     height: 35px;
     width: 150px;
 }
 #buttonSearch{
     /*style="border-radius: 10px;margin-left: 5px; font-size: 14px;height: 35px;"*/
-    border-radius: 10px;
+    border-radius: 3px;
     margin-left: 5px;
     font-size: 14px;
     height: 35px;
 }
-#movie {
+#news {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 110%;
-    margin-left: -50px;
+    width: 121%;
+    margin-left: -205px;
 }
-#movie thead{
+#news thead{
     text-align: center;
 }
-#movie td, #movie th {
+#news td, #movie th {
     text-align: center;
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#movie tr:nth-child(even){background-color: #f2f2f2;}
-#movie tbody tr td:nth-child(2){
+#news tr:nth-child(even){background-color: #f2f2f2;}
+#news tbody tr td:nth-child(2){
     text-align: left;
 }
-#movie tbody tr td:nth-child(7) {
+#news tbody tr td:nth-child(7) {
     /*font-size: 22px;*/
     margin-left: 9px;
 }
-#movie tbody tr td:nth-child(7) a i{
+#news tbody tr td:nth-child(7) a i{
     font-size: 22px;
     margin-left: 31px;
 }
 
-#movie tr:hover {background-color: #ddd;}
+#news tr:hover {background-color: #ddd;}
 
-#movie th {
+#news th {
     font-weight: bold;
     font-size: 15px;
     padding-top: 12px;
@@ -57,7 +57,7 @@
     background-color: #2a3035;
     color: white;
 }
-#movie td{
+#news td{
     font-size: 14px;
 }
 #cssAddForm input{

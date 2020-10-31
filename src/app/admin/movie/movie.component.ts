@@ -99,7 +99,7 @@ export class MovieComponent implements OnInit {
               isSub: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
               is2d: ['',[Validators.required,Validators.min(0),Validators.max(1)]],
               posterUrl: ['', [Validators.required,Validators.maxLength(300)]],
-              startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'), dateValidator]],
+              startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
               endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),]],
               duration: ['',[Validators.required,Validators.min(60),Validators.max(235),Validators.pattern(/^[0-9]+$/)]],
               trailerUrl: ['',[Validators.required,Validators.maxLength(250),

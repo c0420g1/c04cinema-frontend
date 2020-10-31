@@ -8,7 +8,7 @@ import {News} from '../../model/News';
   providedIn: 'root'
 })
 export class NewsService {
-  private readonly API_URL_NEWS = 'http://localhost:8080/news';
+  private readonly API_URL_NEWS = 'http://localhost:8080/other';
   private readonly API_URL_NEWS_2 = 'http://localhost:8080/news2';
 
   constructor(private http: HttpClient) { }
@@ -30,5 +30,10 @@ export class NewsService {
   //edit News
   editNews(news: News, id: number): Observable<News> {
     return this.http.patch<News>(this.API_URL_NEWS + '/' +  id, news);
+  }
+
+  //delete News
+  deleteNews(id: number): Observable<News>{
+    return this.http.delete<News>(this.API_URL_NEWS + '/' + id);
   }
 }
