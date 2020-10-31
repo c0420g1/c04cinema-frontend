@@ -1,7 +1,6 @@
 export class Seat {
     id: number;
-    name: number;
-    theatreId: number;
+    name: String;
     hallId: number;
     seatTypeId: number;
 }

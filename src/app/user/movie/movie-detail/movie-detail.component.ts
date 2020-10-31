@@ -41,9 +41,8 @@ export class MovieDetailComponent implements OnInit {
     dangerousVideoUrl = '';
     checkHideButton = false;
     show: Show;
-    checkTableTime = false;
     showTableTime: Show[] = [];
-
+    votes: number;
 
 
     constructor(private moviesService: MovieService,
@@ -56,6 +55,7 @@ export class MovieDetailComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.votes = Math.floor (Math.random () * 6 + 115);
 
         const dateCur = new Date();
         const resultDate = this.pipe.transform(dateCur, 'yyyy-MM-dd');

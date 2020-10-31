@@ -6,9 +6,11 @@ export class Promotion {
     description: string;
     startDate: string;
     endDate: string;
-    showId: number;
-    moveId: number;
-    theatreId: number;
-    customerId: number;
-    staffId: number
+    showId?: number;
+    moveId?: number;
+    theatreId?: number;
+    customerId?: number;
+    staffId?: number;
+    price: number;
+    picture: string
 }

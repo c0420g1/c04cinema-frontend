@@ -20,46 +20,45 @@ export class SeatComponent implements OnInit {
   seat: Seat;
   seats: Seat[] = [];
   seatType: SeatType[] = [];
+  seatNumber : number
   addFormSeat: FormGroup;
   editFormSeat: FormGroup;
 
 
   ngOnInit(): void {
+    this.theaterService.getAllSeatType().subscribe((data) => {this.seatType = data; });
     this.hallIdReceive = Number.parseInt(this.route.snapshot.paramMap.get("id"));
-    this.theaterService.getHall(this.hallIdReceive).subscribe((data) => {this.hall = data; });
     this.showListSeats(this.hallIdReceive);
     this.addFormSeat = this.fbAddSeat.group({
       name: [''],
-      theatreId: [this.hall.theatreId],
-      hallId: [this.hall.id],
-      seatTypeId: [1]
+      hallId: [this.hallIdReceive],
+      seatTypeId: [1],
     })
     ;
 
     this.editFormSeat = this.fbEditSeat.group({
-      name: ['' , [Validators.required, Validators.pattern(/^(A|B|C|D|E|F|G|H)([0-9]{1,2})$/)]],
-      theatreId: [this.hall.theatreId],
-      hallId: [this.hall.id],
-      seatTypeId: ['' , Validators.required]
+      id: [''],
+      name: [''],
+      hallId: [''],
+      seatTypeId: [''],
     })
     ;
 
   }
 
   showListSeats(hallId){
-    this.theaterService.getAllSeatType().subscribe((data) => {this.seatType = data; });
     this.theaterService.getAllSeat(hallId).subscribe((data) => {this.seats = data; });
   }
 
-  addSeatToHall(seatNumber,hallId){
-    for (let i = 0; i <= seatNumber ; i ++){
+  addSeatToHall(){
+    for (let i = 0; i <= this.seatNumber ; i ++){
       const {value} = this.addFormSeat;
       this.theaterService.addSeat(value)
           .subscribe(nextSeat => {
             this.seats.unshift(nextSeat);
           }, error => console.log(error));
     }
-    this.showListSeats(hallId);
+    this.showListSeats(this.hallIdReceive);
   }
 
   editSeat(seat: Seat){

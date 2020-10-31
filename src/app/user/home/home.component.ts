@@ -3,7 +3,7 @@ import {MovieService} from '../movie/movie.service';
 import {Movie} from 'src/app/model/Movie';
 import {DatePipe} from '@angular/common';
 import {BannerService} from '../../service/banner.service';
-import { Banner } from 'src/app/model/Banner';
+import {Banner} from 'src/app/model/Banner';
 
 declare var $: any;
 
@@ -15,12 +15,14 @@ declare var $: any;
 export class HomeComponent implements OnInit {
     movieShowing: Movie[] = [];
     bannerList: Banner[] = [];
-
+    movieBestChoice: Movie[] = [];
+    randomNumberVote: number;
     constructor(private  moviesService: MovieService, private pipe: DatePipe,
                 private bannerService: BannerService) {
     }
 
     ngOnInit(): void {
+        this.randomNumberVote = Math.floor (Math.random () * 6 + 115);
         this.bannerService.getAllBanner().subscribe((data) => this.bannerList = data);
 
         $('.banner').show().revolution({
@@ -42,7 +44,7 @@ export class HomeComponent implements OnInit {
         });
 
         $('.score').raty({
-            width: 130,
+            width: 100,
             score: 0,
             path: 'assets/images/rate/',
             starOff: 'star-off.svg',
@@ -53,6 +55,13 @@ export class HomeComponent implements OnInit {
                 this.movieShowing = data;
             }
         );
+        this.moviesService.getBestChoiceFilm().subscribe(
+            (data) => {
+                this.movieBestChoice = data;
+            },
+            error => console.log(error)
+        );
+
 
     }
 

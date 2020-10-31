@@ -28,6 +28,7 @@
                 <p *ngIf="pointForm.get('contractStarDate').hasError('pattern')"> must format (yyyy-mm-dd)</p>
             </div>
         </div>
+        <p *ngIf="error">day end > day star</p>
     </div>
     <div class="form-group row">
         <div class="col-sm-7">
@@ -54,13 +55,15 @@
         <td>Day Create</td>
         <td>Source</td>
         <td>Point</td>
+        <td>Code</td>
     </tr>
     </thead>
-    <tbody *ngFor="let point of pointS">
+    <tbody *ngFor="let point of pointListS">
     <tr>
         <td>{{point.dayPut}}</td>
         <td>{{point.movieName}}</td>
         <td>{{point.point}}</td>
+        <td>{{point.code}}</td>
     </tr>
     </tbody>
 </table>

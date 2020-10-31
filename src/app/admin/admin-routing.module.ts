@@ -11,6 +11,8 @@ import {BannerComponent} from './banner/banner.component';
 import { TheaterComponent } from './theater/theater.component';
 import {HallListComponent} from './hall-list/hall-list.component';
 import {SeatComponent} from './seat/seat.component';
+import {PromotionComponent} from './promotion/promotion.component';
+import {NewsComponent} from './news/news.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,10 @@ const routes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     children: [
+      {
+        path: 'banner',
+        component: BannerComponent
+      },
       {
         path: 'dashboard',
         component: DashboardComponent
@@ -43,8 +49,12 @@ const routes: Routes = [
         component: BookingTicketComponent
       },
       {
-        path: 'banner',
-        component: BannerComponent
+        path: 'news',
+        component: NewsComponent
+      },
+      {
+        path: 'promotion',
+        component: PromotionComponent
       },
       {
         path: 'theater',
