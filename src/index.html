@@ -77,7 +77,24 @@
         $('header').removeClass('header-wrapper')
       }
     })
+    $('.login-window').click(function(e){
+      e.preventDefault();
+      $('.overlay').removeClass('close').addClass('open');
+    });
+    $('.register-window').click(function(e){
+      e.preventDefault();
+      $('.overlayregister').removeClass('close').addClass('open');
+    });
+    $('.overlay-close').click(function(e) {
+      e.preventDefault;
+      $('.overlay').removeClass('open').addClass('close');
+      $('.overlayregister').removeClass('open').addClass('close');
 
+      setTimeout(function(){
+        $('.overlay').removeClass('close');
+        $('.overlayregister').removeClass('close');
+      }, 500);
+    });
   </script>
 <script src="https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD"></script>
 
@@ -106,5 +123,6 @@
 
     }).render('#paypal-button-container');
 </script>
+
 </body>
 </html>
