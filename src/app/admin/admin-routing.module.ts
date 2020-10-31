@@ -21,6 +21,10 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {
+        path: 'banner',
+        component: BannerComponent
+      },
+      {
         path: 'dashboard',
         component: DashboardComponent
       },
