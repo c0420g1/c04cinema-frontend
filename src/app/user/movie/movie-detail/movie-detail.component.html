@@ -7,11 +7,11 @@
             </div>
         </div>
         <div class="col-sm-7 col-md-9">
-            <a  style="color: blue" class="movie__title link--huge">{{movie.name}}</a>
+            <a  style="color: blue; font-size: 27px; font-weight: bold" class="movie__title link--huge">{{movie.name}}</a>
 
             <p class="movie__time">{{movie.duration}} min</p>
 
-            <p class="movie__option"><strong>Director: </strong><a >{{movie.director}}</a></p>
+            <p class="movie__option"><strong>Director: </strong><a>{{movie.director}}</a></p>
             <p class="movie__option"><strong>Actor: </strong><a >{{movie.actor}}</a></p>
             <p class="movie__option"><strong>Start date : </strong>{{movie.startDate}}</p>
             <p class="movie__option"><strong>Entertainment : </strong><a >{{movie.entertainment}}</a></p>
@@ -32,7 +32,7 @@
                 </div>
 
 
-                <a href="#" class="movie__show-btn" (click)="solve()">Showtime</a>
+                <a href="#" class="movie__show-btn" (click)="solve()">Description</a>
 
             </div>
         </div>
@@ -41,15 +41,20 @@
 
         <!-- Time table (choose film start time)-->
         <!-- end time table-->
+<!--        <div class="col-sm-12">-->
+<!--            <div class="time-select">-->
+<!--                <h3 class="">Time showing :</h3>-->
+<!--                <div class="time-select__item"*ngFor="let show of showTableTime">-->
+<!--                    <span>{{show.startTime | date: 'HH:mm'}}</span>-->
+<!--                </div>-->
+<!--                <div *ngIf="showTableTime.length===0">-->
+<!--                    <p>Not found !</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="col-sm-12">
-            <div class="time-select">
-                <h3 class="">Time showing :</h3>
-                <div class="time-select__item"*ngFor="let show of showTableTime">
-                    <span>{{show.startTime | date: 'HH:mm'}}</span>
-                </div>
-                <div *ngIf="showTableTime.length===0">
-                    <p>Not found !</p>
-                </div>
+            <div class="time-select" style="font-size: 15px">
+                {{movie.description}}
             </div>
         </div>
     </div>
