@@ -20,6 +20,10 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin'
     }
+  },
+  {
+    path: 'error',
+    loadChildren: () => import(`./shared/shared.module`).then(m => m.SharedModule)
   }
 ];
 

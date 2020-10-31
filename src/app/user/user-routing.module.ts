@@ -18,6 +18,7 @@ import {RegisterComponent} from './register/register.component';
 import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { LoginpageComponent } from './loginpage/loginpage.component';
 
 
 
@@ -37,6 +38,10 @@ const routes: Routes = [
             path: 'register',
             component: RegisterComponent
         }]
+      },
+      {
+        path: 'login',
+        component: LoginpageComponent
       },
       {
         path: 'promotion',
