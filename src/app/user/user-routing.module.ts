@@ -12,9 +12,14 @@ import {MovieShowingComponent} from './movie/movie-showing/movie-showing.compone
 import {MovieComingComponent} from './movie/movie-coming/movie-coming.component';
 import {MovieDetailComponent} from './movie/movie-detail/movie-detail.component';
 import { BookingComponent } from './booking/booking.component';
+import {LoginComponent} from './login/login.component';
+import {AuthGuard} from '../auth.guard';
+import {RegisterComponent} from './register/register.component';
 import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { LoginpageComponent } from './loginpage/loginpage.component';
+
 
 
 const routes: Routes = [
@@ -24,7 +29,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
+        children: [{
+          path: '',
+          component: LoginComponent
+        },
+          {
+            path: 'register',
+            component: RegisterComponent
+        }]
+      },
+      {
+        path: 'login',
+        component: LoginpageComponent
       },
       {
         path: 'promotion',
@@ -44,7 +61,12 @@ const routes: Routes = [
       },
       {
         path: 'booking/:id',
-        component: BookingComponent
+        component: BookingComponent,
+        canActivate: [AuthGuard],
+        data: {
+
+          expectedRole: 'customer'
+        }
       },
       {
         path: 'customer',
@@ -70,7 +92,11 @@ const routes: Routes = [
       },
       {
         path: 'movie-showing',
-        component: MovieShowingComponent
+        component: MovieShowingComponent,
+        children: [{
+          path: 'movie-showing',
+          component: LoginComponent
+        }]
       },
       {
         path: 'movie-coming',

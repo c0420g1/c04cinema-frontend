@@ -12,10 +12,10 @@ export class PointService {
   private readonly API_URL2 = 'http://localhost:8080/showPointUseList/page';
   constructor(private http: HttpClient) {}
 
-  getTickerPlusById(id: string,page: number,date_star :string,date_end :string): Observable<Point[]> {
+  getTickerPlusById(id: number,page: number,date_star :string,date_end :string): Observable<Point[]> {
     return this.http.get<Point[]>(`${this.API_URL1}/${page}?id=${id}&star_date=${date_star}T07:00:00&end_date=${date_end}T07:00:00`);
   }
-  getTickerListPlusById(id: string,date_star :string,date_end :string): Observable<Point[]> {
+  getTickerListPlusById(id: number,date_star :string,date_end :string): Observable<Point[]> {
     return this.http.get<Point[]>(`${this.API_URL1}/?id=${id}&star_date=${date_star}T07:00:00&end_date=${date_end}T07:00:00`);
   }
 

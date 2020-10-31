@@ -12,4 +12,5 @@ export class Customer {
     gender: string;
     cardid: string;
     code:string;
+    imageUrl:string;
 }
