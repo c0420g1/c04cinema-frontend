@@ -31,6 +31,9 @@ export class TickerPutComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
             const key = paramMap.get('id');
+
+
+
             this.tickerService
                 .getTickerById(key, this.currentPage, 0)
                 .subscribe(next => (this.tickerPut = next), error => (this.tickerPut = []));
