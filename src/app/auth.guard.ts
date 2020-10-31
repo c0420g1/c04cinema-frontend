@@ -17,14 +17,27 @@ export class AuthGuard implements CanActivate {
     const token = this.tokenStorageService.getToken();
     // decode the token to get its payload
     const tokenPayload = this.tokenStorageService.getAuthorities();
-    if (
+
+    if(tokenPayload==null)
+    this.router.navigateByUrl('/login');
+    else
+      if (
         !token ||
         tokenPayload !== expectedRole
     ) {
-      // @ts-ignore
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/error');
       return false;
     }
+    // }
+    // else{
+    //   if (
+    //     !token ||
+    //     tokenPayload !== expectedRole
+    // ) {
+    //   this.router.navigateByUrl('/login');
+    //   return false;
+    // }
+    // }
     return true;
   }
 }
