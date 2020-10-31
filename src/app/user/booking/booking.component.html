@@ -22,10 +22,10 @@
     <section class="container">
         <div class="col-sm-12">
             <h2 class="page-heading">City &amp; Date</h2>
-        <select class="select__sort" (change)="changeLocation(4)">
+        <select class="select__sort"  style="font-size: 19px" (change)="changeLocation(4)">
           <option *ngFor="let location of listLocation" [ngValue]="location.id">{{location.name}}</option>
         </select>
-        <input type="date" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
+        <input type="date" style="font-size: 15px; margin-left: 10px" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
             <h2 class="page-heading">Pick time</h2>
 
             <div class="time-select time-select--wide">
