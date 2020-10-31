@@ -64,7 +64,8 @@ const routes: Routes = [
         component: BookingComponent,
         canActivate: [AuthGuard],
         data: {
-          expectedRole: 'customer' || 'admin'
+
+          expectedRole: 'customer'
         }
       },
       {
