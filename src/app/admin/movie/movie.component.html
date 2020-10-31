@@ -7,9 +7,8 @@
                 <div class="table-title">
                     <div class="row">
                         <div style="width: 18%; display: flex" >
-<!--                            hieu edit at ngModelChange-->
-                            <input [(ngModel)]="variableFind" (ngModelChange)="searchByName(variableFind)"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
-                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">Search<i class="fa fa-search"></i></button>
+                            <input [(ngModel)]="variableFind"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">SEARCH</button>
 <!--                            <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>-->
                         </div>
                         <div class="col-sm-3">
@@ -58,9 +57,9 @@
                                 <td>3D</td>
                             </ng-template>
                             <td>
-                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovie(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovieEdit(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
                                 <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
-                                <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
+                                <a href="#addShow"  title="Add Show Time" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -69,43 +68,31 @@
 
                 <div class="row" style="margin-top: 10px; margin-bottom: 20px" *ngIf="!message">
                     <div class="col-lg-3">
-                        <div style="font-size: 15px">
-                            Show {{entityNumber}} entities of {{totalEntities}} entities
+                        <div style="font-size: 15px;">
+                            Show {{entityNumber}} movies of {{totalEntities}} movies.
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div style="float: right; margin-right: 50px">
                             <ul class="list-inline">
                                 <li>
-                                    <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                    <button (click)="prePage()" class="btn btn-light" style="font-size: 14px" *ngIf="currentPage>1">Previous</button>
                                 </li>
 
                                 <li>
-                                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="height: 33px;width: 130px;font-size: 14px"
                                            [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
                                 </li>
 
                                 <li>
-                                    <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
-                                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                    <span style="margin-left: 10px ; margin-right: 10px;color: black; font-size: 14px">{{this.currentPage}}</span>
+                                    <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage" style="font-size: 14px">Next</button>
                                 </li>
                             </ul>
-
-
                         </div>
                     </div>
-
                 </div>
-<!--                <div class="page" style="margin-left: 450px">-->
-<!--                    <button  class="btn badge-dark" >First</button>-->
-<!--                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Previous</button>-->
-<!--                    <span style= "margin-left: 10px ;" ><button class="btn badge-dark" >1</button></span>-->
-<!--                    <span style=" margin-left: 10px ;"><button class="btn badge-dark" >2</button></span>-->
 
-<!--                    <span style="margin-left: 10px ;"><button class="btn badge-dark" >3</button></span>-->
-<!--                    <button style="margin-left: 10px ;" class="btn badge-dark" >Next</button>-->
-<!--                    <button  style= "margin-left: 10px ;" class="btn badge-dark" >Last</button>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -123,19 +110,17 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <app-image-upload  (getLinkFather)="getMark($event)"></app-image-upload>
-                            <!--                                <img src="https://upload.wikimedia.org/wikipedia/vi/7/7f/Star_Wars_The_Last_Jedi.jpg" alt="" style="width: 200px; height: auto">-->
-                            <!--                                <button style="margin-left: 20px" class="btn btn-secondary" >Poster Url</button>-->
+                            <app-image-upload></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Url Poster<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" readonly>
+                            <label>Poster Url<span style="color: red">(*)</span></label>
+                            <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('posterUrl').invalid && addFormMovie.get('posterUrl').touched">
-                            <p *ngIf="addFormMovie.get('posterUrl').hasError('required')">Url Poster is required</p>
-                            <p *ngIf="addFormMovie.get('posterUrl').hasError('maxLength')">Url Poster must be less than 300 characters</p>
+                            <p *ngIf="addFormMovie.get('posterUrl').hasError('required')">Poster Url is required</p>
+                            <p *ngIf="addFormMovie.get('posterUrl').hasError('maxLength')">Poster Url must be less than 300 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Name <span style="color: red">(*)</span></label>
@@ -148,7 +133,7 @@
                         </div>
                         <div class="form-group">
                             <label>Start Date <span style="color: red">(*)</span></label>
-                            <input type="date" class="form-control" formControlName="startDate">
+                            <input type="date" class="form-control" formControlName="startDate" (change)="compareTwoDates()" [(ngModel)]="start">
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('startDate').invalid && addFormMovie.get('startDate').touched">
@@ -156,15 +141,17 @@
                             <p *ngIf="addFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
                             <p *ngIf="addFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
                         </div>
+
                         <div class="form-group">
                             <label>End Date <span style="color: red">(*)</span></label>
-                            <input type="date" class="form-control" formControlName="endDate">
+                            <input type="date" class="form-control" formControlName="endDate" [(ngModel)]="end" (change)="compareTwoDates()">
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('endDate').invalid && addFormMovie.get('endDate').touched">
                             <p *ngIf="addFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="addFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
+                        <p class="error1" *ngIf="error" style="color: red">Start Date < End Date</p>
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" formControlName="actor" >
@@ -173,7 +160,7 @@
                              *ngIf="addFormMovie.get('actor').invalid && addFormMovie.get('actor').touched">
                             <p *ngIf="addFormMovie.get('actor').hasError('required')">Actor is required</p>
                             <p *ngIf="addFormMovie.get('actor').hasError('pattern')">Actor must be not special sign</p>
-                            <p *ngIf="addFormMovie.get('actor').hasError('maxLength')">Actor must be less than 45 characters</p>
+                            <p *ngIf="addFormMovie.get('actor').hasError('maxLength')">Actor must be less than 46 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Director <span style="color: red">(*)</span></label>
@@ -203,6 +190,7 @@
                             <p *ngIf="addFormMovie.get('duration').hasError('required')">Duration (minute) is required</p>
                             <p *ngIf="addFormMovie.get('duration').hasError('min')">Duration (minute) must be number more than 60</p>
                             <p *ngIf="addFormMovie.get('duration').hasError('max')">Duration (minute) must be number less than 235</p>
+                            <p *ngIf="addFormMovie.get('duration').hasError('pattern')">Duration (minute) must be number from: 60 to 235 minutes </p>
                         </div>
                         <div class="form-group" >
                             <label>Version <span style="color: red">(*)</span></label><br>
@@ -216,6 +204,7 @@
                             <p *ngIf="addFormMovie.get('is2d').hasError('required')">Version is required</p>
                             <p *ngIf="addFormMovie.get('is2d').hasError('min')">Version must be number 0 or 1</p>
                             <p *ngIf="addFormMovie.get('is2d').hasError('max')">Version must be number 0 or 1</p>
+                            <p *ngIf="addFormMovie.get('is2d').hasError('pattern')">Version must be number 0 or 1</p>
                         </div>
                         <div class="form-group" >
                             <label >Subtitle <span style="color: red">(*)</span></label><br>
@@ -240,13 +229,14 @@
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must be less than 250 characters</p>
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
                         </div>
+
                         <div class="form-group">
                             <label>Movie Genre Type <span style="color: red">(*)</span></label><br>
                             <div style="margin-left: 5px">
                                 <div class="form-check">
                                     <div class="row">
                                         <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
-                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxes($event)">
+                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesAdd($event)" >
                                             <label style="margin-left: 5px;">
                                                 {{mgType.name}}
                                             </label>
@@ -255,8 +245,7 @@
                                 </div>
                             </div>
                         </div>
-
-
+                        <p *ngIf="errorIdMovieGenreType">Id Movie Genre Type must be from 1 to 5</p>
                         <div class="form-group">
                             <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
                             <div>
@@ -274,6 +263,7 @@
                             <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('required')">Movie Rated Age is required</p>
                             <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number more than 0</p>
                             <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number less than 6</p>
+                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('pattern')">Movie Rated Age must be number from: 1 to 5 </p>
                         </div>
                         <div class="form-group">
                             <label>Star Rating<span style="color: red">(*)</span></label><br>
@@ -292,6 +282,7 @@
                             <p *ngIf="addFormMovie.get('starRating').hasError('required')">Star Rating is required</p>
                             <p *ngIf="addFormMovie.get('starRating').hasError('min')">Star Rating must be number more than 0</p>
                             <p *ngIf="addFormMovie.get('starRating').hasError('max')">Star Rating must be number less than 6</p>
+                            <p *ngIf="addFormMovie.get('starRating').hasError('pattern')">Star Rating must be number from: 1 to 5 </p>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -311,7 +302,6 @@
         </div>
     </div>
 </div>
-
 <!--END ADD NEW FILM-->
 
 <!--EDIT FILM-->
@@ -326,16 +316,24 @@
                     </div>
                     <div class="modal-body">
                         <div>
-<!--                            <img  alt="" style="width: 200px; height: auto">-->
-                            <input type="text" formControlName="posterUrl" alt="" style="width: 200px; height: auto">
-<!--                            <div [style.]="" style="width: 300px; height: 600px"></div>-->
-                            <button style="margin-left: 20px" class="btn btn-secondary">Poster Url</button>
+                            <app-image-upload ></app-image-upload>
+                        </div>
+                        <br>
+                        <div>
+                            <img  [src]="posterUrlShowImage" style="width: 200px; height: auto">
+                        </div>
+                        <div>
+                            <label>Poster Url <span style="color: red">(*)</span></label>
+                            <input type="text" formControlName="posterUrl" [value]="url" alt="" style="width: 200px; height: auto" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('posterUrl').invalid && editFormMovie.get('posterUrl').touched">
-                            <p *ngIf="editFormMovie.get('posterUrl').hasError('required')">Url Poster is required</p>
-                            <p *ngIf="editFormMovie.get('posterUrl').hasError('maxLength')">Url Poster must be less than 300 characters</p>
+                            <p *ngIf="editFormMovie.get('posterUrl').hasError('required')">Poster Url is required</p>
+                            <p *ngIf="editFormMovie.get('posterUrl').hasError('maxLength')">Poster Url must be less than 300 characters</p>
                         </div>
+
+                        <br>
+
                         <input type="hidden" formControlName="id">
                         <div class="form-group">
                             <label>Name <span style="color: red">(*)</span></label>
@@ -349,7 +347,7 @@
 
                         <div class="form-group">
                             <label>Start Date <span style="color: red">(*)</span></label>
-                            <input type="date" class="form-control" formControlName="startDate">
+                            <input type="date" class="form-control" formControlName="startDate" (change)="compareTwoDates()" [(ngModel)]="start">
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('startDate').invalid && editFormMovie.get('startDate').touched">
@@ -357,15 +355,18 @@
                             <p *ngIf="editFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
                             <p *ngIf="editFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
                         </div>
+
                         <div class="form-group">
                             <label>End Date <span style="color: red">(*)</span></label>
-                            <input type="date" class="form-control" formControlName="endDate">
+                            <input type="date" class="form-control" formControlName="endDate" [(ngModel)]="end" (change)="compareTwoDates()">
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('endDate').invalid && editFormMovie.get('endDate').touched">
                             <p *ngIf="editFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="editFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
+                        <p class="error1" *ngIf="error">Start Date > End Date</p>
+
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" formControlName="actor">
@@ -404,12 +405,13 @@
                             <p *ngIf="editFormMovie.get('duration').hasError('required')">Duration (minute) is required</p>
                             <p *ngIf="editFormMovie.get('duration').hasError('min')">Duration (minute) must be number more than 60</p>
                             <p *ngIf="editFormMovie.get('duration').hasError('max')">Duration (minute) must be number less than 235</p>
+                            <p *ngIf="editFormMovie.get('duration').hasError('pattern')">Duration (minute) must be number from: 60 to 235 minutes </p>
                         </div>
                         <div class="form-group" >
                             <label>Version <span style="color: red">(*)</span></label><br>
-                            <input type="radio"  formControlName="is2d" value="1">
+                            <input type="radio"  formControlName="is2d" [value] ="1">
                             <label style="margin-left: 5px">2D</label>
-                            <input type="radio"  formControlName="is2d" value="0" style="margin-left: 55px;" >
+                            <input type="radio"  formControlName="is2d" [value]="0" style="margin-left: 55px;" >
                             <label style="margin-left: 5px" >3D</label><br>
                         </div>
                         <div class="alert alert-danger" role="alert"
@@ -420,9 +422,9 @@
                         </div>
                         <div class="form-group" >
                             <label >Subtitle <span style="color: red">(*)</span></label><br>
-                            <input type="radio"  formControlName="isSub" value="1">
+                            <input type="radio"  formControlName="isSub" [value] ="1">
                             <label style="margin-left: 5px">Subtitle</label>
-                            <input type="radio"  formControlName="isSub" value="0" style="margin-left: 55px;" >
+                            <input type="radio"  formControlName="isSub" [value] ="0" style="margin-left: 55px;" >
                             <label style="margin-left: 5px">Not Subtitle</label><br>
                         </div>
                         <div class="alert alert-danger" role="alert"
@@ -456,7 +458,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <p *ngIf="errorIdMovieGenreTypeEdit">Id Movie Genre Type must be from 1 to 5</p>
                         <div class="form-group">
                             <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
                             <div>

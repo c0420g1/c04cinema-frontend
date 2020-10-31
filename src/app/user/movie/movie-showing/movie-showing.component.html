@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row mt-2 ml-2">
         <div class="col-3">
-            <p class="title-search"><strong>Search </strong></p>
+<!--            <p class="title-search"><strong>Search </strong></p>-->
+            <img src="https://www.cgv.vn/media/wysiwyg/2019/AUG/kenhcine.gif">
+            <h3 class="fa fa search">Search</h3>
         </div>
         <div class="col-4">
             <input type="date" class="form-control btn-block ml-2 input-search-date"
@@ -49,3 +51,4 @@
 
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 </div>
+<router-outlet></router-outlet>

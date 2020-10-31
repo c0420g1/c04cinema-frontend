@@ -15,24 +15,25 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { BookingTicketComponent } from './booking-ticket/booking-ticket.component';
 import { BannerComponent } from './banner/banner.component';
-import { TheaterComponent } from './theater/theater.component';
+import { PromotionAdminComponent } from './promotion-admin/promotion-admin.component';
 import {HallListComponent} from './hall-list/hall-list.component';
-import { SeatComponent } from './seat/seat.component';
+import {TheaterComponent} from './theater/theater.component';
+import {SeatComponent} from './seat/seat.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PromotionComponent } from './promotion/promotion.component';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, TheaterComponent,HallListComponent, SeatComponent, PromotionComponent],
-    imports: [
-        CommonModule,
-        AdminRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireStorageModule,
-        AngularFireDatabaseModule,
-        NgxLoadingModule.forRoot({}),
-        NgxPaginationModule
-    ]
+  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, PromotionAdminComponent, TheaterComponent,HallListComponent,SeatComponent, PromotionComponent, NewsComponent],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    NgxLoadingModule.forRoot({}), NgxPaginationModule
+  ]
 })
 export class AdminModule { }

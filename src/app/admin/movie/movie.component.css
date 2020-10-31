@@ -1,3 +1,8 @@
+.posterUrlShowImage{
+    width: 223px;
+    height: auto;
+    border: 2px solid black;
+}
 #inputSearch{
     /*style="border-radius: 10px;margin-left: 15px; font-size: 14px; height: 35px; width: 150px;"*/
     border-radius: 10px;
@@ -16,7 +21,8 @@
 #movie {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 110%;
+    margin-left: -50px;
 }
 #movie thead{
     text-align: center;

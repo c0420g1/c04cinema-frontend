@@ -7,19 +7,21 @@
             </div>
         </div>
         <div class="col-sm-7 col-md-9">
-            <a  style="color: blue" class="movie__title link--huge">{{movie.name}}</a>
+            <a style="color: blue; font-size: 27px; font-weight: bold"
+               class="movie__title link--huge">{{movie.name}}</a>
 
             <p class="movie__time">{{movie.duration}} min</p>
 
-            <p class="movie__option"><strong>Director: </strong><a >{{movie.director}}</a></p>
-            <p class="movie__option"><strong>Actor: </strong><a >{{movie.actor}}</a></p>
+            <p class="movie__option"><strong>Director: </strong><a>{{movie.director}}</a></p>
+            <p class="movie__option"><strong>Actor: </strong><a>{{movie.actor}}</a></p>
             <p class="movie__option"><strong>Start date : </strong>{{movie.startDate}}</p>
-            <p class="movie__option"><strong>Entertainment : </strong><a >{{movie.entertainment}}</a></p>
-            <p class="movie__option"><strong>Actors: </strong><a >{{movie.actor}}</a></p>
-            <p class="movie__option"><strong>Age restriction: </strong><a >{{movie.movieRatedAgeId}}</a></p>
+            <p class="movie__option"><strong>Entertainment : </strong><a>{{movie.entertainment}}</a></p>
+            <p class="movie__option"><strong>Actors: </strong><a>{{movie.actor}}</a></p>
+            <p class="movie__option"><strong>Age restriction: </strong><a>{{movie.movieRatedAgeId}}</a></p>
 
             <div class="movie__btns">
-                <a [routerLink]="['/booking',movie.id]" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book a ticket <span class="hidden-sm">for this movie</span></a>
+                <a [routerLink]="['/booking',movie.id]" class="btn btn-md btn--warning" *ngIf="checkHideButton===false">book
+                    a ticket <span class="hidden-sm">for this movie</span></a>
                 <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal"
                    class="watchlist">Watch trailer</a>
             </div>
@@ -27,31 +29,19 @@
             <div class="preview-footer">
                 <div class="movie__rate">
                     <div class="score"></div>
-                    <span class="movie__rate-number">170 votes</span>
+                    <span class="movie__rate-number">{{votes}} votes</span>
                     <span class="movie__rating">{{movie.starRating}}</span>
                 </div>
-
-
-                <a href="#" class="movie__show-btn" (click)="solve()">Showtime</a>
-
             </div>
         </div>
 
         <div class="clearfix"></div>
 
-        <!-- Time table (choose film start time)-->
-        <!-- end time table-->
-        <div class="col-sm-12">
-            <div class="time-select">
-                <h3 class="">Time showing :</h3>
-                <div class="time-select__item"*ngFor="let show of showTableTime">
-                    <span>{{show.startTime | date: 'HH:mm'}}</span>
-                </div>
-                <div *ngIf="showTableTime.length===0">
-                    <p>Not found !</p>
-                </div>
-            </div>
-        </div>
+
+    </div>
+    <div class="col-sm-12" style="font-size: 15px;">
+        <h4 class="page-heading">Description :</h4>
+        {{movie.description}}
     </div>
 </div>
 
