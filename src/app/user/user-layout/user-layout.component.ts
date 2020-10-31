@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RegisterService} from './register.service';
-import {CustomerDTO} from './model/customerDTO';
 declare var $: any;
-import * as bcrypt from 'bcryptjs';
-import {AuthService} from './auth.service';
-import {TokenStorageService} from './token-storage.service';
 import {Router} from '@angular/router';
-import {Account} from '../customer/model/Account';
+import { RegisterService } from './register.service';
+import { CustomerDTO } from './model/customerDTO';
+import { TokenStorageService } from './token-storage.service';
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
@@ -20,6 +17,10 @@ export class UserLayoutComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    $('.auth__show').click(function (e){
+      e.preventDefault();
+      $('.auth__function').toggleClass('open-function')
+    });
     $('.login-window').click(function(e){
       e.preventDefault();
       $('.overlay').removeClass('close').addClass('open');
@@ -55,5 +56,9 @@ export class UserLayoutComponent implements OnInit {
   }
    register(){
    this.router.navigateByUrl('/register');
+  }
+  toggle(){
+    var menu = document.querySelector('.auth__function');
+    menu.classList.toggle('open-function');
   }
 }

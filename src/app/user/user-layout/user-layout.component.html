@@ -52,7 +52,7 @@
           </li>
         </ul>
       </nav>
-      <div class="control-panel" *ngIf="info.token; else block1">
+      <div class="control-panel" *ngIf="info.token; else block1" (click)="toggle()">
         <div class="auth auth--home">
           <div class="auth__show">
                   <span class="auth__image">
