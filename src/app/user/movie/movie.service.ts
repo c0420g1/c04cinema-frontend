@@ -13,6 +13,7 @@ export class MovieService {
   private readonly API_MOV_BY_NAME = 'http://localhost:8080/movie/';
   private readonly API_MOV_COM = 'http://localhost:8080/movie-coming/';
   private readonly TOTAL_MOV_COM = 'http://localhost:8080/totalPageComing/';
+  private readonly MOV_BEST_CHOICE = 'http://localhost:8080/movie/bestchoise';
 
   constructor(private http: HttpClient) {
   }
@@ -41,6 +42,9 @@ export class MovieService {
 
   getTotalPage(date: string): Observable<number>{
     return this.http.get<number>(this.TOTAL_MOV_COM + date);
+  }
+  getBestChoiceFilm():Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.MOV_BEST_CHOICE);
   }
 
 }
