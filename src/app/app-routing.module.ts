@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import(`./admin/admin.module`).then(m => m.AdminModule)
+  },
+  {
+    path: 'error',
+    loadChildren: () => import(`./shared/shared.module`).then(m => m.SharedModule)
   }
 ];
 
