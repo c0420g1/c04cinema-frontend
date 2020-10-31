@@ -13,6 +13,8 @@ export class RegisterService {
   private API_URL_ADD_ACCOUNT = 'http://localhost:8080/account'
   private API_URL_ADD_CUSTOMER = 'http://localhost:8080/customer'
   private API_URL_ROLE = 'http://localhost:8080/role_account'
+  private API_URL_CHECK_ACCOUNT = 'http://localhost:8080/checkAccount'
+  private API_URL_CHECK_EMAIL = 'http://localhost:8080/checkEmail'
   constructor(private http: HttpClient) { }
   getAccountIdFirst(): Observable<Account>{
     return this.http.get<Account>(this.API_URL_AC);
@@ -28,5 +30,11 @@ export class RegisterService {
   }
   addRole(role): Observable<any>{
     return this.http.post(this.API_URL_ROLE, role);
+  }
+  checkAccount(account): Observable<any>{
+    return this.http.post(this.API_URL_CHECK_ACCOUNT, account);
+  }
+  chekEmail(email: string): Observable<any>{
+    return this.http.post(this.API_URL_CHECK_EMAIL, email);
   }
 }
