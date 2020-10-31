@@ -5,15 +5,15 @@
 }
 #inputSearch{
     /*style="border-radius: 10px;margin-left: 15px; font-size: 14px; height: 35px; width: 150px;"*/
-    border-radius: 10px;
-    margin-left: 15px;
+    border-radius: 3px;
+    margin-left: -102px;
     font-size: 14px;
     height: 35px;
     width: 150px;
 }
 #buttonSearch{
     /*style="border-radius: 10px;margin-left: 5px; font-size: 14px;height: 35px;"*/
-    border-radius: 10px;
+    border-radius: 3px;
     margin-left: 5px;
     font-size: 14px;
     height: 35px;
@@ -21,8 +21,8 @@
 #movie {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 110%;
-    margin-left: -50px;
+    width: 121%;
+    margin-left: -205px;
 }
 #movie thead{
     text-align: center;
