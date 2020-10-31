@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-// @ts-ignore
-import {Hall} from '../../model/hall';
-import {Show} from '../../model/show';
 import {Movie} from '../../model/Movie';
 import {MovieGenreType} from '../../model/MovieGenreType';
 import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
+import { Show } from 'src/app/model/Show';
+import { Hall } from 'src/app/model/Hall';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-// <<<<<<< Updated upstream
   private readonly API_URL_MOVIE = 'http://localhost:8080/movies';
   private readonly API_URL_MOVIE_2 = 'http://localhost:8080/movie';
-// =======
-  // private readonly API_URL_MOVIE = 'http://localhost:8080/movie';
-// >>>>>>> Stashed changes
+
   private readonly API_URL_MOVIE_GENRE_TYPE = 'http://localhost:8080/movie_genre_type';
   private readonly API_URL_MOVIE_GENRE_ASSOCIATE = 'http://localhost:8080/movie_genre_associate';
   private readonly API_URL_LAST_MOVIE = 'http://localhost:8080/lastMovie';
@@ -27,9 +23,7 @@ export class MovieService {
   private readonly API_URL_DELETE_ALL_MOVIE_GENRE_ASSOCIATE_BY_MOVIE_ID = 'http://localhost:8080/movieGenreAssociate';
   private readonly API_URL_SHOW = 'http://localhost:8080/show';
 
-  // //creator Hieu to search by name of movie
-  // private readonly API_SEARCH_NAME = 'http://localhost:8080/movie/';
-
+ //creator Hieu to search by name of movie
   constructor(private http: HttpClient) { }
   //get Movie List and Search that disable pageable
   getListMovie(search: string): Observable<Movie[]>{
