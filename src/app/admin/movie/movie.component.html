@@ -1,30 +1,30 @@
 
-<div class="content" style="height: 71vh">
-    <div class="container-fluid">
+<div class="content" style="margin-top: 10px">
+    <div class="container" >
         <div class="row" >
-            <div class="col-10" style="margin-top: 5px; margin-left: 8%">
+            <div class="col-12" style="margin-top: 5px; margin-left: 8%">
 
                 <div class="table-title">
                     <div class="row">
-                        <div style="width: 18%; display: flex" >
+                        <div class="col-sm-3" style="width: 18%; display: flex" >
                             <input [(ngModel)]="variableFind"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
                             <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">SEARCH</button>
-<!--                            <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>-->
                         </div>
                         <div class="col-sm-3">
-                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
+                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 500px;border-radius: 3px;"
+                               href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-9" style="max-width: 75%">
-                            <div style="margin-left: 380px;">
+                            <div style="margin-left: 311px;">
                                 <p style="font-size: 31px; font-weight: bold">Movie Management</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div>
+                <div class="col-sm-12">
                     <h3 class="text text-success" *ngIf="message">{{message}}</h3>
                     <table id="movie">
                         <thead>
@@ -320,8 +320,9 @@
                         </div>
                         <br>
                         <div>
-                            <img  [src]="posterUrlShowImage" style="width: 200px; height: auto">
+                            <img  [src]="posterUrlShowImage" style="width: auto; height: 200px">
                         </div>
+                        <br>
                         <div>
                             <label>Poster Url <span style="color: red">(*)</span></label>
                             <input type="text" formControlName="posterUrl" [value]="url" alt="" style="width: 200px; height: auto" >
@@ -353,7 +354,6 @@
                              *ngIf="editFormMovie.get('startDate').invalid && editFormMovie.get('startDate').touched">
                             <p *ngIf="editFormMovie.get('startDate').hasError('required')">Start Date is required</p>
                             <p *ngIf="editFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
-                            <p *ngIf="editFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
                         </div>
 
                         <div class="form-group">
@@ -365,7 +365,7 @@
                             <p *ngIf="editFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="editFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
-                        <p class="error1" *ngIf="error">Start Date > End Date</p>
+                        <p class="error1" *ngIf="error" style="color: red">Start Date > End Date</p>
 
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
