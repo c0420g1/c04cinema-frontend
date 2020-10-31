@@ -5082,7 +5082,8 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   border: none;
   padding-left: 23px;
 }
-#navigation .menu__nav-item:before {
+/*neu dung menu nav thi se hien dau cham*/
+#navigation . menu__nav-item:before {
   content: "\f111";
   color: #b4b1b2;
   font: 5px "FontAwesome";
@@ -5853,11 +5854,15 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   left: 0;
 }
 .movie .movie__option {
-  font-size: 13px;
+  font-size: 15px;
   margin-bottom: 3px;
+}
+.movie__option strong{
+  font-weight: bold;
 }
 .movie__option a{
   color: blue!important;
+  font-size: 15px;
 }
 .movie .comment-link {
   position: relative;
@@ -6636,7 +6641,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .contact-form-wrapper {
   background-color: #ffd564;
   overflow: hidden;
-  margin: 76px 0;
+  margin: 36px 0;
   padding: 56px 0 60px;
 }
 .contact-info {

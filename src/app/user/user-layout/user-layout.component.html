@@ -24,27 +24,27 @@
             <a routerLink="">Home</a>
 
           </li>
-          <li>
-            <span class="sub-nav-toggle plus"></span>
+          <li >
+
             <a>Movies</a>
-            <ul style="list-style: none">
+            <ul >
               <ol class="menu__nav-item"><a  routerLink="/movie-showing">Movies showing</a></ol>
               <ol class="menu__nav-item"><a routerLink="/movie-coming">Movies coming soon</a></ol>
             </ul>
           </li>
           <li>
             <span class="sub-nav-toggle plus"></span>
-            <a routerLink="promotion">Promotion</a>
+            <a routerLink="/promotion">Promotion</a>
 
           </li>
           <li>
             <span class="sub-nav-toggle plus"></span>
-            <a href="cinema">Cinema</a>
+            <a routerLink="/gallery">Gallery</a>
 
           </li>
           <li>
             <span class="sub-nav-toggle plus"></span>
-            <a routerLink="booking">News</a>
+            <a routerLink="/news">News</a>
 
           </li>
           <li>
@@ -83,9 +83,8 @@
   <router-outlet></router-outlet>
 
 <!--  end-body-->
-  <div class="clearfix"></div>
 
-  <footer class="footer-wrapper">
+  <footer class="footer-wrapper" style="background-color: blue;">
     <section class="container">
       <div class="col-xs-4 col-md-2 footer-nav">
         <ul class="nav-link">
@@ -107,7 +106,7 @@
         <ul class="nav-link">
           <li><a href="#" class="nav-link__item">Terms of use</a></li>
           <li><a href="gallery-four.html" class="nav-link__item">Gallery</a></li>
-          <li><a href="contact.html" class="nav-link__item">Contacts</a></li>
+          <li><a routerLink="contact" class="nav-link__item">Contacts</a></li>
           <li><a href="page-elements.html" class="nav-link__item">Support</a></li>
         </ul>
       </div>

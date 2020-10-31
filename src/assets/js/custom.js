@@ -225,13 +225,14 @@ function init_Home() {
     "use strict";
 
 	//1. Init revolution slider and add arrows behaviour
-				var api = $('.banner').show().revolution({
+
+    jQuery('#rev_slider_1').show().revolution({
                     delay:9000,
                     startwidth:1170,
                     startheight:500,
 
                     navigation: {
- 
+
                         arrows: {
                             enable: true,
                             style: 'hebe',
@@ -239,7 +240,6 @@ function init_Home() {
                             tmp: '<span class="slider__info">{{title}}</span>'
                         }
                     },
-
                     spinner: 'spinner2',
                   });
 

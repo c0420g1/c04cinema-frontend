@@ -15,6 +15,10 @@ import { BookingComponent } from './booking/booking.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from '../auth.guard';
 import {RegisterComponent} from './register/register.component';
+import { ContactComponent } from './contact/contact.component';
+import { NewsComponent } from './news/news.component';
+import { GalleryComponent } from './gallery/gallery.component';
+
 
 
 const routes: Routes = [
@@ -37,6 +41,18 @@ const routes: Routes = [
       {
         path: 'promotion',
         component: PromotionComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
+      },
+      {
+        path: 'news',
+        component: NewsComponent
+      },
+      {
+        path: 'gallery',
+        component: GalleryComponent
       },
       {
         path: 'booking/:id',

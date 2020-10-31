@@ -59,7 +59,7 @@
                             <td>
                                 <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovieEdit(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
                                 <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
-                                <a href="#addShow"  title="Add Show" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
+                                <a href="#addShow"  title="Add Show Time" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -68,8 +68,8 @@
 
                 <div class="row" style="margin-top: 10px; margin-bottom: 20px" *ngIf="!message">
                     <div class="col-lg-3">
-                        <div style="font-size: 15px">
-                            Show {{entityNumber}} entities of {{totalEntities}} entities
+                        <div style="font-size: 15px;">
+                            Show {{entityNumber}} movies of {{totalEntities}} movies.
                         </div>
                     </div>
                     <div class="col-lg-9">
