@@ -27,7 +27,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/custom.js"
+              "src/assets/js/custom.js",
+              "src/assets/js/external/jquery.raty.js"
             ]
           },
           "configurations": {
