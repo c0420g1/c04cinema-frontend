@@ -18,6 +18,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {SafePipeModule} from 'safe-pipe';
 import {BookingComponent} from './booking/booking.component';
 import {NgxLoadingModule} from 'ngx-loading';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ContactComponent } from './contact/contact.component';
+import { NewsComponent } from './news/news.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 // @ts-ignore
@@ -26,7 +30,7 @@ import {NgxLoadingModule} from 'ngx-loading';
         PromotionComponent, CustomerComponent, InformationComponent,
         HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
         MovieShowingComponent, MovieComingComponent,
-        MovieDetailComponent, BookingComponent],
+        MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent],
     imports: [
         CommonModule,
         UserRoutingModule,
@@ -35,6 +39,7 @@ import {NgxLoadingModule} from 'ngx-loading';
         HttpClientModule,
         SafePipeModule,
         NgxLoadingModule,
+        NgxPaginationModule,
 
     ]
 })
