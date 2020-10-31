@@ -1,0 +1,28 @@
+.quoc{
+    display: inline-block;
+    padding: 5px 87px 10px 19px;
+    /* margin-top: 14px; */
+    line-height: 18px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #dbdee1;
+    background-color: #fff;
+    color: #4c4145;
+    font-size: 13px;
+}
+
+.qg{
+        display: inline-block;
+        width: 80px;
+        margin: 0 10px 0 10px;
+        line-height: 18px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        border: solid 1px #dbdee1;
+        background-color: #fff;
+        color: #4c4145;
+        font-size: 33px;
+        text-align: center;
+    }

@@ -6817,7 +6817,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   font: 16px 'aleoregular', sans-serif;
   padding-left: 55px;
   position: relative;
-  width: 33.2%;
+  width: 25%;
   display: inline-block;
 }
 .order-step-area .order-step:before {

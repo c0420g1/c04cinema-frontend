@@ -1,19 +1,21 @@
     <div id="step0">
-    <section class="container" style="padding-top:50px">
+    <section class="container" style="padding-top:40px">
         <div class="order-container">
             <div class="order">
-                <img class="order__images" alt='' src="assets/images/tickets.png">
+                <img class="order__images" alt='' src="assets/images/q.png" style="width: 130px; height: 120px;">
                 <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
                 <div class="order__control">
-                    <a (click)="fstep2()" [ngClass]="{active: !isActive }" class="order__control-btn">Purchase</a>
-                    <a (click)="fstep22()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
+                    <a (click)="fstep22()" [ngClass]="{active: !isActive }" class="order__control-btn">Purchase</a>
+                    <a (click)="fstep3()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
                 </div>
             </div>
         </div>
         <div class="order-step-area">
             <div [ngClass]="{order_step_disable: step!='s1'}" class="order-step first--step">1. Where &amp; When</div>
-                    <div [ngClass]="{order_step_disable: step!='s2'}" class="order-step second--step">2. Choose a sit</div>
-                    <div [ngClass]="{order_step_disable: step!='s3'}" class="order-step third--step">3. Check out</div>
+                    <div [ngClass]="{order_step_disable: step!='s2'}" class="order-step first--step">2. Choose a sit</div>
+                    <div [ngClass]="{order_step_disable: step!='s3'}" class="order-step first--step">3. Choose a combo</div>
+                    <div [ngClass]="{order_step_disable: step!='s4'}" class="order-step third--step">4. Check out</div>
+                    
         </div>
 
     </section>
@@ -21,6 +23,7 @@
     <div id="step1">
     <section class="container">
         <div class="col-sm-12">
+            <h2 class="page-heading">Film: {{movieName}}</h2>
             <h2 class="page-heading">City &amp; Date</h2>
         <select class="select__sort"  style="font-size: 19px" (change)="changeLocation(4)">
           <option *ngFor="let location of listLocation" [ngValue]="location.id">{{location.name}}</option>
@@ -105,6 +108,48 @@
     </div>
     </div>
 
+<div id="stCombo" style="display: none;">
+    <section class="container">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="page-heading">Combo</h2>
+
+                    <div class="rates-wrapper rates--full">
+
+                        <table>
+                            <tr class="rates">
+    
+                              <td style="width: 29%"> <img src="assets/images/1.jpg" style="width: 300px; height: 210px;"></td>
+                                <td class="rates__obj" style="width: 16%;" >Coombo Name</td>
+                                <td class="rates__vote" style="width: 23%;"><span (click)="minus()"><i class="fa fa-minus-circle" style="font-size: xx-large;"></i></span>
+                                    <span><input type="text" class="qg" value="{{quantity}}" (keyup)="quan($event.target.value)"></span>
+                            <span (click)="plus()"><i class="fa fa-plus-circle" style="font-size: xx-large;"></i></span>
+                                </td>
+                                <td style="width: 16%;font-size: xx-large;">20$</td>
+                                <td class="rates__result">4.8</td>
+                            </tr>
+                        
+                    </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<div class="clearfix"></div>
+        <div class="booking-pagination booking-pagination--margin">
+            <a  (click)="stepCombo()" class="booking-pagination__prev">
+                <span class="arrow__text arrow--prev">prev step</span>
+                <span class="arrow__info">chooise a sit</span>
+            </a>
+            <a (click)="fstep22()" class="booking-pagination__next">
+                <span class="arrow__text arrow--next">next step</span>
+                <span class="arrow__info">checkout</span>
+            </a>
+    </div>
+</div>
+
     <div id="payment" style="display: none;">
         <section class="container">
             <div class="col-sm-12">
@@ -115,8 +160,14 @@
                     <li class="book-result__item">You get new bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
                 </ul>
                 <h2 class="page-heading">Input your promotion code</h2>
-                <input name="promotionCode" (keyup)="getProCode($event.target.value)" />
-                <input type="button" value="Use" (click)="useProCode()">
+                <input type="text" name="promotionCode" (keyup)="getProCode($event.target.value)" class="quoc" width="200px" />
+                <input type="button" value="Use Code" (click)="useProCode()" class="btn btn-md btn--danger search__button">
+
+                    
+                <!-- <input type="text" class="quoc">
+                <button type='submit' class="btn btn-md btn--danger search__button" style="position: static">use code</button> -->
+            
+    
                 <h2 class="page-heading">Choose payment method</h2>
                 <div id="paypal-button-container"></div>
 
@@ -190,7 +241,7 @@
         <section class="container" style="padding-top:50px">
             <div class="order-container">
                 <div class="order">
-                    <img class="order__images" alt='' src="assets/images/tickets.png">
+                    <img class="order__images" alt='' src="assets/images/q.png" style="width: 130px; height: 120px;">
                     <p class="order__title">Thank you <br><span class="order__descript">you have successfully reserved seat</span></p>
                 </div>
 

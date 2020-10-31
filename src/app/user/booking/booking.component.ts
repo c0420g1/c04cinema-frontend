@@ -8,7 +8,8 @@ import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
 import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MovieService } from '../movie/movie.service';
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -33,12 +34,14 @@ export class BookingComponent implements OnInit {
   step: string= 's1';
   accountId: number=1;
   movieId: number= 94;
+  movieName: string;
   seatId: number;
   showTime: string;
   hallName: string;
   theatreName: string;
+  quantity: number=0;
   // res: BookingTicket = new BookingTicket();
-  constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute, private movieService: MovieService) {
     
   }
 
@@ -127,30 +130,44 @@ export class BookingComponent implements OnInit {
     $("#step1").hide();
     $("#step2").hide();
     $("#step3").hide();
+    $("#stCombo").show();
+  }
+
+  fstep22() {
+    this.step='s4';
+    this.isActive= false;
+    $("#step1").hide();
+    $("#step2").hide();
+    $("#stCombo").hide();
     $("#payment").show();
     this.ticketQuantity= this.listRes.length;
   }
 
-  fstep22() {
-    this.step='s3';
+  fstep3(){
+    this.step='s4';
     this.isActive= true;
+    $("#stCombo").hide();
     $("#step1").hide();
     $("#step2").hide();
     $("#payment").hide();
     $("#step3").show();
     this.ticketQuantity= this.listRes.length;
+    // this.hiddenAll();
+    // this.listRes.forEach(e=> {
+    //   e.contactEmail="hcronin0@mtv.com";
+    //   e.contactPhone= "5859577512";
+    //   e.paymentId= 2;
+    //   e.promotionId= 16;
+    //   this.bookService.booking(e).subscribe();
+    //   });
+    // $("#reserve").show();
   }
 
-  fstep3(){
+  stepCombo(){
+    this.step='s2';
     this.hiddenAll();
-    this.listRes.forEach(e=> {
-      e.contactEmail="hcronin0@mtv.com";
-      e.contactPhone= "5859577512";
-      e.paymentId= 2;
-      e.promotionId= 16;
-      this.bookService.booking(e).subscribe();
-      });
-    $("#reserve").show();
+    $("#step0").show();
+    $("#step2").show();
   }
 
   fstep4(){
@@ -176,34 +193,51 @@ export class BookingComponent implements OnInit {
   }
 
   pPurchase(){
-    this.step='s2';
+    this.step='s3';
     this.hiddenAll();
     $("#step0").show();
-    $("#step2").show();
+    $("#stCombo").show();
   }
 
   pReserve(){
-    this.step='s2';
+    this.step='s3';
     this.hiddenAll();
     $("#step0").show();
-    $("#step2").show();
+    $("#stCombo").show();
   }
   hiddenAll(){
     $("#step0").hide();
     $("#step1").hide();
     $("#step2").hide();
     $("#step3").hide();
+    $("#stCombo").hide();
     $("#payment").hide();
     $("#reserve").hide();
   }
 
+  plus(){
+    this.quantity++;
+ }
+ minus(){
+   if(this.quantity>0)
+      this.quantity--;
+ }
 
+ quan(val){
+    this.quantity= val;
+ }
   ngOnInit(): void {
     $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
     const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
     this.dateShow = currentDate;
 
-
+    this.activatedRoute.paramMap.subscribe(
+      (param: ParamMap) => {
+          this.movieId = (Number)(param.get('id'));
+          this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
+            this.movieName= r[0].name;
+          });
+      });
     this.bookService.getAllLocation().subscribe(r => this.listLocation = r);
     this.bookService.getBookingTime(this.locationId, this.movieId, '2020-11-28').subscribe((data: any) => {
       this.listTheatreTime = data; console.log(this.listTheatreTime); }

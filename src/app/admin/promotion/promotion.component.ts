@@ -3,13 +3,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Promotion} from '../../model/promotion';
 import {PromotionService} from '../../service/promotion.service';
 import {ShowService} from '../../user/movie/show.service';
-import {Show} from '../../model/show';
 import {Movie} from '../../model/Movie';
 import {Theatre} from '../../model/theatre';
 import {Customer} from '../../user/customer/model/Customer';
 import {MovieService} from '../movie/movie.service';
 import {TheaterService} from '../theater/theater.service';
 import {CustomerService} from '../../user/customer/service/customer.service';
+import { Show } from 'src/app/model/Show';
 
 @Component({
   selector: 'app-promotion',
