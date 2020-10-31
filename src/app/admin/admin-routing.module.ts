@@ -11,6 +11,7 @@ import {BannerComponent} from './banner/banner.component';
 import { TheaterComponent } from './theater/theater.component';
 import {HallListComponent} from './hall-list/hall-list.component';
 import {SeatComponent} from './seat/seat.component';
+import {PromotionComponent} from './promotion/promotion.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: 'banner',
         component: BannerComponent
+      },
+      {
+        path: 'promotion',
+        component: PromotionComponent
       },
       {
         path: 'theater',

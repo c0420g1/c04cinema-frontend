@@ -19,9 +19,10 @@ import { TheaterComponent } from './theater/theater.component';
 import {HallListComponent} from './hall-list/hall-list.component';
 import { SeatComponent } from './seat/seat.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PromotionComponent } from './promotion/promotion.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, TheaterComponent,HallListComponent, SeatComponent],
+  declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, TheaterComponent,HallListComponent, SeatComponent, PromotionComponent],
     imports: [
         CommonModule,
         AdminRoutingModule,
