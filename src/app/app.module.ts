@@ -11,6 +11,7 @@ import {AdminModule} from './admin/admin.module';
 import {DatePipe} from '@angular/common';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {httpInterceptorProviders} from './user/user-layout/auth-interceptor.service';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import {httpInterceptorProviders} from './user/user-layout/auth-interceptor.serv
         ReactiveFormsModule,
         HttpClientModule,
         UserModule,
-        AdminModule
+        AdminModule,
+        ChartsModule
     ],
     providers: [DatePipe,httpInterceptorProviders],
     bootstrap: [AppComponent]
