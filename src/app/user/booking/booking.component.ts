@@ -1,5 +1,5 @@
 import { Location } from '../../model/location';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookingService } from 'src/app/service/booking.service';
 import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
@@ -18,6 +18,10 @@ declare var $: any;
 })
   export class BookingComponent implements OnInit {
    //#region avaiable 
+   title = 'paypal';
+   @ViewChild('paypalRef', {static: true}) private  paypalRef: ElementRef;
+ 
+
   locationId: number = 1;
   dateShow: string = '';
   listLocation: Location[] = [];
@@ -44,6 +48,7 @@ declare var $: any;
   selectedObject : Location;
   listCombo: any= [];
   totalCombo: number= 0;
+  totalFinal: number=0;
   //#endregion
 
   //#region build in
@@ -51,7 +56,57 @@ declare var $: any;
   }
 
   ngOnInit(): void {
-    $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
+    // $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
+    // window.paypal.Buttons({
+    //   style: {
+    //     layout: 'horizontal',
+    //     color: 'blue',
+    //     shape: 'rect',
+    //     label: 'paypal'
+    //   },
+    //   createOrder: (data, actions) => {
+    //     return actions.order.create({
+    //       purchase_units: [
+    //         {
+    //           amount: {
+    //             value: this.number,
+    //             currency_code: 'USD'
+    //           }
+    //         }
+    //       ]
+    //     });
+    //   }
+    // }).render(this.paypalRef.nativeElement);
+
+
+    paypal.Buttons({
+      // Set up the transaction
+      createOrder: (data, actions) => {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: this.totalFinal
+                  }
+              }]
+          });
+      },
+
+      // Finalize the transaction
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              // Show a success message to the buyer
+              $("#btPurchase").removeClass("dg");
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+      }
+
+
+  }).render('#paypal-button-container');
+
+
+
+    
+    
     const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
     this.dateShow = currentDate;
 
@@ -172,6 +227,7 @@ declare var $: any;
     $("#step2").hide();
     $("#stCombo").hide();
     $("#payment").show();
+    this.totalFinal= this.totalCombo + this.totalPrice;
     this.ticketQuantity= this.listRes.length;
   }
 
@@ -247,12 +303,24 @@ declare var $: any;
     $("#reserve").hide();
   }
 
-  plus(){
-    this.quantity++;
+  plus(id, price){
+    let q= $("#"+id).val();
+    let res= Number(q) + 1;
+    $("#"+id).val(res);
+    let tot= res * Number(price);
+    $("#"+id+'q').text('$'+tot);
+    this.totalCombo+= Number(price);
  }
- minus(){
-   if(this.quantity>0)
-      this.quantity--;
+ minus(id, price){
+  let q= $("#"+id).val();
+   if(Number(q)>0){
+    let res= Number(q) - 1;
+    $("#"+id).val(res);
+    let tot= res * Number(price);
+    $("#"+id+'q').text('$'+tot);
+    this.totalCombo-= Number(price);
+   }
+     
  }
 
  quan(val){

@@ -1,5 +1,5 @@
     <div id="step0">
-    <section class="container" style="padding-top:40px">
+    <section class="container" style="padding-top:30px">
         <div class="order-container">
             <div class="order">
                 <img class="order__images" alt='' src="assets/images/q.png" style="width: 130px; height: 120px;">
@@ -145,7 +145,7 @@
     </div>
     </div>
 
-<div id="stCombo">
+<div id="stCombo" style="display: none;">
     <section class="container">
         <div class="col-sm-12">
             <div class="row">
@@ -157,17 +157,17 @@
                         <table>
                             <tr *ngFor="let combo of listCombo" class="rates">
     
-                              <td style="width: 25%"> <img src="{{combo.imageUrl}}" style="width: 275px; height: 195px;"></td>
+                              <td style="width: 25%"> <img src="{{combo.imageUrl}}" style="width: 268px; height: 191px;"></td>
                                 <td class="rates__obj" style="width: 23%;" >
                                 <div>{{combo.name}}</div>    
                                  <div> {{combo.description}}</div>  
                                 </td>
-                                <td class="rates__vote" style="width: 20%;"><span (click)="minus()"><i class="fa fa-minus-circle" style="font-size: x-large;"></i></span>
-                                    <span><input type="text" class="qg" value="{{quantity}}" (keyup)="quan($event.target.value)"></span>
-                            <span (click)="plus()"><i class="fa fa-plus-circle" style="font-size: x-large;"></i></span>
+                                <td class="rates__vote" style="width: 20%;"><span (click)="minus(combo.id, combo.price)"><i class="fa fa-minus-circle" style="font-size: x-large;"></i></span>
+                                    <span><input type="text" class="qg" id="{{combo.id}}" value="0" (keyup)="quan($event.target.value)"></span>
+                            <span (click)="plus(combo.id, combo.price)"><i class="fa fa-plus-circle" style="font-size: x-large;"></i></span>
                                 </td>
-                                <td style="width: 15%;font-size: xx-large;">{{combo.price| currency}} </td>
-                                <td class="rates__result">{{totalCombo}}</td>
+                                <td style="width: 15%;font-size: x-large;">{{combo.price| currency}} </td>
+                                <td class="rates__result"><span id="{{combo.id + 'q'}}">$0</span></td>
                             </tr>
                         
                     </table>
@@ -195,9 +195,10 @@
             <div class="col-sm-12">
                 <h2 class="page-heading">price</h2>
                 <ul class="book-result">
-                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
-                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
-                    <li class="book-result__item">You get new bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
+                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">Combo: <span class="book-result__count booking-ticket">{{totalCombo | currency}}</span></li>
+                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalFinal | currency}}</span></li>
+                    <li class="book-result__item">New bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
                 </ul>
                 <h2 class="page-heading">Input your promotion code</h2>
                 <input type="text" name="promotionCode" (keyup)="getProCode($event.target.value)" class="quoc" width="200px" />
@@ -209,8 +210,8 @@
             
     
                 <h2 class="page-heading">Choose payment method</h2>
-                <div id="paypal-button-container"></div>
-
+                <div #paypalRef id="paypal-button-container"></div>
+                <!-- <div #paypalRef></div> -->
 
                 <h2 class="page-heading">Contact information</h2>
         
@@ -224,7 +225,7 @@
                 </form>
             </div>
             <div class="order">
-                <a (click)="fstep4()" class="btn btn-md btn--warning btn--wide">purchase</a>
+                <a (click)="fstep4()" id="btPurchase" class="btn btn-md btn--warning btn--wide dg">purchase</a>
             </div>
         </section>
 
