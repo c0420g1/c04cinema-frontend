@@ -33,7 +33,11 @@ export class ImageUploadComponent implements OnInit {
   showPreview(event: any) {
     if (event.target.files && event.target.files[0]){
       const reader = new FileReader();
-      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.onload = (e: any) => {
+        this.imgSrc = e.target.result;
+        console.log('hello'+e.target.result);
+      }
+
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
       console.log(this.selectedImage);
@@ -54,7 +58,7 @@ export class ImageUploadComponent implements OnInit {
   addNewImage() {
     this.loading = true;
     this.dateImage = new Date().getTime();
-    this.editImage.name=`${this.selectedImage.name}_${this.dateImage}`;
+    this.editImage.name=`${this.dateImage}`;
     const filePath = `${this.editImage.category}/${this.selectedImage.name}_${this.dateImage}`;
     const fileRef = this.storage.ref(filePath);
 

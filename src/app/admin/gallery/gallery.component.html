@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-3 mt-3" *ngFor="let image of imageList">
             <img class="img-fluid" style="width: 200px;height: 200px" [src]="image.data.imageUrl" alt="">
-            <p>{{image.data.caption}}</p>
+            <p>{{image.data.category}}</p>
             <p>name: {{image.data.name}}</p>
 <!--            <button class="btn btn-danger" href="#" (click)="deleteImage(image)">Delete Image</button>-->
             <a class="link" (click)="copyImage(image)">
