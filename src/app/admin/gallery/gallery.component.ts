@@ -20,7 +20,6 @@ export class GalleryComponent implements OnInit {
       }
   }
   imageList = [];
-  // rowIndexArray: any[];
   constructor(private service: ImageService) { }
 
   ngOnInit(): void {
@@ -39,7 +38,13 @@ export class GalleryComponent implements OnInit {
                     key: this.imageListKey[i],
                     data: this.imageListData[i]
                 }
-                this.imageList.push(this.item);
+                // @ts-ignore
+                // if(this.item.data.category == "Gallery"){
+                    this.imageList.push(this.item);
+                // }
+
+
+
             }
           //   this.imageList = [
           //       {
