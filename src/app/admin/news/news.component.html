@@ -45,10 +45,10 @@
                         <tr *ngFor="let news of newses;let i = index">
                             <td>{{i + 1}}</td>
                             <td>{{news.name}}</td>
-                            <td><img [src]="news.imageUrl" style="height: 200px; width: auto"></td>
+                            <td><img [src]="news.imageUrl" style="height: 150px; width: auto"></td>
                             <td>
                                 <a href="#editNews" class="edit" title="Edit" data-toggle="modal" (click)="getNewsEdit(news)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
-                                <a href="#deleteNews"  title="Delete" data-toggle="modal" (click)="getDeleteNews(news)" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
+                                <a href="#deleteNews"  title="Delete" data-toggle="modal" (click)="getDeleteNews(news)" ><i style="color: #ef2f2f;margin-left: 5px" class="material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                         </tbody>
