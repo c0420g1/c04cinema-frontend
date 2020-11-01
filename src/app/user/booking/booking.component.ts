@@ -51,6 +51,7 @@ declare var $: any;
   totalCombo: number= 0;
   totalFinal: number=0;
   listTicket: Ticket[]= [];
+  seat: Seat= new Seat();
   //#endregion
 
   //#region build in
@@ -179,13 +180,12 @@ declare var $: any;
       bt.bookingDate = this.datepipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
       this.listRes.push(bt);
 
-      let seatName: string='A1';
       let tic= new Ticket();
       this.bookService.bookingGetSeatName(this.seatId).subscribe(r=>{
-         seatName= r.name;
+          this.seat = r;
           tic.code="abc";
           tic.price= seatPrice;
-          tic.seatName= seatName;
+          tic.seatName= this.seat.name;
           this.listTicket.push(tic);
       });
       

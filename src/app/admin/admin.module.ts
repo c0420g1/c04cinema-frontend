@@ -22,10 +22,12 @@ import {SeatComponent} from './seat/seat.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PromotionComponent } from './promotion/promotion.component';
 import { NewsComponent } from './news/news.component';
+import { UserModule } from '../user/user.module';
 
 @NgModule({
   declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, PromotionAdminComponent, TheaterComponent,HallListComponent,SeatComponent, PromotionComponent, NewsComponent],
   imports: [
+    UserModule,
     CommonModule,
     AdminRoutingModule,
     FormsModule,

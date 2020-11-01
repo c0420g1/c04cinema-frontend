@@ -1,6 +1,6 @@
 export class Seat {
     id: number;
-    name: String;
+    name: string;
     hallId: number;
     seatTypeId: number;
 }

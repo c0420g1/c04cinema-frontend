@@ -51,8 +51,8 @@ export class BookingService {
     return this.http.get<number>(this.API_URL_USEBONUS  + '?accId='+ accId + '&proCode='+ proCode);
   }
 
-  bookingGetSeatName(seatId: number): Observable<string>{
-    return this.http.get<string>(this.API_URL_SEATNAME + seatId);
+  bookingGetSeatName(seatId: number): Observable<Seat>{
+    return this.http.get<Seat>(this.API_URL_SEATNAME + seatId);
   }
 
   bookingGetCombo(): Observable<any>{
