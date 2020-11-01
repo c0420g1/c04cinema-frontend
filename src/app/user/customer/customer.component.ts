@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CustomerService} from './service/customer.service';
 import {Customer} from './model/Customer';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-customer',
@@ -13,29 +15,37 @@ export class CustomerComponent implements OnInit {
     customer: Customer;
     rescus: string;
     point = 0;
+    check: boolean;
+    sub: Subscription;
 
-    constructor(private customerService: CustomerService,private activatedRoute: ActivatedRoute, ) {
+    constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.myFunction(1);
-        this.customerService.getCustomerById(this.rescus).subscribe(
-            next => {
-                this.customer = next[0];
-                this.point = this.customer.currentBonusPoint;
-            },
-            error => {
-                console.log(error);
-                this.customer = null;
-            }
-        );
+        this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+            const key = paramMap.get('id');
+            this.myFunction(key);
+            this.customerService.getCustomerById(this.rescus).subscribe(
+                next => {
+                    this.customer = next[0];
+                    this.point = this.customer.currentBonusPoint;
+                },
+                error => {
+                    console.log(error);
+                    this.customer = null;
+                }
+            );
+        });
 
-
+        this.check = true;
     }
 
-    myFunction(id: number) {
-        let uri = 'filter={"property":"id","operator":"eq","value":' + id + '}';
+    myFunction(id: string) {
+        let uri = 'filter={"property":"accountId","operator":"eq","value":' + id + '}';
         this.rescus = encodeURI(uri);
     }
 
+    checkShow() {
+        this.check = false;
+    }
 }
