@@ -1,5 +1,5 @@
 import { Location } from '../../model/location';
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookingService } from 'src/app/service/booking.service';
 import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
@@ -11,6 +11,7 @@ import { Booking } from 'src/app/model/Booking';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MovieService } from '../movie/movie.service';
 import { Ticket } from 'src/app/model/Ticket';
+import { Movie } from 'src/app/model/Movie';
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -52,13 +53,22 @@ declare var $: any;
   totalFinal: number=0;
   listTicket: Ticket[]= [];
   seat: Seat= new Seat();
+  movieBestChoice: Movie[] = [];
   //#endregion
 
   //#region build in
   constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute, private movieService: MovieService) {   
   }
 
+  @Input() name: string ='user';
   ngOnInit(): void {
+    this.movieService.getBestChoiceFilm().subscribe(
+      (data) => {
+          this.movieBestChoice = data;
+      },
+      error => console.log(error)
+  );
+
     // $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
     // window.paypal.Buttons({
     //   style: {
@@ -121,7 +131,7 @@ declare var $: any;
           });
       });
     this.bookService.getAllLocation().subscribe(r => {this.listLocation = r; console.log(this.listLocation)});
-    this.bookService.getBookingTime(this.locationId, 94, '2020-11-28').subscribe((data: any) => {
+    this.bookService.getBookingTime(this.locationId, this.movieId, this.dateShow).subscribe((data: any) => {
       this.listTheatreTime = data; console.log(this.listTheatreTime); }
     );
     this.bookService.getSeatType().subscribe(r => this.listSeatType = r);
@@ -132,8 +142,7 @@ declare var $: any;
  
   //#region event & service
   changeLocation(lId){
-    alert(lId);
-    this.bookService.getBookingTime(lId, 94, '2020-11-28').subscribe((data: any) => {
+    this.bookService.getBookingTime(lId, this.movieId, this.dateShow).subscribe((data: any) => {
       this.listTheatreTime = data;
     console.log(data) }
     );
@@ -212,6 +221,15 @@ declare var $: any;
   
   //#region show hide
   
+  chooseFilm(movieId){
+    $('.cinema-rating').removeClass('choose');
+    $('#' + movieId).addClass('choose');
+    this.movieId= movieId;
+    this.bookService.getBookingTime(this.locationId, this.movieId, this.dateShow).subscribe((data: any) => {
+      this.listTheatreTime = data; console.log(this.listTheatreTime); }
+    );
+  }
+
   pricefn(priceSeat){
       return Number(priceSeat) + this.priceShow;
   }
@@ -222,6 +240,7 @@ declare var $: any;
     }
     this.step='s2';
     $("#step1").hide();
+    $('#more').hide();
     $("#step2").show();
   }
   fstep2() {

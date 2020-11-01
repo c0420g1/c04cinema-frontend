@@ -32,3 +32,18 @@
         cursor: default;
         opacity: .6; */
     }
+.cinema-wrap{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: auto;
+}
+
+.cinema-rating{
+    background-color: #ffd564;
+    display: none;
+}
+.choose{
+    display: block;
+}

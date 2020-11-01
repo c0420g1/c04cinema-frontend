@@ -33,7 +33,8 @@ import { LoginpageComponent } from './loginpage/loginpage.component';
         PromotionComponent, CustomerComponent, InformationComponent,
         HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
         MovieShowingComponent, MovieComingComponent, MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent, LoginComponent, RegisterComponent, LoginpageComponent],
-    imports: [
+   exports: [BookingComponent],
+        imports: [
         CommonModule,
         UserRoutingModule,
         ReactiveFormsModule,

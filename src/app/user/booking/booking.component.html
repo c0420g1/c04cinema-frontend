@@ -1,5 +1,38 @@
-    <div id="step0">
-    <section class="container" style="padding-top:30px">
+<div *ngIf="name=='admin'" id="more">
+<div class="search-wrapper" style="margin-top: 0;">
+    <div class="container container--add">
+        <form id='search-form' method='get' class="search">
+            <input type="text" class="search__field" placeholder="Search">
+            <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
+                <option value="1" selected='selected'>By title</option>
+                <option value="2">By year</option>
+                <option value="3">By producer</option>
+                <option value="4">By title</option>
+                <option value="5">By year</option>
+            </select>
+            <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
+        </form>
+    </div>
+</div>
+<div class="cinema-wrap">
+    <div class="row">
+        <div *ngFor="let movie of movieBestChoice" class="col-xs-4 col-sm-2 cinema-item">
+            <div class="cinema">
+                <a (click)="chooseFilm(movie.id)" class="cinema__images">
+                    <img alt='' [src]="movie.posterUrl" style="width: 190px; height: 250px">
+                    <span id="{{movie.id}}" class="cinema-rating"><span><i class="fa fa-check" style="font-size: x-large;"></i></span></span>
+                </a>
+                <a class="cinema-title">{{movie.name}}</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+   <div id="step0">
+    <section class="container" [style.padding-top]="name=='user'? '30px': '0px'" [style.margin-top]="name=='user'? '0px': '-50px'">
         <div class="order-container">
             <div class="order">
                 <img class="order__images" alt='' src="assets/images/q.png" style="width: 130px; height: 120px;">
@@ -21,9 +54,10 @@
     </section>
     </div>
     <div id="step1">
+
     <section class="container">
         <div class="col-sm-12">
-            <h2 class="page-heading">Film: {{movieName}}</h2>
+            <h2 *ngIf="name=='user'" class="page-heading">Film: {{movieName}}</h2>
             <h2 class="page-heading">City &amp; Date</h2>
 
 
