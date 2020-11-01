@@ -11,8 +11,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
-  // @Output()
-  // getLinkFather: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  getLinkFather: EventEmitter<string> = new EventEmitter<string>();
   imageList: any[];
   imgSrc = 'assets/images/banners/300.png';
   loading = false;
@@ -98,7 +98,7 @@ export class ImageUploadComponent implements OnInit {
         a = image.imageUrl;
       }
     }
-    //this.getLinkFather.emit(a);
+    this.getLinkFather.emit(a);
     const selBox = document.createElement('textarea');
     selBox.style.opacity="1";
     selBox.rows = 3;
@@ -108,7 +108,7 @@ export class ImageUploadComponent implements OnInit {
     selBox.focus();
     selBox.select();
     document.execCommand('copy');
-    //contain.removeChild(selBox);
+    contain.removeChild(selBox);
   }
 
 
