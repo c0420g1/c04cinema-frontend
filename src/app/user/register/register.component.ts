@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomerDTO} from '../user-layout/model/customerDTO';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegisterService} from '../user-layout/register.service';
 import {TokenStorageService} from '../user-layout/token-storage.service';
 import {Router} from '@angular/router';
@@ -50,12 +50,12 @@ export class RegisterComponent implements OnInit {
     });
     this.formCustomer = this.fb.group({
       name: ['', Validators.required],
-      birthday: ['', Validators.required],
+      birthday: ['', [Validators.required, dateValidator, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       gender: ['', Validators.required],
       cardid: ['', [Validators.required, Validators.minLength(9), Validators.pattern('[\\d]*')]],
       email: ['', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
       address: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12), Validators.pattern('[\\d]*')]],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12), Validators.pattern('0[\\d]*')]],
       customerTypeId: ['1'],
       currentBonusPoint: ['0'],
       isactive: ['1'],
@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
       imageUrl: ['https://www.freepngimg.com/thumb/youtube/62644-profile-account-google-icons-computer-user-iconfinder.png']
     });
   }
+
   getForm(){
     this.account = this.formAccount.value;
     this.registerService.checkAccount(this.account).subscribe(data => {
@@ -84,16 +85,18 @@ export class RegisterComponent implements OnInit {
             this.pass = bcrypt.hashSync(this.account.password, 10);
             console.log(this.pass);
             this.account.password = this.pass;
-            this.registerService.addAccount(this.formAccount.value).subscribe();
-            // tslint:disable-next-line:radix
-            this.customerDTO.accountId = this.accountFindById.id + 1;
-            console.log(this.customerDTO);
-            this.registerService.addCustomer(this.customerDTO).subscribe();
-            this.role.accountId = this.accountFindById.id + 1;
-            this.role.roleId = 1;
-            console.log(this.role);
-            this.registerService.addRole(this.role).subscribe();
-            this.router.navigateByUrl('/login')
+            this.registerService.addAccount(this.formAccount.value).subscribe(data => {
+              // tslint:disable-next-line:radix
+              this.customerDTO.accountId = this.accountFindById.id + 1;
+              console.log(this.customerDTO);
+              this.registerService.addCustomer(this.customerDTO).subscribe();
+              this.role.accountId = this.accountFindById.id + 1;
+              this.role.roleId = 1;
+              console.log(this.role);
+              this.registerService.addRole(this.role).subscribe();
+              this.router.navigateByUrl('/login')
+            });
+
           }
         })
       }
@@ -101,4 +104,17 @@ export class RegisterComponent implements OnInit {
 
   }
 
+}
+function dateValidator(formControl: FormControl) {
+  let date1: string[];
+  date1 = formControl.value.split('-');
+  const o_date = new Intl.DateTimeFormat;
+  const f_date = (m_ca, m_it) => Object({...m_ca, [m_it.type]: m_it.value});
+  const m_date = o_date.formatToParts().reduce(f_date, {});
+  let dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2])) ;
+  let dateNumberNow = (parseInt(m_date.year) * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day)) ;
+  if (dateNumber > dateNumberNow) {
+    return {checkDate: true};
+  }
+  return null;
 }

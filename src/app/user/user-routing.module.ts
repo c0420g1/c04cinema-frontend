@@ -64,13 +64,16 @@ const routes: Routes = [
         component: BookingComponent,
         canActivate: [AuthGuard],
         data: {
-
           expectedRole: 'customer'
         }
       },
       {
         path: 'customer/:id',
         component: CustomerComponent,
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'customer'
+        },
         children: [
           {
             path: 'information/:id',
