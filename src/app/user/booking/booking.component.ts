@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MovieService } from '../movie/movie.service';
+import { Ticket } from 'src/app/model/Ticket';
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -49,6 +50,7 @@ declare var $: any;
   listCombo: any= [];
   totalCombo: number= 0;
   totalFinal: number=0;
+  listTicket: Ticket[]= [];
   //#endregion
 
   //#region build in
@@ -154,7 +156,7 @@ declare var $: any;
     this.theatreName= theatreName;
   }
 
-  chooseSit(seatId, seatPrice, bonus_seat_point) {
+      chooseSit(seatId, seatPrice, bonus_seat_point) {
     
     if ($('#' + seatId).hasClass('sits_state_not')){
       return;
@@ -176,6 +178,17 @@ declare var $: any;
       this.totalPrice += bt.price;
       bt.bookingDate = this.datepipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
       this.listRes.push(bt);
+
+      let seatName: string='A1';
+      let tic= new Ticket();
+      this.bookService.bookingGetSeatName(this.seatId).subscribe(r=>{
+         seatName= r.name;
+          tic.code="abc";
+          tic.price= seatPrice;
+          tic.seatName= seatName;
+          this.listTicket.push(tic);
+      });
+      
     }
   }
   
@@ -304,18 +317,18 @@ declare var $: any;
   }
 
   plus(id, price){
-    let q= $("#"+id).val();
+    let q= $("#"+id+'a').val();
     let res= Number(q) + 1;
-    $("#"+id).val(res);
+    $("#"+id+'a').val(res);
     let tot= res * Number(price);
     $("#"+id+'q').text('$'+tot);
     this.totalCombo+= Number(price);
  }
  minus(id, price){
-  let q= $("#"+id).val();
+  let q= $("#"+id+'a').val();
    if(Number(q)>0){
     let res= Number(q) - 1;
-    $("#"+id).val(res);
+    $("#"+id+'a').val(res);
     let tot= res * Number(price);
     $("#"+id+'q').text('$'+tot);
     this.totalCombo-= Number(price);
@@ -327,14 +340,9 @@ declare var $: any;
     this.quantity= val;
  }
   
-
-    getSeatName(){
-      let seatName: string='A1';
-      // this.bookService.bookingGetSeatName(this.seatId).subscribe(r=>{
-      //       seatName= r;
-      // });
-      return seatName;
-    }
+ print(){
+  window.print();
+ }
 
     //#endregion
 }

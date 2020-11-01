@@ -163,7 +163,7 @@
                                  <div> {{combo.description}}</div>  
                                 </td>
                                 <td class="rates__vote" style="width: 20%;"><span (click)="minus(combo.id, combo.price)"><i class="fa fa-minus-circle" style="font-size: x-large;"></i></span>
-                                    <span><input type="text" class="qg" id="{{combo.id}}" value="0" (keyup)="quan($event.target.value)"></span>
+                                    <span><input type="text" class="qg" id="{{combo.id + 'a'}}" value="0"></span>
                             <span (click)="plus(combo.id, combo.price)"><i class="fa fa-plus-circle" style="font-size: x-large;"></i></span>
                                 </td>
                                 <td style="width: 15%;font-size: x-large;">{{combo.price| currency}} </td>
@@ -298,22 +298,24 @@
                     <p class="order__title">Thank you <br><span class="order__descript">you have successfully purchased tickets</span></p>
                 </div>
 
-                <div *ngFor="let l of listRes" class="ticket">
+                <div *ngFor="let t of listTicket" class="ticket">
                     <div class="ticket-position">
                         <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
                         <div class="ticket__inner">
 
                             <div class="ticket-secondary">
-                                <span class="ticket__item">Ticket number <strong class="ticket__number">a126bym4</strong></span>
+                                <span class="ticket__item">Ticket number <strong class="ticket__number">{{t.code}}</strong></span>
                                 <span class="ticket__item ticket__date">{{showTime.split('T')[0]}}</span>
                                 <span class="ticket__item ticket__time">{{showTime.split('T')[1]}}</span>
                                 <span class="ticket__item">Theatre: <span class="ticket__cinema">{{theatreName}}</span></span>
                                 <span class="ticket__item">Hall: <span class="ticket__hall">{{hallName}}</span></span>
+                                <span class="ticket__item ticket__price">price: <strong
+                                    class="ticket__cost">{{t.price | currency}}</strong></span>
                             </div>
 
                             <div class="ticket-primery">
                                 <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">The Fifth Estate (2020)</strong></span>
-                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">{{getSeatName()}}</span></span>
+                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">{{t.seatName}}</span></span>
                             </div>
 
 
@@ -325,7 +327,7 @@
 
                 <div class="ticket-control">
                     <a href="#" class="watchlist list--download">Download</a>
-                    <a href="#" class="watchlist list--print">Print</a>
+                    <a (click)="print()" class="watchlist list--print">Print</a>
                 </div>
 
             </div>

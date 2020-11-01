@@ -7417,6 +7417,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .ticket-position {
   display: inline-block;
   overflow: hidden;
+  background-color: #FFF9D5;
 }
 .ticket-control {
   text-align: center;
