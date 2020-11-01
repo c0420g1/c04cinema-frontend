@@ -1,1 +1,47 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Top Requirements of Customer</h2>
+            <div class="chart-wrapper">
+                <canvas baseChart
+                        [datasets]="radarChartData"
+                        [options]="radarChartOptions"
+                        [labels]="radarChartLabels"
+                        [chartType]="radarChartType">
+                </canvas>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <div>
+                <h2>Top Hightest Revenue Movies </h2>
+            </div>
+            <div class="chart-wrapper">
+                <canvas baseChart
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <h2>Revenue Of Each Month</h2>
+            </div>
+            <div class="chart-wrapper">
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
