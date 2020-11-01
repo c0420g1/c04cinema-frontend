@@ -131,7 +131,6 @@
                                "to":"opacity:0;",
                                "ease":"Power3.easeInOut"
                              }]'>
-                    Two-time Academy Award winner Ron Howard, teams once again with fellow two-time Academy<br> Award nominee, writer Peter Morgan , on Rush, a spectacular big-screen re-creation of the merciless<br> 1970s rivalry between James Hunt and Niki Lauda
                 </div>
                 <div class="tp-caption margin-slider"
                      data-x="right"
@@ -327,7 +326,7 @@
                                "to":"opacity:0;",
                                "ease":"Power3.easeInOut"
                              }]'>
-                    Stop <span class="highlight">wishing.</span> Start <span class="highlight">doing.</span>
+                    Stop wishing Start doing.
                 </div>
 
                 <div class="tp-caption slide__descript"
@@ -348,7 +347,7 @@
                                "to":"opacity:0;",
                                "ease":"Power3.easeInOut"
                              }]'>
-                    find your best match movie with A.MOVIE
+                    find your best match movie with C04.MOVIE
                 </div>
 
                 <div class="tp-caption slider-wrap-btn"
@@ -433,7 +432,13 @@
                                 href="#">Drama</a></p>
 
                         <div class="movie__rate">
-                            <div class="score"></div>
+                            <div class="score">
+                                <img alt="1" src="assets/images/rate/star-on.svg" title="bad">
+                                <img alt="1" src="assets/images/rate/star-on.svg" title="bad">
+                                <img alt="1" src="assets/images/rate/star-on.svg" title="bad">
+                                <img alt="1" src="assets/images/rate/star-on.svg" title="bad">
+                                <img alt="1" src="assets/images/rate/star-off.svg" title="bad">
+                            </div>
                             <span class="movie__rating">4.1</span>
                         </div>
                     </div>
@@ -470,56 +475,26 @@
     <!------------------------------------------------------------------------------------------------------------------------>
     <div class="col-sm-12">
         <h2 class="page-heading">Latest news</h2>
+        <div *ngFor="let news of threeLastNews" class="col-sm-4 similar-wrap col--remove">
+            <div class="post post--preview post--preview--wide">
+                <div class="post__image">
+                    <img alt='' [src]="news.imageUrl" style="width: 100%;" >
+                    <div class="social social--position social--hide">
+                        <span class="social__name">Share:</span>
+                        <a href='#' class="social__variant social--first fa fa-facebook"></a>
+                        <a href='#' class="social__variant social--second fa fa-twitter"></a>
+                        <a href='#' class="social__variant social--third fa fa-vk"></a>
+                    </div>
+                </div>
+                <p class="post__date">22 October 2020 </p>
+                <a href="single-page-left.html" class="post__title">{{news.name}}</a>
+                <br>
+                <a href="single-page-left.html" class="btn read-more post--btn">read more</a>
+            </div>
+        </div>
 
-        <div class="col-sm-4 similar-wrap col--remove">
-            <div class="post post--preview post--preview--wide">
-                <div class="post__image">
-                    <img alt='' src="assets/images/client-photo/post-thor.jpg">
-                    <div class="social social--position social--hide">
-                        <span class="social__name">Share:</span>
-                        <a href='#' class="social__variant social--first fa fa-facebook"></a>
-                        <a href='#' class="social__variant social--second fa fa-twitter"></a>
-                        <a href='#' class="social__variant social--third fa fa-vk"></a>
-                    </div>
-                </div>
-                <p class="post__date">22 October 2020 </p>
-                <a href="single-page-left.html" class="post__title">"Thor: The Dark World" - World Premiere</a>
-                <a href="single-page-left.html" class="btn read-more post--btn">read more</a>
-            </div>
-        </div>
-        <div class="col-sm-4 similar-wrap col--remove">
-            <div class="post post--preview post--preview--wide">
-                <div class="post__image">
-                    <img alt='' src="assets/images/client-photo/post-annual.jpg">
-                    <div class="social social--position social--hide">
-                        <span class="social__name">Share:</span>
-                        <a href='#' class="social__variant social--first fa fa-facebook"></a>
-                        <a href='#' class="social__variant social--second fa fa-twitter"></a>
-                        <a href='#' class="social__variant social--third fa fa-vk"></a>
-                    </div>
-                </div>
-                <p class="post__date">22 October 2020 </p>
-                <a href="single-page-left.html" class="post__title">30th Annual Night Of Stars Presented By The Fashion
-                    Group International</a>
-                <a href="single-page-left.html" class="btn read-more post--btn">read more</a>
-            </div>
-        </div>
-        <div class="col-sm-4 similar-wrap col--remove">
-            <div class="post post--preview post--preview--wide">
-                <div class="post__image">
-                    <img alt='' src="assets/images/client-photo/post-awards.jpg">
-                    <div class="social social--position social--hide">
-                        <span class="social__name">Share:</span>
-                        <a href='#' class="social__variant social--first fa fa-facebook"></a>
-                        <a href='#' class="social__variant social--second fa fa-twitter"></a>
-                        <a href='#' class="social__variant social--third fa fa-vk"></a>
-                    </div>
-                </div>
-                <p class="post__date">22 October 2020 </p>
-                <a href="single-page-left.html" class="post__title">Hollywood Film Awards 2020</a>
-                <a href="single-page-left.html" class="btn read-more post--btn">read more</a>
-            </div>
-        </div>
+
+
     </div>
 
 </section>

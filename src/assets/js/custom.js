@@ -328,7 +328,7 @@ function init_Home() {
         width:130, 
         score: 0,
         path: 'assets/images/rate/',
-        starOff : 'star-off.svg',
+        starOff : 'star-on.svg',
         starOn  : 'star-on.svg' 
     });
 

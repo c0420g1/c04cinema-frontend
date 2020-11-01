@@ -73,12 +73,4 @@ export class MovieService {
   getAllHall(): Observable<Hall[]>{
     return this.http.get<Hall[]>(this.API_URL_ALL_HALL);
   }
-
-
-
-
-  //creator Hieu to search by name of movie
-  // searhcByName(name: string): Observable<Movie[]>{
-  //   return this.http.get<Movie[]>(this.API_SEARCH_NAME + name)
-  // }
 }

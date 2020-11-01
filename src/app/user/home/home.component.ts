@@ -4,6 +4,8 @@ import {Movie} from 'src/app/model/Movie';
 import {DatePipe} from '@angular/common';
 import {BannerService} from '../../service/banner.service';
 import {Banner} from 'src/app/model/Banner';
+import {News} from '../../model/News';
+import {NewsService} from '../../admin/news/news.service';
 
 declare var $: any;
 
@@ -17,8 +19,9 @@ export class HomeComponent implements OnInit {
     bannerList: Banner[] = [];
     movieBestChoice: Movie[] = [];
     randomNumberVote: number;
+    threeLastNews: News[] = [];
     constructor(private  moviesService: MovieService, private pipe: DatePipe,
-                private bannerService: BannerService) {
+                private bannerService: BannerService, private  newsService: NewsService) {
     }
 
     ngOnInit(): void {
@@ -61,7 +64,12 @@ export class HomeComponent implements OnInit {
             },
             error => console.log(error)
         );
-
+        this.newsService.getThreeLastNews().subscribe(
+            (data)=>{
+                this.threeLastNews = data;
+            },
+            error => {console.log(error)}
+        )
 
     }
 

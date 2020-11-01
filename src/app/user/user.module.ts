@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { LoginpageComponent } from './loginpage/loginpage.component';
 
 
 // @ts-ignore
@@ -31,7 +32,7 @@ import { GalleryComponent } from './gallery/gallery.component';
     declarations: [UserLayoutComponent, HomeComponent,
         PromotionComponent, CustomerComponent, InformationComponent,
         HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
-        MovieShowingComponent, MovieComingComponent, MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent, LoginComponent, RegisterComponent],
+        MovieShowingComponent, MovieComingComponent, MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent, LoginComponent, RegisterComponent, LoginpageComponent],
     imports: [
         CommonModule,
         UserRoutingModule,

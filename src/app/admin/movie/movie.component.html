@@ -1,30 +1,30 @@
 
-<div class="content" style="height: 71vh">
-    <div class="container-fluid">
+<div class="content" style="margin-top: 10px">
+    <div class="container" >
         <div class="row" >
-            <div class="col-10" style="margin-top: 5px; margin-left: 8%">
+            <div class="col-12" style="margin-top: 5px; margin-left: 8%">
 
                 <div class="table-title">
                     <div class="row">
-                        <div style="width: 18%; display: flex" >
+                        <div class="col-sm-3" style="width: 18%; display: flex" >
                             <input [(ngModel)]="variableFind"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
                             <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">SEARCH</button>
-<!--                            <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>-->
                         </div>
                         <div class="col-sm-3">
-                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
+                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 640px;border-radius: 3px;"
+                               href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-9" style="max-width: 75%">
-                            <div style="margin-left: 380px;">
+                            <div style="margin-left: 311px;">
                                 <p style="font-size: 31px; font-weight: bold">Movie Management</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div>
+                <div class="col-sm-12">
                     <h3 class="text text-success" *ngIf="message">{{message}}</h3>
                     <table id="movie">
                         <thead>
@@ -57,9 +57,11 @@
                                 <td>3D</td>
                             </ng-template>
                             <td>
-                                <a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovieEdit(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
-                                <a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
-                                <a href="#addShow"  title="Add Show Time" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a>
+                                <div style="display: flex;">
+                                    <div style="justify-content: center"><a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovieEdit(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a></div>
+                                    <div style="justify-content: center"><a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a></div>
+                                    <div style="justify-content: center"><a href="#addShow"  title="Add Show Time" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a></div>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -110,12 +112,12 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <app-image-upload></app-image-upload>
+                            <app-image-upload (getLinkFather)="getLink($event)"></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Poster Url<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control" [value]="url"  formControlName="posterUrl" >
+                            <input type="text" class="form-control" [(ngModel)]="url"  formControlName="posterUrl" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('posterUrl').invalid && addFormMovie.get('posterUrl').touched">
@@ -151,7 +153,7 @@
                             <p *ngIf="addFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="addFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
-                        <p class="error1" *ngIf="error" style="color: red">Start Date < End Date</p>
+                        <p class="error1" *ngIf="error" style="color: red">Start Date must be before End Date</p>
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" formControlName="actor" >
@@ -316,15 +318,16 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <app-image-upload ></app-image-upload>
+                            <app-image-upload (getLinkFather)="getLink($event)" ></app-image-upload>
                         </div>
                         <br>
                         <div>
-                            <img  [src]="posterUrlShowImage" style="width: 200px; height: auto">
+                            <img  [src]="posterUrlShowImage" style="width: auto; height: 200px">
                         </div>
+                        <br>
                         <div>
                             <label>Poster Url <span style="color: red">(*)</span></label>
-                            <input type="text" formControlName="posterUrl" [value]="url" alt="" style="width: 200px; height: auto" >
+                            <input type="text" formControlName="posterUrl" [(ngModel)]="url" alt="" style="width: 200px; height: auto" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('posterUrl').invalid && editFormMovie.get('posterUrl').touched">
@@ -337,7 +340,7 @@
                         <input type="hidden" formControlName="id">
                         <div class="form-group">
                             <label>Name <span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control" formControlName="name" >
+                            <input t    ype="text" class="form-control" formControlName="name" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('name').invalid && editFormMovie.get('name').touched">
@@ -353,7 +356,6 @@
                              *ngIf="editFormMovie.get('startDate').invalid && editFormMovie.get('startDate').touched">
                             <p *ngIf="editFormMovie.get('startDate').hasError('required')">Start Date is required</p>
                             <p *ngIf="editFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
-                            <p *ngIf="editFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
                         </div>
 
                         <div class="form-group">
@@ -365,7 +367,7 @@
                             <p *ngIf="editFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="editFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
-                        <p class="error1" *ngIf="error">Start Date > End Date</p>
+                        <p class="error1" *ngIf="error" style="color: red">Start Date must be before End Date</p>
 
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>

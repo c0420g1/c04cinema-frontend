@@ -1,6 +1,6 @@
 <!--    register-->
 
-<div id="register1" class="overlayregister overlay-hugeinc  ">
+<div id="register1" class="overlayregister overlay-hugeinc open">
     <section class="container">
         <div class="col-sm-4 col-sm-offset-4" style="margin-left: 30%">
             <form class="login"  style="padding-top: 0; width: 127%" [formGroup]="formCustomer">
@@ -17,6 +17,9 @@
                             <div class="alert alert-danger" role="alert"
                                  *ngIf="formAccount.get('username').invalid && formAccount.get('username').touched">
                                 <p *ngIf="formAccount.get('username').hasError('required')">Account is Required</p>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                                <p >{{errorMessage}}</p>
                             </div>
                         </div >
                         <div class="inputWithIcon">
@@ -64,6 +67,8 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="formCustomer.get('cardid').invalid && formCustomer.get('cardid').touched">
                             <p *ngIf="formCustomer.get('cardid').hasError('required')">Id card is Required</p>
+                            <p *ngIf="formCustomer.get('cardid').hasError('minlength')">ID card minimum 9 digits</p>
+                            <p *ngIf="formCustomer.get('cardid').hasError('pattern')">ID must be numeric</p>
                         </div>
                     </div>
                     <div class="inputWithIcon">
@@ -73,6 +78,10 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="formCustomer.get('email').invalid && formCustomer.get('email').touched">
                             <p *ngIf="formCustomer.get('email').hasError('required')">Email is Required</p>
+                            <p *ngIf="formCustomer.get('email').hasError('pattern')">Email is not format</p>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="errorEmail">
+                            <p >{{errorEmail}}</p>
                         </div>
                     </div>
                     <div class="inputWithIcon">
@@ -91,6 +100,9 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="formCustomer.get('phone').invalid && formCustomer.get('phone').touched">
                             <p *ngIf="formCustomer.get('phone').hasError('required')">Phone number is Required</p>
+                            <p *ngIf="formCustomer.get('phone').hasError('pattern')">Phone number must be numeric</p>
+                            <p *ngIf="formCustomer.get('phone').hasError('minlength') || formCustomer.get('phone').hasError('maxlength')">
+                                Phone numbers must have minimum 10 numbers and maximum 12 numbers</p>
                         </div>
                     </div>
                 </div>
