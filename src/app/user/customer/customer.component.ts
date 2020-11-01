@@ -4,6 +4,7 @@ import {Customer} from './model/Customer';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {TokenStorageService} from '../user-layout/token-storage.service';
 
 @Component({
     selector: 'app-customer',
@@ -18,7 +19,7 @@ export class CustomerComponent implements OnInit {
     check: boolean;
     sub: Subscription;
 
-    constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute) {
+    constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute, private token: TokenStorageService) {
     }
 
     ngOnInit(): void {
@@ -47,5 +48,9 @@ export class CustomerComponent implements OnInit {
 
     checkShow() {
         this.check = false;
+    }
+    logout() {
+        this.token.signOut();
+        window.location.reload();
     }
 }
