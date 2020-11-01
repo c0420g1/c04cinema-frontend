@@ -1,0 +1,92 @@
+.posterUrlShowImage{
+    width: 223px;
+    height: auto;
+    border: 2px solid black;
+}
+#inputSearch{
+    /*style="border-radius: 10px;margin-left: 15px; font-size: 14px; height: 35px; width: 150px;"*/
+    border-radius: 3px;
+    margin-left: -102px;
+    font-size: 14px;
+    height: 35px;
+    width: 150px;
+}
+#buttonSearch{
+    /*style="border-radius: 10px;margin-left: 5px; font-size: 14px;height: 35px;"*/
+    border-radius: 3px;
+    margin-left: 5px;
+    font-size: 14px;
+    height: 35px;
+}
+#news {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 127%;
+    margin-left: -127px;
+}
+#news thead{
+    text-align: center;
+}
+#news td, #movie th {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#news tr:nth-child(even){background-color: #f2f2f2;}
+#news tbody tr td:nth-child(2){
+    text-align: left;
+}
+#news tbody tr td:nth-child(7) {
+    /*font-size: 22px;*/
+    margin-left: 9px;
+}
+#news tbody tr td:nth-child(7) a i{
+    font-size: 22px;
+    margin-left: 31px;
+}
+
+#news tr:hover {background-color: #ddd;}
+
+#news th {
+    font-weight: bold;
+    font-size: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #2a3035;
+    color: white;
+}
+#news td{
+    font-size: 14px;
+}
+#cssAddForm input{
+    font-size: 14px;
+}
+#cssAddForm textarea{
+    font-size: 14px;
+}
+#cssAddForm select option{
+    font-size: 14px;
+}
+#cssAddForm{
+    font-size: 14px;
+}
+#cssEditForm {
+    font-size: 14px;
+}
+#cssEditForm textarea{
+    font-size: 14px;
+}
+#cssEditForm input{
+    font-size: 14px;
+}
+#cssDeleteForm {
+    font-size: 14px;
+}
+#cssAddShowForm {
+    font-size: 14px;
+}
+#cssAddShowForm input{
+    font-size: 14px;
+}

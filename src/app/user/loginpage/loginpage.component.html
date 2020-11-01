@@ -1,0 +1,35 @@
+<div style="padding-top: 40px;">
+<form id="login-form" class="login" [formGroup]="formLogin">
+    <p class="login__title">sign in <br><span class="login-edition">welcome to C04.Movie</span></p>
+
+    <div class="social social--colored" style="background-color: #ffd564;">
+        <a href='#' class="social__variant fa fa-facebook"></a>
+        <a href='#' class="social__variant fa fa-twitter"></a>
+        <a href='#' class="social__variant fa fa-tumblr"></a>
+    </div>
+
+    <p class="login__tracker">or</p>
+
+    <div class="field-wrap">
+        <input type='text' placeholder='Account' formControlName="username" class="login__input">
+        <div class="alert alert-danger" role="alert"
+             *ngIf="formLogin.get('username').invalid && formLogin.get('username').touched">
+            <p *ngIf="formLogin.get('username').hasError('required')">Account is Required</p>
+        </div>
+        <input type='password' placeholder='Password' formControlName="password" class="login__input">
+        <div class="alert alert-danger" role="alert"
+             *ngIf="formLogin.get('password').invalid && formLogin.get('password').touched">
+            <p *ngIf="formLogin.get('password').hasError('required')">Password is Required</p>
+        </div>
+
+        <input type='checkbox' id='#informed' class='login__check styled'>
+        <label for='#informed' class='login__check-info'>remember me</label>
+    </div>
+
+    <div class="login__control">
+        <button  class="btn btn-md btn--warning btn--wider" (click)="loginpage()" [disabled]="formLogin.invalid">sign in</button>
+        <a href="#" class="login__tracker form__tracker">Forgot password?</a>
+    </div>
+</form>
+
+</div>

@@ -1,0 +1,117 @@
+<!--    register-->
+
+<div id="register1" class="overlayregister overlay-hugeinc open">
+    <section class="container">
+        <div class="col-sm-4 col-sm-offset-4" style="margin-left: 30%">
+            <form class="login"  style="padding-top: 0; width: 127%" [formGroup]="formCustomer">
+                <div class="header-form" >
+                    <button type="button" class="overlay-close">Close</button>
+                    <p class="login__title">Register <br><span class="login-edition">welcome to C04.Movie</span></p>
+                </div>
+                <div class="field-wrap">
+                    <form [formGroup]="formAccount">
+                        <div class="inputWithIcon">
+                            <label>Account</label>
+                            <input type='text'  class="login__input" formControlName="username">
+                            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-user m-r-10"></i>
+                            <div class="alert alert-danger" role="alert"
+                                 *ngIf="formAccount.get('username').invalid && formAccount.get('username').touched">
+                                <p *ngIf="formAccount.get('username').hasError('required')">Account is Required</p>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                                <p >{{errorMessage}}</p>
+                            </div>
+                        </div >
+                        <div class="inputWithIcon">
+                            <label>Password</label>
+                            <input type='password'  class="login__input" formControlName="password">
+                            <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-key m-r-10"></i>
+                            <div class="alert alert-danger" role="alert"
+                                 *ngIf="formAccount.get('password').invalid && formAccount.get('password').touched">
+                                <p *ngIf="formAccount.get('password').hasError('required')">Password is Required</p>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="inputWithIcon">
+                        <label>Full Name</label>
+                        <input type='text'  class="login__input" formControlName="name">
+                        <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-pencil m-r-10"></i>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('name').invalid && formCustomer.get('name').touched">
+                            <p *ngIf="formCustomer.get('name').hasError('required')">Full name is Required</p>
+                        </div>
+                    </div>
+                    <div class="inputWithIcon">
+                        <label>Birthday</label>
+                        <input type='date'  class="login__input" formControlName="birthday">
+                        <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-birthday-cake m-r-10"></i>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('birthday').invalid && formCustomer.get('birthday').touched">
+                            <p *ngIf="formCustomer.get('birthday').hasError('required')">Birthday is Required</p>
+                        </div>
+                    </div>
+                    <div class="inputWithIcon">
+                        <label>Gender</label><br>
+                        <input type='radio'  formControlName="gender"  value="Male"  style="margin-left: 30px"><label style="font-size: 14px; margin-left: 5px">Male</label>
+                        <input type='radio'  formControlName="gender"  value="Femail" style="margin-left: 30px"> <label style="font-size: 14px; margin-left: 5px">Femail</label>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('gender').invalid && formCustomer.get('gender').touched">
+                            <p *ngIf="formCustomer.get('gender').hasError('required')">Gender is Required</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="inputWithIcon">
+                        <label>ID Card</label>
+                        <input type='text'   class="login__input" formControlName="cardid">
+                        <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-id-card m-r-10"></i>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('cardid').invalid && formCustomer.get('cardid').touched">
+                            <p *ngIf="formCustomer.get('cardid').hasError('required')">Id card is Required</p>
+                            <p *ngIf="formCustomer.get('cardid').hasError('minlength')">ID card minimum 9 digits</p>
+                            <p *ngIf="formCustomer.get('cardid').hasError('pattern')">ID must be numeric</p>
+                        </div>
+                    </div>
+                    <div class="inputWithIcon">
+                        <label>Email</label>
+                        <input type='text'   class="login__input" formControlName="email">
+                        <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-envelope m-r-10"></i>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('email').invalid && formCustomer.get('email').touched">
+                            <p *ngIf="formCustomer.get('email').hasError('required')">Email is Required</p>
+                            <p *ngIf="formCustomer.get('email').hasError('pattern')">Email is not format</p>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="errorEmail">
+                            <p >{{errorEmail}}</p>
+                        </div>
+                    </div>
+                    <div class="inputWithIcon">
+                        <label>Address</label>
+                        <input type='text'   class="login__input" formControlName="address">
+                        <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-address-book-o m-r-10"></i>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('address').invalid && formCustomer.get('address').touched">
+                            <p *ngIf="formCustomer.get('address').hasError('required')">Address is Required</p>
+                        </div>
+                    </div>
+                    <div class="inputWithIcon">
+                        <label>Phone number</label>
+                        <input type='text'  class="login__input" formControlName="phone" >
+                        <i _ngcontent-vlu-c29="" aria-hidden="true" class="fa fa-phone m-r-10"></i>
+                        <div class="alert alert-danger" role="alert"
+                             *ngIf="formCustomer.get('phone').invalid && formCustomer.get('phone').touched">
+                            <p *ngIf="formCustomer.get('phone').hasError('required')">Phone number is Required</p>
+                            <p *ngIf="formCustomer.get('phone').hasError('pattern')">Phone number must be numeric</p>
+                            <p *ngIf="formCustomer.get('phone').hasError('minlength') || formCustomer.get('phone').hasError('maxlength')">
+                                Phone numbers must have minimum 10 numbers and maximum 12 numbers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="login__control" >
+                    <button  type='submit' class="btn btn-md btn--warning btn--wider" style="margin-top: 15px"[disabled]="formAccount.invalid || formCustomer.invalid" (click)="getForm()">Register</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
