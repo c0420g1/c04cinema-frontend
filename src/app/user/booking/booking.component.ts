@@ -16,7 +16,8 @@ declare var $: any;
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css']
 })
-export class BookingComponent implements OnInit {
+  export class BookingComponent implements OnInit {
+   //#region avaiable 
   locationId: number = 1;
   dateShow: string = '';
   listLocation: Location[] = [];
@@ -40,15 +41,43 @@ export class BookingComponent implements OnInit {
   hallName: string;
   theatreName: string;
   quantity: number=0;
-  // res: BookingTicket = new BookingTicket();
-  constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute, private movieService: MovieService) {
-    
+  selectedObject : Location;
+  listCombo: any= [];
+  totalCombo: number= 0;
+  //#endregion
+
+  //#region build in
+  constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute, private movieService: MovieService) {   
   }
 
-  changeLocation(lId){
+  ngOnInit(): void {
+    $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
+    const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+    this.dateShow = currentDate;
 
-    this.bookService.getBookingTime(lId, this.movieId, this.dateShow).subscribe((data: any) => {
-      this.listTheatreTime = data; }
+    this.activatedRoute.paramMap.subscribe(
+      (param: ParamMap) => {
+          this.movieId = (Number)(param.get('id'));
+          this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
+            this.movieName= r[0].name;
+          });
+      });
+    this.bookService.getAllLocation().subscribe(r => {this.listLocation = r; console.log(this.listLocation)});
+    this.bookService.getBookingTime(this.locationId, 94, '2020-11-28').subscribe((data: any) => {
+      this.listTheatreTime = data; console.log(this.listTheatreTime); }
+    );
+    this.bookService.getSeatType().subscribe(r => this.listSeatType = r);
+    this.bookService.bookingGetCombo().subscribe(c => this.listCombo = c );
+    }
+
+  //#endregion
+ 
+  //#region event & service
+  changeLocation(lId){
+    alert(lId);
+    this.bookService.getBookingTime(lId, 94, '2020-11-28').subscribe((data: any) => {
+      this.listTheatreTime = data;
+    console.log(data) }
     );
   }
 
@@ -111,7 +140,10 @@ export class BookingComponent implements OnInit {
       
     })
   }
-
+  //#endregion
+  
+  //#region show hide
+  
   pricefn(priceSeat){
       return Number(priceSeat) + this.priceShow;
   }
@@ -226,25 +258,7 @@ export class BookingComponent implements OnInit {
  quan(val){
     this.quantity= val;
  }
-  ngOnInit(): void {
-    $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
-    const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
-    this.dateShow = currentDate;
-
-    this.activatedRoute.paramMap.subscribe(
-      (param: ParamMap) => {
-          this.movieId = (Number)(param.get('id'));
-          this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
-            this.movieName= r[0].name;
-          });
-      });
-    this.bookService.getAllLocation().subscribe(r => this.listLocation = r);
-    this.bookService.getBookingTime(this.locationId, this.movieId, '2020-11-28').subscribe((data: any) => {
-      this.listTheatreTime = data; console.log(this.listTheatreTime); }
-    );
-    this.bookService.getSeatType().subscribe(r => this.listSeatType = r);
-
-    }
+  
 
     getSeatName(){
       let seatName: string='A1';
@@ -253,4 +267,6 @@ export class BookingComponent implements OnInit {
       // });
       return seatName;
     }
+
+    //#endregion
 }

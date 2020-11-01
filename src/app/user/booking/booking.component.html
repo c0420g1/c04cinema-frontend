@@ -25,10 +25,47 @@
         <div class="col-sm-12">
             <h2 class="page-heading">Film: {{movieName}}</h2>
             <h2 class="page-heading">City &amp; Date</h2>
-        <select class="select__sort"  style="font-size: 19px" (change)="changeLocation(4)">
-          <option *ngFor="let location of listLocation" [ngValue]="location.id">{{location.name}}</option>
+
+
+
+
+
+
+            <!-- <div class="choose-container choose-container--short">
+                <form id='select' class="select" method='get'>
+                    <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
+                        <option value="1" selected='selected'>London</option>
+                        <option value="2">New York</option>
+                        <option value="3">Paris</option>
+                        <option value="4">Berlin</option>
+                        <option value="5">Moscow</option>
+                        <option value="3">Minsk</option>
+                        <option value="4">Warsawa</option>
+                        <option value="5">Kiev</option>
+                    </select>
+                </form>
+
+                <div class="datepicker">
+                    <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
+                    <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
+                </div>
+            </div> -->
+
+
+
+
+
+            <span style="font-size: large;"><i class="fa fa-map-marker"></i> City: </span>   
+        <select *ngIf="listLocation" class="select__sort"  style="font-size: 19px"  [(ngModel)]="selectedObject" 
+        (ngModelChange)="changeLocation(selectedObject.id)">
+        <option [ngValue]="undefined" selected>Tokyo</option>
+          <option *ngFor="let location of listLocation" [ngValue]="location">{{location.name}}</option>
         </select>
-        <input type="date" style="font-size: 15px; margin-left: 10px" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
+
+            <span class="datepicker__marker" style="font-size: large;margin-left: 30px;"><i class="fa fa-calendar"></i> Date:</span>
+            <input type="date" style="font-size: 15px; margin-left: 10px" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
+
+       
             <h2 class="page-heading">Pick time</h2>
 
             <div class="time-select time-select--wide">
@@ -108,7 +145,7 @@
     </div>
     </div>
 
-<div id="stCombo" style="display: none;">
+<div id="stCombo">
     <section class="container">
         <div class="col-sm-12">
             <div class="row">
@@ -118,16 +155,19 @@
                     <div class="rates-wrapper rates--full">
 
                         <table>
-                            <tr class="rates">
+                            <tr *ngFor="let combo of listCombo" class="rates">
     
-                              <td style="width: 29%"> <img src="assets/images/1.jpg" style="width: 300px; height: 210px;"></td>
-                                <td class="rates__obj" style="width: 16%;" >Coombo Name</td>
-                                <td class="rates__vote" style="width: 23%;"><span (click)="minus()"><i class="fa fa-minus-circle" style="font-size: xx-large;"></i></span>
-                                    <span><input type="text" class="qg" value="{{quantity}}" (keyup)="quan($event.target.value)"></span>
-                            <span (click)="plus()"><i class="fa fa-plus-circle" style="font-size: xx-large;"></i></span>
+                              <td style="width: 25%"> <img src="{{combo.imageUrl}}" style="width: 275px; height: 195px;"></td>
+                                <td class="rates__obj" style="width: 23%;" >
+                                <div>{{combo.name}}</div>    
+                                 <div> {{combo.description}}</div>  
                                 </td>
-                                <td style="width: 16%;font-size: xx-large;">20$</td>
-                                <td class="rates__result">4.8</td>
+                                <td class="rates__vote" style="width: 20%;"><span (click)="minus()"><i class="fa fa-minus-circle" style="font-size: x-large;"></i></span>
+                                    <span><input type="text" class="qg" value="{{quantity}}" (keyup)="quan($event.target.value)"></span>
+                            <span (click)="plus()"><i class="fa fa-plus-circle" style="font-size: x-large;"></i></span>
+                                </td>
+                                <td style="width: 15%;font-size: xx-large;">{{combo.price| currency}} </td>
+                                <td class="rates__result">{{totalCombo}}</td>
                             </tr>
                         
                     </table>
