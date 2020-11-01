@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
   errorEmail: string;
   pass: string;
   role: RoleAccount = new RoleAccount();
+  codeCustomer: string;
   constructor(private fb: FormBuilder, private registerService: RegisterService, private token: TokenStorageService,
               private router: Router) { }
 
@@ -59,9 +60,17 @@ export class RegisterComponent implements OnInit {
       customerTypeId: ['1'],
       currentBonusPoint: ['0'],
       isactive: ['1'],
-      code: [''],
+      code: [this.codeCustomer = this.getRandomCode(5)],
       imageUrl: ['https://www.freepngimg.com/thumb/youtube/62644-profile-account-google-icons-computer-user-iconfinder.png']
     });
+  }
+  getRandomCode(length){
+    var randomNumber = '0123456789';
+    var result = 'KH-';
+    for (var i = 0; i < length; i++) {
+      result += randomNumber.charAt(Math.floor(Math.random() * randomNumber.length));
+    }
+    return result;
   }
 
   getForm(){
@@ -118,3 +127,4 @@ function dateValidator(formControl: FormControl) {
   }
   return null;
 }
+
