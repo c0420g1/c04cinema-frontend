@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { NewsdetailComponent } from './newsdetail/newsdetail.component';
 
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginpageComponent
+      },
+      {
+        path: 'newsDetail',
+        component: NewsdetailComponent
       },
       {
         path: 'promotion',
