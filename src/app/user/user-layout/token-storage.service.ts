@@ -44,4 +44,7 @@ export class TokenStorageService {
     window.sessionStorage.removeItem(USERID_KEY);
     window.sessionStorage.setItem(USERID_KEY, userid);
   }
+  public getUserid(): string {
+    return sessionStorage.getItem(USERID_KEY);
+  }
 }
