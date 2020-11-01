@@ -36,8 +36,8 @@
                 </div>
             </div>
         </div>
-        <ng-template [ngIf]="movies.length === 0">
-            <h4 class="h4-not-found"> Not found movies !</h4>
+        <ng-template [ngIf]="movies.length === 0 && loading == false">
+            <h4 class="h4-not-found"> Not found any result same your input !</h4>
         </ng-template>
     </div>
 </div>
