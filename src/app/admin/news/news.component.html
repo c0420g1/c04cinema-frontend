@@ -127,13 +127,14 @@
                             <p *ngIf="addFormNews.get('description').hasError('maxLength')">Description is less than 2001 characters</p>
                         </div>
 
+                        <br>
                         <div>
-                            <app-image-upload></app-image-upload>
+                            <app-image-upload (getLinkFather)="getLink($event)"></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Image Url<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control"  formControlName="imageUrl" >
+                            <input type="text" class="form-control" [(ngModel)]="url"  formControlName="imageUrl" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormNews.get('imageUrl').invalid && addFormNews.get('imageUrl').touched">
@@ -195,12 +196,12 @@
                         </div>
 
                         <div>
-                            <app-image-upload></app-image-upload>
+                            <app-image-upload (getLinkFather)="getLink($event)"></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Image Url<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control"  formControlName="imageUrl" >
+                            <input type="text" class="form-control" [(ngModel)]="url"  formControlName="imageUrl" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormNews.get('imageUrl').invalid && editFormNews.get('imageUrl').touched">
