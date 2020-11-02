@@ -46,7 +46,8 @@ export class PromotionComponent implements OnInit {
          // @ts-ignore
         if (parseInt(this.promotion.price) > parseInt(this.customer.currentBonusPoint)) {
 
-            alert('You are not enough point, Donate blood pls!');
+            // alert('You are not enough point, Donate blood pls!');
+            this.check =true;
         } else {
             // Tính Điểm sau khi đã mua Promotion cho Customer
             this.point = this.customer.currentBonusPoint - this.promotion.price;
