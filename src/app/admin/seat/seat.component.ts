@@ -29,12 +29,6 @@ export class SeatComponent implements OnInit {
     this.theaterService.getAllSeatType().subscribe((data) => {this.seatType = data; });
     this.hallIdReceive = Number.parseInt(this.route.snapshot.paramMap.get("id"));
     this.showListSeats(this.hallIdReceive);
-    this.addFormSeat = this.fbAddSeat.group({
-      name: [''],
-      hallId: [this.hallIdReceive],
-      seatTypeId: [1],
-    })
-    ;
 
     this.editFormSeat = this.fbEditSeat.group({
       id: [''],
@@ -51,14 +45,18 @@ export class SeatComponent implements OnInit {
   }
 
   addSeatToHall(){
-    for (let i = 0; i <= this.seatNumber ; i ++){
+      this.addFormSeat = this.fbAddSeat.group({
+        name: [''],
+        hallId: [this.hallIdReceive],
+        seatTypeId: [1],
+      });
       const {value} = this.addFormSeat;
+    for (let i = 0; i <= this.seatNumber ; i ++){
       this.theaterService.addSeat(value)
           .subscribe(nextSeat => {
             this.seats.unshift(nextSeat);
           }, error => console.log(error));
     }
-    this.showListSeats(this.hallIdReceive);
   }
 
   editSeat(seat: Seat){
