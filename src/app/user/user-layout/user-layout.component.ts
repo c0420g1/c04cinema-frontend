@@ -62,4 +62,11 @@ export class UserLayoutComponent implements OnInit {
     var menu = document.querySelector('.auth__function');
     menu.classList.toggle('open-function');
   }
+
+  goToSetting(val){
+      this.router.navigateByUrl("/customer/"+val )
+  .then(() => {
+    window.location.reload();
+  });
+  }
 }
