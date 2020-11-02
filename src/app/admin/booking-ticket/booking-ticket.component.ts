@@ -74,7 +74,10 @@ export class BookingTicketComponent implements OnInit {
     if (this.numberTicket == null){
       this.bookingTicketService.confirmTicket(this.confirmTicket,0).subscribe(() => this.ngOnInit());
     } else {
-      this.bookingTicketService.confirmTicket(this.confirmTicket,this.numberTicket*500).subscribe(() => this.ngOnInit());
+      this.bookingTicketService.confirmTicket(this.confirmTicket,this.numberTicket*500).subscribe(() => {
+        this.numberTicket=0;
+        this.ngOnInit()}
+        );
     }
 
     this.check = false;
