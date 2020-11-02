@@ -24,7 +24,10 @@ export class PromotionComponent implements OnInit {
             this.datas = res;
             console.log(this.datas);
         });
-
+        this.promotionService.findCustomer(100).subscribe(data => {
+            this.customer = data;
+            console.log(this.customer.id);
+        });
     }
 
     rescus = '';
@@ -49,39 +52,44 @@ export class PromotionComponent implements OnInit {
 
     buyPromotion(promotion) {
         this.promotion = promotion;
-        // console.log(this.promotion)
-        this.customerID = this.promotion.customerId;
-        console.log(this.customerID);
-        this.myFunction('1');
-        this.promotionService.getCustomerPoint(this.rescus).subscribe(data => {
-            this.customer = data;
 
-        });
-        console.log(this.promotion.price);
-        console.log(this.customer[0].currentBonusPoint);
+
+        // // console.log(this.promotion)
+        // this.customerID = this.promotion.customerId;
+        // console.log(this.customerID);
+        // this.myFunction('1');
+        // this.promotionService.getCustomerPoint(this.rescus).subscribe(data => {
+        //     this.customer = data;
+        //
+        // });
+        // console.log(this.promotion.price);
+        // console.log(this.customer[0].currentBonusPoint);
+        // // @ts-ignore
         // @ts-ignore
-        if (parseInt(this.promotion.price) > parseInt(this.customer[0].currentBonusPoint)) {
+        if (parseInt(this.promotion.price) > parseInt(this.customer.currentBonusPoint)) {
 
             alert('You are not enough point, Donate blood pls!');
         } else {
             // Tính Điểm sau khi đã mua Promotion cho Customer
-            this.point = this.customer[0].currentBonusPoint - this.promotion.price;
+            this.point = this.customer.currentBonusPoint - this.promotion.price;
             console.log(this.point);
             // Cập nhật điểm về lại cho Customer
-            this.promotionService.updatePoint(1, this.point).subscribe(data => {
+            this.promotionService.updatePoint(this.customer.id, this.point).subscribe(data => {
                 // @ts-ignore
-                this.customer[0].currentBonusPoint = data;
-                console.log(this.customer[0].currentBonusPoint);
+                this.customer.currentBonusPoint = data;
+                console.log(this.customer.currentBonusPoint);
 
             });
+            //
+                this.promotion.code= this.promotionService.getRandomCode(6);
+                console.log(this.promotion.id);
+                console.log(this.promotion.code);
+                this.promotionService.updateCodePC(this.customer.id,this.promotion.id, this.promotion.code).subscribe();
 
-            this.promotion.code= this.promotionService.getRandomCode(6);
-            console.log(this.promotion.id);
-            console.log(this.promotion.code);
-            this.promotionService.updateCodePC(1,this.promotion.id, this.promotion.code).subscribe();
 
-
-                alert(this.promotion.code)
+                    alert(this.promotion.code)
+            // }
         }
+        window.location.reload();
     }
 }
