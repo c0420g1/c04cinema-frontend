@@ -25,6 +25,7 @@ import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { NewsdetailComponent } from './newsdetail/newsdetail.component';
 
 
 // @ts-ignore
@@ -32,8 +33,9 @@ import { LoginpageComponent } from './loginpage/loginpage.component';
     declarations: [UserLayoutComponent, HomeComponent,
         PromotionComponent, CustomerComponent, InformationComponent,
         HistoryPointComponent, TickerPutComponent, TickerCancelComponent,
-        MovieShowingComponent, MovieComingComponent, MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent, LoginComponent, RegisterComponent, LoginpageComponent],
-    imports: [
+        MovieShowingComponent, MovieComingComponent, MovieDetailComponent, BookingComponent, ContactComponent, NewsComponent, GalleryComponent, LoginComponent, RegisterComponent, LoginpageComponent, NewsdetailComponent],
+   exports: [BookingComponent],
+        imports: [
         CommonModule,
         UserRoutingModule,
         ReactiveFormsModule,

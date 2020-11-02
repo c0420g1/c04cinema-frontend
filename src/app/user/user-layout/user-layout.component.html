@@ -63,9 +63,9 @@
             {{info.username}}
           </a>
           <ul class="auth__function">
-<!--            <li><a  class="auth__function-item" [routerLink]="['ticker/ticker-put',info.accountId]">Booked tickets</a></li>-->
+           <li><a  class="auth__function-item" href="/customer/{{info.accountId}}/ticker-put/{{info.accountId}}">Booked tickets</a></li>
             <li *ngIf="info.authorities == 'admin'"><a routerLink="/admin" class="auth__function-item">Admin</a></li>
-            <li><a class="auth__function-item" [routerLink]="['/customer',info.accountId]" >Settings</a></li>
+            <li><a class="auth__function-item" (click)="goToSetting(info.accountId)">Settings</a></li>
             <li><a class="auth__function-item" style="cursor: pointer" (click)="logout()">Logout</a></li>
           </ul>
         </div>

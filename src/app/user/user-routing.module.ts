@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { NewsdetailComponent } from './newsdetail/newsdetail.component';
 
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginpageComponent
+      },
+      {
+        path: 'newsDetail',
+        component: NewsdetailComponent
       },
       {
         path: 'promotion',
@@ -93,28 +98,28 @@ const routes: Routes = [
           }
         ]
       },
-      // {
-      //   path: 'ticker',
-      //   component: CustomerComponent,
-      //   children: [
-      //     {
-      //       path: 'information/:id',
-      //       component: InformationComponent
-      //     },
-      //     {
-      //       path: 'history-point/:id',
-      //       component: HistoryPointComponent
-      //     },
-      //     {
-      //       path: 'ticker-put/:id',
-      //       component: TickerPutComponent
-      //     },
-      //     {
-      //       path: 'ticker-cancel/:id',
-      //       component: TickerCancelComponent
-      //     }
-      //   ]
-      // },
+      {
+        path: 'ticker',
+        component: CustomerComponent,
+        children: [
+          {
+            path: 'information/:id',
+            component: InformationComponent
+          },
+          {
+            path: 'history-point/:id',
+            component: HistoryPointComponent
+          },
+          {
+            path: 'ticker-put/:id',
+            component: TickerPutComponent
+          },
+          {
+            path: 'ticker-cancel/:id',
+            component: TickerCancelComponent
+          }
+        ]
+      },
       {
         path: 'movie-showing',
         component: MovieShowingComponent,
