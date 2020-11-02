@@ -46,14 +46,14 @@ export class RegisterComponent implements OnInit {
     this.registerService.getAccountIdFirst().subscribe(data => {this.accountFindById = data; });
     this.registerService.getCustomerIdFirst().subscribe(data => {console.log(data); });
     this.formAccount = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required, Validators.maxLength(15)]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$')]]
     });
     this.formCustomer = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s\\\\W|_]+')]],
       birthday: ['', [Validators.required, dateValidator, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       gender: ['', Validators.required],
-      cardid: ['', [Validators.required, Validators.minLength(9), Validators.pattern('[\\d]*')]],
+      cardid: ['', [Validators.required, Validators.pattern('[\\d]{3,}(-)[\\d]{2,}(-)[\\d]{4,}')]],
       email: ['', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
       address: ['', Validators.required],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12), Validators.pattern('0[\\d]*')]],
