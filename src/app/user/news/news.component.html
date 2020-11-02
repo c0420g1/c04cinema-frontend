@@ -5,29 +5,24 @@
             <h2 class="page-heading">News</h2>
 
             <!-- News post article-->
-            <article class="post post--news">
-                <a href='single-page-left.html' class="post__image-link">
-                    <img alt='' src="assets/images/client-photo/single-post.jpg">
+            <article class="post post--news" *ngFor="let new of news  | paginate: { itemsPerPage: 3, currentPage: p }">
+                <a href='https://ngoisao.net/hau-truong/scarlett-johansson-cuoi-chong-thu-ba-4184330.html' class="post__image-link">
+                    <img alt='' [src]="new.imageUrl" style="width: 100%; height: auto">
                 </a>
 
-                <h1><a href="single-page-left.html" class="post__title-link">Donec eu mollis augue, ut egestas
-                    leo</a></h1>
+                <h1><a href='https://ngoisao.net/hau-truong/scarlett-johansson-cuoi-chong-thu-ba-4184330.html' class="post__title-link ">{{new.name}}</a></h1>
                 <p class="post__date">29 October 2020 </p>
 
                 <div class="wave-devider"></div>
 
-                <p class="post__text">Mauris gravida ipsum vitae libero molestie eget dignissim ipsum egestas.
-                    Quisque in eros id velit molestie placerat a ut arcu. Etiam consequat, turpis ac commodo
-                    rhoncus, justo enim consequat tortor, vitae interdum odio tellus at sem. Aliquam lacus quam,
-                    lobortis sed lacus eget, commodo volutpat nunc. Text link sample. Proin accumsan diam vel nulla
-                    ultrices congue.</p>
+                <p class="post__text">{{new.description}}</p>
 
                 <div class="tags">
                     <ul>
-                        <li class="item-wrap"><a href="#" class="tags__item">news</a></li>
-                        <li class="item-wrap"><a href="#" class="tags__item">movie</a></li>
-                        <li class="item-wrap"><a href="#" class="tags__item">ceremony</a></li>
-                        <li class="item-wrap"><a href="#" class="tags__item">award</a></li>
+                        <li class="item-wrap"><a  class="tags__item">news</a></li>
+                        <li class="item-wrap"><a  class="tags__item">movie</a></li>
+                        <li class="item-wrap"><a class="tags__item">ceremony</a></li>
+                        <li class="item-wrap"><a  class="tags__item">award</a></li>
                     </ul>
                 </div>
 
@@ -36,12 +31,33 @@
             <!-- end news post article-->
 
             <div class="pagination">
-                <div style="float: left;width: 40%;"><a href='#' class="pagination__prev">prev</a></div>
+                <div style="float: left;width: 40%;"><a  class="pagination__prev" (click)="plusPage()">prev</a></div>
                 
-               <div style="float: right; width: 60%;"> <a href='#' class="pagination__next">next</a></div>
+               <div style="float: right; width: 60%;"> <a class="pagination__next" (click)="prevPage()">next</a></div>
             </div>
 
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <aside class="col-sm-4 col-md-3">
             <div class="sitebar">
