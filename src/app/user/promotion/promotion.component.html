@@ -7,11 +7,11 @@
 
         <div class="row">
             <div class="col-4" *ngFor="let item of datas|paginate: { itemsPerPage: 6, currentPage: p }" style="margin-bottom: 60px">
-                <li class="film-lists item last"  style="margin-left: 30px">
+                <li class="film-lists item last"  style="margin-left: 30px;list-style: none">
                     <div class="product-info" style="min-height: 77px;">
                         <h2 style="font-size: 22px; color: blue " class="product-name">{{item.name}}</h2>
                         <span class="price"><span style="font-weight: bold">Price :</span> {{item.price}}</span>
-                        <button  type="button" title="Mua" class="btn bg-warning" style="margin-left: 180px" (click)="buyPromotion(item)" *ngIf="accountID!= 0; else block ">
+                        <button  type="button" title="Buy" class="btn bg-warning" style="margin-left: 180px" (click)="buyPromotion(item)" *ngIf="accountID!= 0; else block ">
                             <span><span>Buy</span></span>
                         </button>
                         <ng-template #block>
@@ -47,10 +47,16 @@
                     <button type="button" class="overlay-close" (click)="load()">Close</button>
                     <p class="login__title">Promotion Code <br><span class="login-edition">welcome to C04.Movie</span></p>
                 </div>
-                <div style="text-align: center">
+                <div style="text-align: center" *ngIf="proCode; else code">
                     <p>Your promotion code: </p>
                     <p style="font-size: 20px">{{proCode}} </p>
                 </div>
+                <ng-template #code>
+                    <div style="text-align: center" >
+                        <p> You are not enough point, Donate blood pls! </p>
+
+                    </div>
+                </ng-template>
 
             </form>
         </div>

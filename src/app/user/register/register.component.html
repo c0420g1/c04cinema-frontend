@@ -17,6 +17,7 @@
                             <div class="alert alert-danger" role="alert"
                                  *ngIf="formAccount.get('username').invalid && formAccount.get('username').touched">
                                 <p *ngIf="formAccount.get('username').hasError('required')">Account is Required</p>
+                                <p *ngIf="formAccount.get('username').hasError('maxlength')">Account must have maximum 15 character</p>
                             </div>
                             <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
                                 <p >{{errorMessage}}</p>
@@ -29,6 +30,7 @@
                             <div class="alert alert-danger" role="alert"
                                  *ngIf="formAccount.get('password').invalid && formAccount.get('password').touched">
                                 <p *ngIf="formAccount.get('password').hasError('required')">Password is Required</p>
+                                <p *ngIf="formAccount.get('password').hasError('pattern')">Password is not format: Abcd1234</p>
                             </div>
                         </div>
                     </form>
@@ -69,8 +71,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="formCustomer.get('cardid').invalid && formCustomer.get('cardid').touched">
                             <p *ngIf="formCustomer.get('cardid').hasError('required')">Id card is Required</p>
-                            <p *ngIf="formCustomer.get('cardid').hasError('minlength')">ID card minimum 9 digits</p>
-                            <p *ngIf="formCustomer.get('cardid').hasError('pattern')">ID must be numeric</p>
+                            <p *ngIf="formCustomer.get('cardid').hasError('pattern')">ID is not format:xxx-xx-xxxx</p>
                         </div>
                     </div>
                     <div class="inputWithIcon">
