@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Promotion} from '../../../Promotion';
 import {PromotionService} from '../../promotion.service';
 import {Customer} from '../customer/model/Customer';
+import {GlobalConstants} from '../../model/GlobalConstants';
 
 @Component({
     selector: 'app-promotion',
@@ -11,11 +12,13 @@ import {Customer} from '../customer/model/Customer';
 export class PromotionComponent implements OnInit {
     datas: Promotion[] = [];
     promotion: Promotion;
+    proCode: string;
     customerID: string;
     customer: Customer;
     point: number;
     p: number = 1;
-
+    accountID: number;
+    check = false;
     constructor(private promotionService: PromotionService) {
     }
 
@@ -24,48 +27,23 @@ export class PromotionComponent implements OnInit {
             this.datas = res;
             console.log(this.datas);
         });
-        this.promotionService.findCustomer(100).subscribe(data => {
+        this.accountID = GlobalConstants.accId;
+        // GlobalConstants để đăng nhập tự động nhận account id của customer
+        this.promotionService.findCustomer(GlobalConstants.accId).subscribe(data => {
             this.customer = data;
             console.log(this.customer.id);
         });
     }
 
-    rescus = '';
 
-    myFunction(id: string) {
-        let uri = 'filter={"property":"id","operator":"eq","value":' + id + '}';
-        this.rescus = encodeURI(uri);
-    }
 
-    // getId(promotion) {
-    //     this.promotion = promotion;
-    //     // console.log(this.promotion)
-    //     this.customerID = this.promotion.customerId;
-    //     console.log(this.customerID);
-    //     this.myFunction('1');
-    //     this.promotionService.getCustomerPoint(this.rescus).subscribe(data => {
-    //         this.customer = data;
-    //
-    //     });
-    // }
 
 
     buyPromotion(promotion) {
         this.promotion = promotion;
 
 
-        // // console.log(this.promotion)
-        // this.customerID = this.promotion.customerId;
-        // console.log(this.customerID);
-        // this.myFunction('1');
-        // this.promotionService.getCustomerPoint(this.rescus).subscribe(data => {
-        //     this.customer = data;
-        //
-        // });
-        // console.log(this.promotion.price);
-        // console.log(this.customer[0].currentBonusPoint);
-        // // @ts-ignore
-        // @ts-ignore
+         // @ts-ignore
         if (parseInt(this.promotion.price) > parseInt(this.customer.currentBonusPoint)) {
 
             alert('You are not enough point, Donate blood pls!');
@@ -81,15 +59,20 @@ export class PromotionComponent implements OnInit {
 
             });
             //
-                this.promotion.code= this.promotionService.getRandomCode(6);
+                this.proCode = this.promotionService.getRandomCode(6);
                 console.log(this.promotion.id);
                 console.log(this.promotion.code);
-                this.promotionService.updateCodePC(this.customer.id,this.promotion.id, this.promotion.code).subscribe();
+                this.promotionService.updateCodePC(this.customer.id,this.promotion.id, this.proCode).subscribe();
 
 
-                    alert(this.promotion.code)
-            // }
+
         }
+        this.check = true;
+
+    }
+
+    load() {
+        // Load lại trang
         window.location.reload();
     }
 }
