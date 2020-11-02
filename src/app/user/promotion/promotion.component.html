@@ -1,74 +1,24 @@
-<!--<div id="1" class="item new col-md-4" *ngFor="let item of datas|paginate: { itemsPerPage: 6, currentPage: p }" style="margin-top: 150px">-->
-<!--    <div class="d-flex justify-content-center align-items-center flex-lg-column">-->
-<!--        <img src="{{item.picture}}">-->
-<!--        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"-->
-<!--                (click)="getId(item)">-->
-<!--            Detail-->
-<!--        </button>-->
-<!--    </div>-->
-
-<!--</div>-->
-<!--<div class="justify-content-center" style="font-size: large; ">-->
-<!--    <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
-<!--</div>-->
-
-
-<!--<div *ngIf="promotion" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"-->
-<!--     aria-labelledby="exampleModalLabel"-->
-<!--     aria-hidden="true" style="margin-top: 100px">-->
-<!--    <div class="modal-dialog" role="document" style="margin-top: 140px">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title " id="exampleModalLabel"style="margin-top: 10px">Modal title</h5>-->
-<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="modal-body ">-->
-<!--                <div class="row align-items-center " style="width: 50%">-->
-<!--                    <img src="{{promotion.picture}}" style="margin-left: 45px">-->
-<!--                </div>-->
-<!--                <div class="row m-0 " style="width: 50%; padding-top: 10px; margin: 0">-->
-<!--                    <label>Name:</label>-->
-<!--                    <p>{{promotion.name}}</p>-->
-<!--                    <label>Discount: </label>-->
-<!--                    <p>{{promotion.discount}}</p>-->
-<!--                    <label>Description:</label>-->
-<!--                    <p>{{promotion.description}}</p>-->
-<!--                    <label>Start Day:</label>-->
-<!--                    <p>{{promotion.startDate}}</p>-->
-<!--                    <label>End Day: </label>-->
-<!--                    <p>{{promotion.endDate}}</p>-->
-<!--                    <label>Price:</label>-->
-<!--                    <p>{{promotion.price}}</p>-->
-<!--                </div>-->
-
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="buyPromotion()">Buy</button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--    </div>-->
-<!--</div>-->
-
 
 <div  style="margin-top: 140px">
 <div class="page-title category-title" style="margin-bottom: 50px; margin-left: 50px">
     <h2 class="page-heading">Promotion</h2>
 </div>
 <div class="category-products cgv-voucher-cate " >
-    <ul class="products-grid products-grid--max-3-col first last odd" style="display:flex;">
+
         <div class="row">
             <div class="col-4" *ngFor="let item of datas|paginate: { itemsPerPage: 6, currentPage: p }" style="margin-bottom: 60px">
-                <li class="film-lists item last"  style="margin-left: 30px">
+                <li class="film-lists item last"  style="margin-left: 30px;list-style: none">
                     <div class="product-info" style="min-height: 77px;">
                         <h2 style="font-size: 22px; color: blue " class="product-name">{{item.name}}</h2>
                         <span class="price"><span style="font-weight: bold">Price :</span> {{item.price}}</span>
-                        <button  type="button" title="Mua" class="btn bg-warning" style="margin-left: 180px" (click)="buyPromotion(item)">
+                        <button  type="button" title="Buy" class="btn bg-warning" style="margin-left: 180px" (click)="buyPromotion(item)" *ngIf="accountID!= 0; else block ">
                             <span><span>Buy</span></span>
                         </button>
+                        <ng-template #block>
+                            <button  type="button" title="Mua" class="btn bg-warning" style="margin-left: 180px" routerLink="/login">
+                                <span><span>Buy</span></span>
+                            </button>
+                        </ng-template>
                         <div class="short-descriptions" style="font-size: 15px">
                             <div class="std"><span style="font-weight: bold">Discount :</span> {{item.discount}}</div>
                             <div class="std"><span style="font-weight: bold">Start Day :</span> {{item.startDate}}  | <span style="font-weight: bold">End Day :</span>   {{item.endDate}}</div>
@@ -83,9 +33,32 @@
             </div>
 
         </div>
-    </ul>
     <div class="justify-content-center" style="font-size: large;margin-left: 600px ">
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 </div>
+</div>
+
+<div id="login1" class="overlay overlay-hugeinc open" *ngIf="check == true">
+    <section class="container">
+        <div class="col-sm-4 col-sm-offset-4">
+            <form id="login-form" class="login" style="padding-top: 0">
+                <div class="header-form">
+                    <button type="button" class="overlay-close" (click)="load()">Close</button>
+                    <p class="login__title">Promotion Code <br><span class="login-edition">welcome to C04.Movie</span></p>
+                </div>
+                <div style="text-align: center" *ngIf="proCode; else code">
+                    <p>Your promotion code: </p>
+                    <p style="font-size: 20px">{{proCode}} </p>
+                </div>
+                <ng-template #code>
+                    <div style="text-align: center" >
+                        <p> You are not enough point, Donate blood pls! </p>
+
+                    </div>
+                </ng-template>
+
+            </form>
+        </div>
+    </section>
 </div>
