@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {TokenStorageService} from '../../user/user-layout/token-storage.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,11 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminLayoutComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  info: any;
+  constructor(private router: Router, private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.router.navigateByUrl('/admin/dashboard');
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities()
+    };
   }
-
 }

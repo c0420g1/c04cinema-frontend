@@ -23,6 +23,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { PromotionComponent } from './promotion/promotion.component';
 import { NewsComponent } from './news/news.component';
 import { UserModule } from '../user/user.module';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [AdminLayoutComponent, DashboardComponent, MovieComponent, TicketComponent, ImageUploadComponent, GalleryComponent, BookingTicketComponent, BannerComponent, PromotionAdminComponent, TheaterComponent,HallListComponent,SeatComponent, PromotionComponent, NewsComponent],
@@ -35,7 +36,7 @@ import { UserModule } from '../user/user.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    NgxLoadingModule.forRoot({}), NgxPaginationModule
+    NgxLoadingModule.forRoot({}), NgxPaginationModule, ChartsModule
   ]
 })
 export class AdminModule { }

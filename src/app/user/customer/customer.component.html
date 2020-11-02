@@ -11,18 +11,79 @@
             <img [src]="customer.imageUrl" height="auto" width="200"/>
             <p style="font-size: 20px; font-weight: bold">{{customer.name}}</p>
             <p>Cumulative Points : {{point}}</p>
-            <button type='submit' class="btn btn-md btn--warning btn--wider"><a href="../../../index.html">Log Out</a></button>
+            <button type='submit' class="btn btn-md btn--warning btn--wider" (click)="logout()"><a>Log Out</a>
+            </button>
             <hr>
-            <div class="m-1"><a [routerLink]="['information',customer.id]"> Account Information</a></div>
+            <div class="m-1"><a [routerLink]="['information',customer.id]" (click)="checkShow()"> Account
+                Information</a></div>
             <hr>
-            <div class="m-3"><a [routerLink]="['history-point',customer.id]"> History </a></div>
+            <div class="m-3"><a [routerLink]="['history-point',customer.id]" (click)="checkShow()"> History </a></div>
             <hr>
-            <div class="m-4"><a [routerLink]="['ticker-put',customer.accountId]"> Tickets Booked </a></div>
+            <div class="m-4"><a [routerLink]="['ticker-put',customer.accountId]" (click)="checkShow()"> Tickets
+                Booked </a></div>
             <hr>
-            <div class="m-4"><a [routerLink]="['ticker-cancel',customer.accountId]"> Tickets Cancel </a></div>
+            <div class="m-4"><a [routerLink]="['ticker-cancel',customer.accountId]" (click)="checkShow()"> Tickets
+                Cancel </a></div>
         </div>
         <div class="col-lg-8" style="text-align: left">
             <router-outlet></router-outlet>
+
+            <div *ngIf="check">
+                <h3>User information</h3>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Member Card :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.code}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">
+                        Full Name  :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.name}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">
+                        Birth Day  :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.birthday}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">
+                        Gender :</label>
+                    <div class="col-sm-8">
+                        <div class="form-group row">
+                            <label style="margin-left: 15px">{{customer.gender}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Email :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.email}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Credit Card  :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.cardid}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Phone  :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.phone}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Address  :</label>
+                    <div class="col-sm-9">
+                        <label>{{customer.address}}</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

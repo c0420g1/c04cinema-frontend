@@ -69,13 +69,16 @@ const routes: Routes = [
         component: BookingComponent,
         canActivate: [AuthGuard],
         data: {
-
           expectedRole: 'customer'
         }
       },
       {
-        path: 'customer',
+        path: 'customer/:id',
         component: CustomerComponent,
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'customer'
+        },
         children: [
           {
             path: 'information/:id',
@@ -95,6 +98,28 @@ const routes: Routes = [
           }
         ]
       },
+      // {
+      //   path: 'ticker',
+      //   component: CustomerComponent,
+      //   children: [
+      //     {
+      //       path: 'information/:id',
+      //       component: InformationComponent
+      //     },
+      //     {
+      //       path: 'history-point/:id',
+      //       component: HistoryPointComponent
+      //     },
+      //     {
+      //       path: 'ticker-put/:id',
+      //       component: TickerPutComponent
+      //     },
+      //     {
+      //       path: 'ticker-cancel/:id',
+      //       component: TickerCancelComponent
+      //     }
+      //   ]
+      // },
       {
         path: 'movie-showing',
         component: MovieShowingComponent,
