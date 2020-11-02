@@ -82,4 +82,10 @@ export class SeatComponent implements OnInit {
     }
   }
 
+  checkSeatContain(){
+    if (this.seats.length == 0){
+      return true
+    };
+  }
+
 }
