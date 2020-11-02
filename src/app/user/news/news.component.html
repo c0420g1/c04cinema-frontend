@@ -6,11 +6,11 @@
 
             <!-- News post article-->
             <article class="post post--news" *ngFor="let new of news  | paginate: { itemsPerPage: 3, currentPage: p }">
-                <a href='https://ngoisao.net/hau-truong/scarlett-johansson-cuoi-chong-thu-ba-4184330.html' class="post__image-link">
+                <a routerLink="/newsDetail" class="post__image-link">
                     <img alt='' [src]="new.imageUrl" style="width: 100%; height: auto">
                 </a>
 
-                <h1><a href='https://ngoisao.net/hau-truong/scarlett-johansson-cuoi-chong-thu-ba-4184330.html' class="post__title-link ">{{new.name}}</a></h1>
+                <h1><a routerLink="/newsDetail" class="post__title-link ">{{new.name}}</a></h1>
                 <p class="post__date">29 October 2020 </p>
 
                 <div class="wave-devider"></div>
