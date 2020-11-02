@@ -222,7 +222,6 @@ declare var $: any;
   //#region show hide
   
   chooseFilm(movieId){
-    alert(movieId);
     $('.cinema-rating').removeClass('choose');
     $('#' + movieId).addClass('choose');
     this.movieId= movieId;

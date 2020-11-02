@@ -6,6 +6,9 @@ import { RegisterService } from './register.service';
 import { CustomerDTO } from './model/customerDTO';
 import { TokenStorageService } from './token-storage.service';
 import { GlobalConstants } from 'src/app/model/GlobalConstants';
+import { NewsService } from 'src/app/admin/news/news.service';
+import { NewService } from '../news/new.service';
+import { News } from 'src/app/model/News';
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
@@ -14,10 +17,13 @@ import { GlobalConstants } from 'src/app/model/GlobalConstants';
 export class UserLayoutComponent implements OnInit {
   info: any;
   customerDTO: CustomerDTO;
-  constructor(private fb: FormBuilder, private registerService: RegisterService, private token: TokenStorageService,
+  listSiteMap: News[]=[];
+  constructor(private fb: FormBuilder, private registerService: RegisterService, private token: TokenStorageService, private newsService: NewService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.newsService.getAllSiteMap().subscribe(r=> this.listSiteMap= r);
+
     $('.auth__show').click(function (e){
       e.preventDefault();
       $('.auth__function').toggleClass('open-function')
