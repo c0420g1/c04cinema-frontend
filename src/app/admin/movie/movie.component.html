@@ -120,7 +120,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('posterUrl').invalid && addFormMovie.get('posterUrl').touched">
                             <p *ngIf="addFormMovie.get('posterUrl').hasError('required')">Poster Url is required</p>
-                            <p *ngIf="addFormMovie.get('posterUrl').hasError('maxLength')">Poster Url must be less than 300 characters</p>
+                            <p *ngIf="addFormMovie.get('posterUrl').hasError('maxLength')">Poster Url must not be more than 300 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Name <span style="color: red">(*)</span></label>
@@ -129,17 +129,18 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('name').invalid && addFormMovie.get('name').touched">
                             <p *ngIf="addFormMovie.get('name').hasError('required')">Name is required</p>
-                            <p *ngIf="addFormMovie.get('name').hasError('maxLength')">Name must be less than 100 characters</p>
+                            <p *ngIf="addFormMovie.get('name').hasError('maxLength')">Name must not be more than 100 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Start Date <span style="color: red">(*)</span></label>
                             <input type="date" class="form-control" formControlName="startDate" (change)="compareTwoDates()" [(ngModel)]="start">
                         </div>
+
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('startDate').invalid && addFormMovie.get('startDate').touched">
                             <p *ngIf="addFormMovie.get('startDate').hasError('required')">Start Date is required</p>
                             <p *ngIf="addFormMovie.get('startDate').hasError('pattern')">Start Date must be follow format: (yyyy-mm-dd)</p>
-                            <p *ngIf="addFormMovie.get('startDate').hasError('checkDate')">Start Date must be more than Current Date</p>
+                            <p *ngIf="addFormMovie.get('startDate').hasError('checkDate')">Start Date must be after Current Date</p>
                         </div>
 
                         <div class="form-group">
@@ -160,7 +161,7 @@
                              *ngIf="addFormMovie.get('actor').invalid && addFormMovie.get('actor').touched">
                             <p *ngIf="addFormMovie.get('actor').hasError('required')">Actor is required</p>
                             <p *ngIf="addFormMovie.get('actor').hasError('pattern')">Actor must be not special sign</p>
-                            <p *ngIf="addFormMovie.get('actor').hasError('maxLength')">Actor must be less than 46 characters</p>
+                            <p *ngIf="addFormMovie.get('actor').hasError('maxLength')">Actor must not be more than 45 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Director <span style="color: red">(*)</span></label>
@@ -170,7 +171,7 @@
                              *ngIf="addFormMovie.get('director').invalid && addFormMovie.get('director').touched">
                             <p *ngIf="addFormMovie.get('director').hasError('required')">Director is required</p>
                             <p *ngIf="addFormMovie.get('director').hasError('pattern')">Director must be not special sign</p>
-                            <p *ngIf="addFormMovie.get('director').hasError('maxLength')">Director must be less than 45 characters</p>
+                            <p *ngIf="addFormMovie.get('director').hasError('maxLength')">Director must not be more than 45 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Entertainment <span style="color: red">(*)</span></label>
@@ -179,7 +180,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('entertainment').invalid && addFormMovie.get('entertainment').touched">
                             <p *ngIf="addFormMovie.get('entertainment').hasError('required')">Entertainment is required</p>
-                            <p *ngIf="addFormMovie.get('entertainment').hasError('maxLength')">Entertainment must be less than 45 characters</p>
+                            <p *ngIf="addFormMovie.get('entertainment').hasError('maxLength')">Entertainment must not be more than 45 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Duration (minute) <span style="color: red">(*)</span></label>
@@ -188,15 +189,15 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('duration').invalid && addFormMovie.get('duration').touched">
                             <p *ngIf="addFormMovie.get('duration').hasError('required')">Duration (minute) is required</p>
-                            <p *ngIf="addFormMovie.get('duration').hasError('min')">Duration (minute) must be number more than 60</p>
-                            <p *ngIf="addFormMovie.get('duration').hasError('max')">Duration (minute) must be number less than 235</p>
+                            <p *ngIf="addFormMovie.get('duration').hasError('min')">Duration (minute) must be number from: 60 to 235 minutes</p>
+                            <p *ngIf="addFormMovie.get('duration').hasError('max')">Duration (minute) must be number from: 60 to 235 minutes</p>
                             <p *ngIf="addFormMovie.get('duration').hasError('pattern')">Duration (minute) must be number from: 60 to 235 minutes </p>
                         </div>
                         <div class="form-group" >
                             <label>Version <span style="color: red">(*)</span></label><br>
-                            <input type="radio" id="2d" formControlName="is2d" value="1">
+                            <input type="radio" id="2d" formControlName="is2d"  value="1" >
                             <label for="2d" style="margin-left: 5px">2D</label>
-                            <input type="radio" id="3d" formControlName="is2d" value="0" style="margin-left: 55px;" >
+                            <input type="radio" id="3d" formControlName="is2d"  value="0"  style="margin-left: 55px;" >
                             <label for="3d" style="margin-left: 5px">3D</label><br>
                         </div>
                         <div class="alert alert-danger" role="alert"
@@ -226,7 +227,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('trailerUrl').invalid && addFormMovie.get('trailerUrl').touched">
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('required')">Trailer Url is required</p>
-                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must be less than 250 characters</p>
+                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must not be more than 250 characters</p>
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
                         </div>
 
@@ -236,7 +237,7 @@
                                 <div class="form-check">
                                     <div class="row">
                                         <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
-                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesAdd($event)" >
+                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesAdd($event)"  >
                                             <label style="margin-left: 5px;">
                                                 {{mgType.name}}
                                             </label>
@@ -245,7 +246,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p *ngIf="errorIdMovieGenreType">Id Movie Genre Type must be from 1 to 5</p>
+                        <p *ngIf="errorIdMovieGenreType">Id Movie Genre Type must be from 1 to 12</p>
                         <div class="form-group">
                             <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
                             <div>
@@ -261,8 +262,8 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('movieRatedAgeId').invalid && addFormMovie.get('movieRatedAgeId').touched">
                             <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('required')">Movie Rated Age is required</p>
-                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number more than 0</p>
-                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number less than 6</p>
+                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number from: 1 to 5</p>
+                            <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number from: 1 to 5</p>
                             <p *ngIf="addFormMovie.get('movieRatedAgeId').hasError('pattern')">Movie Rated Age must be number from: 1 to 5 </p>
                         </div>
                         <div class="form-group">
@@ -280,8 +281,8 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormMovie.get('starRating').invalid && addFormMovie.get('starRating').touched">
                             <p *ngIf="addFormMovie.get('starRating').hasError('required')">Star Rating is required</p>
-                            <p *ngIf="addFormMovie.get('starRating').hasError('min')">Star Rating must be number more than 0</p>
-                            <p *ngIf="addFormMovie.get('starRating').hasError('max')">Star Rating must be number less than 6</p>
+                            <p *ngIf="addFormMovie.get('starRating').hasError('min')">Star Rating must be number from: 1 to 5</p>
+                            <p *ngIf="addFormMovie.get('starRating').hasError('max')">Star Rating must be number from: 1 to 5</p>
                             <p *ngIf="addFormMovie.get('starRating').hasError('pattern')">Star Rating must be number from: 1 to 5 </p>
                         </div>
                         <div class="form-group">
@@ -330,7 +331,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('posterUrl').invalid && editFormMovie.get('posterUrl').touched">
                             <p *ngIf="editFormMovie.get('posterUrl').hasError('required')">Poster Url is required</p>
-                            <p *ngIf="editFormMovie.get('posterUrl').hasError('maxLength')">Poster Url must be less than 300 characters</p>
+                            <p *ngIf="editFormMovie.get('posterUrl').hasError('maxLength')">Poster Url must not be more than 300 characters</p>
                         </div>
 
                         <br>
@@ -343,7 +344,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('name').invalid && editFormMovie.get('name').touched">
                             <p *ngIf="editFormMovie.get('name').hasError('required')">Name is required</p>
-                            <p *ngIf="editFormMovie.get('name').hasError('maxLength')">Name must be less than 100 characters</p>
+                            <p *ngIf="editFormMovie.get('name').hasError('maxLength')">Name must not be more than 100 characters</p>
                         </div>
 
                         <div class="form-group">
@@ -375,7 +376,7 @@
                              *ngIf="editFormMovie.get('actor').invalid && editFormMovie.get('actor').touched">
                             <p *ngIf="editFormMovie.get('actor').hasError('required')">Actor is required</p>
                             <p *ngIf="editFormMovie.get('actor').hasError('pattern')">Actor must be not special sign</p>
-                            <p *ngIf="editFormMovie.get('actor').hasError('maxLength')">Actor must be less than 45 characters</p>
+                            <p *ngIf="editFormMovie.get('actor').hasError('maxLength')">Actor must not be more than 45 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Director <span style="color: red">(*)</span></label>
@@ -385,7 +386,7 @@
                              *ngIf="editFormMovie.get('director').invalid && editFormMovie.get('director').touched">
                             <p *ngIf="editFormMovie.get('director').hasError('required')">Director is required</p>
                             <p *ngIf="editFormMovie.get('director').hasError('pattern')">Director must be not special sign</p>
-                            <p *ngIf="editFormMovie.get('director').hasError('maxLength')">Director must be less than 45 characters</p>
+                            <p *ngIf="editFormMovie.get('director').hasError('maxLength')">Director must not be more than 45 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Entertainment <span style="color: red">(*)</span></label>
@@ -394,7 +395,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('entertainment').invalid && editFormMovie.get('entertainment').touched">
                             <p *ngIf="editFormMovie.get('entertainment').hasError('required')">Entertainment is required</p>
-                            <p *ngIf="editFormMovie.get('entertainment').hasError('maxLength')">Entertainment must be less than 45 characters</p>
+                            <p *ngIf="editFormMovie.get('entertainment').hasError('maxLength')">Entertainment must not be more than 45 characters</p>
                         </div>
                         <div class="form-group">
                             <label>Duration (minute) <span style="color: red">(*)</span></label>
@@ -403,8 +404,8 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('duration').invalid && editFormMovie.get('duration').touched">
                             <p *ngIf="editFormMovie.get('duration').hasError('required')">Duration (minute) is required</p>
-                            <p *ngIf="editFormMovie.get('duration').hasError('min')">Duration (minute) must be number more than 60</p>
-                            <p *ngIf="editFormMovie.get('duration').hasError('max')">Duration (minute) must be number less than 235</p>
+                            <p *ngIf="editFormMovie.get('duration').hasError('min')">Duration (minute) must  be number not more than 60</p>
+                            <p *ngIf="editFormMovie.get('duration').hasError('max')">Duration (minute) must not be number more than 235</p>
                             <p *ngIf="editFormMovie.get('duration').hasError('pattern')">Duration (minute) must be number from: 60 to 235 minutes </p>
                         </div>
                         <div class="form-group" >
@@ -440,7 +441,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('trailerUrl').invalid && editFormMovie.get('trailerUrl').touched">
                             <p *ngIf="editFormMovie.get('trailerUrl').hasError('required')">Trailer Url is required</p>
-                            <p *ngIf="editFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must be less than 250 characters</p>
+                            <p *ngIf="editFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must not be more than 250 characters</p>
                             <p *ngIf="editFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
                         </div>
                         <div class="form-group">
@@ -458,7 +459,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p *ngIf="errorIdMovieGenreTypeEdit">Id Movie Genre Type must be from 1 to 5</p>
+                        <p *ngIf="errorIdMovieGenreTypeEdit">Id Movie Genre Type must be from 1 to 12</p>
                         <div class="form-group">
                             <label>Movie Rated Age<span style="color: red">(*)</span></label><br>
                             <div>
@@ -474,8 +475,8 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('movieRatedAgeId').invalid && editFormMovie.get('movieRatedAgeId').touched">
                             <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('required')">Movie Rated Age is required</p>
-                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number more than 0</p>
-                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number less than 6</p>
+                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('min')">Movie Rated Age must be number from 1 to 5.</p>
+                            <p *ngIf="editFormMovie.get('movieRatedAgeId').hasError('max')">Movie Rated Age must be number from 1 to 5.</p>
                         </div>
                         <div class="form-group">
                             <label>Star Rating<span style="color: red">(*)</span></label><br>
@@ -492,8 +493,8 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('starRating').invalid && editFormMovie.get('starRating').touched">
                             <p *ngIf="editFormMovie.get('starRating').hasError('required')">Star Rating is required</p>
-                            <p *ngIf="editFormMovie.get('starRating').hasError('min')">Star Rating must be number more than 0</p>
-                            <p *ngIf="editFormMovie.get('starRating').hasError('max')">Star Rating must be number less than 6</p>
+                            <p *ngIf="editFormMovie.get('starRating').hasError('min')">Star Rating must be number from 1 to 5.</p>
+                            <p *ngIf="editFormMovie.get('starRating').hasError('max')">Star Rating must be number from 1 to 5.</p>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -501,7 +502,7 @@
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormMovie.get('description').invalid && editFormMovie.get('description').touched">
-                            <p *ngIf="editFormMovie.get('description').hasError('maxLength')">Description is less than 1000 characters</p>
+                            <p *ngIf="editFormMovie.get('description').hasError('maxLength')">Description is not more than 1000 characters</p>
                         </div>
                     </div>
                     <div class="modal-footer">
