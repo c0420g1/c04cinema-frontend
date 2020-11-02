@@ -12,8 +12,8 @@ import {HallListComponent} from './hall-list/hall-list.component';
 import {SeatComponent} from './seat/seat.component';
 import {NewsComponent} from './news/news.component';
 import { BookingComponent } from '../user/booking/booking.component';
-import { GalleryComponent } from './gallery/gallery.component';
 import { PromotionComponent } from './promotion/promotion.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 const routes: Routes = [
@@ -42,7 +42,7 @@ const routes: Routes = [
         component: ImageUploadComponent
       },
       {
-        path: 'gallery',
+        path: 'galleryadmin',
         component: GalleryComponent
       },
       {
@@ -54,11 +54,11 @@ const routes: Routes = [
         component: BookingComponent
       },
       {
-        path: 'news',
+        path: 'newsadmin',
         component: NewsComponent
       },
       {
-        path: 'promotion',
+        path: 'promotionadmin',
         component: PromotionComponent
       },
       {
