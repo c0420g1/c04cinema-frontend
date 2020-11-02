@@ -1,31 +1,105 @@
-    <div id="step0">
-    <section class="container" style="padding-top:50px">
+<div *ngIf="name=='admin'" id="more">
+<div class="search-wrapper" style="margin-top: 0;">
+    <div class="container container--add">
+        <form id='search-form' method='get' class="search">
+            <input type="text" class="search__field" placeholder="Search">
+            <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
+                <option value="1" selected='selected'>By title</option>
+                <option value="2">By year</option>
+                <option value="3">By producer</option>
+                <option value="4">By title</option>
+                <option value="5">By year</option>
+            </select>
+            <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
+        </form>
+    </div>
+</div>
+<div class="cinema-wrap">
+    <div class="row">
+        <div *ngFor="let movie of movieBestChoice" class="col-xs-4 col-sm-2 cinema-item">
+            <div class="cinema">
+                <a (click)="chooseFilm(movie.id)" class="cinema__images">
+                    <img alt='' [src]="movie.posterUrl" style="width: 190px; height: 250px">
+                    <span id="{{movie.id}}" class="cinema-rating"><span><i class="fa fa-check" style="font-size: x-large;"></i></span></span>
+                </a>
+                <a class="cinema-title">{{movie.name}}</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+   <div id="step0">
+    <section class="container" [style.padding-top]="name=='user'? '30px': '0px'" [style.margin-top]="name=='user'? '0px': '-50px'">
         <div class="order-container">
             <div class="order">
-                <img class="order__images" alt='' src="assets/images/tickets.png">
+                <img class="order__images" alt='' src="assets/images/q.png" style="width: 130px; height: 120px;">
                 <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
                 <div class="order__control">
-                    <a (click)="fstep2()" [ngClass]="{active: !isActive }" class="order__control-btn">Purchase</a>
-                    <a (click)="fstep22()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
+                    <a (click)="fstep22()" [ngClass]="{active: !isActive }" class="order__control-btn">Purchase</a>
+                    <a (click)="fs33()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
                 </div>
             </div>
         </div>
         <div class="order-step-area">
             <div [ngClass]="{order_step_disable: step!='s1'}" class="order-step first--step">1. Where &amp; When</div>
-                    <div [ngClass]="{order_step_disable: step!='s2'}" class="order-step second--step">2. Choose a sit</div>
-                    <div [ngClass]="{order_step_disable: step!='s3'}" class="order-step third--step">3. Check out</div>
+                    <div [ngClass]="{order_step_disable: step!='s2'}" class="order-step first--step">2. Choose a sit</div>
+                    <div [ngClass]="{order_step_disable: step!='s3'}" class="order-step first--step">3. Choose a combo</div>
+                    <div [ngClass]="{order_step_disable: step!='s4'}" class="order-step third--step">4. Check out</div>
+                    
         </div>
 
     </section>
     </div>
     <div id="step1">
+
     <section class="container">
         <div class="col-sm-12">
+            <h2 *ngIf="name=='user'" class="page-heading">Film: {{movieName}}</h2>
             <h2 class="page-heading">City &amp; Date</h2>
-        <select class="select__sort"  style="font-size: 19px" (change)="changeLocation(4)">
-          <option *ngFor="let location of listLocation" [ngValue]="location.id">{{location.name}}</option>
+
+
+
+
+
+
+            <!-- <div class="choose-container choose-container--short">
+                <form id='select' class="select" method='get'>
+                    <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
+                        <option value="1" selected='selected'>London</option>
+                        <option value="2">New York</option>
+                        <option value="3">Paris</option>
+                        <option value="4">Berlin</option>
+                        <option value="5">Moscow</option>
+                        <option value="3">Minsk</option>
+                        <option value="4">Warsawa</option>
+                        <option value="5">Kiev</option>
+                    </select>
+                </form>
+
+                <div class="datepicker">
+                    <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
+                    <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
+                </div>
+            </div> -->
+
+
+
+
+
+            <span style="font-size: large;"><i class="fa fa-map-marker"></i> City: </span>   
+        <select *ngIf="listLocation" class="select__sort"  style="font-size: 19px"  [(ngModel)]="selectedObject" 
+        (ngModelChange)="changeLocation(selectedObject.id)">
+        <option [ngValue]="undefined" selected>Tokyo</option>
+          <option *ngFor="let location of listLocation" [ngValue]="location">{{location.name}}</option>
         </select>
-        <input type="date" style="font-size: 15px; margin-left: 10px" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
+
+            <span class="datepicker__marker" style="font-size: large;margin-left: 30px;"><i class="fa fa-calendar"></i> Date:</span>
+            <input type="date" style="font-size: 15px; margin-left: 10px" value="{{dateShow}}" (change)="searchByDate($event.target.value)">
+
+       
             <h2 class="page-heading">Pick time</h2>
 
             <div class="time-select time-select--wide">
@@ -105,21 +179,73 @@
     </div>
     </div>
 
+<div id="stCombo" style="display: none;">
+    <section class="container">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="page-heading">Combo</h2>
+
+                    <div class="rates-wrapper rates--full">
+
+                        <table>
+                            <tr *ngFor="let combo of listCombo" class="rates">
+    
+                              <td style="width: 25%"> <img src="{{combo.imageUrl}}" style="width: 268px; height: 191px;"></td>
+                                <td class="rates__obj" style="width: 23%;" >
+                                <div>{{combo.name}}</div>    
+                                 <div> {{combo.description}}</div>  
+                                </td>
+                                <td class="rates__vote" style="width: 20%;"><span (click)="minus(combo.id, combo.price)"><i class="fa fa-minus-circle" style="font-size: x-large;"></i></span>
+                                    <span><input type="text" class="qg" id="{{combo.id + 'a'}}" value="0"></span>
+                            <span (click)="plus(combo.id, combo.price)"><i class="fa fa-plus-circle" style="font-size: x-large;"></i></span>
+                                </td>
+                                <td style="width: 15%;font-size: x-large;">{{combo.price| currency}} </td>
+                                <td class="rates__result"><span id="{{combo.id + 'q'}}">$0</span></td>
+                            </tr>
+                        
+                    </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<div class="clearfix"></div>
+        <div class="booking-pagination booking-pagination--margin">
+            <a  (click)="stepCombo()" class="booking-pagination__prev">
+                <span class="arrow__text arrow--prev">prev step</span>
+                <span class="arrow__info">chooise a sit</span>
+            </a>
+            <a (click)="fstep22()" class="booking-pagination__next">
+                <span class="arrow__text arrow--next">next step</span>
+                <span class="arrow__info">checkout</span>
+            </a>
+    </div>
+</div>
+
     <div id="payment" style="display: none;">
         <section class="container">
             <div class="col-sm-12">
                 <h2 class="page-heading">price</h2>
                 <ul class="book-result">
-                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
-                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
-                    <li class="book-result__item">You get new bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
+                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">Combo: <span class="book-result__count booking-ticket">{{totalCombo | currency}}</span></li>
+                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalFinal | currency}}</span></li>
+                    <li class="book-result__item">New bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
                 </ul>
                 <h2 class="page-heading">Input your promotion code</h2>
-                <input name="promotionCode" (keyup)="getProCode($event.target.value)" />
-                <input type="button" value="Use" (click)="useProCode()">
-                <h2 class="page-heading">Choose payment method</h2>
-                <div id="paypal-button-container"></div>
+                <input type="text" name="promotionCode" (keyup)="getProCode($event.target.value)" class="quoc" width="200px" />
+                <input type="button" value="Use Code" (click)="useProCode()" class="btn btn-md btn--danger search__button">
 
+                    
+                <!-- <input type="text" class="quoc">
+                <button type='submit' class="btn btn-md btn--danger search__button" style="position: static">use code</button> -->
+            
+    
+                <h2 class="page-heading">Choose payment method</h2>
+                <div #paypalRef id="paypal-button-container"></div>
+                <!-- <div #paypalRef></div> -->
 
                 <h2 class="page-heading">Contact information</h2>
         
@@ -133,7 +259,7 @@
                 </form>
             </div>
             <div class="order">
-                <a (click)="fstep4()" class="btn btn-md btn--warning btn--wide">purchase</a>
+                <a (click)="fstep4()" id="btPurchase" class="btn btn-md btn--warning btn--wide dg">purchase</a>
             </div>
         </section>
 
@@ -153,8 +279,10 @@
             <div class="col-sm-12">
                 <h2 class="page-heading">price</h2>
                 <ul class="book-result">
-                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
-                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">Combo: <span class="book-result__count booking-ticket">{{totalCombo | currency}}</span></li>
+                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalFinal | currency}}</span></li>
+                    <li class="book-result__item">New bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
                 </ul>
 
                 <h2 class="page-heading">Contact information</h2>
@@ -190,7 +318,7 @@
         <section class="container" style="padding-top:50px">
             <div class="order-container">
                 <div class="order">
-                    <img class="order__images" alt='' src="assets/images/tickets.png">
+                    <img class="order__images" alt='' src="assets/images/q.png" style="width: 130px; height: 120px;">
                     <p class="order__title">Thank you <br><span class="order__descript">you have successfully reserved seat</span></p>
                 </div>
 
@@ -206,22 +334,24 @@
                     <p class="order__title">Thank you <br><span class="order__descript">you have successfully purchased tickets</span></p>
                 </div>
 
-                <div *ngFor="let l of listRes" class="ticket">
+                <div *ngFor="let t of listTicket" class="ticket">
                     <div class="ticket-position">
                         <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
                         <div class="ticket__inner">
 
                             <div class="ticket-secondary">
-                                <span class="ticket__item">Ticket number <strong class="ticket__number">a126bym4</strong></span>
+                                <span class="ticket__item">Ticket number <strong class="ticket__number">{{t.code}}</strong></span>
                                 <span class="ticket__item ticket__date">{{showTime.split('T')[0]}}</span>
                                 <span class="ticket__item ticket__time">{{showTime.split('T')[1]}}</span>
                                 <span class="ticket__item">Theatre: <span class="ticket__cinema">{{theatreName}}</span></span>
                                 <span class="ticket__item">Hall: <span class="ticket__hall">{{hallName}}</span></span>
+                                <span class="ticket__item ticket__price">price: <strong
+                                    class="ticket__cost">{{t.price | currency}}</strong></span>
                             </div>
 
                             <div class="ticket-primery">
                                 <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">The Fifth Estate (2020)</strong></span>
-                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">{{getSeatName()}}</span></span>
+                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">{{t.seatName}}</span></span>
                             </div>
 
 
@@ -233,7 +363,7 @@
 
                 <div class="ticket-control">
                     <a href="#" class="watchlist list--download">Download</a>
-                    <a href="#" class="watchlist list--print">Print</a>
+                    <a (click)="print()" class="watchlist list--print">Print</a>
                 </div>
 
             </div>

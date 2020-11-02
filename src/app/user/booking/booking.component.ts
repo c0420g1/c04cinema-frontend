@@ -1,5 +1,5 @@
 import { Location } from '../../model/location';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookingService } from 'src/app/service/booking.service';
 import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
@@ -8,14 +8,23 @@ import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
 import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MovieService } from '../movie/movie.service';
+import { Ticket } from 'src/app/model/Ticket';
+import { Movie } from 'src/app/model/Movie';
+import { GlobalConstants } from 'src/app/model/GlobalConstants';
 declare var $: any;
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css']
 })
-export class BookingComponent implements OnInit {
+  export class BookingComponent implements OnInit {
+   //#region avaiable 
+   title = 'paypal';
+   @ViewChild('paypalRef', {static: true}) private  paypalRef: ElementRef;
+ 
+
   locationId: number = 1;
   dateShow: string = '';
   listLocation: Location[] = [];
@@ -33,19 +42,113 @@ export class BookingComponent implements OnInit {
   step: string= 's1';
   accountId: number=1;
   movieId: number= 94;
+  movieName: string;
   seatId: number;
   showTime: string;
   hallName: string;
   theatreName: string;
-  // res: BookingTicket = new BookingTicket();
-  constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute) {
-    
+  quantity: number=0;
+  selectedObject : Location;
+  listCombo: any= [];
+  totalCombo: number= 0;
+  totalFinal: number=0;
+  listTicket: Ticket[]= [];
+  seat: Seat= new Seat();
+  movieBestChoice: Movie[] = [];
+  //#endregion
+
+  //#region build in
+  constructor(private fb: FormBuilder, private bookService: BookingService, private datepipe: DatePipe, private activatedRoute: ActivatedRoute, private movieService: MovieService) {   
   }
 
-  changeLocation(lId){
+  @Input() name: string ='user';
+  ngOnInit(): void {
+    this.movieService.getBestChoiceFilm().subscribe(
+      (data) => {
+          this.movieBestChoice = data;
+      },
+      error => console.log(error)
+  );
 
+    // $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
+    // window.paypal.Buttons({
+    //   style: {
+    //     layout: 'horizontal',
+    //     color: 'blue',
+    //     shape: 'rect',
+    //     label: 'paypal'
+    //   },
+    //   createOrder: (data, actions) => {
+    //     return actions.order.create({
+    //       purchase_units: [
+    //         {
+    //           amount: {
+    //             value: this.number,
+    //             currency_code: 'USD'
+    //           }
+    //         }
+    //       ]
+    //     });
+    //   }
+    // }).render(this.paypalRef.nativeElement);
+
+
+    paypal.Buttons({
+      // Set up the transaction
+      createOrder: (data, actions) => {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: this.totalFinal
+                  }
+              }]
+          });
+      },
+
+      // Finalize the transaction
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              // Show a success message to the buyer
+              $("#btPurchase").removeClass("dg");
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+      }
+
+
+  }).render('#paypal-button-container');
+
+
+
+    
+    
+    const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+    this.dateShow = currentDate;
+
+    this.activatedRoute.paramMap.subscribe(
+      (param: ParamMap) => {
+          this.movieId = (Number)(param.get('id'));
+          this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
+            this.movieName= r[0].name;
+          });
+      });
+    this.bookService.getAllLocation().subscribe(r => {this.listLocation = r; console.log(this.listLocation)});
+    this.bookService.getBookingTime(this.locationId, this.movieId, this.dateShow).subscribe((data: any) => {
+      this.listTheatreTime = data; console.log(this.listTheatreTime); }
+    );
+    this.bookService.getSeatType().subscribe(r => this.listSeatType = r);
+    this.bookService.bookingGetCombo().subscribe(c => this.listCombo = c );
+    }
+
+  //#endregion
+ 
+  //#region event & service
+  changeLocation(lId){
+    alert(lId);
+    alert(this.movieId);
+    alert(this.dateShow);
     this.bookService.getBookingTime(lId, this.movieId, this.dateShow).subscribe((data: any) => {
-      this.listTheatreTime = data; }
+      this.listTheatreTime = data;
+    console.log(data) }
     );
   }
 
@@ -67,7 +170,7 @@ export class BookingComponent implements OnInit {
     this.theatreName= theatreName;
   }
 
-  chooseSit(seatId, seatPrice, bonus_seat_point) {
+      chooseSit(seatId, seatPrice, bonus_seat_point) {
     
     if ($('#' + seatId).hasClass('sits_state_not')){
       return;
@@ -89,6 +192,15 @@ export class BookingComponent implements OnInit {
       this.totalPrice += bt.price;
       bt.bookingDate = this.datepipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
       this.listRes.push(bt);
+
+      let tic= new Ticket();
+      this.bookService.bookingGetSeatName(this.seatId).subscribe(r=>{
+          this.seat = r;
+          tic.code="ABCDE"+this.seat.name;
+          tic.price= seatPrice;
+          tic.seatName= this.seat.name;
+          this.listTicket.push(tic);
+      });
     }
   }
   
@@ -97,9 +209,9 @@ export class BookingComponent implements OnInit {
   }
 
   useProCode(){
-    this.bookService.bookingUseBonus(1,this.proCode).subscribe(r=> {
+    this.bookService.bookingUseBonus(GlobalConstants.accId,this.proCode).subscribe(r=> {
       if(Number(r)>0){
-        this.totalPrice= this.totalPrice - Number(r);
+        this.totalFinal= this.totalFinal - Number(r);
         alert("Thank you! Your discount is: " + r);
       }
       else{
@@ -107,6 +219,19 @@ export class BookingComponent implements OnInit {
       }
       
     })
+  }
+  //#endregion
+  
+  //#region show hide
+  
+  chooseFilm(movieId){
+    alert(movieId);
+    $('.cinema-rating').removeClass('choose');
+    $('#' + movieId).addClass('choose');
+    this.movieId= movieId;
+    this.bookService.getBookingTime(this.locationId, this.movieId, this.dateShow).subscribe((data: any) => {
+      this.listTheatreTime = data; console.log(this.listTheatreTime); }
+    );
   }
 
   pricefn(priceSeat){
@@ -119,6 +244,7 @@ export class BookingComponent implements OnInit {
     }
     this.step='s2';
     $("#step1").hide();
+    $('#more').hide();
     $("#step2").show();
   }
   fstep2() {
@@ -127,21 +253,39 @@ export class BookingComponent implements OnInit {
     $("#step1").hide();
     $("#step2").hide();
     $("#step3").hide();
-    $("#payment").show();
-    this.ticketQuantity= this.listRes.length;
+    $("#stCombo").show();
   }
 
   fstep22() {
-    this.step='s3';
+    this.step='s4';
+    this.isActive= false;
+    $("#step1").hide();
+    $("#step2").hide();
+    $("#stCombo").hide();
+    $("#payment").show();
+    this.totalFinal= this.totalCombo + this.totalPrice;
+    this.ticketQuantity= this.listRes.length;
+  }
+
+  fs33(){
+    this.step='s4';
     this.isActive= true;
+    $("#stCombo").hide();
+    $("#step1").hide();
+    $("#step2").hide();
+    $("#payment").hide();
+    $("#step3").show();
+  }
+
+  fstep3(){
+    this.step='s4';
+    this.isActive= true;
+    $("#stCombo").hide();
     $("#step1").hide();
     $("#step2").hide();
     $("#payment").hide();
     $("#step3").show();
     this.ticketQuantity= this.listRes.length;
-  }
-
-  fstep3(){
     this.hiddenAll();
     this.listRes.forEach(e=> {
       e.contactEmail="hcronin0@mtv.com";
@@ -153,17 +297,24 @@ export class BookingComponent implements OnInit {
     $("#reserve").show();
   }
 
+  stepCombo(){
+    this.step='s2';
+    this.hiddenAll();
+    $("#step0").show();
+    $("#step2").show();
+  }
+
   fstep4(){
     this.hiddenAll();
-    // this.listRes.forEach(e=> {
-    // e.contactEmail="hcronin0@mtv.com";
-    // e.contactPhone= "5859577512";
-    // e.paymentId= 2;
-    // e.promotionId= 16;
-    // e.status= 0;
-    // this.bookService.booking(e).subscribe();
-    // });
-    // this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
+    this.listRes.forEach(e=> {
+    e.contactEmail="hcronin0@mtv.com";
+    e.contactPhone= "5859577512";
+    e.paymentId= 2;
+    e.promotionId= 16;
+    e.status= 0;
+    this.bookService.booking(e).subscribe();
+    });
+    this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
     $("#final").show();
 
   }
@@ -176,47 +327,55 @@ export class BookingComponent implements OnInit {
   }
 
   pPurchase(){
-    this.step='s2';
+    this.step='s3';
     this.hiddenAll();
     $("#step0").show();
-    $("#step2").show();
+    $("#stCombo").show();
   }
 
   pReserve(){
-    this.step='s2';
+    this.step='s3';
     this.hiddenAll();
     $("#step0").show();
-    $("#step2").show();
+    $("#stCombo").show();
   }
   hiddenAll(){
     $("#step0").hide();
     $("#step1").hide();
     $("#step2").hide();
     $("#step3").hide();
+    $("#stCombo").hide();
     $("#payment").hide();
     $("#reserve").hide();
   }
 
+  plus(id, price){
+    let q= $("#"+id+'a').val();
+    let res= Number(q) + 1;
+    $("#"+id+'a').val(res);
+    let tot= res * Number(price);
+    $("#"+id+'q').text('$'+tot);
+    this.totalCombo+= Number(price);
+ }
+ minus(id, price){
+  let q= $("#"+id+'a').val();
+   if(Number(q)>0){
+    let res= Number(q) - 1;
+    $("#"+id+'a').val(res);
+    let tot= res * Number(price);
+    $("#"+id+'q').text('$'+tot);
+    this.totalCombo-= Number(price);
+   }
+     
+ }
 
-  ngOnInit(): void {
-    $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
-    const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
-    this.dateShow = currentDate;
+ quan(val){
+    this.quantity= val;
+ }
+  
+ print(){
+  window.print();
+ }
 
-
-    this.bookService.getAllLocation().subscribe(r => this.listLocation = r);
-    this.bookService.getBookingTime(this.locationId, this.movieId, '2020-11-28').subscribe((data: any) => {
-      this.listTheatreTime = data; console.log(this.listTheatreTime); }
-    );
-    this.bookService.getSeatType().subscribe(r => this.listSeatType = r);
-
-    }
-
-    getSeatName(){
-      let seatName: string='A1';
-      // this.bookService.bookingGetSeatName(this.seatId).subscribe(r=>{
-      //       seatName= r;
-      // });
-      return seatName;
-    }
+    //#endregion
 }

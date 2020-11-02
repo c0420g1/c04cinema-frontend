@@ -5,14 +5,15 @@ import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
 import {MovieComponent} from './movie/movie.component';
 import {TicketComponent} from './ticket/ticket.component';
 import {ImageUploadComponent} from './image-upload/image-upload.component';
-import {GalleryComponent} from './gallery/gallery.component';
 import {BookingTicketComponent} from './booking-ticket/booking-ticket.component';
 import {BannerComponent} from './banner/banner.component';
 import { TheaterComponent } from './theater/theater.component';
 import {HallListComponent} from './hall-list/hall-list.component';
 import {SeatComponent} from './seat/seat.component';
-import {PromotionComponent} from './promotion/promotion.component';
 import {NewsComponent} from './news/news.component';
+import { BookingComponent } from '../user/booking/booking.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { PromotionComponent } from './promotion/promotion.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: 'booking-ticket',
         component: BookingTicketComponent
+      },
+      {
+        path: 'booking',
+        component: BookingComponent
       },
       {
         path: 'news',
