@@ -143,9 +143,6 @@ declare var $: any;
  
   //#region event & service
   changeLocation(lId){
-    alert(lId);
-    alert(this.movieId);
-    alert(this.dateShow);
     this.bookService.getBookingTime(lId, this.movieId, this.dateShow).subscribe((data: any) => {
       this.listTheatreTime = data;
     console.log(data) }
@@ -225,7 +222,6 @@ declare var $: any;
   //#region show hide
   
   chooseFilm(movieId){
-    alert(movieId);
     $('.cinema-rating').removeClass('choose');
     $('#' + movieId).addClass('choose');
     this.movieId= movieId;
