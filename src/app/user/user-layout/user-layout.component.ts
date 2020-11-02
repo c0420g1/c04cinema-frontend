@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import { RegisterService } from './register.service';
 import { CustomerDTO } from './model/customerDTO';
 import { TokenStorageService } from './token-storage.service';
+import { GlobalConstants } from 'src/app/model/GlobalConstants';
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
@@ -46,6 +47,7 @@ export class UserLayoutComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       accountId: this.token.getUserid()
     };
+     GlobalConstants.accId=Number(this.token.getUserid());
   }
   logout() {
     this.token.signOut();

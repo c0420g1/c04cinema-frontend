@@ -12,6 +12,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MovieService } from '../movie/movie.service';
 import { Ticket } from 'src/app/model/Ticket';
 import { Movie } from 'src/app/model/Movie';
+import { GlobalConstants } from 'src/app/model/GlobalConstants';
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -192,12 +193,11 @@ declare var $: any;
       let tic= new Ticket();
       this.bookService.bookingGetSeatName(this.seatId).subscribe(r=>{
           this.seat = r;
-          tic.code="abc";
+          tic.code="ABCDE"+this.seat.name;
           tic.price= seatPrice;
           tic.seatName= this.seat.name;
           this.listTicket.push(tic);
       });
-      
     }
   }
   
@@ -206,9 +206,9 @@ declare var $: any;
   }
 
   useProCode(){
-    this.bookService.bookingUseBonus(1,this.proCode).subscribe(r=> {
+    this.bookService.bookingUseBonus(GlobalConstants.accId,this.proCode).subscribe(r=> {
       if(Number(r)>0){
-        this.totalPrice= this.totalPrice - Number(r);
+        this.totalFinal= this.totalFinal - Number(r);
         alert("Thank you! Your discount is: " + r);
       }
       else{
@@ -222,6 +222,7 @@ declare var $: any;
   //#region show hide
   
   chooseFilm(movieId){
+    alert(movieId);
     $('.cinema-rating').removeClass('choose');
     $('#' + movieId).addClass('choose');
     this.movieId= movieId;
@@ -263,6 +264,16 @@ declare var $: any;
     this.ticketQuantity= this.listRes.length;
   }
 
+  fs33(){
+    this.step='s4';
+    this.isActive= true;
+    $("#stCombo").hide();
+    $("#step1").hide();
+    $("#step2").hide();
+    $("#payment").hide();
+    $("#step3").show();
+  }
+
   fstep3(){
     this.step='s4';
     this.isActive= true;
@@ -272,15 +283,15 @@ declare var $: any;
     $("#payment").hide();
     $("#step3").show();
     this.ticketQuantity= this.listRes.length;
-    // this.hiddenAll();
-    // this.listRes.forEach(e=> {
-    //   e.contactEmail="hcronin0@mtv.com";
-    //   e.contactPhone= "5859577512";
-    //   e.paymentId= 2;
-    //   e.promotionId= 16;
-    //   this.bookService.booking(e).subscribe();
-    //   });
-    // $("#reserve").show();
+    this.hiddenAll();
+    this.listRes.forEach(e=> {
+      e.contactEmail="hcronin0@mtv.com";
+      e.contactPhone= "5859577512";
+      e.paymentId= 2;
+      e.promotionId= 16;
+      this.bookService.booking(e).subscribe();
+      });
+    $("#reserve").show();
   }
 
   stepCombo(){
@@ -292,15 +303,15 @@ declare var $: any;
 
   fstep4(){
     this.hiddenAll();
-    // this.listRes.forEach(e=> {
-    // e.contactEmail="hcronin0@mtv.com";
-    // e.contactPhone= "5859577512";
-    // e.paymentId= 2;
-    // e.promotionId= 16;
-    // e.status= 0;
-    // this.bookService.booking(e).subscribe();
-    // });
-    // this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
+    this.listRes.forEach(e=> {
+    e.contactEmail="hcronin0@mtv.com";
+    e.contactPhone= "5859577512";
+    e.paymentId= 2;
+    e.promotionId= 16;
+    e.status= 0;
+    this.bookService.booking(e).subscribe();
+    });
+    this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
     $("#final").show();
 
   }

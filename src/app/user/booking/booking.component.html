@@ -39,7 +39,7 @@
                 <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
                 <div class="order__control">
                     <a (click)="fstep22()" [ngClass]="{active: !isActive }" class="order__control-btn">Purchase</a>
-                    <a (click)="fstep3()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
+                    <a (click)="fs33()" [ngClass]="{active: isActive }" class="order__control-btn">Reserve</a>
                 </div>
             </div>
         </div>
@@ -279,8 +279,10 @@
             <div class="col-sm-12">
                 <h2 class="page-heading">price</h2>
                 <ul class="book-result">
-                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{ticketQuantity}}</span></li>
-                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{totalPrice | currency}}</span></li>
+                    <li class="book-result__item">Combo: <span class="book-result__count booking-ticket">{{totalCombo | currency}}</span></li>
+                    <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{totalFinal | currency}}</span></li>
+                    <li class="book-result__item">New bonus points: <span class="book-result__count booking-ticket">+{{bonusPoint}}</span></li>
                 </ul>
 
                 <h2 class="page-heading">Contact information</h2>
