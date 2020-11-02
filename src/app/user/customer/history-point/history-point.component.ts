@@ -60,6 +60,20 @@ export class HistoryPointComponent implements OnInit {
                         next => {
                             this.account = next[0];
                             this.idAc = this.account.id;
+                            this.pointService.getTickerPlusById(this.idAc, this.currentPage, '2020-01-01', '2021-01-01').subscribe(next => (this.pointS = next), error => (this.pointS = []));
+                            this.pointService
+                                .getTickerListPlusById(this.idAc, '2020-01-01', '2021-01-01')
+                                .subscribe(next => {
+                                    (this.pointListS = next
+                                        , this.totalEntities = this.pointListS.length
+                                        , this.totalPage = this.totalEntities / 10);
+                                    if (this.pointListS.length === 0) {
+                                        this.message = 'not Data!';
+                                    } else {
+                                        this.message = '';
+                                    };
+                                    error => (this.pointListS = []);
+                                });
                         },
                         error => {
                             console.log(error);
@@ -74,24 +88,8 @@ export class HistoryPointComponent implements OnInit {
             );
         });
 
-        this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-            const key = paramMap.get('id');
-            this.pointService.getTickerPlusById(this.idAc, this.currentPage, '2020-01-01', '2021-01-01').subscribe(next => (this.pointS = next), error => (this.pointS = []));
-            this.pointService
-                .getTickerListPlusById(this.idAc, this.star, this.end)
-                .subscribe(next => {
-                    (this.pointListS = next
-                        , this.totalEntities = this.pointListS.length
-                        , this.totalPage = this.totalEntities / 10);
-                    if (this.pointListS.length === 0) {
-                        this.message = 'not Data!';
-                    } else {
-                        this.message = '';
-                    };
-                    error => (this.pointListS = []);
 
-                });
-        });
+
     }
 
 

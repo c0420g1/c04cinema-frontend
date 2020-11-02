@@ -34,7 +34,20 @@ export class PromotionComponent implements OnInit {
         this.rescus = encodeURI(uri);
     }
 
-    getId(promotion) {
+    // getId(promotion) {
+    //     this.promotion = promotion;
+    //     // console.log(this.promotion)
+    //     this.customerID = this.promotion.customerId;
+    //     console.log(this.customerID);
+    //     this.myFunction('1');
+    //     this.promotionService.getCustomerPoint(this.rescus).subscribe(data => {
+    //         this.customer = data;
+    //
+    //     });
+    // }
+
+
+    buyPromotion(promotion) {
         this.promotion = promotion;
         // console.log(this.promotion)
         this.customerID = this.promotion.customerId;
@@ -44,10 +57,6 @@ export class PromotionComponent implements OnInit {
             this.customer = data;
 
         });
-    }
-
-
-    buyPromotion() {
         console.log(this.promotion.price);
         console.log(this.customer[0].currentBonusPoint);
         // @ts-ignore

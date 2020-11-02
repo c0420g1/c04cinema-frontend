@@ -4,28 +4,44 @@
 
         <div class="row">
             <div class="gallery-wrapper">
-                <div class="col-sm-6">
-                    <div class="gallery-item">
-                        <a href='assets/images/gallery/large/item-1.jpg' class="gallery-item__image gallery-item--photo">
-                            <img alt='' src="assets/images/gallery/thumb/item-1.jpg">
-                        </a>
-                        <a href='assets/images/gallery/large/item-1.jpg'
-                           class="gallery-item__descript gallery-item--photo-link">
-                            <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
-                            <p class="gallery-item__name">Marble Arch Odeon</p>
-                        </a>
+                <div class="col-sm-6"  *ngFor="let image of imageList">
+<!--                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#' + image.data.name">Popup image</button>-->
+
+                    <div [id]="'a'+image.data.name" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="width: 620px">
+                                <div class="modal-body">
+                                    <img [src]="image.data.imageUrl" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
+<!--                    <div class="modal fade" [id]="image.data.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                        <div class="modal-dialog" role="document">-->
+<!--                            <div class="modal-content">-->
+<!--                                <div class="modal-header">-->
+<!--                                    <h5 class="modal-title" id="exampleModalLabel">{{image.data.caption}}</h5>-->
+<!--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                        <span aria-hidden="true">&times;</span>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                                <div class="modal-body">-->
+<!--                                    <img alt='' [src]="image.data.imageUrl">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <!--                    end modal-->
                     <div class="gallery-item">
-                        <a href='assets/images/gallery/large/item-2.jpg' class="gallery-item__image gallery-item--photo">
-                            <img alt='' src="assets/images/gallery/thumb/item-2.jpg">
+                        <a data-toggle="modal" [attr.data-target]="'#a' + image.data.name"  class="gallery-item__image gallery-item--photo">
+                            <img alt='' [src]="image.data.imageUrl">
                         </a>
-                        <a href='assets/images/gallery/large/item-2.jpg'
+                        <a data-toggle="modal" [attr.data-target]="'#a' + image.data.name"
                            class="gallery-item__descript gallery-item--photo-link">
                             <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
-                            <p class="gallery-item__name">Marble Arch Odeon</p>
+                            <p class="gallery-item__name">{{image.data.caption}}</p>
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -36,5 +52,6 @@
     <div style="float: left; width: 94%;"> <a href='#' class="pagination__prev">prev</a></div>
     <div><a href='float: right;' class="pagination__next">next</a></div>        
     </div>
+
 </div>
 </section>

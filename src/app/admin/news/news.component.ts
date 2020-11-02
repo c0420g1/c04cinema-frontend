@@ -11,6 +11,7 @@ import {News} from '../../model/News';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
+  url: string;
   addFormNews: FormGroup;
   editFormNews: FormGroup;
   newses: News[] = [];
@@ -106,6 +107,9 @@ export class NewsComponent implements OnInit {
     this.newsService.deleteNews(this.newsDelete.id).subscribe((data)=>this.ngOnInit());
   }
 
+  getLink(value) {
+    this.url = value;
+  }
 
 
 }

@@ -38,8 +38,7 @@ export class LoginpageComponent implements OnInit {
             this.isLoginFailed = false;
             this.isLoggedIn = true;
             this.roles = this.tokenStorage.getAuthorities();
-            // window.location.reload();
-            this.router.navigateByUrl('/')
+            window.location.replace("/")
           }
         },
         error => {
