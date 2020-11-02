@@ -35,10 +35,9 @@
                             <th>Entertainment</th>
                             <th>Duration(m)</th>
                             <th width="6%">Version</th>
-                            <th width="20%">
+                            <th width="12%">
                                 <div style="display: flex">
                                     <div  style="margin-left: 20px">Edit</div>
-                                    <div style="margin-left: 15px">Delete</div>
                                     <div  style="margin-left: 11px">Add Show</div>
                                 </div>
                             </th>
@@ -59,7 +58,6 @@
                             <td>
                                 <div style="display: flex;">
                                     <div style="justify-content: center"><a href="#editMovie" class="edit" title="Edit" data-toggle="modal" (click)="getMovieEdit(movie)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a></div>
-                                    <div style="justify-content: center"><a href="#deleteMovie"  title="Delete" data-toggle="modal" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a></div>
                                     <div style="justify-content: center"><a href="#addShow"  title="Add Show Time" data-toggle="modal"><i  style="color: blue;" class="material-icons" (click)="getShowMovie(movie)">&#xe148;</i></a></div>
                                 </div>
                             </td>
@@ -516,32 +514,6 @@
     </div>
 </div>
 <!--END EDIT MOVIE-->
-
-<!--DELETE MOVIE-->
-<div id="cssDeleteForm">
-    <div id="deleteMovie" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form  method="post" novalidate>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Movie</h4>
-                        <a ><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete this movie?</p>
-                        <p class="text-warning"><small>This action cannot be undone.</small></p>
-                    </div>
-                    <div class="modal-footer">
-                        <a ><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"></a>
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--END DELETE MOVIE-->
 
 
 <!--ADD SHOW-->
