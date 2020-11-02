@@ -41,6 +41,7 @@
                         <div class="alert alert-danger" role="alert"
                              *ngIf="formCustomer.get('name').invalid && formCustomer.get('name').touched">
                             <p *ngIf="formCustomer.get('name').hasError('required')">Full name is Required</p>
+                            <p *ngIf="formCustomer.get('name').hasError('pattern')">Full name is not format</p>
                         </div>
                     </div>
                     <div class="inputWithIcon">
