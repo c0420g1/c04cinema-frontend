@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { NewsdetailComponent } from './newsdetail/newsdetail.component';
 
 
 
@@ -44,6 +45,10 @@ const routes: Routes = [
         component: LoginpageComponent
       },
       {
+        path: 'newsDetail',
+        component: NewsdetailComponent
+      },
+      {
         path: 'promotion',
         component: PromotionComponent
       },
@@ -64,12 +69,37 @@ const routes: Routes = [
         component: BookingComponent,
         canActivate: [AuthGuard],
         data: {
-
           expectedRole: 'customer'
         }
       },
       {
-        path: 'customer',
+        path: 'customer/:id',
+        component: CustomerComponent,
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'customer'
+        },
+        children: [
+          {
+            path: 'information/:id',
+            component: InformationComponent
+          },
+          {
+            path: 'history-point/:id',
+            component: HistoryPointComponent
+          },
+          {
+            path: 'ticker-put/:id',
+            component: TickerPutComponent
+          },
+          {
+            path: 'ticker-cancel/:id',
+            component: TickerCancelComponent
+          }
+        ]
+      },
+      {
+        path: 'ticker',
         component: CustomerComponent,
         children: [
           {

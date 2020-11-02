@@ -18,6 +18,7 @@ export class PromotionService {
     private updatePointPCUrl = 'http://localhost:8080/updatePointPC';
     private apiUrl = 'http://localhost:8080/promotion';
     private updateCodePcUrl = 'http://localhost:8080/createProCus';
+    private findCustomerUrl = 'http://localhost:8080/findCustomer';
 
     constructor(private httpClient: HttpClient) {
     }
@@ -50,5 +51,9 @@ export class PromotionService {
         return this.httpClient.post(this.updateCodePcUrl + '?cusId=' + customerId + '&proId=' + promotionId + '&code=' + code);
 
     }
+    findCustomer(accountId):Observable<any>{
+        return this.httpClient.get(this.findCustomerUrl + '/'+ accountId );
+    }
+
 
 }

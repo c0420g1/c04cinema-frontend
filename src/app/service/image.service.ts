@@ -19,11 +19,7 @@ export class ImageService {
     }
     this.imageConfirm = false;
   }
-  // deleteImageDetails(imageDetails){
-  //
-  //   console.log(this.imageDetailList);
-  //   this.imageDetailList.remove(imageDetails);
-  // }
+
   deleteImageDetails(key: string): Promise<void> {
     return this.imageDetailList.remove(key);
   }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Promotion} from '../../../Promotion';
 import {PromotionService} from '../../promotion.service';
 import {Customer} from '../customer/model/Customer';
+import {GlobalConstants} from '../../model/GlobalConstants';
 
 @Component({
     selector: 'app-promotion',
@@ -11,11 +12,13 @@ import {Customer} from '../customer/model/Customer';
 export class PromotionComponent implements OnInit {
     datas: Promotion[] = [];
     promotion: Promotion;
+    proCode: string;
     customerID: string;
     customer: Customer;
     point: number;
     p: number = 1;
-
+    accountID: number;
+    check = false;
     constructor(private promotionService: PromotionService) {
     }
 
@@ -24,55 +27,53 @@ export class PromotionComponent implements OnInit {
             this.datas = res;
             console.log(this.datas);
         });
-
-    }
-
-    rescus = '';
-
-    myFunction(id: string) {
-        let uri = 'filter={"property":"id","operator":"eq","value":' + id + '}';
-        this.rescus = encodeURI(uri);
-    }
-
-    getId(promotion) {
-        this.promotion = promotion;
-        // console.log(this.promotion)
-        this.customerID = this.promotion.customerId;
-        console.log(this.customerID);
-        this.myFunction('1');
-        this.promotionService.getCustomerPoint(this.rescus).subscribe(data => {
+        this.accountID = GlobalConstants.accId;
+        // GlobalConstants để đăng nhập tự động nhận account id của customer
+        this.promotionService.findCustomer(GlobalConstants.accId).subscribe(data => {
             this.customer = data;
-
+            console.log(this.customer.id);
         });
     }
 
 
-    buyPromotion() {
-        console.log(this.promotion.price);
-        console.log(this.customer[0].currentBonusPoint);
-        // @ts-ignore
-        if (parseInt(this.promotion.price) > parseInt(this.customer[0].currentBonusPoint)) {
 
-            alert('You are not enough point, Donate blood pls!');
+
+
+    buyPromotion(promotion) {
+        this.promotion = promotion;
+
+
+         // @ts-ignore
+        if (parseInt(this.promotion.price) > parseInt(this.customer.currentBonusPoint)) {
+
+            // alert('You are not enough point, Donate blood pls!');
+            this.check =true;
         } else {
             // Tính Điểm sau khi đã mua Promotion cho Customer
-            this.point = this.customer[0].currentBonusPoint - this.promotion.price;
+            this.point = this.customer.currentBonusPoint - this.promotion.price;
             console.log(this.point);
             // Cập nhật điểm về lại cho Customer
-            this.promotionService.updatePoint(1, this.point).subscribe(data => {
+            this.promotionService.updatePoint(this.customer.id, this.point).subscribe(data => {
                 // @ts-ignore
-                this.customer[0].currentBonusPoint = data;
-                console.log(this.customer[0].currentBonusPoint);
+                this.customer.currentBonusPoint = data;
+                console.log(this.customer.currentBonusPoint);
 
             });
+            //
+                this.proCode = this.promotionService.getRandomCode(6);
+                console.log(this.promotion.id);
+                console.log(this.promotion.code);
+                this.promotionService.updateCodePC(this.customer.id,this.promotion.id, this.proCode).subscribe();
 
-            this.promotion.code= this.promotionService.getRandomCode(6);
-            console.log(this.promotion.id);
-            console.log(this.promotion.code);
-            this.promotionService.updateCodePC(1,this.promotion.id, this.promotion.code).subscribe();
 
 
-                alert(this.promotion.code)
         }
+        this.check = true;
+
+    }
+
+    load() {
+        // Load lại trang
+        window.location.reload();
     }
 }

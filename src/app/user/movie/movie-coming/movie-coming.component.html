@@ -23,24 +23,24 @@
             <h1 class="not-found"> Not found movies !</h1>
         </ng-template>
     </div>
-</div>
-
-<!--Paging-->
-<div class="col-sm-12">
-    <div style="float: right; margin-right: 50px; margin-top: 20px">
-        <ul class="list-inline">
-            <li>
-                <button (click)="prePage()" class="btn btn-light" [disabled]="currentPage ==1">Previous</button>
-            </li>
-            <span style="margin-left: 10px ; margin-right: 10px;color: black; font-size: 13px">{{this.currentPage}}</span>
-            <li>
-                <button (click)="nexPage()" class="btn btn-light" [disabled]="currentPage >= totalPage">Next</button>
-            </li>
-        </ul>
+    <div class="col-sm-12">
+        <div style="float: right; margin-right: 40px; margin-top: 40px">
+            <ul class="list-inline">
+                <li>
+                    <button (click)="prePage()" class="btn btn-light" [disabled]="currentPage ==1"> < Previous</button>
+                </li>
+                <span style="margin-left: 10px ; margin-right: 10px;color: black; font-size: 13px">{{this.currentPage}}</span>
+                <li>
+                    <button (click)="nexPage()" class="btn btn-light" [disabled]="currentPage >= totalPage">Next ></button>
+                </li>
+            </ul>
 
 
+        </div>
     </div>
 </div>
+<!--Paging-->
+
 <!--Loading -->
 <div class="my-container">
     <ng-template #customLoadingTemplate>

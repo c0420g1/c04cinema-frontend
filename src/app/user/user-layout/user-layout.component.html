@@ -63,9 +63,9 @@
             {{info.username}}
           </a>
           <ul class="auth__function">
-            <li><a href="#" class="auth__function-item">Booked tickets</a></li>
+           <li><a  class="auth__function-item" href="/customer/{{info.accountId}}/ticker-put/{{info.accountId}}">Booked tickets</a></li>
             <li *ngIf="info.authorities == 'admin'"><a routerLink="/admin" class="auth__function-item">Admin</a></li>
-            <li><a class="auth__function-item" [routerLink]="'customer'">Settings</a></li>
+            <li><a class="auth__function-item" (click)="goToSetting(info.accountId)">Settings</a></li>
             <li><a class="auth__function-item" style="cursor: pointer" (click)="logout()">Logout</a></li>
           </ul>
         </div>
@@ -104,10 +104,10 @@
       </div>
       <div class="col-xs-4 col-md-2 footer-nav">
         <ul class="nav-link">
-          <li><a href="#" class="nav-link__item">Terms of use</a></li>
-          <li><a href="/gallery" class="nav-link__item">Gallery</a></li>
+          <li *ngFor="let n of listSiteMap"><a routerLink="{{n.description}}" class="nav-link__item">{{n.name}}</a></li>
+          <!-- <li><a href="/gallery" class="nav-link__item">Gallery</a></li>
           <li><a routerLink="/contact" class="nav-link__item">Contacts</a></li>
-          <li><a href="page-elements.html" class="nav-link__item">Support</a></li>
+          <li><a href="page-elements.html" class="nav-link__item">Support</a></li> -->
         </ul>
       </div>
       <div class="col-xs-12 col-md-6">

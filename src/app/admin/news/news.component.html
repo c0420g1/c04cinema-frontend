@@ -45,10 +45,10 @@
                         <tr *ngFor="let news of newses;let i = index">
                             <td>{{i + 1}}</td>
                             <td>{{news.name}}</td>
-                            <td><img [src]="news.imageUrl" style="height: 200px; width: auto"></td>
+                            <td><img [src]="news.imageUrl" style="height: 150px; width: auto"></td>
                             <td>
                                 <a href="#editNews" class="edit" title="Edit" data-toggle="modal" (click)="getNewsEdit(news)"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
-                                <a href="#deleteNews"  title="Delete" data-toggle="modal" (click)="getDeleteNews(news)" ><i style="color: #ef2f2f;" class="material-icons">&#xE872;</i></a>
+                                <a href="#deleteNews"  title="Delete" data-toggle="modal" (click)="getDeleteNews(news)" ><i style="color: #ef2f2f;margin-left: 5px" class="material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -127,13 +127,14 @@
                             <p *ngIf="addFormNews.get('description').hasError('maxLength')">Description is less than 2001 characters</p>
                         </div>
 
+                        <br>
                         <div>
-                            <app-image-upload></app-image-upload>
+                            <app-image-upload (getLinkFather)="getLink($event)"></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Image Url<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control"  formControlName="imageUrl" >
+                            <input type="text" class="form-control" [(ngModel)]="url"  formControlName="imageUrl" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="addFormNews.get('imageUrl').invalid && addFormNews.get('imageUrl').touched">
@@ -195,12 +196,12 @@
                         </div>
 
                         <div>
-                            <app-image-upload></app-image-upload>
+                            <app-image-upload (getLinkFather)="getLink($event)"></app-image-upload>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Image Url<span style="color: red">(*)</span></label>
-                            <input type="text" class="form-control"  formControlName="imageUrl" >
+                            <input type="text" class="form-control" [(ngModel)]="url"  formControlName="imageUrl" >
                         </div>
                         <div class="alert alert-danger" role="alert"
                              *ngIf="editFormNews.get('imageUrl').invalid && editFormNews.get('imageUrl').touched">

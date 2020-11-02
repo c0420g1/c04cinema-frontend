@@ -76,8 +76,8 @@ export class MovieComponent implements OnInit {
           name: ['',[Validators.required,Validators.maxLength(100)]],
           director: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
           actor: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
-          isSub: ['',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
-          is2d: ['',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
+          isSub: ['1',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
+          is2d: ['1',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
           posterUrl: ['',[Validators.required]],
           startDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'), dateValidator]],
           endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
@@ -116,7 +116,7 @@ export class MovieComponent implements OnInit {
     errorIdMovieGenreType = false;
   checkBoxesAdd(event) {
         this.check = event.target.value;
-        if (this.check < 1 || this.check > 5){
+        if (this.check < 1 || this.check > 12){
             this.errorIdMovieGenreType = true;
         }else {
             this.errorIdMovieGenreType = false;
@@ -181,7 +181,7 @@ export class MovieComponent implements OnInit {
     checkBoxesEdit(event) {
         console.log(event.target.value);
         this.checkEdit = event.target.value;
-        if (this.checkEdit > 5 || this.checkEdit <1){
+        if (this.checkEdit > 12 || this.checkEdit <1){
             this.errorIdMovieGenreTypeEdit = true;
         }else {
             this.errorIdMovieGenreTypeEdit = false;
@@ -323,6 +323,10 @@ export class MovieComponent implements OnInit {
         }
     }
 
+    // hai edit
+    getLink(value) {
+        this.url = value;
+    }
 }
 
 // function to validate date > current date

@@ -1,1 +1,68 @@
-<p>dashboard works!</p>
+
+<div class="row" style="margin-top: 100px">
+
+    <div class="col-lg-4" style="text-align: center; margin-top: 300px">
+        <label>
+            <h3>Total Sales in Month: $117000</h3>
+        </label>
+    </div>
+    <div class="chart-wrapper col-lg-8" >
+        <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend"
+                [colors]="pieChartColor" style="height: 600px; width: auto">
+        </canvas>
+    </div>
+
+</div>
+
+<hr >
+
+<div class="row" style="margin-top: 100px">
+
+    <div class="col-lg-4" style="text-align: center; margin-top: 300px">
+        <label>
+            <h3>Total Sales in Month vs Last Year</h3>
+        </label>
+    </div>
+
+    <div class="chart-wrapper col-lg-8">
+        <canvas baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="row" style="margin-top: 100px; margin-bottom: 100px">
+
+    <div class="col-lg-4" style="text-align: center; margin-top: 300px">
+        <label>
+            <h3>Total Sales in Month vs Last Year</h3>
+        </label>
+    </div>
+
+    <div class="chart-wrapper col-lg-8">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType" style="height: 600px; width: auto">
+        </canvas>
+    </div>
+
+</div>
