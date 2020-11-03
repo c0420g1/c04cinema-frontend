@@ -35,7 +35,7 @@
                             <th>Entertainment</th>
                             <th>Duration(m)</th>
                             <th width="6%">Version</th>
-                            <th width="12%">
+                            <th width="15%">
                                 <div style="display: flex">
                                     <div  style="margin-left: 20px">Edit</div>
                                     <div  style="margin-left: 11px">Add Show</div>
@@ -80,7 +80,7 @@
                                 </li>
 
                                 <li>
-                                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="height: 33px;width: 130px;font-size: 14px"
+                                    <input type="number" min="0" max="{{totalPage+1}}" class="input-group" placeholder="number of page" style="height: 33px;width: 130px;font-size: 14px"
                                            [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
                                 </li>
 
@@ -228,7 +228,6 @@
                              *ngIf="addFormMovie.get('trailerUrl').invalid && addFormMovie.get('trailerUrl').touched">
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('required')">Trailer Url is required</p>
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must not be more than 250 characters</p>
-                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
                         </div>
 
                         <div class="form-group">
