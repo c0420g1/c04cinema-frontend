@@ -12,46 +12,29 @@
                             </div>
                         </div>
                     </div>
-                    <div style="width: 30%; display: flex" *ngIf="seats == []">
+                    <div style="width: 30%; display: flex" *ngIf="checkSeatContain()">
                         <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addSeat" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Seat</a>
                     </div>
                 </div>
                 <br>
-                <div>
-                    <table id="movie">
+                <section class="container">
+                    <div class="col-sm-12">
+                        <div class="choose-sits">
+                            <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+                                <div class="sits-area hidden-xs">
+                                    <div class="sits-anchor">screen</div>
+                                    <br>
+                                    <div class="sits" style="width: 600px;padding-left: 50px;">
+                                        <div class="sits__row">
+                                            <span *ngFor="let i of seats" [ngClass]="{ sits_price_cheap : i.seatTypeId==1, sits_price_middle: i.seatTypeId==2, sits_price_expensive: i.seatTypeId==3 }" class="sits__place"  id="{{i.id}}" (click)="editSeat(i)" data-toggle="modal" data-target="#editSeat">{{i.name}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <tr>A<ng-container *ngFor="let seat of seats,let i = index">
-                    <ng-container *ngIf="i <= 10">
-                        <td><button class="btn btn-primary" (click)="editSeat(seat)" data-toggle="modal" data-target="#editSeat">{{seat.name}}</button></td>
-                    </ng-container>
-            </ng-container></tr>
-
-            <tr>B<ng-container *ngFor="let seat of seats,let i = index">
-                    <ng-container *ngIf="i <= 20 && i > 10">
-                        <td><button class="btn btn-primary" (click)="editSeat(seat)" data-toggle="modal" data-target="#editSeat">{{seat.name}}</button></td>
-                    </ng-container>
-            </ng-container></tr>
-
-            <tr>C<ng-container *ngFor="let seat of seats,let i = index">
-                    <ng-container *ngIf="i <= 30 && i > 20">
-                        <td><button class="btn btn-primary" (click)="editSeat(seat)" data-toggle="modal" data-target="#editSeat">{{seat.name}}</button></td>
-                    </ng-container>
-            </ng-container></tr>
-
-            <tr>D<ng-container *ngFor="let seat of seats,let i = index">
-                    <ng-container *ngIf="i <= 40 && i > 30">
-                        <td><button class="btn btn-primary" (click)="editSeat(seat)" data-toggle="modal" data-target="#editSeat">{{seat.name}}</button></td>
-                    </ng-container>
-            </ng-container></tr>
-
-            <tr>E<ng-container *ngFor="let seat of seats,let i = index">
-                    <ng-container *ngIf="i <= 50 && i > 40">
-                        <td><button class="btn btn-primary" (click)="editSeat(seat)" data-toggle="modal" data-target="#editSeat">{{seat.name}}</button></td>
-                    </ng-container>
-            </ng-container></tr>
-
-        </table>
-                </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -66,11 +49,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nameHall">Seat Number: </label>
                             <input type="number"
-                                   class="form-control" id="nameHall" placeholder="Enter Seat Number" [ngModel]="seatNumber" >
+                                   class="form-control" id="nameHall" placeholder="Enter Seat Number" (keyup)="setMsg($event.target.value)" >
                         </div>
                     </div>
 
@@ -78,6 +62,7 @@
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                         <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" (click)="addSeatToHall()">
                     </div>
+                </form>
             </div>
         </div>
     </div>

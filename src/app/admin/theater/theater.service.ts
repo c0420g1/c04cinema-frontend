@@ -21,7 +21,7 @@ export class TheaterService {
   private readonly API_URL_SEATS_LIST = 'http://localhost:8080/seat/list';
   private readonly API_URL_SEATS = 'http://localhost:8080/seat';
   private readonly API_URL_SEAT_TYPE = 'http://localhost:8080/seat_type';
-
+  private readonly API_URL_SEATS_CREATE = 'http://localhost:8080/seat/create';
   constructor(private http: HttpClient) { }
   getAllTheater(params): Observable<Theatre[]>{
     return this.http.get<Theatre[]>(this.API_URL_THEATERS, {params});
@@ -67,8 +67,8 @@ export class TheaterService {
     return this.http.get<Seat[]>(this.API_URL_SEATS_LIST + '/?hallId=' + hallId);
   }
 
-  addSeat(seat: Partial<Seat>): Observable<Seat>{
-    return this.http.post<Seat>(this.API_URL_HALLS, seat);
+  addSeat(hallId,noOfSeats): Observable<Seat[]>{
+    return this.http.get<Seat[]>(this.API_URL_SEATS_CREATE + '/?hallId=' + hallId + '&noOfSeats=' + noOfSeats);
   }
 
   editSeat(seat: Seat) {
