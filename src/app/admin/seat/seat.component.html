@@ -49,11 +49,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nameHall">Seat Number: </label>
                             <input type="number"
-                                   class="form-control" id="nameHall" placeholder="Enter Seat Number" [ngModel]="seatNumber" >
+                                   class="form-control" id="nameHall" placeholder="Enter Seat Number" (keyup)="setMsg($event.target.value)" >
                         </div>
                     </div>
 
@@ -61,6 +62,7 @@
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                         <input type="submit" class="btn btn-success" data-dismiss="modal" value="Add" (click)="addSeatToHall()">
                     </div>
+                </form>
             </div>
         </div>
     </div>
