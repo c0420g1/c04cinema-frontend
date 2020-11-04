@@ -41,7 +41,7 @@ declare var $: any;
   proCode: string ='';
   isActive: boolean= false;
   step: string= 's1';
-  accountId: number=1;
+  accountId: number;
   movieId: number= 94;
   movieName: string;
   seatId: number;
@@ -311,7 +311,7 @@ declare var $: any;
     e.status= 0;
     this.bookService.booking(e).subscribe();
     });
-    this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
+    this.bookService.bookingUpdateBonus(this.accountId, this.bonusPoint).subscribe();
     $("#final").show();
 
   }
