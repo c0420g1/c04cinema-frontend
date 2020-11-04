@@ -6,6 +6,7 @@ import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
 import { BookingTimeDTO } from 'src/app/model/BookingTimeDTO';
 import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
+
 import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -40,7 +41,7 @@ declare var $: any;
   proCode: string ='';
   isActive: boolean= false;
   step: string= 's1';
-  accountId: number=1;
+  accountId: number;
   movieId: number= 94;
   movieName: string;
   seatId: number;
@@ -310,7 +311,7 @@ declare var $: any;
     e.status= 0;
     this.bookService.booking(e).subscribe();
     });
-    this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
+    this.bookService.bookingUpdateBonus(this.accountId, this.bonusPoint).subscribe();
     $("#final").show();
 
   }
