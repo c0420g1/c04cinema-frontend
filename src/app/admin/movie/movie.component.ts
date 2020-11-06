@@ -73,7 +73,6 @@ export class MovieComponent implements OnInit {
     this.movieService.getAllHall().subscribe((data) => {this.halls = data; });
     this.addFormMovie = this.fb.group(
         {
-<<<<<<< Updated upstream
             name: ['',[Validators.required, Validators.maxLength(100)]],
             director: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/),Validators.maxLength(45)]],
             actor: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
@@ -88,22 +87,6 @@ export class MovieComponent implements OnInit {
             movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5),Validators.pattern(/^[0-9]+$/)]],
             description: ['',Validators.maxLength(1000)],
             entertainment: ['',[Validators.required,Validators.maxLength(45)]],
-=======
-          name: ['',[Validators.required,Validators.maxLength(100)]],
-          director: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
-          actor: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]+$/), Validators.maxLength(45)]],
-          isSub: ['1',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
-          is2d: ['1',[Validators.required,Validators.min(0),Validators.max(1),Validators.pattern(/^[0-9]+$/)]],
-          posterUrl: ['',[Validators.required]],
-          startDate: ['',[Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'), dateValidator, Validators.required]],
-          endDate: ['',[Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
-          duration: ['',[Validators.required,Validators.min(60),Validators.max(235),Validators.pattern(/^[0-9]+$/)]],
-          trailerUrl: ['',[Validators.required,Validators.maxLength(250)]],
-          starRating:['',[Validators.required,Validators.min(1),Validators.max(5),Validators.pattern(/^[0-9]+$/)]],
-          movieRatedAgeId: ['',[Validators.required,Validators.min(1),Validators.max(5),Validators.pattern(/^[0-9]+$/)]],
-          description: ['',Validators.maxLength(1000)],
-          entertainment: ['',[Validators.required,Validators.maxLength(45)]],
->>>>>>> Stashed changes
         }
     )
       this.editFormMovie = this.fb.group(
