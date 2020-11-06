@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-sm-3">
                             <a style="margin-bottom: 7px;padding: 8px; margin-left: 640px;border-radius: 3px;"
-                               href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
+                               data-toggle="modal" data-target="#addNewMovie" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
                         </div>
                     </div>
                     <div class="row">
@@ -99,7 +99,7 @@
 </div>
 <!--ADD NEW MOVIE-->
 <div id="cssAddForm">
-    <div id="addNewMovie" class="modal fade" >
+    <div id="addNewMovie" class="modal fade"   >
         <div class="modal-dialog">
             <div class="modal-content" >
 
@@ -152,7 +152,8 @@
                             <p *ngIf="addFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="addFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
-                        <p class="error1" *ngIf="error" style="color: red">Start Date must be before End Date</p>
+                        <p class="alert alert-danger" *ngIf="error" style="color: red">Start Date must be before End Date, and End Date not after (Start Date + 30 days)</p>
+
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" formControlName="actor" >
