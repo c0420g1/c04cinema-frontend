@@ -6,6 +6,7 @@ import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
 import { BookingTimeDTO } from 'src/app/model/BookingTimeDTO';
 import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
+
 import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
 import { ActivatedRoute, ParamMap } from '@angular/router';
