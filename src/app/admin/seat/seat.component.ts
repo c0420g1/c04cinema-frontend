@@ -51,7 +51,7 @@ export class SeatComponent implements OnInit {
   }
 
   addSeatToHall(){
-    this.theaterService.addSeat(this.hallIdReceive,this.seatNumber).subscribe((data) => {this.seats = data; });
+    this.theaterService.addSeat(this.hallIdReceive,100).subscribe((data) => {this.seats = data; });
     this.showListSeats(this.hallIdReceive);
   }
 
