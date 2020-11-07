@@ -12,7 +12,8 @@ import {Seat} from '../../model/seat';
   providedIn: 'root'
 })
 export class TheaterService {
-  private readonly API_URL_THEATERS = 'http://localhost:8080/test/theatre?id=';
+  private readonly API_URL_THEATERS = 'http://localhost:8080/theatre';
+  private readonly API_URL_THEATERNAME = 'http://localhost:8080/theatreName?id=';
   private readonly API_URL_HALLS = 'http://localhost:8080/hall';
   private readonly API_URL_HALLS_LIST = 'http://localhost:8080/hall/list';
   private readonly API_URL_HALLS_SEARCH = 'http://localhost:8080/hall/search';
@@ -27,8 +28,8 @@ export class TheaterService {
     return this.http.get<Theatre[]>(this.API_URL_THEATERS, {params});
   }
 
-  getTheater(id: number): Observable<Theatre>{
-    return this.http.get<Theatre>(this.API_URL_THEATERS + id);
+  getTheaterName(id): Observable<Theatre>{
+    return this.http.get<Theatre>(this.API_URL_THEATERNAME + id);
   }
 
   getAllLocation(): Observable<Location[]>{
