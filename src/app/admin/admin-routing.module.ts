@@ -64,16 +64,14 @@ const routes: Routes = [
       {
         path: 'theater',
         component: TheaterComponent,
+      },
+      {
+        path: 'theater/hall/:id',
+        component: HallListComponent,
         children:[
           {
-            path: 'hall/:id',
-            component: HallListComponent,
-            children:[
-              {
-                path: 'seat/:id',
-                component: SeatComponent,
-              }
-            ]
+            path: 'seat/:id',
+            component: SeatComponent,
           }
         ]
       }
