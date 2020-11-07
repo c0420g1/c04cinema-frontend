@@ -45,7 +45,7 @@ export class InformationComponent implements OnInit, OnDestroy {
         this.customerForm = this.fb.group({
             id: [''],
             code: ['', Validators.required],
-            name: ['', [Validators.required, Validators.pattern('([A-Z])\\w+')]],
+            name: ['', [Validators.required, Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s\\W|_]+')]],
             birthday: ['', [Validators.required, dateValidator, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
             gender: ['', [Validators.required, Validators.pattern('Male|Female')]],
             email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,}(@)[a-zA-Z]{3,}\.[a-zA-Z]{3}$/)]],

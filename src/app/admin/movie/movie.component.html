@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-sm-3">
                             <a style="margin-bottom: 7px;padding: 8px; margin-left: 640px;border-radius: 3px;"
-                               href="#addNewMovie" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
+                               data-toggle="modal" data-target="#addNewMovie" class="btn btn-md btn--warning btn--book btn-control--home">Add New Movie</a>
                         </div>
                     </div>
                     <div class="row">
@@ -35,7 +35,7 @@
                             <th>Entertainment</th>
                             <th>Duration(m)</th>
                             <th width="6%">Version</th>
-                            <th width="12%">
+                            <th width="15%">
                                 <div style="display: flex">
                                     <div  style="margin-left: 20px">Edit</div>
                                     <div  style="margin-left: 11px">Add Show</div>
@@ -80,7 +80,7 @@
                                 </li>
 
                                 <li>
-                                    <input type="number" min="0" max="{{totalPage}}" class="input-group" placeholder="number of page" style="height: 33px;width: 130px;font-size: 14px"
+                                    <input type="number" min="0" max="{{totalPage+1}}" class="input-group" placeholder="number of page" style="height: 33px;width: 130px;font-size: 14px"
                                            [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
                                 </li>
 
@@ -99,7 +99,7 @@
 </div>
 <!--ADD NEW MOVIE-->
 <div id="cssAddForm">
-    <div id="addNewMovie" class="modal fade" >
+    <div id="addNewMovie" class="modal fade"   >
         <div class="modal-dialog">
             <div class="modal-content" >
 
@@ -152,7 +152,8 @@
                             <p *ngIf="addFormMovie.get('endDate').hasError('required')">End Date is required</p>
                             <p *ngIf="addFormMovie.get('endDate').hasError('pattern')">End Date must be follow format: (yyyy-mm-dd)</p>
                         </div>
-                        <p class="error1" *ngIf="error" style="color: red">Start Date must be before End Date</p>
+                        <p class="alert alert-danger" *ngIf="error" style="color: red">Start Date must be before End Date, and End Date not after (Start Date + 30 days)</p>
+
                         <div class="form-group">
                             <label>Actor <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" formControlName="actor" >
@@ -228,7 +229,6 @@
                              *ngIf="addFormMovie.get('trailerUrl').invalid && addFormMovie.get('trailerUrl').touched">
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('required')">Trailer Url is required</p>
                             <p *ngIf="addFormMovie.get('trailerUrl').hasError('maxLength')">Trailer Url must not be more than 250 characters</p>
-                            <p *ngIf="addFormMovie.get('trailerUrl').hasError('pattern')">Trailer Url must be link starts with: https://www.youtube.com</p>
                         </div>
 
                         <div class="form-group">
@@ -237,7 +237,7 @@
                                 <div class="form-check">
                                     <div class="row">
                                         <div class="col-4"  *ngFor="let mgType of movieGenreTypes">
-                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesAdd($event)"  >
+                                            <input class="form-check-input"  type="checkbox" value="{{mgType.id}}" (change)="checkBoxesAdd($event)">
                                             <label style="margin-left: 5px;">
                                                 {{mgType.name}}
                                             </label>

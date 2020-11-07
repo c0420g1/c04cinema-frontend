@@ -108,7 +108,7 @@
     <div class="form-group row">
         <label for="staticEmail" class="col-sm-3 col-form-label">Email :</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="staticEmail" formControlName="email">
+            <input type="text" class="form-control" id="staticEmail" formControlName="email" readonly>
             <div class="alert alert-danger" role="alert"
                  *ngIf="customerForm.get('email').touched && customerForm.get('email').invalid">
                 <p *ngIf="customerForm.get('email').hasError('required')"> required </p>
