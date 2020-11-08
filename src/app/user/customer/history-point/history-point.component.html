@@ -62,7 +62,7 @@
     <tr>
         <td>{{point.dayPut}}</td>
         <td>{{point.movieName}}</td>
-        <td>{{point.point}}</td>
+        <td>{{point.point}} <label *ngIf="point.isCancel == 1">+ 100 </label></td>
         <td>{{point.code}}</td>
     </tr>
     </tbody>

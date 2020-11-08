@@ -6,7 +6,7 @@ import {Account} from '../model/Account';
 import {AccountService} from '../service/account.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import { Error1 } from '../model/error1';
+import {Error1} from '../model/error1';
 
 @Component({
     selector: 'app-information',
@@ -29,16 +29,16 @@ export class InformationComponent implements OnInit, OnDestroy {
     checkPassNew: boolean;
     checkUpInfor = false;
     sub: Subscription;
-    errorPassNew : string;
-    errorPassReNew : string;
-    regexPass =  new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$');
-
+    errorPassNew: string;
+    errorPassReNew: string;
+    regexPass = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$');
 
 
     constructor(private customerService: CustomerService,
                 private accountService: AccountService,
                 private fb: FormBuilder,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+    ) {
     }
 
     ngOnInit(): void {
@@ -50,13 +50,12 @@ export class InformationComponent implements OnInit, OnDestroy {
             gender: ['', [Validators.required, Validators.pattern('Male|Female')]],
             email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,}(@)[a-zA-Z]{3,}\.[a-zA-Z]{3}$/)]],
             cardid: ['', [Validators.required, Validators.pattern('[\\d]{3,}(-)[\\d]{2,}(-)[\\d]{4,}')]],
-            phone: ['',[Validators.required, Validators.pattern('^[\\d\\s]+$')]],
+            phone: ['', [Validators.required, Validators.pattern('^[\\d\\s]+$')]],
             address: ['', [Validators.required, Validators.maxLength(200)]],
         });
         this.accountForm = this.fb.group({
             username: ['', Validators.required],
         });
-
 
 
         this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
@@ -111,24 +110,27 @@ export class InformationComponent implements OnInit, OnDestroy {
             this.customerService.updateCustomer(data, this.customer.id).subscribe(
                 next => {
                     this.error1s = next;
-                    this.checkUpInfor = true;
-                    this.ngOnInit();
+                    console.log(this.error1s);
+                    if (this.error1s.length == 0) {
+                        this.ngOnInit();
+                        this.reloadPage();
+                        this.checkUpInfor = true;}
                 },
                 error => console.log(error)
             );
         }
     };
 
-    checkRegexPass(){
-        if(!this.regexPass.test(this.passNew) || !this.regexPass.test(this.passReNew)){
+    checkRegexPass() {
+        if (!this.regexPass.test(this.passNew) || !this.regexPass.test(this.passReNew)) {
             this.errorPassNew = 'New Pass length pass word > 8 and < 20 or pass format Abcd123';
             this.errorPassReNew = 'Re New Pass length pass word > 8 and < 20 or pass format Abcd123';
             this.checkUpInfor = false;
-        } else
-        {
-            this.editPass()
+        } else {
+            this.editPass();
         }
     }
+
     // Huỳnh Văn Thịnh.
     // chỉnh sửa password
     editPass() {
@@ -155,6 +157,10 @@ export class InformationComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
+    }
+
+    reloadPage() {
+        window.location.reload();
     }
 
 }
