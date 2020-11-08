@@ -6,7 +6,7 @@ import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
 import { BookingTimeDTO } from 'src/app/model/BookingTimeDTO';
 import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -14,6 +14,7 @@ import { MovieService } from '../movie/movie.service';
 import { Ticket } from 'src/app/model/Ticket';
 import { Movie } from 'src/app/model/Movie';
 import { GlobalConstants } from 'src/app/model/GlobalConstants';
+declare var testq: any;
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -56,6 +57,7 @@ declare var $: any;
   listTicket: Ticket[]= [];
   seat: Seat= new Seat();
   movieBestChoice: Movie[] = [];
+  listTicketType: any=[];
   //#endregion
 
   //#region build in
@@ -71,28 +73,9 @@ declare var $: any;
       error => console.log(error)
   );
 
-    // $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
-    // window.paypal.Buttons({
-    //   style: {
-    //     layout: 'horizontal',
-    //     color: 'blue',
-    //     shape: 'rect',
-    //     label: 'paypal'
-    //   },
-    //   createOrder: (data, actions) => {
-    //     return actions.order.create({
-    //       purchase_units: [
-    //         {
-    //           amount: {
-    //             value: this.number,
-    //             currency_code: 'USD'
-    //           }
-    //         }
-    //       ]
-    //     });
-    //   }
-    // }).render(this.paypalRef.nativeElement);
+  this.bookService.bookingGetTicketType().subscribe(r=> this.listTicketType= r);
 
+    $.getScript('assets/js/custom.js');
 
     paypal.Buttons({
       // Set up the transaction
@@ -111,7 +94,7 @@ declare var $: any;
           return actions.order.capture().then(function(details) {
               // Show a success message to the buyer
               $("#btPurchase").removeClass("dg");
-              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+              Swal.fire('Thank you', 'Transaction completed by ' + details.payer.name.given_name + '!', 'success')
           });
       }
 
@@ -128,9 +111,12 @@ declare var $: any;
     this.activatedRoute.paramMap.subscribe(
       (param: ParamMap) => {
           this.movieId = (Number)(param.get('id'));
-          this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
-            this.movieName= r[0].name;
-          });
+          if(this.movieId>0){
+            this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
+              this.movieName= r[0].name;
+            }); 
+          }
+          
       });
     this.bookService.getAllLocation().subscribe(r => {this.listLocation = r; console.log(this.listLocation)});
     this.bookService.getBookingTime(this.locationId, this.movieId, this.dateShow).subscribe((data: any) => {
@@ -209,10 +195,10 @@ declare var $: any;
     this.bookService.bookingUseBonus(GlobalConstants.accId,this.proCode).subscribe(r=> {
       if(Number(r)>0){
         this.totalFinal= this.totalFinal - Number(r);
-        alert("Thank you! Your discount is: " + r);
+        Swal.fire('Thank you', 'Your discount is: ' + r, 'success')
       }
       else{
-        alert("You can not use this promotion code");
+        Swal.fire("You can not use this promotion code");
       }
       
     })

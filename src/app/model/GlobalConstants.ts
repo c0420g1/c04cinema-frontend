@@ -1,3 +1,3 @@
 export class GlobalConstants {
-    public static accId: number = 0;
+    public static accId: number = 1;
 }
