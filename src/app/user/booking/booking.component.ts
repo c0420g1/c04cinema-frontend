@@ -14,6 +14,7 @@ import { MovieService } from '../movie/movie.service';
 import { Ticket } from 'src/app/model/Ticket';
 import { Movie } from 'src/app/model/Movie';
 import { GlobalConstants } from 'src/app/model/GlobalConstants';
+declare var testq: any;
 declare var $: any;
 @Component({
   selector: 'app-booking',
@@ -56,6 +57,7 @@ declare var $: any;
   listTicket: Ticket[]= [];
   seat: Seat= new Seat();
   movieBestChoice: Movie[] = [];
+  listTicketType: any=[];
   //#endregion
 
   //#region build in
@@ -71,28 +73,9 @@ declare var $: any;
       error => console.log(error)
   );
 
-    // $.getScript('https://www.paypal.com/sdk/js?client-id=AbJeouGlJvVRkjJTAc6A19dol8QuE10JquuF_DjlCItut0bYICC8qfCzOhTNJpw1PhoAin9zZMPXHA9j&currency=USD');
-    // window.paypal.Buttons({
-    //   style: {
-    //     layout: 'horizontal',
-    //     color: 'blue',
-    //     shape: 'rect',
-    //     label: 'paypal'
-    //   },
-    //   createOrder: (data, actions) => {
-    //     return actions.order.create({
-    //       purchase_units: [
-    //         {
-    //           amount: {
-    //             value: this.number,
-    //             currency_code: 'USD'
-    //           }
-    //         }
-    //       ]
-    //     });
-    //   }
-    // }).render(this.paypalRef.nativeElement);
+  this.bookService.bookingGetTicketType().subscribe(r=> this.listTicketType= r);
 
+    $.getScript('assets/js/custom.js');
 
     paypal.Buttons({
       // Set up the transaction
