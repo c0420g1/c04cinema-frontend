@@ -145,8 +145,7 @@ declare var $: any;
   //#region event & service
   changeLocation(lId){
     this.bookService.getBookingTime(lId, this.movieId, this.dateShow).subscribe((data: any) => {
-      this.listTheatreTime = data;
-    console.log(data) }
+      this.listTheatreTime = data; }
     );
   }
 
@@ -311,7 +310,7 @@ declare var $: any;
     e.status= 0;
     this.bookService.booking(e).subscribe();
     });
-    this.bookService.bookingUpdateBonus(1, this.bonusPoint).subscribe();
+    this.bookService.bookingUpdateBonus(this.accountId, this.bonusPoint).subscribe();
     $("#final").show();
 
   }
