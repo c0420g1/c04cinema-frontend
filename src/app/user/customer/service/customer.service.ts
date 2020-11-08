@@ -17,7 +17,7 @@ export class CustomerService {
     return this.http.get<Customer>(`${this.API_URL}?${id}`);
   }
 
-  updateCustomer(customer: Customer, i: number): Observable<Error1[]> {
+  updateCustomer(customer: Customer): Observable<Error1[]> {
     return this.http.patch<Error1[]>(`${this.API_URL1}/${customer.id}`, customer);
   }
 }

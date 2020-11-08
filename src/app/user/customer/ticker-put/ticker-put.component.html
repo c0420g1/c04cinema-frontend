@@ -19,7 +19,7 @@
         <td>{{ticker.totalMoney}}</td>
         <td *ngIf="ticker.status == 1">received</td>
         <td *ngIf="ticker.status == 0">not received</td>
-        <td *ngIf="ticker.status == 0"><button class="btn btn-md btn--warning btn--wider" data-toggle="modal" data-target="#formDelete" (click)="checkDelete(ticker.idTicker)">Cancel Ticker</button></td>
+        <td *ngIf="ticker.status == 0"><button class="btn btn-md btn--warning btn--wider" data-toggle="modal" data-target="#formDelete" (click)="checkDelete(ticker.idTicker)">Cancel</button></td>
     </tr>
     </tbody>
 </table>
@@ -54,17 +54,20 @@
         <form>
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title">Delete Ticker</h5>
+                    <h5 class="modal-title">Cancel Ticker</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div>
-                    <p> Do you wan cancel ticker </p>
+                    <p style="margin-left: 20px"> Do you wan cancel ticker </p>
                 </div>
-                <div>
+                <div style="margin-left: 198px;margin-bottom: 16px;">
                     <button type="submit" class="btn btn-lg btn-outline-primary" data-dismiss="modal" (click)="cancelTicker()">
-                        Delete
+                        Yes
+                    </button>
+                    <button style="margin-left: 10px" type="submit" class="btn btn-lg btn-outline-primary" data-dismiss="modal">
+                        No
                     </button>
                 </div>
             </div>
