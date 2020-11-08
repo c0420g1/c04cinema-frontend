@@ -3,4 +3,5 @@ export class Point {
     dayPut:string;
     point: number;
     code: string;
+    isCancel: number;
 }

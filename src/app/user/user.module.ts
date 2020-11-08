@@ -26,6 +26,7 @@ import { NewsComponent } from './news/news.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
 import { NewsdetailComponent } from './newsdetail/newsdetail.component';
+import {ImageUploadComponent} from '../admin/image-upload/image-upload.component';
 
 
 // @ts-ignore

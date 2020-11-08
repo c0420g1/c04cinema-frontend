@@ -3,6 +3,7 @@ import {TickerService} from '../service/ticker.service';
 import {Ticker} from '../model/Ticker';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {Error1} from '../model/error1';
 
 @Component({
     selector: 'app-ticker-put',
@@ -20,6 +21,8 @@ export class TickerPutComponent implements OnInit, OnDestroy {
     totalPage: number;
     jumpPage: any;
     sub: Subscription;
+    error1s: Error1[];
+    i : number;
 
     constructor(private tickerService: TickerService,  private activatedRoute: ActivatedRoute) {
     }
@@ -31,12 +34,9 @@ export class TickerPutComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
             const key = paramMap.get('id');
-
-
-
             this.tickerService
                 .getTickerById(key, this.currentPage, 0)
-                .subscribe(next => (this.tickerPut = next), error => (this.tickerPut = []));
+                .subscribe(next => (this.tickerPut = next),error => (this.tickerPut = []));
 
             this.tickerService
                 .getTickerByListId(key, 0)
@@ -73,6 +73,23 @@ export class TickerPutComponent implements OnInit, OnDestroy {
             this.jumpPage = this.currentPage;
         }
         this.ngOnInit();
+    }
+
+    cancelTicker() {
+        this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+            const key = paramMap.get('id');
+        this.tickerService
+            .pathTicker(key,this.i)
+            .subscribe(next => (this.error1s = next),error => (this.tickerPut = []));
+            this.reloadPage();
+        });
+    }
+    reloadPage() {
+        window.location.reload();
+    }
+
+    checkDelete(i: number) {
+        this.i = i;
     }
 }
 

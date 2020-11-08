@@ -10,3 +10,35 @@ label{
     font-size: 14px;
     font-weight: bolder;
 }
+* {box-sizing: border-box;}
+
+.container1 {
+    position: relative;
+    width: 50%;
+    max-width: 300px;
+}
+
+.image {
+    display: block;
+    width: auto;
+    height: 200px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 204%;
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 35px;
+    padding: 60px;
+    text-align: center;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}

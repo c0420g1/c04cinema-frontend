@@ -9,6 +9,7 @@
         <td>Day Put</td>
         <td>Total Money</td>
         <td>Status</td>
+        <td>Change Ticket</td>
     </tr>
     </thead>
     <tbody *ngFor="let ticker of tickerPut">
@@ -18,6 +19,7 @@
         <td>{{ticker.totalMoney}}</td>
         <td *ngIf="ticker.status == 1">received</td>
         <td *ngIf="ticker.status == 0">not received</td>
+        <td *ngIf="ticker.status == 0"><button class="btn btn-md btn--warning btn--wider" data-toggle="modal" data-target="#formDelete" (click)="checkDelete(ticker.idTicker)">Cancel</button></td>
     </tr>
     </tbody>
 </table>
@@ -44,5 +46,31 @@
                 </li>
             </ul>
         </div>
+    </div>
+</div>
+<div class="modal fade" id="formDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title">Cancel Ticker</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div>
+                    <p style="margin-left: 20px"> Do you wan cancel ticker </p>
+                </div>
+                <div style="margin-left: 198px;margin-bottom: 16px;">
+                    <button type="submit" class="btn btn-lg btn-outline-primary" data-dismiss="modal" (click)="cancelTicker()">
+                        Yes
+                    </button>
+                    <button style="margin-left: 10px" type="submit" class="btn btn-lg btn-outline-primary" data-dismiss="modal">
+                        No
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

@@ -3,6 +3,8 @@ const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
 const USERID_KEY = 'AuthUserid';
 const AUTHORITIES_KEY = 'AuthAuthorities';
+const IMAGE_KEY = 'AuthImage';
+
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +48,13 @@ export class TokenStorageService {
   }
   public getUserid(): string {
     return sessionStorage.getItem(USERID_KEY);
+  }
+
+  public saveImageUrl(imageUrl: string) {
+    window.sessionStorage.removeItem(IMAGE_KEY);
+    window.sessionStorage.setItem(IMAGE_KEY, imageUrl);
+  }
+  public getImageUrl(): string {
+    return sessionStorage.getItem(IMAGE_KEY);
   }
 }
