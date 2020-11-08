@@ -3,4 +3,5 @@ export class JwtResponse {
     accountId: string;
     username: string;
     authorities: string;
+    imageUrl: string;
 }

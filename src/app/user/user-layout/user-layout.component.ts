@@ -46,12 +46,13 @@ export class UserLayoutComponent implements OnInit {
         $('.overlayregister').removeClass('close');
       }, 500);
     });
-    this.registerService.getCustomerIdFirst().subscribe(data => {console.log(data);  });
+    this.registerService.getCustomerIdFirst().subscribe(data => {console.log(data);});
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities(),
-      accountId: this.token.getUserid()
+      accountId: this.token.getUserid(),
+      imageUrl: this.token.getImageUrl()
     };
      GlobalConstants.accId=Number(this.token.getUserid());
   }

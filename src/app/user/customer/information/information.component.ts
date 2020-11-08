@@ -7,6 +7,7 @@ import {AccountService} from '../service/account.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Error1} from '../model/error1';
+import {TokenStorageService} from '../../user-layout/token-storage.service';
 
 @Component({
     selector: 'app-information',
@@ -38,6 +39,7 @@ export class InformationComponent implements OnInit, OnDestroy {
                 private accountService: AccountService,
                 private fb: FormBuilder,
                 private activatedRoute: ActivatedRoute,
+                private token: TokenStorageService
     ) {
     }
 
@@ -86,6 +88,10 @@ export class InformationComponent implements OnInit, OnDestroy {
 
     }
 
+    logout() {
+        this.token.signOut();
+        window.location.reload();
+    }
 
     myFunction(id: string) {
         let uri = 'filter={"property":"id","operator":"eq","value":' + id + '}';
@@ -107,7 +113,7 @@ export class InformationComponent implements OnInit, OnDestroy {
                 ...this.customer,
                 ...value
             };
-            this.customerService.updateCustomer(data, this.customer.id).subscribe(
+            this.customerService.updateCustomer(data).subscribe(
                 next => {
                     this.error1s = next;
                     console.log(this.error1s);
@@ -148,6 +154,9 @@ export class InformationComponent implements OnInit, OnDestroy {
                     this.passNew = '';
                     this.passReNew = '';
                     this.ngOnInit();
+                    if(this.error2s.fileName == 'success'){
+                        this.logout();
+                    }
                 },
                 error => console.log(error)
             );
