@@ -36,6 +36,7 @@ export class TheaterComponent implements OnInit {
   private getRequestParams(page: number, pageSize: number) {
     const params = {};
 
+
     if (page) {
       params[`page`] = page - 1;
     }

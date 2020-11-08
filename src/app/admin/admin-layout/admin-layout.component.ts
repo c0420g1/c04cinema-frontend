@@ -12,7 +12,7 @@ export class AdminLayoutComponent implements OnInit {
   constructor(private router: Router, private token: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.router.navigateByUrl('/admin/dashboard');
+    // this.router.navigateByUrl('/admin/dashboard');
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),

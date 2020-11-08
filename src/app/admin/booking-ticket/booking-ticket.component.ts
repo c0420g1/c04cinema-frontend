@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {BookingTicketDTO} from '../../model/bookingTicketDTO';
 import {BookingTicket} from '../../model/bookingTicket';
-import {Router} from '@angular/router';
 import {ConfirmTicket} from '../../model/confirmTicket';
 import {BookingTicketService} from '../../service/booking-ticket.service';
+
 
 @Component({
   selector: 'app-booking-ticket',
@@ -28,8 +28,7 @@ export class BookingTicketComponent implements OnInit {
   seatList: BookingTicketDTO[] = [];
   private confirmTicket: ConfirmTicket;
   ticketUpdate = new BookingTicket();
-  constructor(private bookingTicketService: BookingTicketService,
-              private route: Router) { }
+  constructor(private bookingTicketService: BookingTicketService) { }
 
   ngOnInit(): void {
 
@@ -64,6 +63,7 @@ export class BookingTicketComponent implements OnInit {
             this.quantity = this.seatList.length;
             console.log(this.quantity);
             this.total = this.quantity * data[0].price;
+
           });
     });
     this.ticketNew = ticket;
@@ -76,11 +76,11 @@ export class BookingTicketComponent implements OnInit {
     } else {
       this.bookingTicketService.confirmTicket(this.confirmTicket,this.numberTicket*500).subscribe(() => {
         this.numberTicket=0;
-        this.ngOnInit()}
-        );
+        this.ngOnInit()
+      });
     }
 
-    this.check = false;
+    this.check = true;
     document.getElementById('formEdit').click();
   }
   prePage(): void {
@@ -112,5 +112,12 @@ export class BookingTicketComponent implements OnInit {
     } else{
       this.check = false;
     }
+    console.log(this.numberTicket);
+  }
+
+
+  print() {
+    document.getElementById("formEdit").click();
+    window.print();
   }
 }

@@ -4,6 +4,7 @@ import {Hall} from '../../model/Hall';
 import {TheaterService} from '../theater/theater.service';
 import {HallType} from '../../model/hallType';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Theatre} from '../../model/theatre';
 
 @Component({
   selector: 'app-hall-list',
@@ -15,7 +16,7 @@ export class HallListComponent implements OnInit {
   titleSearch ='';
   pageHall = 1;
   count = 0;
-  pageSizeHall = 4;
+  pageSizeHall = 10;
   pageSizes = [3, 6, 9];
   theaterId: number;
 
@@ -31,9 +32,12 @@ export class HallListComponent implements OnInit {
   hall: Hall;
   halls: Hall[] = [];
   hallType: HallType[] = [];
+  theater: Theatre;
 
   ngOnInit(): void {
     this.theaterId = Number.parseInt(this.route.snapshot.paramMap.get("id"));
+    this.theaterService.getTheater(this.theaterId).subscribe((data) => {this.theater = data; });
+    console.log(this.theaterId)
     this.showListHall();
     this.addFormHall = this.fbAddHall.group({
       name: ['', Validators.required],
@@ -84,9 +88,10 @@ export class HallListComponent implements OnInit {
           .subscribe(nextHall => {
             this.halls.unshift(nextHall);
             this.addFormHall.reset();
+            this.ngOnInit();
           }, error => console.log(error));
     }
-    this.showListHall();
+
   }
 
   editHall(hall: Hall){
