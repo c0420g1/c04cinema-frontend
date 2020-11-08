@@ -1,22 +1,21 @@
-<div class="content" style="height: 71vh">
+<div *ngIf="theaterName"  class="content" style="height: 71vh">
     <div class="container-fluid">
         <div class="row" >
             <div class="col-10" style="margin-top: 28px; margin-left: 8%">
                 <div class="table-title">
                     <div class="row">
-                        <div style="width: 18%; display: flex" >
-                            <input [(ngModel)]="titleSearch"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
-                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">Search<i class="fa fa-search"></i></button>
+                        <div class="col-sm-9" style="width: 18%; display: flex" >
+                            <input style="width: 20%;" [(ngModel)]="titleSearch"  id="inputSearch" class="form-control" type="text" name="search" placeholder="Search  for ..." >
+                            <button type="button" class="btn btn-success" id="buttonSearch" (click)="search()">SEARCH</button>
                         </div>
-                        <div style="width: 30%; display: flex">
-                            <a style="margin-bottom: 7px;padding: 8px; margin-left: 722px;border-radius: 10px;" href="#addHall" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Hall</a>
+                        <div class="col-sm-3" style="padding-left: 90px;">
+                            <a style="border-radius: 10px;" href="#addHall" data-toggle="modal" class="btn btn-md btn--warning btn--book btn-control--home">Add New Hall</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-9" style="max-width: 75%">
                             <div style="margin-left: 380px;">
-                                <p style="font-size: 14px; font-weight: bold">Hall Management</p>
-<!--                                <p style="font-size: 14px; font-weight: bold">{{theater.name}}</p>-->
+                                <p style="font-size: 14px; font-weight: bold">Hall Management (<font color='blue'>{{theaterName.name}}</font>)</p>
                             </div>
                         </div>
                     </div>
@@ -49,7 +48,8 @@
                                 </ng-container>
                             </ng-container>
                             <td>
-                                <a [routerLink]="['seat', hall.id]" class="detail" title="Detail" data-toggle="modal" ><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+                                <a href="#" (click)="goToSeat($event,hall.id)" title="Detail"><i style="color: #ffd564" class="material-icons">&#xE254;</i></a>
+
                             </td>
                             <td>
                                 <button class="btn btn-primary" (click)="editHall(hall)" data-toggle="modal" data-target="#editHall">Edit</button>
