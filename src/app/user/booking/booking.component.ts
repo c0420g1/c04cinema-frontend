@@ -6,7 +6,7 @@ import { BookingTicketDTO } from 'src/app/model/bookingTicketDTO';
 import { BookingTimeDTO } from 'src/app/model/BookingTimeDTO';
 import { Seat } from 'src/app/model/seat';
 import { BookingTicket } from 'src/app/model/bookingTicket';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { DatePipe } from '@angular/common';
 import { Booking } from 'src/app/model/Booking';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -94,7 +94,7 @@ declare var $: any;
           return actions.order.capture().then(function(details) {
               // Show a success message to the buyer
               $("#btPurchase").removeClass("dg");
-              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+              Swal.fire('Thank you', 'Transaction completed by ' + details.payer.name.given_name + '!', 'success')
           });
       }
 
@@ -111,9 +111,12 @@ declare var $: any;
     this.activatedRoute.paramMap.subscribe(
       (param: ParamMap) => {
           this.movieId = (Number)(param.get('id'));
-          this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
-            this.movieName= r[0].name;
-          });
+          if(this.movieId>0){
+            this.movieService.getMovieById(this.movieId.toString()).subscribe(r=>{
+              this.movieName= r[0].name;
+            }); 
+          }
+          
       });
     this.bookService.getAllLocation().subscribe(r => {this.listLocation = r; console.log(this.listLocation)});
     this.bookService.getBookingTime(this.locationId, this.movieId, this.dateShow).subscribe((data: any) => {
@@ -192,10 +195,10 @@ declare var $: any;
     this.bookService.bookingUseBonus(GlobalConstants.accId,this.proCode).subscribe(r=> {
       if(Number(r)>0){
         this.totalFinal= this.totalFinal - Number(r);
-        alert("Thank you! Your discount is: " + r);
+        Swal.fire('Thank you', 'Your discount is: ' + r, 'success')
       }
       else{
-        alert("You can not use this promotion code");
+        Swal.fire("You can not use this promotion code");
       }
       
     })
