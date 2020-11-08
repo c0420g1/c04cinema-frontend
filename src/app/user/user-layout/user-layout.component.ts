@@ -51,7 +51,8 @@ export class UserLayoutComponent implements OnInit {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities(),
-      accountId: this.token.getUserid()
+      accountId: this.token.getUserid(),
+      imageUrl: this.token.getImageUrl()
     };
      GlobalConstants.accId=Number(this.token.getUserid());
   }

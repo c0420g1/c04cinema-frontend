@@ -16,7 +16,8 @@ export class AdminLayoutComponent implements OnInit {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
-      authorities: this.token.getAuthorities()
+      authorities: this.token.getAuthorities(),
+      imageUrl: this.token.getImageUrl()
     };
   }
 }

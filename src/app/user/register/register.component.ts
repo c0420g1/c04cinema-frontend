@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       currentBonusPoint: ['0'],
       isactive: ['1'],
       code: [this.codeCustomer = this.getRandomCode(5)],
-      imageUrl: ['https://www.freepngimg.com/thumb/youtube/62644-profile-account-google-icons-computer-user-iconfinder.png']
+      imageUrl: ['https://www.fit2work.com.au/assets/img/avatars/LoginIconAppl.png']
     });
   }
   getRandomCode(length){

@@ -15,8 +15,12 @@ const httpOptions = {
 })
 export class AuthService {
   private loginUrl = 'http://localhost:8080/login';
+  private loginFbUrl = 'http://localhost:8080/loginFb';
   constructor(private http: HttpClient) { }
   attemptAuth(account): Observable<JwtResponse>{
     return this.http.post<JwtResponse>(this.loginUrl, account, httpOptions);
+  }
+  loginFB(infoFB): Observable<JwtResponse>{
+    return this.http.post<JwtResponse>(this.loginFbUrl,infoFB, httpOptions);
   }
 }
