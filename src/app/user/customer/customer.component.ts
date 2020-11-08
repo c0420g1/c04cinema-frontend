@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {CustomerService} from './service/customer.service';
 import {Customer} from './model/Customer';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {TokenStorageService} from '../user-layout/token-storage.service';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
     selector: 'app-customer',
@@ -13,13 +13,17 @@ import {TokenStorageService} from '../user-layout/token-storage.service';
 })
 export class CustomerComponent implements OnInit {
 
+
     customer: Customer;
     rescus: string;
     point = 0;
     check: boolean;
     sub: Subscription;
 
-    constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute, private token: TokenStorageService) {
+
+    constructor(private customerService: CustomerService
+                , private activatedRoute: ActivatedRoute
+                , private token: TokenStorageService) {
     }
 
     ngOnInit(): void {
