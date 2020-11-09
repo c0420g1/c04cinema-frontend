@@ -9,6 +9,7 @@ import {Image} from '../../admin/Image';
 import {ImageService} from '../../service/image.service';
 import {finalize} from 'rxjs/operators';
 import {Error1} from './model/error1';
+import {GlobalConstants} from '../../model/GlobalConstants';
 
 @Component({
     selector: 'app-customer',
@@ -54,6 +55,7 @@ export class CustomerComponent implements OnInit {
                 next => {
                     this.customer = next[0];
                     this.point = this.customer.currentBonusPoint;
+                    console.log(this.customer.imageUrl);
                 },
                 error => {
                     console.log(error);
@@ -61,7 +63,6 @@ export class CustomerComponent implements OnInit {
                 }
             );
         });
-
         this.check = true;
     }
 
@@ -110,7 +111,9 @@ export class CustomerComponent implements OnInit {
                         this.customerService.updateCustomer(this.customer).subscribe(
                             next => {
                                 this.error1s = next;
-                                console.log(this.error1s)
+                                console.log(this.error1s);
+                                this.token.saveImageUrl(this.customer.imageUrl)
+                                window.location.reload();
                             });
                     this.checkImage = false;
                     this.service.insertImageDetails(this.editImage);

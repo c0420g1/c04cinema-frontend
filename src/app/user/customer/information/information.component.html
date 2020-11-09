@@ -52,9 +52,6 @@
 <hr>
 <form [formGroup]="customerForm">
     <h3>User information</h3>
-    <div *ngIf="checkUpInfor">
-        <p style="color: #00A0D1">Update Information success !</p>
-    </div>
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Member Card :</label>
         <div class="col-sm-9">
@@ -158,6 +155,20 @@
 
     <button type='submit' class="btn btn-md btn--warning btn--wider" [disabled]="customerForm.invalid" (click)="editCustomer()">Update</button>
 </form>
-
+<div id="login1" class="overlay overlay-hugeinc open" *ngIf="checkUpInfor == true">
+    <section class="container">
+        <div class="col-sm-4 col-sm-offset-4">
+            <form id="login-form" class="login" style="padding-top: 0">
+                <div class="header-form">
+                    <button type="button" class="overlay-close" (click)="reloadPage()">Close</button>
+                    <p class="login__title">Information Code <br><span class="login-edition">welcome to C04.Movie</span></p>
+                </div>
+                <div>
+                    <h5 style="margin: 10px 10px; text-align: center">Update Information success !</h5>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 
 

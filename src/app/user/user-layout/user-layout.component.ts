@@ -18,6 +18,7 @@ export class UserLayoutComponent implements OnInit {
   info: any;
   customerDTO: CustomerDTO;
   listSiteMap: News[]=[];
+  image: string;
   constructor(private fb: FormBuilder, private registerService: RegisterService, private token: TokenStorageService, private newsService: NewService,
               private router: Router) { }
 
