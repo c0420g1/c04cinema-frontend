@@ -6,6 +6,7 @@
             <h3 class="fa fa search">Search</h3>
         </div>
         <div class="col-4">
+            <input type="date" value="{{dateCurrent}}" class="form-control btn-block ml-2 input-search-date"
                    (change)="searchFilmByDate($event.target.value)">
         </div>
         <div class="col-5">
