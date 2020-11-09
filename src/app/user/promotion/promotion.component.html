@@ -2,23 +2,29 @@
 <section class="container" style="padding-top: 40px;">
         <h2 class="page-heading">Promotion</h2>
         <div class="offers-block">
-            <div class="col-xs-6 col-sm-4 col-md-3 offers-wrap">
+            <div style="margin-bottom: 30px" class="col-xs-6 col-sm-4 col-md-3 offers-wrap" *ngFor="let item of datas|paginate: { itemsPerPage: 8, currentPage: p }">
                 <a href='#' class="offer offer--gift" style="margin-bottom: 0;">
                     <div class="offer__head">
-                        <p class="offer__name">Family Ticket<br></p>
-                        <p style="color: white;">Price: 123 point</p>
-                        <span class="offer__datail">with <br> $10 Discount  </span>
+                        <div>
+                            <p class="offer__name">{{item.name}}<br></p>
+                        </div>
+                        <p style="color: white;">Price: {{item.price}}</p>
+                        <span class="offer__datail">with <br> {{item.discount}} $ Discount </span>
                     </div>
                     <br>
-                    <p class="offer__full">From: 2020-10-10 to 2020-10-10</p>
-                    <p style="color: white;">Description</p>
+                    <p class="offer__full">From: {{item.startDate}} to {{item.endDate}}</p>
+                    <p style="color: white;">{{item.description}}</p>
                 </a>
-                <a href="#" class="btn btn-md btn--warning" style="margin-left: 45px;">Buy Promotion</a> 
+                <a  class="btn btn-md btn--warning" style="margin-left: 45px;" (click)="buyPromotion(item)" *ngIf="accountID!= 0; else block ">Buy Promotion</a>
+                <ng-template #block>
+                    <a routerLink="/login" class="btn btn-md btn--warning" style="margin-left: 45px;">Buy Promotion</a>
+                </ng-template>
             </div>
 
         </div>
-
-
+    <div class="justify-content-center" style="font-size: large;margin-left: 425px ">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
 
     
 
