@@ -119,7 +119,6 @@ export class InformationComponent implements OnInit, OnDestroy {
                     console.log(this.error1s);
                     if (this.error1s.length == 0) {
                         this.ngOnInit();
-                        this.reloadPage();
                         this.checkUpInfor = true;}
                 },
                 error => console.log(error)
