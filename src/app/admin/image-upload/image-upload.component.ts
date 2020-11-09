@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import {ImageService} from '../../service/image.service';
@@ -70,7 +70,7 @@ export class ImageUploadComponent implements OnInit {
             this.service.insertImageDetails(this.editImage);
             this.confirm = this.service.imageConfirm;
             this.loading = false;
-            alert("Upload Completed");
+            Swal.fire('Thank you!','Uploaded successfully', 'success')
           });
         })
     ).subscribe();
