@@ -108,7 +108,7 @@ export class CustomerComponent implements OnInit {
             finalize(() => {
                 fileRef.getDownloadURL().subscribe((url) => {
                     this.customer.imageUrl = url,
-                        this.customerService.updateCustomer(this.customer).subscribe(
+                        this.customerService.updateImageUrl(this.customer).subscribe(
                             next => {
                                 this.error1s = next;
                                 if(this.error1s.length > 0 ){
