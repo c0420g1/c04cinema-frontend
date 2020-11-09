@@ -111,7 +111,8 @@ export class CustomerComponent implements OnInit {
                         this.customerService.updateImageUrl(this.customer).subscribe(
                             next => {
                                 this.error1s = next;
-                                if(this.error1s != null ){
+                                console.log(this.error1s);
+                                if(this.error1s.length > 0){
                                     this.checkEditImage = true;
                                 } else {
                                 this.token.saveImageUrl(this.customer.imageUrl)
