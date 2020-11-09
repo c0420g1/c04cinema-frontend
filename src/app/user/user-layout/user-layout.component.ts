@@ -18,6 +18,7 @@ export class UserLayoutComponent implements OnInit {
   info: any;
   customerDTO: CustomerDTO;
   listSiteMap: News[]=[];
+  image: string;
   constructor(private fb: FormBuilder, private registerService: RegisterService, private token: TokenStorageService, private newsService: NewService,
               private router: Router) { }
 
@@ -46,7 +47,7 @@ export class UserLayoutComponent implements OnInit {
         $('.overlayregister').removeClass('close');
       }, 500);
     });
-    this.registerService.getCustomerIdFirst().subscribe(data => {console.log(data);  });
+    this.registerService.getCustomerIdFirst().subscribe(data => {console.log(data);});
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap, Params, RouterOutlet} from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router, RouterOutlet} from '@angular/router';
 import {Hall} from '../../model/Hall';
 import {TheaterService} from '../theater/theater.service';
 import {HallType} from '../../model/hallType';
@@ -26,18 +26,17 @@ export class HallListComponent implements OnInit {
   addFormSeat : FormGroup;
   deleteFormHall: Hall;
 
-  constructor(private route: ActivatedRoute, private theaterService: TheaterService,
+  constructor(private route: ActivatedRoute, private router: Router, private theaterService: TheaterService,
               private fbAddHall: FormBuilder, private fbEditHall: FormBuilder ) { }
 
   hall: Hall;
   halls: Hall[] = [];
   hallType: HallType[] = [];
-  theater: Theatre;
-
+  theaterName: Theatre;
+   
   ngOnInit(): void {
     this.theaterId = Number.parseInt(this.route.snapshot.paramMap.get("id"));
-    this.theaterService.getTheater(this.theaterId).subscribe((data) => {this.theater = data; });
-    console.log(this.theaterId)
+    this.theaterService.getTheaterName(this.theaterId).subscribe((r) => {this.theaterName = r; console.log(this.theaterName.name); });
     this.showListHall();
     this.addFormHall = this.fbAddHall.group({
       name: ['', Validators.required],
@@ -132,4 +131,11 @@ export class HallListComponent implements OnInit {
     this.addFormHall.reset();
   }
 
+  goToSeat(e, hallId){
+    e.preventDefault();
+    const url: string = '/admin/theater/hall/' + this.theaterName.id + '/seat/' + hallId;
+    this.router.navigate([url]).then( () => {
+        window.location.reload();
+    });
+  }
 }

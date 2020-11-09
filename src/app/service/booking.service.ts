@@ -21,6 +21,7 @@ export class BookingService {
   private readonly API_URL_USEBONUS = 'http://localhost:8080/promotionDiscount';
   private readonly API_URL_SEATNAME = 'http://localhost:8080/getSeatNameById/';
   private readonly API_URL_COMBO = 'http://localhost:8080/food_drink';
+  private readonly API_URL_TICKETTYPE = 'http://localhost:8080/ticket_type';
   constructor(private http: HttpClient) { }
 
   getAllLocation(): Observable<Location[]>{
@@ -53,6 +54,10 @@ export class BookingService {
 
   bookingGetSeatName(seatId: number): Observable<Seat>{
     return this.http.get<Seat>(this.API_URL_SEATNAME + seatId);
+  }
+
+  bookingGetTicketType(): Observable<any>{
+    return this.http.get<any>(this.API_URL_TICKETTYPE);
   }
 
   bookingGetCombo(): Observable<any>{

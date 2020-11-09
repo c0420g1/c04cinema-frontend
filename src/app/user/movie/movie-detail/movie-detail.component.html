@@ -40,9 +40,48 @@
 
     </div>
     <div class="col-sm-12" style="font-size: 15px">
-        <h4 class="page-heading" style="margin-left: 446px">Description </h4>
+        <h2 class="page-heading">Description </h2>
         {{movie.description}}
     </div>
+
+    <div class="col-sm-12">
+        <h2 class="page-heading">comments ({{sumComment}})</h2>
+        <div class="comment-wrapper">
+            <form id="comment-form" class="comment-form">
+                <textarea class="comment-form__text" placeholder='Add you comment here' (keyup)='getCom($event.target.value)'></textarea>
+                <label class="comment-form__info">450 characters left</label>
+                <button (click)="addCom()" class="btn btn-md btn--danger comment-form__btn">add comment</button>
+            </form>
+
+            <div class="comment-sets">
+
+                <div *ngFor='let c of listComment' class="comment">
+                    <div class="comment__images">
+                        <img alt='' [src]="c.customerImgUrl" style="width: 50px; height: 50px;">
+                    </div>
+
+                    <a href='#' class="comment__author" style="padding-left: 0;">{{c.customerName}}</a>
+                    <p class="comment__date">{{c.time}}</p>
+                    <p class="comment__message">{{c.comment}}</p>
+                    <a href='#' (click)="freply($event, c.id, c.customerId)" id="{{c.id + 'a'}}" class="comment__reply">Reply</a>
+
+
+                    <div *ngFor="let s of c.reply" class="comment comment--answer">
+                        <div class="comment__images">
+                            <img alt='' [src]="s.customerImgUrl" style="width: 50px; height: 50px;">
+                        </div>
+    
+                        <a href='#' class="comment__author" style="padding-left: 0;">{{s.customerName}}</a>
+                        <p class="comment__date">{{s.time}}</p>
+                        <p class="comment__message">{{s.comment}}</p>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+</div>
 </div>
 
 <!-- Modal iframe youtube -->

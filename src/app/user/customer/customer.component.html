@@ -8,11 +8,28 @@
 <div *ngIf="customer" class="container">
     <div class="row">
         <div class="col-lg-4" style="text-align: center">
-            <img [src]="customer.imageUrl" height="auto" width="200"/>
+            <div class="container1">
+            <img [src]="customer.imageUrl"  height="auto" width="300" alt="Avatar" class="image" />
+                <div class="overlay" (click)="fileUploader.click()" >Change Avatar</div>
+            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <br><br>
+                        <input style="display: none" required type="file" class="form-control-file" #fileUploader accept="image/*" (change)="showPreview($event)">
+                    </div>
+                </div>
+                    <ng-template #customLoadingTemplate></ng-template>
+                    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+            </div>
+            <div *ngIf="checkImage">
+                <button class="btn btn-md btn--warning btn--wider" (click)="addNewImage()" style="width: 100%">Change Avatar</button>
+            </div>
             <p style="font-size: 20px; font-weight: bold">{{customer.name}}</p>
-            <p>Cumulative Points : {{point}}</p>
-            <button type='submit' class="btn btn-md btn--warning btn--wider" (click)="logout()"><a>Log Out</a>
-            </button>
+            <p>Cumulative Points : {{point}} </p>
+            <button type='submit' class="btn btn-md btn--warning btn--wider" (click)="logout()" style="width: 100%"><a>Log Out</a></button>
+
             <hr>
             <div class="m-1"><a [routerLink]="['information',customer.id]" (click)="checkShow()"> Account
                 Information</a></div>

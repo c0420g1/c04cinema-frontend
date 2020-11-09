@@ -1,13 +1,17 @@
 import {Component, OnInit, Pipe} from '@angular/core';
 import {Movie} from 'src/app/model/Movie';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MovieService} from '../movie.service';
 import {DatePipe} from '@angular/common';
 import {Show} from 'src/app/model/Show';
+import {Comment} from 'src/app/model/Comment';
 import {ShowService} from '../show.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import DateTimeFormat = Intl.DateTimeFormat;
-
+import { GlobalConstants } from 'src/app/model/GlobalConstants';
+import * as moment from 'moment';
+import { TestBed } from '@angular/core/testing';
+declare var addReply: any;
 declare var $: any;
 
 
@@ -43,20 +47,22 @@ export class MovieDetailComponent implements OnInit {
     show: Show;
     showTableTime: Show[] = [];
     votes: number;
-
-
+    listComment: any= [];
+    sumComment: number = 0;    
+    com: string;
+    cusId: number;
     constructor(private moviesService: MovieService,
                 private activatedRoute: ActivatedRoute,
                 private showService: ShowService,
                 private pipe: DatePipe,
-                private sanitizer: DomSanitizer
+                private sanitizer: DomSanitizer,
+                private router: Router
     ) {
-
+        window['addReply'] = this.addReply;
     }
 
     ngOnInit(): void {
         this.votes = Math.floor (Math.random () * 6 + 115);
-
         const dateCur = new Date();
         const resultDate = this.pipe.transform(dateCur, 'yyyy-MM-dd');
         let date2 = Date.parse(resultDate);
@@ -99,6 +105,9 @@ export class MovieDetailComponent implements OnInit {
             starOn: 'star-on.svg',
         });
 
+        this.moviesService.getCCustomerByAccountId(GlobalConstants.accId.toString()).subscribe(r=> this.cusId= r.id);
+        this.moviesService.getCommentByMovieId(this.id).subscribe(e=>
+            {this.listComment = e; this.sumComment= e[0].sumComment; console.log(this.listComment)} );
 
         this.showService.getAllShow().subscribe(
             (data) => {
@@ -114,6 +123,61 @@ export class MovieDetailComponent implements OnInit {
 
 
 
+    }
+
+    freply(e, cid, cusId){
+        e.preventDefault();
+        const movieId= this.id;
+        const replyCusId= this.cusId;
+        let moviceService= this.moviesService;
+        let router= this.router;
+            $('.comment').find('.comment-form').remove();
+            $('#'+ cid+ 'a').parent().append("<div class='comment-form'>\
+                                <textarea id='"+ cid +"b' class='comment-form__text' placeholder='Add you comment here'></textarea>\
+                                <label class='comment-form__info'>450 characters left</label>\
+                                <button id='quoc' class='btn btn-md btn--danger comment-form__btn'>add comment</button>\
+                            </div>");
+
+                            $('#quoc').click(function(){
+                              const content= $('#'+ cid+'b').val(); 
+                                addReply(moviceService,movieId,replyCusId, cid,cusId, content, router);
+                            })
+    };
+
+    getCom(val){
+       this.com= val;     
+    }
+
+    addReply(moviceService, movieId, replyCusId, commentId, customerId, content, router){
+        let reply= new Comment();
+        reply.customerId= customerId;
+        reply.movieId= movieId;
+        reply.createDate= new Date().toISOString();
+        reply.replyOneCustomId= replyCusId;
+        reply.replyTwoCustomId= commentId; 
+        reply.comment= content;
+        moviceService.addComment(reply).subscribe();
+        const currentRoute = router.url;
+        router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            router.navigate([currentRoute]);
+        }); 
+    }
+
+    addCom(){
+        let comment= new Comment();
+        comment.customerId= this.cusId;
+        comment.movieId= Number(this.id);
+        comment.comment= this.com;
+        comment.createDate= new Date().toISOString();
+        this.moviesService.addComment(comment).subscribe();
+        this.refeshComponent();
+    }
+
+    refeshComponent(){
+        const currentRoute = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate([currentRoute]);
+        }); 
     }
 
     updateVideoUrl(id: string) {

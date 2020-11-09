@@ -1,6 +1,13 @@
 <div *ngIf="name=='admin'" id="more">
-<div class="search-wrapper" style="margin-top: 0;">
+<div class="search-wrapper" style="margin-top:0px;">
     <div class="container container--add">
+        <div style="padding-top: 10px;">
+            <span style="font-size: large; color: #fe505a;"><i class="fa fa-male"></i> Ticket Type: </span>   
+        <select *ngIf="listTicketType" class="select__sort"  style="font-size: 19px">
+        <option [ngValue]="undefined" selected>Customer</option>
+          <option *ngFor="let tt of listTicketType" [ngValue]="tt">{{tt.name}}</option>
+        </select>
+        </div>
         <form id='search-form' method='get' class="search">
             <input type="text" class="search__field" placeholder="Search">
             <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
@@ -10,7 +17,7 @@
                 <option value="4">By title</option>
                 <option value="5">By year</option>
             </select>
-            <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
+            <button type='submit' class="btn btn-md btn--danger search__button" style="height: 71%;">search a movie</button>
         </form>
     </div>
 </div>

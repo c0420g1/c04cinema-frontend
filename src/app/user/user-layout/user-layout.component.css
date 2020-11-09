@@ -4,3 +4,11 @@ ul{
 #navigation ul{
     list-style:  none;
 }
+
+.ban{
+    min-height: 100%;
+    background-image: url(/assets/images/download/banner2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
