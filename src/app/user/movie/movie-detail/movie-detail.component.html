@@ -50,7 +50,11 @@
             <form id="comment-form" class="comment-form">
                 <textarea class="comment-form__text" placeholder='Add you comment here' (keyup)='getCom($event.target.value)'></textarea>
                 <label class="comment-form__info">450 characters left</label>
-                <button (click)="addCom()" class="btn btn-md btn--danger comment-form__btn">add comment</button>
+                <button (click)="addCom()" class="btn btn-md btn--danger comment-form__btn" *ngIf="cusId; else block">add comment</button>
+                <ng-template #block>
+                    <button routerLink="/login" class="btn btn-md btn--danger comment-form__btn" >add comment</button>
+                </ng-template>
+              
             </form>
 
             <div class="comment-sets">
