@@ -106,3 +106,18 @@
 </div>
 <div class="clearfix"></div>
 
+<div id="login1" class="overlay overlay-hugeinc open" *ngIf="error1s.length > 0">
+    <section class="container">
+        <div class="col-sm-4 col-sm-offset-4">
+            <form id="login-form" class="login" style="padding-top: 0">
+                <div class="header-form">
+                    <button type="button" class="overlay-close" (click)="reloadPage()">Close</button>
+                    <p class="login__title">Information Code <br><span class="login-edition">welcome to C04.Movie</span></p>
+                </div>
+                <div>
+                    <h5 style="margin: 10px 10px; text-align: center">Please input all information before edit Avatar !</h5>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

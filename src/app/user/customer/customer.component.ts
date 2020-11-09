@@ -123,4 +123,7 @@ export class CustomerComponent implements OnInit {
             })
         ).subscribe();
     }
+    reloadPage() {
+        window.location.reload();
+    }
 }
