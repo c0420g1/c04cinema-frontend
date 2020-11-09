@@ -42,7 +42,7 @@ declare var $: any;
   proCode: string ='';
   isActive: boolean= false;
   step: string= 's1';
-  accountId: number=1;
+  accountId: number= GlobalConstants.accId;
   movieId: number= 94;
   movieName: string;
   seatId: number;
