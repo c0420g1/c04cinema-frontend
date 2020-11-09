@@ -13,7 +13,9 @@ import {Hall} from '../../model/Hall';
 })
 export class SeatComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private theaterService: TheaterService, private fbAddSeat: FormBuilder, private fbEditSeat: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private theaterService: TheaterService, private fbAddSeat: FormBuilder, private fbEditSeat: FormBuilder) { 
+
+  }
 
   hallIdReceive: number;
   hall: Hall;
