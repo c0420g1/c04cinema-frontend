@@ -13,6 +13,7 @@ export class MovieShowingComponent implements OnInit {
     checkDate = true;
     nameSearch = '';
     loading = false;
+    dateCurrent: string;
 
     constructor(private moviesService: MovieService, private pipe: DatePipe) {
     }
@@ -22,6 +23,7 @@ export class MovieShowingComponent implements OnInit {
         const dateCur = new Date();
         const resultDate = this.pipe.transform(dateCur, 'yyyy-MM-dd');
         console.log(resultDate);
+        this.dateCurrent = resultDate;
         this.moviesService.getMovieByDate(resultDate).subscribe(
             (data) => {
                 try {

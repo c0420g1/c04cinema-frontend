@@ -108,14 +108,16 @@ export class CustomerComponent implements OnInit {
             finalize(() => {
                 fileRef.getDownloadURL().subscribe((url) => {
                     this.customer.imageUrl = url,
-                        this.customerService.updateCustomer(this.customer).subscribe(
+                        this.customerService.updateImageUrl(this.customer).subscribe(
                             next => {
                                 this.error1s = next;
-                                if(this.error1s.length > 0 ){
+                                console.log(this.error1s);
+                                if(this.error1s.length > 0){
                                     this.checkEditImage = true;
-                                }
+                                } else {
                                 this.token.saveImageUrl(this.customer.imageUrl)
                                 window.location.reload();
+                                }
                             });
                     this.checkImage = false;
                     this.service.insertImageDetails(this.editImage);

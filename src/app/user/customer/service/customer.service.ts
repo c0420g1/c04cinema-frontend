@@ -11,6 +11,7 @@ export class CustomerService {
 
   private readonly API_URL = 'http://localhost:8080/customer';
   private readonly API_URL1 = 'http://localhost:8080/editCustomer';
+  private readonly API_URL2 = 'http://localhost:8080/editImageUrl';
   constructor(private http: HttpClient) {}
 
   getCustomerById(id: string): Observable<Customer>{
@@ -19,5 +20,8 @@ export class CustomerService {
 
   updateCustomer(customer: Customer): Observable<Error1[]> {
     return this.http.patch<Error1[]>(`${this.API_URL1}/${customer.id}`, customer);
+  }
+  updateImageUrl(customer: Customer): Observable<Error1[]> {
+    return this.http.patch<Error1[]>(`${this.API_URL2}/${customer.id}`, customer);
   }
 }
