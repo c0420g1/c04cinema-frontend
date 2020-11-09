@@ -18,7 +18,7 @@ import {GlobalConstants} from '../../model/GlobalConstants';
 })
 export class CustomerComponent implements OnInit {
 
-
+    checkEditImage = false;
     customer: Customer;
     rescus: string;
     point = 0;
@@ -111,7 +111,9 @@ export class CustomerComponent implements OnInit {
                         this.customerService.updateCustomer(this.customer).subscribe(
                             next => {
                                 this.error1s = next;
-                                console.log(this.error1s);
+                                if(this.error1s.length > 0 ){
+                                    this.checkEditImage = true;
+                                }
                                 this.token.saveImageUrl(this.customer.imageUrl)
                                 window.location.reload();
                             });
