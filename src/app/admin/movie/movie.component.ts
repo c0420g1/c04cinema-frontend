@@ -13,6 +13,8 @@ import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class MovieComponent implements OnInit {
   url: string;
   message: string;
+  messageEdit: string;
+  messageAdd: string;
   movies: Movie[] = [];
   movieGenreTypes: MovieGenreType[] = [];
   movieGenreAssociates: MovieGenreAssociate[] = [];
@@ -133,7 +135,12 @@ export class MovieComponent implements OnInit {
   }
   // add new movie & movie genre type
   addNewMovie() {
-      this.movieService.addMovie(this.addFormMovie.value).subscribe(data=>this.ngOnInit());
+      this.movieService.addMovie(this.addFormMovie.value).subscribe(
+          data=> {
+              this.messageAdd = "Added Successfully";
+              this.ngOnInit();
+          }
+          );
 
       // add Movie Genre Associate
       this.idMovieGenreTypesTrue=[];
@@ -150,9 +157,13 @@ export class MovieComponent implements OnInit {
                   movieGenreTypeId: [this.idMovieGenreTypesTrue[i]]
               }
           )
-          this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe((data)=>this.ngOnInit());
+          this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe(
+              (data)=>{
+                  this.ngOnInit();
+              }
+          );
       }
-      this.message = "Added successfully";
+
   }
 
 
@@ -198,8 +209,15 @@ export class MovieComponent implements OnInit {
     }
     // edit movie
     editMovie() {
-        this.movieService.editMovieService(this.editFormMovie.value, this.editFormMovie.value.id).subscribe((data)=>this.ngOnInit());
-        this.message = 'Edited Successfully';
+        this.movieService.editMovieService(this.editFormMovie.value, this.editFormMovie.value.id).subscribe(
+
+             (data)=>{
+                 this.messageEdit = "Edit Successful!!!!"
+                 this.ngOnInit();
+             }
+
+        );
+
         this.idEditMovieGenreTypesTrue.splice(0, this.idEditMovieGenreTypesTrue.length);
         for(let i=0; i<this.idEditMovieGenreTypes.length; i++){
             if(this.idEditMovieGenreTypes[i]==true){
@@ -215,7 +233,9 @@ export class MovieComponent implements OnInit {
                     movieGenreTypeId: [this.idEditMovieGenreTypesTrue[i]]
                 }
             )
-            this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe((data)=>this.ngOnInit());
+            this.movieService.addMovieGenreAssociate(this.addFormMovieGenreAssociate.value).subscribe(
+                // (data)=>this.ngOnInit()
+            );
         }
     }
 
