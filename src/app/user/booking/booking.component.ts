@@ -192,7 +192,7 @@ declare var $: any;
   }
 
   useProCode(){
-    this.bookService.bookingUseBonus(GlobalConstants.accId,this.proCode).subscribe(r=> {
+    this.bookService.bookingUseBonus(this.accountId,this.proCode).subscribe(r=> {
       if(Number(r)>0){
         this.totalFinal= this.totalFinal - Number(r);
         Swal.fire('Thank you', 'Your discount is: ' + r, 'success')
