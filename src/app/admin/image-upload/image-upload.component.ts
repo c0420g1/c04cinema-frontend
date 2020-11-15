@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import {ImageService} from '../../service/image.service';
@@ -40,7 +39,6 @@ export class ImageUploadComponent implements OnInit {
 
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
-      console.log(this.selectedImage);
     }else{
       this.imgSrc = 'assets/images/banners/300.png';
       this.selectedImage = null;
