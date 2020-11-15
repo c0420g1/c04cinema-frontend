@@ -5,6 +5,8 @@ import {MovieGenreAssociate} from '../../model/MovieGenreAssociate';
 import {Hall} from '../../model/Hall';
 import {MovieService} from './movie.service';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 @Component({
     selector: 'app-movie',
     templateUrl: './movie.component.html',
@@ -137,7 +139,8 @@ export class MovieComponent implements OnInit {
   addNewMovie() {
       this.movieService.addMovie(this.addFormMovie.value).subscribe(
           data=> {
-              this.messageAdd = "Added Successfully";
+              // this.messageAdd = "Added Successfully";
+              Swal.fire('Thank you!','Added successfully', 'success')
               this.ngOnInit();
           }
           );
@@ -212,8 +215,9 @@ export class MovieComponent implements OnInit {
         this.movieService.editMovieService(this.editFormMovie.value, this.editFormMovie.value.id).subscribe(
 
              (data)=>{
-                 this.messageEdit = "Edit Successful!!!!"
+                 Swal.fire('Thank you!','Edited successfully', 'success')
                  this.ngOnInit();
+
              }
 
         );
@@ -281,7 +285,10 @@ export class MovieComponent implements OnInit {
                     description: ['temporary'],
                     isearly: [0]
                 })
-                this.movieService.addShow(this.addFormShow.value).subscribe();
+                this.movieService.addShow(this.addFormShow.value).subscribe((data)=>{
+                    Swal.fire('Thank you!','Added show successfully.', 'success');
+                    this.ngOnInit();
+                });
             }
         }
     }

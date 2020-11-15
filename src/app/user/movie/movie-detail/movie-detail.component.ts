@@ -175,7 +175,7 @@ export class MovieDetailComponent implements OnInit {
 
     refeshComponent(){
         const currentRoute = this.router.url;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
             this.router.navigate([currentRoute]);
         }); 
     }

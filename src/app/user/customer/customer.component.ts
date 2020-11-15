@@ -85,7 +85,7 @@ export class CustomerComponent implements OnInit {
             const reader = new FileReader();
             this.checkImage = true;
             reader.onload = (e: any) => {
-                this.imgSrc = e.target.result;
+                this.customer.imageUrl = e.target.result;
                 console.log('hello' + e.target.result);
             }
             reader.readAsDataURL(event.target.files[0]);
